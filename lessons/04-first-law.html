@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The First Law</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #simCanvas { width: 100%; height: 360px; display: block; }
+    .acct { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 640px) { .acct { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-lesson="4" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 4</p>
+  <h1>The first law of thermodynamics</h1>
+  <p class="lede"><b>Energy cannot be created or destroyed</b> — it can only be transferred or converted from one form to another. For a closed system, this law of conservation becomes one short equation.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>State the first law in words and as Δ<var>U</var> = <var>q</var> + <var>w</var>.</li>
+      <li>Use an interactive simulator to see how heat and work change <var>U</var> under different conditions.</li>
+      <li>See why Δ<var>U</var> is path-independent while <var>q</var> and <var>w</var> are not.</li>
+      <li>Recognise the special cases: constant volume, adiabatic, isothermal, isolated and cyclic.</li>
+      <li>Connect Δ<var>U</var> to enthalpy, Δ<var>H</var>.</li>
+    </ul>
+  </div>
+
+  <h2 id="statement">The statement</h2>
+  <div class="eq big"><span class="u">ΔU</span> = <span class="q">q</span> + <span class="w">w</span>
+    <span class="label">change in internal energy of the system = heat added to the system + work done on the system</span></div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="Bank account analogy for the first law">
+      <!-- bank -->
+      <rect x="290" y="60" width="180" height="170" rx="12" class="sys-box"/>
+      <polygon points="280,60 380,15 480,60" fill="var(--sys)" opacity=".85"/>
+      <text x="380" y="50" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">SYSTEM "BANK"</text>
+      <rect x="320" y="110" width="120" height="100" rx="6" class="surface"/>
+      <rect id="bankLevel" x="320" y="150" width="120" height="60" rx="6" fill="var(--energy)" opacity=".8"/>
+      <text x="380" y="95" text-anchor="middle" class="t-energy t-mid">balance = U</text>
+      <!-- deposits -->
+      <path d="M60 110 H 280" class="heat-arrow anim-flow"/><polygon points="288,110 273,101 273,119" class="heat-fill"/>
+      <text x="70" y="96" class="t-heat t-mid">deposit: heat in (q &gt; 0)</text>
+      <path d="M60 190 H 280" class="work-arrow anim-flow"/><polygon points="288,190 273,181 273,199" class="work-fill"/>
+      <text x="70" y="176" class="t-work t-mid">deposit: work on (w &gt; 0)</text>
+      <!-- withdrawals -->
+      <path d="M480 110 H 700" class="heat-arrow anim-flow"/><polygon points="708,110 693,101 693,119" class="heat-fill"/>
+      <text x="492" y="96" class="t-heat t-mid">withdrawal: heat out (q &lt; 0)</text>
+      <path d="M480 190 H 700" class="work-arrow anim-flow"/><polygon points="708,190 693,181 693,199" class="work-fill"/>
+      <text x="492" y="176" class="t-work t-mid">withdrawal: work by (w &lt; 0)</text>
+      <text x="380" y="258" text-anchor="middle" class="t-mid">Change in balance = deposits − withdrawals &nbsp;⟺&nbsp; <tspan class="t-energy">ΔU</tspan> = <tspan class="t-heat">q</tspan> + <tspan class="t-work">w</tspan></text>
+    </svg>
+    <figcaption>Just as money in a bank can arrive by cheque or cash, energy can arrive as heat or work. Once inside, it's all just <span class="u">U</span> — the bank doesn't remember how it came in.</figcaption>
+  </figure>
+
+  <p>Since energy is conserved, whatever the system gains, the surroundings lose:</p>
+  <div class="eq">Δ<var>U</var><sub>surroundings</sub> = −Δ<var>U</var><sub>system</sub> &nbsp;&nbsp;⟹&nbsp;&nbsp; Δ<var>U</var><sub>universe</sub> = 0</div>
+
+  <div class="widget" id="acct">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Be the energy accountant</h3></div>
+    <div class="widget-body">
+      <p>Set the heat and work for a process. The <span class="u">U</span> "tank" of the system rises or falls by Δ<var>U</var> = <var>q</var> + <var>w</var>, and the surroundings change by exactly the opposite amount.</p>
+      <div class="acct">
+        <div class="controls">
+          <div class="control"><label for="aq"><span class="q">q</span> (heat to system) <output id="aqOut">+300 J</output></label><input type="range" id="aq" min="-500" max="500" step="10" value="300"></div>
+          <div class="control"><label for="aw"><span class="w">w</span> (work on system) <output id="awOut">−100 J</output></label><input type="range" id="aw" min="-500" max="500" step="10" value="-100"></div>
+          <div class="bars">
+            <div class="bar-row"><span class="q">q</span><div class="bar-track"><div class="bar-fill" id="bq" style="background:var(--heat)"></div></div><span class="bar-val" id="bqv"></span></div>
+            <div class="bar-row"><span class="w">w</span><div class="bar-track"><div class="bar-fill" id="bw" style="background:var(--work)"></div></div><span class="bar-val" id="bwv"></span></div>
+            <div class="bar-row"><span class="u">ΔU<sub>sys</sub></span><div class="bar-track"><div class="bar-fill" id="bu" style="background:var(--energy)"></div></div><span class="bar-val" id="buv"></span></div>
+            <div class="bar-row"><span class="surr">ΔU<sub>surr</sub></span><div class="bar-track"><div class="bar-fill" id="bs" style="background:var(--surr)"></div></div><span class="bar-val" id="bsv"></span></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost" data-preset="300,-100">Gas heated, expands</button>
+            <button class="btn ghost" data-preset="-200,350">Gas compressed, cooled</button>
+            <button class="btn ghost" data-preset="250,-250">q = −w</button>
+          </div>
+        </div>
+        <svg viewBox="0 0 320 280" role="img" aria-label="System with energy level tank">
+          <rect x="4" y="4" width="312" height="272" rx="12" class="surr-box"/>
+          <text x="16" y="24" class="t-small t-surr">SURROUNDINGS</text>
+          <rect x="95" y="50" width="130" height="180" rx="10" class="sys-box"/>
+          <text x="160" y="70" text-anchor="middle" class="t-small t-sys">SYSTEM</text>
+          <rect x="120" y="80" width="80" height="140" rx="6" class="surface"/>
+          <rect id="tank" x="120" y="150" width="80" height="70" rx="6" fill="var(--energy)" opacity=".8"/>
+          <line x1="114" y1="150" x2="206" y2="150" stroke="var(--ink)" stroke-dasharray="4 3"/>
+          <text x="210" y="154" class="t-small t-muted">start</text>
+          <text id="tankLbl" x="160" y="245" text-anchor="middle" class="t-mid t-energy">ΔU = +200 J</text>
+          <g id="qArrow"><path id="qPath" class="heat-arrow anim-flow"/><polygon id="qHead" class="heat-fill"/></g>
+          <g id="wArrow"><path id="wPath" class="work-arrow anim-flow"/><polygon id="wHead" class="work-fill"/></g>
+        </svg>
+      </div>
+      <p id="acctMsg" style="margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <h2 id="simulator" data-short="Piston simulator">Interactive: the first law in a piston</h2>
+  <p>The system is <b>1.00 mol of helium</b> (an ideal, monatomic gas) starting at 300 K and 1.00 atm (24.6 L). Pick a scenario, then use the slider. Watch how the energy entering the gas gets split between Δ<span class="u">U</span> and <span class="w">w</span>.</p>
+
+  <div class="widget" id="sim">
+    <div class="widget-head"><span class="badge">Simulator</span><h3>Heat, work and internal energy</h3></div>
+    <div class="widget-body">
+      <div class="seg" role="group" aria-label="Scenario">
+        <button class="on" data-mode="v">① Heat at constant V</button>
+        <button data-mode="p">② Heat at constant P</button>
+        <button data-mode="ad">③ Compress, insulated</button>
+        <button data-mode="iso">④ Expand at constant T</button>
+      </div>
+      <div class="widget-row" style="margin-top:14px">
+        <canvas id="simCanvas" aria-label="Animated gas in a piston"></canvas>
+        <div>
+          <div class="control"><label for="simS"><span id="simSLbl">Heat added, q</span> <output id="simSOut">0 J</output></label><input type="range" id="simS" min="0" max="2000" step="20" value="0"></div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="q">q</span><div class="bar-track"><div class="bar-fill" id="sq" style="background:var(--heat)"></div></div><span class="bar-val" id="sqv"></span></div>
+            <div class="bar-row"><span class="w">w</span><div class="bar-track"><div class="bar-fill" id="sw" style="background:var(--work)"></div></div><span class="bar-val" id="swv"></span></div>
+            <div class="bar-row"><span class="u">ΔU</span><div class="bar-track"><div class="bar-fill" id="su" style="background:var(--energy)"></div></div><span class="bar-val" id="suv"></span></div>
+          </div>
+          <div class="readout">
+            <div><span class="k">T</span><span class="v" id="simT">300 K</span></div>
+            <div><span class="k">V</span><span class="v" id="simV">24.6 L</span></div>
+            <div><span class="k">P</span><span class="v" id="simP">1.00 atm</span></div>
+          </div>
+          <p id="simMsg" style="font-size:.93rem"></p>
+        </div>
+      </div>
+      <details style="margin-top:6px">
+        <summary style="cursor:pointer;font-weight:600">How does the simulator calculate this?</summary>
+        <p style="font-size:.93rem">For a monatomic ideal gas, <var>U</var> = <sup>3</sup>⁄<sub>2</sub><var>nRT</var>, so Δ<var>U</var> = <sup>3</sup>⁄<sub>2</sub><var>nR</var>Δ<var>T</var> (you don't need to memorise this — it comes from kinetic theory).
+        ① Rigid: <var>w</var> = 0, Δ<var>U</var> = <var>q</var>.
+        ② Constant <var>P</var>: <var>w</var> = −<var>P</var>Δ<var>V</var> = −<var>nR</var>Δ<var>T</var>, so <var>q</var> = Δ<var>U</var> − <var>w</var> = <sup>5</sup>⁄<sub>2</sub><var>nR</var>Δ<var>T</var>: exactly 40% of the heat leaves again as work.
+        ③ Insulated: <var>q</var> = 0, Δ<var>U</var> = <var>w</var>; the volume follows <var>TV</var><sup>2/3</sup> = constant.
+        ④ Water bath keeps <var>T</var> = 300 K, so Δ<var>U</var> = 0 and <var>q</var> = −<var>w</var>; the gas expands in one step against <var>P</var><sub>ext</sub> = <var>P</var><sub>final</sub>.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">What to notice</span>
+    <ul style="margin:.3em 0 0;padding-left:1.2em">
+      <li>In ① and ② the <b>same heat</b> gives <b>different</b> temperature rises: at constant pressure some of the energy leaves as work.</li>
+      <li>In ③ the gas heats up with <b>no heat added</b> — work alone raises <span class="u">U</span>. (This is why a bike pump gets hot, and how diesel engines ignite fuel.)</li>
+      <li>In ④ the gas does work but its <span class="u">U</span> doesn't change: every joule of work is "paid for" by heat drawn in from the bath.</li>
+    </ul>
+  </div>
+
+  <h2 id="path" data-short="Same ΔU, different q & w">Same Δ<span class="u">U</span>, different <span class="q">q</span> and <span class="w">w</span></h2>
+  <p>Because <span class="u">U</span> is a state function, Δ<span class="u">U</span> depends only on the initial and final states. But <b>how</b> the energy is split between heat and work depends on the path. A battery makes this vivid:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="A battery discharged two ways: through a wire (all heat) or through a motor (mostly work)">
+      <!-- left: short circuit -->
+      <g transform="translate(20,10)">
+        <text x="170" y="18" text-anchor="middle" class="t-mid" style="font-weight:700">Path 1 · short-circuit with a wire</text>
+        <rect x="120" y="50" width="100" height="130" rx="10" class="sys-box"/>
+        <rect x="150" y="38" width="40" height="12" rx="3" class="metal"/>
+        <text x="170" y="120" text-anchor="middle" class="t-sys t-mid">battery</text>
+        <path d="M170 38 V 20 H 300 V 220 H 170 V 180" fill="none" stroke="var(--heat)" stroke-width="4"/>
+        <path d="M310 70 h22 M310 120 h22 M310 170 h22" class="heat-arrow anim-flow" style="stroke-width:3"/>
+        <text x="300" y="250" text-anchor="middle" class="t-small t-heat">wire gets very hot</text>
+        <text x="170" y="275" text-anchor="middle" class="t-mid"><tspan class="t-energy">ΔU = −100 kJ</tspan></text>
+        <text x="170" y="298" text-anchor="middle" class="t-mid"><tspan class="t-heat">q = −100 kJ</tspan>, <tspan class="t-work">w = 0</tspan></text>
+      </g>
+      <line x1="380" y1="30" x2="380" y2="310" class="muted-line" stroke-dasharray="4 5"/>
+      <!-- right: motor -->
+      <g transform="translate(400,10)">
+        <text x="170" y="18" text-anchor="middle" class="t-mid" style="font-weight:700">Path 2 · run a motor that lifts a weight</text>
+        <rect x="40" y="50" width="100" height="130" rx="10" class="sys-box"/>
+        <rect x="70" y="38" width="40" height="12" rx="3" class="metal"/>
+        <text x="90" y="120" text-anchor="middle" class="t-sys t-mid">battery</text>
+        <path d="M90 38 V 20 H 220 V 90 M220 150 V 220 H 90 V 180" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <circle cx="220" cy="120" r="30" class="surface" stroke="var(--ink)" stroke-width="3"/>
+        <text x="220" y="125" text-anchor="middle" class="t-mid" style="font-weight:700">M</text>
+        <line x1="250" y1="120" x2="290" y2="120" class="ink-line" stroke-width="3"/>
+        <circle cx="300" cy="120" r="10" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <line x1="310" y1="120" x2="310" y2="170" class="ink-line"/>
+        <rect x="294" y="170" width="32" height="30" rx="3" class="piston">
+          <animate attributeName="y" values="190;140;190" dur="4s" repeatCount="indefinite"/>
+        </rect>
+        <path d="M340 190 V 140" class="work-arrow anim-flow" style="stroke-width:3"/>
+        <path d="M200 65 v-18" class="heat-arrow" style="stroke-width:3"/>
+        <text x="220" y="250" text-anchor="middle" class="t-small t-work">weight lifted (work) + a little heat</text>
+        <text x="170" y="275" text-anchor="middle" class="t-mid"><tspan class="t-energy">ΔU = −100 kJ</tspan></text>
+        <text x="170" y="298" text-anchor="middle" class="t-mid"><tspan class="t-heat">q = −20 kJ</tspan>, <tspan class="t-work">w = −80 kJ</tspan></text>
+      </g>
+    </svg>
+    <figcaption>Same starting state (charged), same final state (discharged), so the <b>same ΔU</b>. But <span class="q">q</span> and <span class="w">w</span> are very different — they are path functions. Only their sum is fixed.</figcaption>
+  </figure>
+
+  <h2 id="special" data-short="Special cases">Special cases you'll use constantly</h2>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Condition</th><th>What it means</th><th>First law becomes</th><th>Example</th></tr>
+      <tr><td><b>Constant volume</b> (rigid)</td><td>Δ<var>V</var> = 0, so <var>w</var> = 0</td><td><span class="u">ΔU</span> = <span class="q">q</span><sub>V</sub></td><td>Bomb calorimeter, sealed steel tank</td></tr>
+      <tr><td><b>Adiabatic</b> (insulated)</td><td>No heat crosses: <var>q</var> = 0</td><td><span class="u">ΔU</span> = <span class="w">w</span></td><td>Bike pump, rapid gas expansion (aerosol can gets cold)</td></tr>
+      <tr><td><b>Isothermal, ideal gas</b></td><td>Δ<var>T</var> = 0, so Δ<var>U</var> = 0</td><td><span class="q">q</span> = −<span class="w">w</span></td><td>Gas expanding slowly in a water bath</td></tr>
+      <tr><td><b>Isolated system</b></td><td><var>q</var> = 0 and <var>w</var> = 0</td><td><span class="u">ΔU</span> = 0</td><td>Ideal thermos; the universe</td></tr>
+      <tr><td><b>Cyclic process</b></td><td>Returns to the starting state</td><td><span class="u">ΔU</span> = 0, so <span class="q">q</span> = −<span class="w">w</span></td><td>One full cycle of an engine</td></tr>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 260" role="img" aria-label="Bomb calorimeter: constant-volume steel vessel in water">
+        <rect x="30" y="40" width="270" height="200" rx="10" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-dasharray="5 4" stroke-width="2"/>
+        <rect x="50" y="70" width="230" height="155" class="liquid"/>
+        <rect x="120" y="105" width="90" height="95" rx="10" fill="var(--ink-3)" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="128" y="113" width="74" height="79" rx="6" class="sys-box"/>
+        <text x="165" y="150" text-anchor="middle" class="t-small t-sys">sample</text>
+        <text x="165" y="165" text-anchor="middle" class="t-small t-sys">+ O₂</text>
+        <path d="M215 150 h30 M115 150 h-30 M165 100 v-22" class="heat-arrow anim-flow" style="stroke-width:3"/>
+        <rect x="250" y="20" width="10" height="120" rx="5" class="surface" stroke="var(--ink)"/>
+        <circle cx="255" cy="142" r="8" fill="var(--hot)"/>
+        <text x="165" y="32" text-anchor="middle" class="t-small" style="font-weight:700">rigid steel "bomb": ΔV = 0</text>
+        <text x="165" y="255" text-anchor="middle" class="t-small t-muted">water + insulation measure the heat</text>
+      </svg>
+      <figcaption>In a <b>bomb calorimeter</b>, the reaction can't expand, so <var>w</var> = 0 and the heat measured is Δ<span class="u">U</span> directly.</figcaption>
+    </figure>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 260" role="img" aria-label="Coffee-cup calorimeter: constant pressure, open to atmosphere">
+        <path d="M90 60 L 105 230 L 225 230 L 240 60 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/>
+        <path d="M110 60 L 122 215 L 208 215 L 220 60" fill="none" stroke="var(--ink-3)" stroke-width="2"/>
+        <rect x="100" y="110" width="130" height="4" fill="none"/>
+        <path d="M106 110 L 224 110 L 213 212 L 117 212 Z" class="liquid"/>
+        <rect x="80" y="50" width="170" height="10" rx="3" class="piston"/>
+        <line x1="165" y1="10" x2="165" y2="190" class="ink-line" stroke-width="3"/>
+        <circle cx="165" cy="195" r="7" fill="var(--hot)"/>
+        <text x="165" y="245" text-anchor="middle" class="t-small" style="font-weight:700">open to air: P = constant</text>
+        <path d="M60 30 V 48" class="ink-line"/><polygon points="60,52 55,42 65,42" fill="var(--ink)"/>
+        <text x="40" y="24" class="t-small t-muted">P<tspan dy="3" font-size="8">atm</tspan></text>
+      </svg>
+      <figcaption>In a <b>coffee-cup calorimeter</b> the pressure is constant, so the heat measured is the <b>enthalpy change</b>, Δ<var>H</var> = <var>q</var><sub>P</sub>.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Connecting to enthalpy, <var>H</var></h3>
+  <p>Most chemistry happens in open beakers at constant atmospheric pressure, where the system can do <var>PV</var> work. To make life easier, chemists define <b>enthalpy</b>:</p>
+  <div class="eq"><var>H</var> = <var>U</var> + <var>PV</var> &nbsp;&nbsp;⟹&nbsp;&nbsp; Δ<var>H</var> = Δ<var>U</var> + <var>P</var>Δ<var>V</var> = <span class="q">q</span><sub>P</sub> &nbsp;(constant <var>P</var>)
+    <span class="label">for reactions of ideal gases at constant T and P: ΔH = ΔU + Δn<sub>gas</sub>RT</span></div>
+  <p>Δ<var>H</var> and Δ<var>U</var> differ only by the <var>PV</var> work. For reactions involving only solids and liquids, Δ<var>V</var> ≈ 0 and so <b>Δ<var>H</var> ≈ Δ<var>U</var></b>. They differ noticeably only when the number of moles of gas changes.</p>
+
+  <h2 id="perpetual" data-short="No free lunch">No free lunch: perpetual motion</h2>
+  <div class="grid-2" style="align-items:center">
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 230" role="img" aria-label="A perpetual motion machine is impossible">
+        <circle cx="165" cy="105" r="70" fill="none" stroke="var(--ink)" stroke-width="3">
+          <animateTransform attributeName="transform" type="rotate" from="0 165 105" to="360 165 105" dur="6s" repeatCount="indefinite"/>
+        </circle>
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0 165 105" to="360 165 105" dur="6s" repeatCount="indefinite"/>
+          <line x1="165" y1="35" x2="165" y2="175" class="ink-line"/><line x1="95" y1="105" x2="235" y2="105" class="ink-line"/>
+          <circle cx="165" cy="35" r="9" class="metal"/><circle cx="235" cy="105" r="9" class="metal"/>
+          <circle cx="165" cy="175" r="9" class="metal"/><circle cx="95" cy="105" r="9" class="metal"/>
+        </g>
+        <path d="M245 60 H 300" class="work-arrow"/><polygon points="306,60 294,53 294,67" class="work-fill"/>
+        <text x="272" y="48" text-anchor="middle" class="t-small t-work">work out</text>
+        <text x="40" y="60" text-anchor="middle" class="t-small t-heat">energy in?</text>
+        <text x="40" y="80" text-anchor="middle" class="t-big" style="fill:var(--bad)">0</text>
+        <line x1="40" y1="190" x2="290" y2="210" stroke="var(--bad)" stroke-width="4"/>
+        <line x1="40" y1="210" x2="290" y2="190" stroke="var(--bad)" stroke-width="4"/>
+      </svg>
+    </figure>
+    <div>
+      <p>Over and over, inventors have claimed machines that produce work forever with no energy input. For a machine running in a cycle, Δ<var>U</var> = 0, so <var>w</var> = −<var>q</var>. With no heat input (<var>q</var> = 0), the work output must be zero too.</p>
+      <p><b>The first law says you can't get out more energy than you put in.</b> (The second law adds that you can't even break even — but that's a story for the next unit.)</p>
+    </div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">A gas absorbs 450 J of heat while it is compressed by the surroundings, which do 200 J of work on it. What is ΔU of the gas?</p>
+    <div class="quiz-opts">
+      <button data-why="Work done ON the gas adds energy, so w = +200 J (not −200 J): ΔU = 450 + 200.">+250 J</button>
+      <button data-why="Heat absorbed means q is positive, and work done on the gas means w is positive. Both increase U.">−650 J</button>
+      <button>+650 J</button>
+      <button data-why="Both q and w are positive here; ΔU is their sum.">−250 J</button>
+    </div>
+    <div class="quiz-fb" data-right="q = +450 J (absorbed), w = +200 J (done on the gas): ΔU = 450 + 200 = +650 J."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">An ideal gas expands slowly at constant temperature and does 1.5 kJ of work. How much heat did it absorb?</p>
+    <div class="quiz-opts">
+      <button>+1.5 kJ</button>
+      <button data-why="For an ideal gas at constant T, ΔU = 0. So q = −w = −(−1.5 kJ) = +1.5 kJ, not zero.">0 kJ — the temperature didn't change</button>
+      <button data-why="The gas did work, so w = −1.5 kJ. q = −w = +1.5 kJ.">−1.5 kJ</button>
+    </div>
+    <div class="quiz-fb" data-right="Isothermal ideal gas: ΔU = 0, so q = −w. The gas absorbs exactly as much heat as the work it does. Note that 'no temperature change' does NOT mean 'no heat'!"></div>
+  </div>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/gas.js"></script>
+<script>
+  // bar helper: value v (J) on a track that spans -max..+max
+  function setBar(el, v, max) {
+    const f = Math.max(-1, Math.min(1, v / max));
+    el.style.left = (f >= 0 ? 50 : 50 + f * 50) + "%";
+    el.style.width = Math.abs(f) * 50 + "%";
+  }
+
+  // ---------- accountant ----------
+  (function () {
+    const q = document.getElementById("aq"), w = document.getElementById("aw");
+    const arrow = (pathId, headId, val, y) => {
+      const p = document.getElementById(pathId), h = document.getElementById(headId);
+      const len = Math.min(70, 12 + Math.abs(val) / 500 * 58), sw = 2 + Math.abs(val) / 500 * 6;
+      p.style.strokeWidth = sw;
+      p.style.opacity = val === 0 ? 0 : 1; h.style.opacity = val === 0 ? 0 : 1;
+      if (val >= 0) { // into system from left
+        p.setAttribute("d", `M${90 - len} ${y} H 88`);
+        h.setAttribute("points", `94,${y} 82,${y - 8} 82,${y + 8}`);
+      } else { // out of system to right
+        p.setAttribute("d", `M232 ${y} H ${226 + len}`);
+        h.setAttribute("points", `${232 + len},${y} ${220 + len},${y - 8} ${220 + len},${y + 8}`);
+      }
+    };
+    const draw = () => {
+      const qv = +q.value, wv = +w.value, du = qv + wv;
+      document.getElementById("aqOut").textContent = signed(qv) + " J";
+      document.getElementById("awOut").textContent = signed(wv) + " J";
+      setBar(document.getElementById("bq"), qv, 1000); document.getElementById("bqv").textContent = signed(qv) + " J";
+      setBar(document.getElementById("bw"), wv, 1000); document.getElementById("bwv").textContent = signed(wv) + " J";
+      setBar(document.getElementById("bu"), du, 1000); document.getElementById("buv").textContent = signed(du) + " J";
+      setBar(document.getElementById("bs"), -du, 1000); document.getElementById("bsv").textContent = signed(-du) + " J";
+      const h = Math.max(4, Math.min(140, 70 + du * 0.07));
+      const tank = document.getElementById("tank"); tank.setAttribute("y", 220 - h); tank.setAttribute("height", h);
+      document.getElementById("tankLbl").textContent = "ΔU = " + signed(du) + " J";
+      arrow("qPath", "qHead", qv, 110); arrow("wPath", "wHead", wv, 180);
+      const qs = qv > 0 ? "absorbs " + qv + " J of heat" : qv < 0 ? "releases " + (-qv) + " J of heat" : "exchanges no heat";
+      const ws = wv > 0 ? "has " + wv + " J of work done on it" : wv < 0 ? "does " + (-wv) + " J of work on the surroundings" : "does no work";
+      document.getElementById("acctMsg").innerHTML = `The system ${qs} and ${ws}. Its internal energy ${du > 0 ? "rises" : du < 0 ? "falls" : "is unchanged"}: ΔU = (${signed(qv)}) + (${signed(wv)}) = <b class="u">${signed(du)} J</b>. The surroundings change by <b class="surr">${signed(-du)} J</b>. Total: 0.`;
+    };
+    q.addEventListener("input", draw); w.addEventListener("input", draw);
+    document.querySelectorAll("[data-preset]").forEach(b => b.addEventListener("click", () => {
+      const [a, c] = b.dataset.preset.split(","); q.value = a; w.value = c; draw();
+    }));
+    draw();
+  })();
+
+  // ---------- piston simulator ----------
+  (function () {
+    const R = 8.314, n = 1, T1 = 300, P1 = 1, V1 = n * 0.082057 * T1 / P1; // 24.6 L
+    const Vmax = 52;
+    const gas = new GasCylinder(document.getElementById("simCanvas"), { n: 44, vf: V1 / Vmax, T: T1 });
+    const S = document.getElementById("simS");
+    let mode = "v";
+    const cfg = {
+      v:  { lbl: "Heat added, q", min: 0, max: 2000, step: 20, unit: "J" },
+      p:  { lbl: "Heat added, q", min: 0, max: 2000, step: 20, unit: "J" },
+      ad: { lbl: "Work done on gas, w", min: 0, max: 2000, step: 20, unit: "J" },
+      iso:{ lbl: "Final volume, V₂", min: 24.6, max: 49.2, step: 0.2, unit: "L" },
+    };
+    const setMode = (m) => {
+      mode = m;
+      document.querySelectorAll("#sim [data-mode]").forEach(b => b.classList.toggle("on", b.dataset.mode === m));
+      const c = cfg[m]; S.min = c.min; S.max = c.max; S.step = c.step; S.value = c.min;
+      document.getElementById("simSLbl").textContent = c.lbl;
+      gas.setLock(m === "v"); gas.setInsulated(m === "ad"); gas.setBath(m === "iso");
+      update();
+    };
+    const update = () => {
+      const s = +S.value;
+      let q, w, dU, T, V, P, msg;
+      if (mode === "v") {
+        q = s; w = 0; dU = q; T = T1 + dU / (1.5 * n * R); V = V1; P = n * 0.082057 * T / V;
+        msg = `Pins lock the piston, so V can't change and <b>w = 0</b>. <b>All</b> the heat goes into internal energy: ΔU = q. The gas gets hot and its pressure rises.`;
+        gas.setFlame(s > 0); gas.setArrows(s > 0 ? 1 : 0, 0); gas.setWeights(1);
+      } else if (mode === "p") {
+        q = s; const dT = q / (2.5 * n * R); T = T1 + dT; w = -n * R * dT; dU = 1.5 * n * R * dT; P = P1; V = n * 0.082057 * T / P;
+        msg = `The piston is free to rise against a constant 1.00 atm. The gas expands, doing work on the surroundings (<b>w &lt; 0</b>). Of every 100 J of heat, 60 J raises U and 40 J leaves again as work.`;
+        gas.setFlame(s > 0); gas.setArrows(s > 0 ? 1 : 0, s > 0 ? -1 : 0); gas.setWeights(1);
+      } else if (mode === "ad") {
+        w = s; q = 0; dU = w; T = T1 + dU / (1.5 * n * R); V = V1 * Math.pow(T1 / T, 1.5); P = n * 0.082057 * T / V;
+        msg = `The cylinder is insulated, so <b>q = 0</b>. Pushing the piston in does work on the gas, and <b>all</b> of it becomes internal energy: ΔU = w. The gas heats up with no flame at all!`;
+        gas.setFlame(false); gas.setArrows(0, s > 0 ? 1 : 0); gas.setWeights(1 + Math.round(s / 500));
+      } else {
+        V = s; T = T1; P = n * 0.082057 * T / V; w = -P * (V - V1) * 101.325; dU = 0; q = -w;
+        msg = `The water bath holds T at 300 K, so for an ideal gas <b>ΔU = 0</b>. The gas does work (w &lt; 0) and draws in exactly the same amount of heat from the bath: <b>q = −w</b>.`;
+        gas.setFlame(false); gas.setArrows(V > V1 + 0.1 ? 1 : 0, V > V1 + 0.1 ? -1 : 0); gas.setWeights(1);
+      }
+      gas.setVolumeFrac(V / Vmax); gas.setTemp(T);
+      const c = cfg[mode];
+      document.getElementById("simSOut").textContent = (c.unit === "L" ? s.toFixed(1) : signed(s)) + " " + c.unit;
+      setBar(document.getElementById("sq"), q, 2200); document.getElementById("sqv").textContent = signed(q) + " J";
+      setBar(document.getElementById("sw"), w, 2200); document.getElementById("swv").textContent = signed(w) + " J";
+      setBar(document.getElementById("su"), dU, 2200); document.getElementById("suv").textContent = signed(dU) + " J";
+      document.getElementById("simT").textContent = T.toFixed(0) + " K";
+      document.getElementById("simV").textContent = V.toFixed(1) + " L";
+      document.getElementById("simP").textContent = P.toFixed(2) + " atm";
+      document.getElementById("simMsg").innerHTML = msg;
+    };
+    S.addEventListener("input", update);
+    document.querySelectorAll("#sim [data-mode]").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+    setMode("v");
+  })();
+</script>
+</body>
+</html>

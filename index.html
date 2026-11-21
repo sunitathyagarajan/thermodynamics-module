@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Principles of Thermodynamics</title>
+  <meta name="description" content="An interactive learning module on the principles of thermodynamics for first-year chemistry students.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-lesson="0" data-root="">
+<header id="topbar"></header>
+
+<div class="page" style="grid-template-columns: 1fr; max-width: 900px;">
+<main style="max-width: none;">
+
+  <section class="hero">
+    <p class="eyebrow">General Chemistry · Learning Module</p>
+    <h1>Principles of Thermodynamics</h1>
+    <p class="lede">Why does a hot cup of coffee cool down? Where does the energy from burning fuel go? How much work can an expanding gas actually do? Thermodynamics answers these questions with a few powerful ideas — and this module walks you through them with diagrams, animations and practice problems.</p>
+  </section>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="hero-t">
+      <title id="hero-t">The big picture: energy moves between a system and its surroundings as heat and work.</title>
+      <rect x="10" y="10" width="740" height="230" rx="16" class="surr-box"/>
+      <text x="30" y="38" class="t-surr t-mid">SURROUNDINGS</text>
+      <rect x="290" y="65" width="180" height="130" rx="14" class="sys-box"/>
+      <text x="380" y="100" text-anchor="middle" class="t-sys t-mid">SYSTEM</text>
+      <text x="380" y="140" text-anchor="middle" class="t-energy" style="font-size:26px">U</text>
+      <text x="380" y="170" text-anchor="middle" class="t-small t-muted">internal energy</text>
+      <!-- heat in -->
+      <path d="M90 105 H 280" class="heat-arrow anim-flow"/>
+      <polygon points="285,105 270,96 270,114" class="heat-fill"/>
+      <text x="150" y="92" class="t-heat t-mid">heat in: q &gt; 0</text>
+      <!-- heat out -->
+      <path d="M480 105 H 670" class="heat-arrow anim-flow"/>
+      <polygon points="675,105 660,96 660,114" class="heat-fill"/>
+      <text x="520" y="92" class="t-heat t-mid">heat out: q &lt; 0</text>
+      <!-- work on -->
+      <path d="M90 165 H 280" class="work-arrow anim-flow"/>
+      <polygon points="285,165 270,156 270,174" class="work-fill"/>
+      <text x="90" y="195" class="t-work t-mid">work on system: w &gt; 0</text>
+      <!-- work by -->
+      <path d="M480 165 H 670" class="work-arrow anim-flow"/>
+      <polygon points="675,165 660,156 660,174" class="work-fill"/>
+      <text x="500" y="195" class="t-work t-mid">work by system: w &lt; 0</text>
+      <text x="380" y="228" text-anchor="middle" class="t-mid"><tspan class="t-energy">ΔU</tspan> = <tspan class="t-heat">q</tspan> + <tspan class="t-work">w</tspan></text>
+    </svg>
+    <figcaption><b>The whole module in one picture.</b> Energy crosses the boundary between a <span class="sys">system</span> and its <span class="surr">surroundings</span> in only two ways — as <span class="q">heat</span> and as <span class="w">work</span>. The first law of thermodynamics keeps the books.</figcaption>
+  </figure>
+
+  <div class="legend" aria-label="Colour key used in every diagram">
+    <strong>Colour key used throughout:</strong>
+    <span><i style="background:var(--sys)"></i>system</span>
+    <span><i style="background:var(--surr)"></i>surroundings</span>
+    <span><i style="background:var(--heat)"></i>heat, q</span>
+    <span><i style="background:var(--work)"></i>work, w</span>
+    <span><i style="background:var(--energy)"></i>internal energy, U</span>
+  </div>
+
+  <div class="objectives">
+    <h3>By the end of this module you should be able to…</h3>
+    <ul>
+      <li>Explain what thermodynamics studies and distinguish <b>state functions</b> from <b>path functions</b>.</li>
+      <li>Identify the <b>system</b> and <b>surroundings</b> and classify systems as open, closed or isolated.</li>
+      <li>Describe internal energy (<var>U</var>), heat (<var>q</var>) and work (<var>w</var>) and apply the correct <b>sign conventions</b>.</li>
+      <li>State the <b>first law</b> (Δ<var>U</var> = <var>q</var> + <var>w</var>) and use it for gases, liquids, solids and chemical reactions.</li>
+      <li>Calculate pressure–volume work for expansions and compressions.</li>
+      <li>Distinguish <b>reversible</b> from <b>irreversible</b> heat and work, compare them quantitatively, and explain why the difference is tiny for solids and liquids.</li>
+    </ul>
+  </div>
+
+  <h2 id="roadmap" style="border-top:0">Lessons</h2>
+  <p>Work through the lessons in order — each builds on the last. Lessons you've opened turn green.</p>
+  <div class="roadmap">
+    <a href="lessons/01-introduction.html" data-n="1"><span class="n">1</span><div><h3>What is thermodynamics?</h3><p>Energy, the laws at a glance, state vs path functions, units.</p></div></a>
+    <a href="lessons/02-system-surroundings.html" data-n="2"><span class="n">2</span><div><h3>System &amp; surroundings</h3><p>Open, closed and isolated systems; exothermic vs endothermic — with animations.</p></div></a>
+    <a href="lessons/03-energy-heat-work.html" data-n="3"><span class="n">3</span><div><h3>Internal energy, heat &amp; work</h3><p>What U, q and w really are, sign conventions, and examples in gases, liquids and solids.</p></div></a>
+    <a href="lessons/04-first-law.html" data-n="4"><span class="n">4</span><div><h3>The first law</h3><p>ΔU = q + w, with an interactive piston-and-burner simulator.</p></div></a>
+    <a href="lessons/05-calculations.html" data-n="5"><span class="n">5</span><div><h3>Worked calculations</h3><p>Eight step-by-step examples of different kinds, plus unlimited practice.</p></div></a>
+    <a href="lessons/06-reversible-irreversible.html" data-n="6"><span class="n">6</span><div><h3>Reversible vs irreversible</h3><p>Heat and work done slowly vs suddenly; comparing work on a P–V diagram; solids and liquids.</p></div></a>
+  </div>
+
+  <h2 id="equations">Key equations card</h2>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Quantity</th><th>Equation</th><th>When to use it</th></tr>
+      <tr><td>First law</td><td><span class="u">ΔU</span> = <span class="q">q</span> + <span class="w">w</span></td><td>Always (closed system)</td></tr>
+      <tr><td>Heat, temperature change</td><td><span class="q">q</span> = <var>m c</var> Δ<var>T</var> &nbsp;or&nbsp; <span class="q">q</span> = <var>n C</var> Δ<var>T</var></td><td>Heating/cooling with no phase change</td></tr>
+      <tr><td>Heat, phase change</td><td><span class="q">q</span> = <var>n</var> Δ<var>H</var><sub>fus</sub>, <var>n</var> Δ<var>H</var><sub>vap</sub></td><td>Melting, boiling (constant <var>T</var>, <var>P</var>)</td></tr>
+      <tr><td>Work, constant external pressure</td><td><span class="w">w</span> = −<var>P</var><sub>ext</sub> Δ<var>V</var></td><td>Irreversible expansion/compression</td></tr>
+      <tr><td>Work, gas made/consumed in a reaction</td><td><span class="w">w</span> = −Δ<var>n</var><sub>gas</sub> <var>RT</var></td><td>Constant <var>T</var> and <var>P</var>, ideal gases</td></tr>
+      <tr><td>Work, reversible isothermal (ideal gas)</td><td><span class="w">w</span> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>)</td><td>Infinitely slow expansion/compression</td></tr>
+      <tr><td>Constant volume</td><td><span class="w">w</span> = 0, so <span class="u">ΔU</span> = <span class="q">q</span><sub><var>V</var></sub></td><td>Rigid container, bomb calorimeter</td></tr>
+      <tr><td>Conversions</td><td colspan="2">1 L·atm = 101.325 J &nbsp;·&nbsp; 1 cal = 4.184 J &nbsp;·&nbsp; <var>R</var> = 8.314 J mol<sup>−1</sup> K<sup>−1</sup> = 0.08206 L·atm mol<sup>−1</sup> K<sup>−1</sup></td></tr>
+    </table>
+  </div>
+
+</main>
+</div>
+<footer class="footer">Principles of Thermodynamics · an interactive module for first-year chemistry</footer>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

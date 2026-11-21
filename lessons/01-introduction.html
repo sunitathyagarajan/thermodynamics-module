@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Is Thermodynamics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="1" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 1</p>
+  <h1>What is thermodynamics?</h1>
+  <p class="lede">Thermodynamics is the science of <b>energy</b> — how it is stored, how it moves from place to place, and how it changes from one form into another.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Define thermodynamics and say what it can (and cannot) predict.</li>
+      <li>Review kinetic and potential energy and the units of energy.</li>
+      <li>Meet the laws of thermodynamics at a glance.</li>
+      <li>Distinguish <b>state functions</b> from <b>path functions</b> — the single most useful idea in this module.</li>
+    </ul>
+  </div>
+
+  <h2 id="meaning">What the word means</h2>
+  <p>The name comes from two Greek words: <i>thermē</i> (heat) and <i>dynamis</i> (power). It was born in the 1800s when engineers wanted to know how much useful work a steam engine could get out of burning coal. Today chemists use the same ideas to answer questions such as:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 220" role="img" aria-label="Four everyday examples of thermodynamics">
+      <!-- steam engine / car -->
+      <g transform="translate(20,20)">
+        <rect width="170" height="180" rx="14" class="surface-2"/>
+        <rect x="35" y="55" width="100" height="60" rx="8" class="sys-box"/>
+        <circle cx="60" cy="130" r="14" class="metal"/><circle cx="112" cy="130" r="14" class="metal"/>
+        <path d="M60 50 q-6 -14 4 -24 q8 -10 0 -20" class="muted-line anim-pulse"/>
+        <path d="M80 50 q-6 -14 4 -24 q8 -10 0 -20" class="muted-line anim-pulse" style="animation-delay:.6s"/>
+        <text x="85" y="165" text-anchor="middle" class="t-mid" style="font-weight:600">Engines</text>
+        <text x="85" y="90" text-anchor="middle" class="t-small t-sys">fuel → work</text>
+      </g>
+      <!-- ice melting -->
+      <g transform="translate(205,20)">
+        <rect width="170" height="180" rx="14" class="surface-2"/>
+        <rect x="50" y="40" width="44" height="44" rx="6" class="ice"/>
+        <rect x="80" y="62" width="34" height="34" rx="6" class="ice"/>
+        <ellipse cx="85" cy="122" rx="55" ry="12" class="liquid"/>
+        <path d="M40 30 l12 12 M130 30 l-12 12" class="heat-arrow" style="stroke-width:3"/>
+        <text x="85" y="165" text-anchor="middle" class="t-mid" style="font-weight:600">Melting ice</text>
+        <text x="85" y="22" text-anchor="middle" class="t-small t-heat">heat flows in</text>
+      </g>
+      <!-- body / metabolism -->
+      <g transform="translate(390,20)">
+        <rect width="170" height="180" rx="14" class="surface-2"/>
+        <circle cx="85" cy="45" r="16" class="sys-box"/>
+        <rect x="65" y="64" width="40" height="56" rx="14" class="sys-box"/>
+        <path d="M110 80 h30 M30 80 h30" class="heat-arrow anim-flow" style="stroke-width:3"/>
+        <text x="85" y="145" text-anchor="middle" class="t-small t-energy">food → heat + work</text>
+        <text x="85" y="165" text-anchor="middle" class="t-mid" style="font-weight:600">Metabolism</text>
+      </g>
+      <!-- battery -->
+      <g transform="translate(575,20)">
+        <rect width="170" height="180" rx="14" class="surface-2"/>
+        <rect x="50" y="45" width="70" height="90" rx="8" class="sys-box"/>
+        <rect x="72" y="35" width="26" height="10" rx="3" class="metal"/>
+        <text x="85" y="80" text-anchor="middle" class="t-big t-sys">+</text>
+        <text x="85" y="122" text-anchor="middle" class="t-big t-sys">−</text>
+        <text x="85" y="165" text-anchor="middle" class="t-mid" style="font-weight:600">Batteries</text>
+        <text x="85" y="26" text-anchor="middle" class="t-small t-energy">chemical → electrical</text>
+      </g>
+    </svg>
+    <figcaption>Every one of these is a story about energy changing form and moving between an object and its environment.</figcaption>
+  </figure>
+
+  <ul>
+    <li>How much heat is released when methane burns?</li>
+    <li>Will a reaction happen on its own (is it <i>spontaneous</i>)?</li>
+    <li>How much work can an expanding gas do on a piston?</li>
+    <li>Why does heat always flow from hot to cold, never the reverse?</li>
+  </ul>
+
+  <div class="callout warn">
+    <span class="callout-title">What thermodynamics does <u>not</u> tell you</span>
+    Thermodynamics tells you <b>whether</b> a process can happen and <b>how much</b> energy is involved — but not <b>how fast</b>. Diamond turning into graphite is thermodynamically favourable, yet your diamond ring is safe for billions of years. Speed is the job of <i>kinetics</i>.
+  </div>
+
+  <h2 id="macro" data-short="Macroscopic view">The macroscopic point of view</h2>
+  <p>A drop of water contains about 10<sup>21</sup> molecules. Tracking each one is impossible. Thermodynamics instead describes matter using a handful of measurable, <b>bulk</b> properties: pressure (<var>P</var>), volume (<var>V</var>), temperature (<var>T</var>), amount (<var>n</var>) and energy. Once these are fixed, the <b>state</b> of the sample is fixed.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 240" role="img" aria-label="Microscopic view of particles compared with macroscopic gauges of P, V and T">
+      <g transform="translate(20,20)">
+        <text x="150" y="0" text-anchor="middle" class="t-mid" style="font-weight:700" dy="12">Microscopic view</text>
+        <rect x="40" y="25" width="220" height="170" rx="10" class="sys-box"/>
+        <g class="energy-fill" id="dots"></g>
+        <text x="150" y="215" text-anchor="middle" class="t-small t-muted">~10²³ particles, each with its own position &amp; speed</text>
+      </g>
+      <path d="M320 120 H 430" class="ink-line" stroke-width="3"/>
+      <polygon points="438,120 424,111 424,129" fill="var(--ink)"/>
+      <text x="378" y="108" text-anchor="middle" class="t-small t-muted">average over</text>
+      <text x="378" y="142" text-anchor="middle" class="t-small t-muted">all particles</text>
+      <g transform="translate(450,20)">
+        <text x="145" y="12" text-anchor="middle" class="t-mid" style="font-weight:700">Macroscopic view</text>
+        <!-- gauges -->
+        <g transform="translate(50,90)">
+          <circle r="42" class="surface" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M-30 18 A 34 34 0 1 1 30 18" class="muted-line"/>
+          <line x1="0" y1="0" x2="22" y2="-22" stroke="var(--heat)" stroke-width="3"/>
+          <circle r="4" fill="var(--ink)"/>
+          <text y="70" text-anchor="middle" class="t-mid" style="font-weight:700">P</text>
+          <text y="88" text-anchor="middle" class="t-small t-muted">1.0 atm</text>
+        </g>
+        <g transform="translate(145,90)">
+          <rect x="-22" y="-45" width="44" height="90" rx="4" class="surface" stroke="var(--ink)" stroke-width="2"/>
+          <rect x="-20" y="-10" width="40" height="53" class="liquid"/>
+          <text y="70" text-anchor="middle" class="t-mid" style="font-weight:700">V</text>
+          <text y="88" text-anchor="middle" class="t-small t-muted">24.5 L</text>
+        </g>
+        <g transform="translate(240,90)">
+          <rect x="-8" y="-48" width="16" height="80" rx="8" class="surface" stroke="var(--ink)" stroke-width="2"/>
+          <circle cy="38" r="14" fill="var(--hot)"/>
+          <rect x="-4" y="-20" width="8" height="58" fill="var(--hot)"/>
+          <text y="70" text-anchor="middle" class="t-mid" style="font-weight:700">T</text>
+          <text y="88" text-anchor="middle" class="t-small t-muted">298 K</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Temperature is really the <b>average kinetic energy</b> of the particles; pressure is the average force of their collisions on the walls. Thermodynamics works with these averages.</figcaption>
+  </figure>
+
+  <h2 id="energy">Energy, briefly</h2>
+  <p><b>Energy</b> is the capacity to do work or to transfer heat. All forms of energy fall into two families:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Kinetic energy — energy of motion</h3>
+      <p style="font-family:var(--serif);font-size:1.25rem;text-align:center"><var>E</var><sub>k</sub> = ½ <var>m v</var><sup>2</sup></p>
+      <p>Molecules translate, rotate and vibrate. The faster they move, the hotter the sample. <b>Thermal energy</b> is the kinetic energy of random molecular motion.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Potential energy — energy of position</h3>
+      <p style="font-family:var(--serif);font-size:1.25rem;text-align:center"><var>E</var><sub>p</sub> = <var>m g h</var> (gravity)</p>
+      <p>In chemistry the important kind is <b>chemical potential energy</b>, stored in the attractions between nuclei and electrons in bonds, and between molecules.</p>
+    </div>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 210" role="img" aria-label="A ball rolling down a hill converts potential energy to kinetic energy">
+      <path d="M30 60 C 200 60, 260 180, 420 180 L 730 180" class="ink-line" stroke-width="3"/>
+      <rect x="30" y="180" width="700" height="4" class="metal"/>
+      <circle cx="60" cy="45" r="14" fill="var(--energy)"/>
+      <circle r="14" fill="var(--energy)" opacity=".9">
+        <animateMotion dur="4s" repeatCount="indefinite" path="M60 45 C 200 45, 260 165, 420 165 L 700 165" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".5 0 .7 1"/>
+      </circle>
+      <text x="60" y="20" text-anchor="middle" class="t-small t-energy">high Eₚ, Eₖ = 0</text>
+      <text x="420" y="145" text-anchor="middle" class="t-small t-energy">low Eₚ, high Eₖ</text>
+      <text x="600" y="140" text-anchor="middle" class="t-small t-heat">friction → heat</text>
+      <text x="380" y="205" text-anchor="middle" class="t-small t-muted">The total energy (Eₚ + Eₖ + heat) never changes — a preview of the first law.</text>
+    </svg>
+  </figure>
+
+  <h3>Units of energy</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Unit</th><th>Definition</th><th>Feel for the size</th></tr>
+      <tr><td>joule (J)</td><td>1 J = 1 kg m<sup>2</sup> s<sup>−2</sup> (SI unit)</td><td>Lifting an apple 1 m</td></tr>
+      <tr><td>kilojoule (kJ)</td><td>1 kJ = 1000 J</td><td>Reaction energies are usually quoted in kJ/mol</td></tr>
+      <tr><td>calorie (cal)</td><td>1 cal = 4.184 J (exactly)</td><td>Heats 1 g of water by 1 °C</td></tr>
+      <tr><td>Calorie (food, Cal)</td><td>1 Cal = 1 kcal = 4184 J</td><td>A banana ≈ 100 Cal ≈ 420 kJ</td></tr>
+      <tr><td>litre-atmosphere (L·atm)</td><td>1 L·atm = 101.325 J</td><td>Comes out of <var>P</var>Δ<var>V</var> work calculations</td></tr>
+    </table>
+  </div>
+
+  <h2 id="laws">The laws at a glance</h2>
+  <p>Thermodynamics rests on four laws. This module focuses on the <b>first law</b>; the others are previewed here so you can see where it fits.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">0 · Zeroth law</h3>
+      <svg viewBox="0 0 300 70" aria-hidden="true">
+        <rect x="10" y="15" width="70" height="40" rx="6" class="sys-box"/><text x="45" y="40" text-anchor="middle" class="t-mid">A</text>
+        <rect x="115" y="15" width="70" height="40" rx="6" class="surr-box"/><text x="150" y="40" text-anchor="middle" class="t-mid">B</text>
+        <rect x="220" y="15" width="70" height="40" rx="6" class="sys-box"/><text x="255" y="40" text-anchor="middle" class="t-mid">C</text>
+        <text x="97" y="40" text-anchor="middle" class="t-mid">=</text><text x="203" y="40" text-anchor="middle" class="t-mid">=</text>
+      </svg>
+      <p>If A and B are in thermal equilibrium, and B and C are too, then A and C are as well. This is what makes <b>thermometers</b> work.</p>
+    </div>
+    <div class="card" style="border-color:var(--energy)">
+      <h3 style="margin-top:0">1 · First law <small style="color:var(--energy)">(this module)</small></h3>
+      <p style="font-family:var(--serif);font-size:1.4rem;text-align:center;margin:.3em 0"><span class="u">ΔU</span> = <span class="q">q</span> + <span class="w">w</span></p>
+      <p><b>Energy is conserved.</b> It can change form and move between system and surroundings, but it cannot be created or destroyed.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">2 · Second law</h3>
+      <svg viewBox="0 0 300 60" aria-hidden="true">
+        <rect x="10" y="10" width="90" height="40" rx="6" fill="var(--heat-fill)" stroke="var(--hot)" stroke-width="2"/><text x="55" y="35" text-anchor="middle" class="t-mid">hot</text>
+        <rect x="200" y="10" width="90" height="40" rx="6" fill="#dcefff" stroke="var(--cold)" stroke-width="2"/><text x="245" y="35" text-anchor="middle" class="t-mid" style="fill:#1b4f80">cold</text>
+        <path d="M108 30 H 186" class="heat-arrow anim-flow" style="stroke-width:4"/><polygon points="192,30 180,23 180,37" class="heat-fill"/>
+      </svg>
+      <p>In any spontaneous process the <b>entropy</b> (dispersal of energy) of the universe increases. Heat flows hot → cold on its own, never the reverse.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">3 · Third law</h3>
+      <svg viewBox="0 0 300 60" aria-hidden="true">
+        <g fill="var(--sys)">
+          <circle cx="40" cy="20" r="6"/><circle cx="70" cy="20" r="6"/><circle cx="100" cy="20" r="6"/><circle cx="130" cy="20" r="6"/>
+          <circle cx="40" cy="45" r="6"/><circle cx="70" cy="45" r="6"/><circle cx="100" cy="45" r="6"/><circle cx="130" cy="45" r="6"/>
+        </g>
+        <text x="220" y="38" text-anchor="middle" class="t-mid">T = 0 K, S = 0</text>
+      </svg>
+      <p>The entropy of a perfect crystal at absolute zero is zero. It gives us a reference point for measuring entropy.</p>
+    </div>
+  </div>
+
+  <h2 id="state-functions" data-short="State vs path functions">State functions vs path functions</h2>
+  <p>This idea will come up again and again, so it is worth getting right now.</p>
+  <ul>
+    <li>A <b>state function</b> depends <b>only on the current state</b> of the system — not on how it got there. Examples: <var>P</var>, <var>V</var>, <var>T</var>, internal energy <span class="u">U</span>, enthalpy <var>H</var>. For a change we write Δ<var>X</var> = <var>X</var><sub>final</sub> − <var>X</var><sub>initial</sub>.</li>
+    <li>A <b>path function</b> depends on <b>how</b> the change happens. <span class="q">Heat (q)</span> and <span class="w">work (w)</span> are path functions. We never write "Δq" or "Δw" — a system doesn't <i>contain</i> heat or work; they only exist while energy is being transferred.</li>
+  </ul>
+
+  <div class="widget" id="hike">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Two hikers, one mountain</h3></div>
+    <div class="widget-body">
+      <p>Both hikers start at base camp (altitude 1200 m) and finish at the summit (3000 m). Choose a trail and press <b>Hike!</b> Watch which quantity depends on the path.</p>
+      <div class="seg" role="group" aria-label="Choose trail">
+        <button class="on" data-path="A">Trail A · steep &amp; direct</button>
+        <button data-path="B">Trail B · long &amp; winding</button>
+      </div>
+      <button class="btn" id="hikeGo" style="margin-left:8px">Hike!</button>
+      <svg viewBox="0 0 740 300" style="margin-top:12px" role="img" aria-label="Mountain with two trails">
+        <polygon points="40,280 330,40 660,280" class="surface-2" stroke="var(--ink-3)" stroke-width="2"/>
+        <polygon points="300,65 330,40 362,66 345,72 330,60 315,72" fill="var(--surface)" stroke="var(--ink-3)"/>
+        <path id="trailA" d="M120 270 L 200 200 L 260 130 L 330 45" fill="none" stroke="var(--heat)" stroke-width="4" stroke-dasharray="8 6"/>
+        <path id="trailB" d="M120 270 C 300 270, 560 255, 520 210 C 470 170, 220 200, 250 150 C 280 110, 450 125, 400 95 C 370 75, 320 70, 330 45" fill="none" stroke="var(--work)" stroke-width="4" stroke-dasharray="8 6" opacity=".35"/>
+        <circle id="hiker" cx="120" cy="270" r="9" fill="var(--sys)" stroke="#fff" stroke-width="2"/>
+        <text x="80" y="292" class="t-small" style="font-weight:600">Base camp · 1200 m</text>
+        <text x="345" y="35" class="t-small" style="font-weight:600">Summit · 3000 m</text>
+        <!-- altitude axis -->
+        <line x1="670" y1="40" x2="670" y2="280" class="muted-line"/>
+        <text x="676" y="45" class="t-small t-muted">3000 m</text>
+        <text x="676" y="280" class="t-small t-muted">1200 m</text>
+      </svg>
+      <div class="readout">
+        <div><span class="k">Altitude change</span><span class="v u" id="hAlt">0 m</span></div>
+        <div><span class="k">Distance walked</span><span class="v" id="hDist" style="color:var(--heat)">0.0 km</span></div>
+        <div><span class="k">Energy as sweat (heat)</span><span class="v" id="hSweat" style="color:var(--heat)">0 kJ</span></div>
+      </div>
+      <p id="hikeMsg" style="margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">The analogy</span>
+    Altitude change is like Δ<span class="u">U</span> — a <b>state function</b>: +1800 m no matter which trail. Distance walked and energy sweated off are like <span class="q">q</span> and <span class="w">w</span> — <b>path functions</b>: they depend on the trail. In Lesson 4 we'll see that <span class="q">q</span> and <span class="w">w</span> can each change with the path while their <b>sum</b>, Δ<span class="u">U</span>, does not.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">Which of these is <u>not</u> a state function?</p>
+    <div class="quiz-opts">
+      <button data-why="Temperature depends only on the current state, so it is a state function.">Temperature, <var>T</var></button>
+      <button data-why="Internal energy depends only on the current state, so it is a state function.">Internal energy, <var>U</var></button>
+      <button data-why="Work depends on the path — expanding against a large or small external pressure gives different work, even between the same two states.">Work, <var>w</var></button>
+      <button data-why="Volume depends only on the current state, so it is a state function.">Volume, <var>V</var></button>
+    </div>
+    <div class="quiz-fb"></div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">A reaction is thermodynamically favourable but nothing seems to happen when you mix the reactants. What is the best explanation?</p>
+    <div class="quiz-opts">
+      <button data-why="If thermodynamics says it is favourable, the energy accounting already works out. The issue is speed.">The first law forbids it.</button>
+      <button>The reaction is very slow — thermodynamics says nothing about rate.</button>
+      <button data-why="A favourable reaction does not need to be forced; the problem here is the rate.">Thermodynamics must be wrong for this reaction.</button>
+    </div>
+    <div class="quiz-fb" data-right="Thermodynamics predicts whether and how much, not how fast. Diamond → graphite is the classic example."></div>
+  </div>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  // scatter particles in the microscopic box
+  (function () {
+    const g = document.getElementById("dots");
+    let s = "";
+    for (let i = 0; i < 46; i++) {
+      const x = 52 + Math.random() * 196, y = 37 + Math.random() * 146;
+      s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4"/>`;
+    }
+    g.innerHTML = s;
+  })();
+
+  // hiking widget
+  (function () {
+    const w = document.getElementById("hike");
+    let path = "A";
+    const pA = document.getElementById("trailA"), pB = document.getElementById("trailB");
+    const hiker = document.getElementById("hiker");
+    const data = { A: { km: 4.2, sweat: 2600 }, B: { km: 11.8, sweat: 5900 } };
+    w.querySelectorAll("[data-path]").forEach(b => b.addEventListener("click", () => {
+      w.querySelectorAll("[data-path]").forEach(x => x.classList.toggle("on", x === b));
+      path = b.dataset.path;
+      pA.setAttribute("opacity", path === "A" ? 1 : .35);
+      pB.setAttribute("opacity", path === "B" ? 1 : .35);
+      hiker.setAttribute("cx", 120); hiker.setAttribute("cy", 270);
+      ["hAlt", "hDist", "hSweat"].forEach(id => document.getElementById(id).textContent = "—");
+      document.getElementById("hikeMsg").textContent = "";
+    }));
+    document.getElementById("hikeGo").addEventListener("click", () => {
+      const el = path === "A" ? pA : pB, L = el.getTotalLength(), d = data[path];
+      const t0 = performance.now(), dur = path === "A" ? 1800 : 3600;
+      const step = (now) => {
+        const f = Math.min(1, (now - t0) / dur);
+        const pt = el.getPointAtLength(f * L);
+        hiker.setAttribute("cx", pt.x); hiker.setAttribute("cy", pt.y);
+        const alt = 1200 + (270 - pt.y) / (270 - 45) * 1800;
+        document.getElementById("hAlt").textContent = "+" + Math.round(alt - 1200) + " m";
+        document.getElementById("hDist").textContent = (d.km * f).toFixed(1) + " km";
+        document.getElementById("hSweat").textContent = Math.round(d.sweat * f) + " kJ";
+        if (f < 1) requestAnimationFrame(step);
+        else document.getElementById("hikeMsg").innerHTML =
+          `Trail ${path} finished: altitude change <b class="u">+1800 m</b> (same for both trails), but distance <b>${d.km} km</b> and sweat <b>${d.sweat} kJ</b> depend on the trail. Try the other trail!`;
+      };
+      requestAnimationFrame(step);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reversible and Irreversible Processes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #stepCanvas { width: 100%; height: 300px; display: block; }
+    .cmp-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .ladder { display: flex; gap: 3px; align-items: flex-end; height: 70px; margin: 10px 0; }
+    .ladder div { flex: 1; border-radius: 4px 4px 0 0; transition: outline .2s; }
+    .ladder div.on { outline: 3px solid var(--ink); outline-offset: 1px; }
+    .race-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+    @media (max-width: 680px) { .race-grid { grid-template-columns: 1fr; } }
+    .race-panel { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+    .race-panel h4 { margin: 2px 0 4px; text-align: center; font-size: 1rem; }
+    .race-panel svg { display: block; width: 100%; height: auto; background: var(--surface); border-radius: 8px; }
+    .race-panel .readout { grid-template-columns: repeat(3, 1fr); }
+    .race-panel .readout div { background: var(--surface); }
+    .race-panel .readout .k { text-transform: none; letter-spacing: 0; font-size: .82rem; }
+    .race-status { font-size: .88rem; min-height: 3.2em; margin: 8px 2px 0; }
+    .race-bars { margin-top: 14px; display: grid; gap: 8px; }
+    .race-bar { display: grid; grid-template-columns: 110px 1fr 76px; gap: 8px; align-items: center; font-size: .9rem; font-weight: 600; }
+    .race-track { height: 22px; background: var(--surface-2); border-radius: 6px; overflow: hidden; }
+    .race-fill { height: 100%; width: 0; border-radius: 6px; }
+    .race-bar span:last-child { text-align: right; }
+  </style>
+</head>
+<body data-lesson="6" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 6</p>
+  <h1>Reversible vs irreversible processes</h1>
+  <p class="lede">Heat and work are path functions — so <b>how</b> a change is carried out matters. The two extremes are a <b>reversible</b> path (infinitely slow and gentle) and an <b>irreversible</b> one (fast, with a finite push). Comparing them reveals the maximum work a process can deliver.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Define reversible and irreversible processes and recognise each.</li>
+      <li>Explain reversible and irreversible <b>work</b> using a piston and a P–V diagram.</li>
+      <li>Explain reversible and irreversible <b>heat</b> transfer.</li>
+      <li>Compare reversible and irreversible work quantitatively — and see why expansion gives maximum work and compression needs minimum work when done reversibly.</li>
+      <li>Decide whether the comparison is meaningful for <b>solids and liquids</b>.</li>
+    </ul>
+  </div>
+
+  <h2 id="definitions">What do "reversible" and "irreversible" mean?</h2>
+  <div class="grid-2">
+    <div class="card" style="border-top:4px solid var(--work)">
+      <h3 style="margin-top:0">Reversible process</h3>
+      <ul style="padding-left:1.2em;margin:0">
+        <li>Carried out through a series of tiny steps, so the system is <b>always at (or infinitely close to) equilibrium</b>.</li>
+        <li>The driving force is <b>infinitesimal</b>: <var>P</var><sub>ext</sub> differs from <var>P</var><sub>gas</sub> by only d<var>P</var>, or the heat source differs in temperature by only d<var>T</var>.</li>
+        <li>Can be <b>reversed at any moment</b> by an infinitesimal change — and both system and surroundings return exactly to their original states.</li>
+        <li>Takes infinitely long: it's an <b>idealisation</b>, a limit we can approach but never reach.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:4px solid var(--heat)">
+      <h3 style="margin-top:0">Irreversible process</h3>
+      <ul style="padding-left:1.2em;margin:0">
+        <li>Driven by a <b>finite</b> difference: a big pressure imbalance, a big temperature gap.</li>
+        <li>Happens at a <b>finite speed</b>; during the process the system is not in equilibrium (turbulence, temperature gradients).</li>
+        <li>Can be undone only by doing something that <b>leaves a permanent change</b> in the surroundings.</li>
+        <li><b>All real processes are irreversible</b>: an egg breaking, a gas rushing into a vacuum, a hot pan cooling.</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 330" role="img" aria-label="Expanding a gas by removing one large weight versus removing grains of sand one at a time">
+      <!-- irreversible -->
+      <g transform="translate(10,10)">
+        <text x="180" y="16" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--heat)">Irreversible: remove the whole weight at once</text>
+        <!-- before -->
+        <g transform="translate(20,40)">
+          <path d="M20 40 V 250 H 120 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="22" y="170" width="96" height="78" class="gas"/>
+          <rect x="22" y="160" width="96" height="10" class="piston"/>
+          <rect x="35" y="110" width="70" height="50" rx="4" class="metal"/>
+          <text x="70" y="140" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:700">BIG</text>
+          <text x="70" y="275" text-anchor="middle" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = 4 atm</tspan></text>
+        </g>
+        <path d="M160 170 H 200" class="ink-line" stroke-width="3"/><polygon points="206,170 194,163 194,177" fill="var(--ink)"/>
+        <text x="182" y="155" text-anchor="middle" class="t-small t-heat">whoosh!</text>
+        <!-- after -->
+        <g transform="translate(210,40)">
+          <path d="M20 40 V 250 H 120 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="22" y="70" width="96" height="178" class="gas"/>
+          <rect x="22" y="60" width="96" height="10" class="piston"/>
+          <path d="M40 110 q8 -10 16 0 t16 0 t16 0" class="muted-line"/>
+          <path d="M40 200 q8 -10 16 0 t16 0 t16 0" class="muted-line"/>
+          <text x="70" y="275" text-anchor="middle" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = 1 atm</tspan></text>
+          <text x="70" y="295" text-anchor="middle" class="t-small t-muted">turbulent, not in equilibrium</text>
+        </g>
+      </g>
+      <line x1="380" y1="30" x2="380" y2="310" class="muted-line" stroke-dasharray="4 5"/>
+      <!-- reversible -->
+      <g transform="translate(390,10)">
+        <text x="180" y="16" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--work)">Reversible: remove sand one grain at a time</text>
+        <g transform="translate(20,40)">
+          <path d="M20 40 V 250 H 120 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="22" y="170" width="96" height="78" class="gas"/>
+          <rect x="22" y="160" width="96" height="10" class="piston"/>
+          <path d="M28 160 Q 70 80 112 160 Z" fill="var(--surr)"/>
+          <circle cx="132" cy="96" r="3" fill="var(--surr)"><animate attributeName="cy" values="96;130;96" dur="1.4s" repeatCount="indefinite"/></circle>
+          <text x="70" y="275" text-anchor="middle" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = 4 atm</tspan></text>
+        </g>
+        <path d="M160 170 H 200" class="ink-line" stroke-width="3"/><polygon points="206,170 194,163 194,177" fill="var(--ink)"/>
+        <text x="182" y="150" text-anchor="middle" class="t-small t-work">slowly…</text>
+        <text x="182" y="195" text-anchor="middle" class="t-small t-muted">(∞ steps)</text>
+        <g transform="translate(210,40)">
+          <path d="M20 40 V 250 H 120 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="22" y="70" width="96" height="178" class="gas"/>
+          <rect x="22" y="60" width="96" height="10" class="piston"/>
+          <path d="M45 60 Q 70 40 95 60 Z" fill="var(--surr)"/>
+          <text x="70" y="275" text-anchor="middle" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = 1 atm</tspan></text>
+          <text x="70" y="295" text-anchor="middle" class="t-small t-muted">always P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> ≈ P</tspan><tspan dy="3" font-size="8">gas</tspan></text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Same start, same finish. Removing one big weight drops <var>P</var><sub>ext</sub> suddenly — the gas rushes up against a low pressure. Removing grains of sand one at a time keeps <var>P</var><sub>ext</sub> just below <var>P</var><sub>gas</sub> the whole way; adding a single grain back would reverse the motion.</figcaption>
+  </figure>
+
+  <h2 id="work" data-short="Reversible vs irreversible work">Reversible and irreversible work</h2>
+  <p>Remember: <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var>, and on a P–V diagram |<var>w</var>| is the <b>area under the external-pressure path</b>. To get the most work out of an expanding gas, we want <var>P</var><sub>ext</sub> to be as <b>high as possible</b> at every stage — but it can't exceed <var>P</var><sub>gas</sub>, or the gas would be compressed instead. The best we can do is <var>P</var><sub>ext</sub> = <var>P</var><sub>gas</sub> − d<var>P</var> all the way: that's the reversible path.</p>
+
+  <div class="eq">Reversible, isothermal, ideal gas: &nbsp; <span class="w">w</span><sub>rev</sub> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>)
+    <span class="label">the area under the smooth isotherm P = nRT/V (derived with calculus: w = −∫P dV)</span></div>
+
+  <div class="widget" id="race">
+    <div class="widget-head"><span class="badge">Animated</span><h3>Watch it happen: irreversible vs reversible work, side by side</h3></div>
+    <div class="widget-body">
+      <p>Both cylinders hold <b>1.00 mol of ideal gas at 298 K</b> (a water bath keeps <var>T</var> constant) and go between the <b>same two states</b>: 4.00 atm, 6.12 L and 1.00 atm, 24.5 L. The load on the piston sets <var>P</var><sub>ext</sub>: the grey block always stays on and is worth 1 atm. <b>Left:</b> the extra 3 atm is three blocks, moved all at once. <b>Right:</b> the extra 3 atm is a pile of sand, moved one grain at a time. Press <b>Play</b>, or drag the time slider to step through.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div class="seg" role="group" aria-label="Direction">
+          <button class="on" data-race="exp">Expansion</button>
+          <button data-race="comp">Compression</button>
+        </div>
+        <button class="btn" id="racePlay">▶ Play</button>
+        <button class="btn ghost" id="raceReset">Reset</button>
+      </div>
+      <div class="control" style="margin-top:12px"><label for="raceT">Time <output id="raceTOut">start</output></label><input type="range" id="raceT" min="0" max="1000" step="1" value="0"></div>
+      <div class="race-grid">
+        <div class="race-panel">
+          <h4 style="color:var(--heat)">Irreversible · one sudden step</h4>
+          <svg id="raceIrr" viewBox="0 0 360 505" role="img" aria-label="Irreversible: blocks removed at once, piston jumps; P-V path drops then runs flat"></svg>
+          <div class="readout">
+            <div><span class="k">P<sub>ext</sub></span><span class="v" id="irrP"></span></div>
+            <div><span class="k">V</span><span class="v" id="irrV"></span></div>
+            <div><span class="k">w</span><span class="v" id="irrW" style="color:var(--heat)"></span></div>
+          </div>
+          <p class="race-status" id="irrStatus"></p>
+        </div>
+        <div class="race-panel">
+          <h4 style="color:var(--work)">Reversible · infinitely many tiny steps</h4>
+          <svg id="raceRev" viewBox="0 0 360 505" role="img" aria-label="Reversible: sand removed grain by grain, piston creeps; P-V path follows the isotherm"></svg>
+          <div class="readout">
+            <div><span class="k">P<sub>ext</sub></span><span class="v" id="revP"></span></div>
+            <div><span class="k">V</span><span class="v" id="revV"></span></div>
+            <div><span class="k">w</span><span class="v" id="revW" style="color:var(--work)"></span></div>
+          </div>
+          <p class="race-status" id="revStatus"></p>
+        </div>
+      </div>
+      <div class="race-bars">
+        <div style="font-weight:700;font-size:.92rem" id="barTitle"></div>
+        <div class="race-bar"><span style="color:var(--heat)">Irreversible</span><div class="race-track"><div class="race-fill" id="barIrr" style="background:var(--heat)"></div></div><span id="barIrrV"></span></div>
+        <div class="race-bar"><span style="color:var(--work)">Reversible</span><div class="race-track"><div class="race-fill" id="barRev" style="background:var(--work)"></div></div><span id="barRevV"></span></div>
+      </div>
+      <div class="callout key" id="raceMsg" style="display:none;margin-bottom:0"></div>
+    </div>
+  </div>
+
+  <p>Why stop at one step or infinitely many? The next widget fills in everything in between.</p>
+
+  <div class="widget" id="steps">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>From one step to infinitely many</h3></div>
+    <div class="widget-body">
+      <p><b>1.00 mol</b> of ideal gas at <b>298 K</b> (kept constant by a water bath) goes between <b>4.00 atm, 6.12 L</b> and <b>1.00 atm, 24.5 L</b>. Choose a direction, then increase the number of steps. Each step changes <var>P</var><sub>ext</sub> suddenly, then lets the gas settle.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div class="seg" role="group" aria-label="Direction">
+          <button class="on" data-dir="exp">Expansion</button>
+          <button data-dir="comp">Compression</button>
+          <button data-dir="cycle">Full cycle</button>
+        </div>
+        <button class="btn ghost" id="stepPlay">▶ Animate</button>
+      </div>
+      <div class="control" style="margin-top:12px">
+        <label for="stepN">Number of steps, N <output id="stepNOut">1</output></label>
+        <input type="range" id="stepN" min="0" max="9" step="1" value="0">
+      </div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="pvSteps" viewBox="0 0 420 300" role="img" aria-label="P-V diagram showing staircase work path and reversible isotherm"></svg>
+        <div>
+          <canvas id="stepCanvas" aria-label="Piston with sand representing external pressure"></canvas>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="k" id="lblW">w (N steps)</span><span class="v w" id="rW"></span></div>
+        <div><span class="k">w (reversible)</span><span class="v" id="rRev" style="color:var(--energy)"></span></div>
+        <div><span class="k">compared with reversible</span><span class="v" id="rPct"></span></div>
+      </div>
+      <p id="stepMsg" style="margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <figure class="diagram">
+    <svg id="convChart" viewBox="0 0 700 300" role="img" aria-label="Work versus number of steps for expansion and compression, converging on the reversible value"></svg>
+    <figcaption><b>Converging from both sides.</b> As the number of steps grows, the work <i>obtained</i> from expansion rises and the work <i>needed</i> for compression falls. Both approach the reversible value, 3.44 kJ. (The dot shows your current N.)</figcaption>
+  </figure>
+
+  <div class="callout key">
+    <span class="callout-title">How to compare reversible and irreversible work</span>
+    <ol style="margin:.3em 0 0;padding-left:1.2em">
+      <li><b>Same initial and final states</b> (so Δ<var>U</var> is the same for both paths).</li>
+      <li>Calculate each: irreversible with <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> (summed over steps); reversible with <var>w</var> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>).</li>
+      <li>Or compare areas on a P–V diagram: the reversible path hugs the isotherm.</li>
+    </ol>
+    <p style="margin-bottom:0"><b>Result:</b> for <b>expansion</b>, |<var>w</var><sub>rev</sub>| &gt; |<var>w</var><sub>irr</sub>| — reversible gives the <b>maximum work out</b>. For <b>compression</b>, <var>w</var><sub>rev</sub> &lt; <var>w</var><sub>irr</sub> — reversible needs the <b>minimum work in</b>. Taking a gas around an irreversible cycle always costs net work; a reversible cycle costs nothing.</p>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 240" role="img" aria-label="Force balance on a piston during irreversible and reversible expansion">
+      <g transform="translate(30,10)">
+        <text x="150" y="16" text-anchor="middle" class="t-mid" style="font-weight:700">Irreversible expansion</text>
+        <path d="M90 40 V 210 H 210 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="92" y="110" width="116" height="98" class="gas"/>
+        <rect x="92" y="100" width="116" height="10" class="piston"/>
+        <path d="M150 50 V 92" class="ink-line" stroke-width="3"/><polygon points="150,98 144,86 156,86" fill="var(--ink)"/>
+        <text x="160" y="70" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = 1 atm (small)</tspan></text>
+        <path d="M150 190 V 122" stroke="var(--sys)" stroke-width="7"/><polygon points="150,114 140,130 160,130" fill="var(--sys)"/>
+        <text x="160" y="165" class="t-small t-sys">P<tspan dy="3" font-size="8">gas</tspan><tspan dy="-3"> = 4 atm (big)</tspan></text>
+        <text x="150" y="232" text-anchor="middle" class="t-small t-muted">Unbalanced push → the extra push is "wasted" on speed and turbulence</text>
+      </g>
+      <g transform="translate(410,10)">
+        <text x="150" y="16" text-anchor="middle" class="t-mid" style="font-weight:700">Reversible expansion</text>
+        <path d="M90 40 V 210 H 210 V 40" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="92" y="110" width="116" height="98" class="gas"/>
+        <rect x="92" y="100" width="116" height="10" class="piston"/>
+        <path d="M150 40 V 92" stroke="var(--ink)" stroke-width="7"/><polygon points="150,100 140,84 160,84" fill="var(--ink)"/>
+        <text x="160" y="62" class="t-small">P<tspan dy="3" font-size="8">ext</tspan><tspan dy="-3"> = P</tspan><tspan dy="3" font-size="8">gas</tspan><tspan dy="-3"> − dP</tspan></text>
+        <path d="M150 190 V 122" stroke="var(--sys)" stroke-width="7"/><polygon points="150,114 140,130 160,130" fill="var(--sys)"/>
+        <text x="160" y="165" class="t-small t-sys">P<tspan dy="3" font-size="8">gas</tspan></text>
+        <text x="150" y="232" text-anchor="middle" class="t-small t-muted">Almost perfectly balanced → every bit of push does useful work</text>
+      </g>
+    </svg>
+  </figure>
+
+  <h2 id="heat" data-short="Reversible vs irreversible heat">Reversible and irreversible heat</h2>
+  <p>Heat flows because of a temperature difference. If that difference is <b>finite</b> (a 20 °C block dropped on an 80 °C hot plate), the heat flow is <b>irreversible</b> — you can't make heat flow back from the block to the hot plate by a tiny change. If the difference is only <b>infinitesimal</b> (d<var>T</var>), the flow is <b>reversible</b>: lowering the source temperature by d<var>T</var> would reverse the direction.</p>
+
+  <div class="widget" id="ladderW">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Heating a block: one hot plate vs a ladder of reservoirs</h3></div>
+    <div class="widget-body">
+      <p>We heat <b>100 g of water</b> (a liquid — it works the same for a solid) from <b>20 °C to 80 °C</b>. Instead of one 80 °C hot plate, we can use a series of reservoirs, each a little hotter than the last. Use the slider and press <b>Heat</b>.</p>
+      <div class="control"><label for="ladN">Number of reservoirs <output id="ladNOut">1</output></label><input type="range" id="ladN" min="0" max="5" step="1" value="0"></div>
+      <div class="ladder" id="ladder"></div>
+      <div class="widget-row">
+        <svg viewBox="0 0 360 200" role="img" aria-label="Block being heated by a reservoir">
+          <rect x="60" y="120" width="240" height="50" rx="6" id="resv" fill="var(--hot)" opacity=".85"/>
+          <text x="180" y="150" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px" id="resvT">reservoir 80 °C</text>
+          <rect x="120" y="50" width="120" height="70" rx="6" id="blk" fill="#8cc4f0" stroke="var(--sys)" stroke-width="2.5"/>
+          <text x="180" y="90" text-anchor="middle" class="t-mid" style="font-weight:700;fill:#0c3d66" id="blkT">20.0 °C</text>
+          <g id="ladArrow"><path d="M138 140 V 76" class="heat-arrow anim-flow" style="stroke-width:5"/><polygon points="138,66 129,80 147,80" class="heat-fill"/><path d="M222 140 V 76" class="heat-arrow anim-flow" style="stroke-width:5"/><polygon points="222,66 213,80 231,80" class="heat-fill"/><text x="250" y="72" class="t-mid t-heat">q</text></g>
+          <text x="180" y="30" text-anchor="middle" class="t-small" id="gapT">temperature gap at contact: 60 °C</text>
+          <text x="180" y="192" text-anchor="middle" class="t-small t-muted">system = the water sample</text>
+        </svg>
+        <div>
+          <div class="btn-row" style="margin-top:0"><button class="btn" id="ladGo">Heat</button></div>
+          <div class="readout">
+            <div><span class="k">Heat added</span><span class="v q" id="ladQ">+25.1 kJ</span></div>
+            <div><span class="k">Largest ΔT gap</span><span class="v" id="ladGap">60 °C</span></div>
+            <div><span class="k">Entropy created*</span><span class="v" id="ladS">6.82 J/K</span></div>
+          </div>
+          <p style="font-size:.9rem" id="ladMsg"></p>
+          <p style="font-size:.8rem;color:var(--ink-3)">*Entropy created in the universe — a measure of irreversibility you'll meet with the second law. It shrinks toward zero as the process becomes reversible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">Is q<sub>rev</sub> different from q<sub>irr</sub>?</span>
+    <p>It depends on the path, because <var>q</var> = Δ<var>U</var> − <var>w</var> and Δ<var>U</var> is fixed by the states:</p>
+    <ul style="margin:0;padding-left:1.2em">
+      <li><b>When work changes with the path</b> (a gas expanding), <var>q</var> changes too. In Example 9 (Lesson 5) the isothermal expansion absorbed <b><var>q</var><sub>rev</sub> = 1717 J</b> but only <b><var>q</var><sub>irr</sub> = 1239 J</b> in one step. Since Δ<var>U</var> = 0, more work out means more heat in: <b><var>q</var><sub>rev</sub> &gt; <var>q</var><sub>irr</sub></b> for expansion.</li>
+      <li><b>When there is essentially no work</b> (heating water in the widget above), <var>q</var> ≈ Δ<var>U</var> is the same — 25.1 kJ — whether you use one hot plate or a thousand reservoirs. What changes is how much <b>entropy is created</b>.</li>
+    </ul>
+    <p style="margin-bottom:0">Reversible heat is special: in the next unit you'll see that entropy is defined as Δ<var>S</var> = <var>q</var><sub>rev</sub>/<var>T</var>.</p>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 210" role="img" aria-label="Reversible and irreversible phase changes of water">
+      <g transform="translate(20,10)">
+        <text x="160" y="16" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--work)">Reversible phase change</text>
+        <rect x="40" y="50" width="70" height="70" rx="6" class="ice"/>
+        <path d="M125 75 H 195" class="ink-line"/><polygon points="201,75 189,69 189,81" fill="var(--ink)"/>
+        <path d="M201 100 H 131" class="ink-line"/><polygon points="125,100 137,94 137,106" fill="var(--ink)"/>
+        <ellipse cx="260" cy="100" rx="50" ry="18" class="liquid"/>
+        <text x="160" y="150" text-anchor="middle" class="t-small">ice ⇌ water at exactly <b>0 °C</b>, 1 atm</text>
+        <text x="160" y="170" text-anchor="middle" class="t-small t-muted">warm by dT → melts; cool by dT → freezes</text>
+      </g>
+      <line x1="380" y1="20" x2="380" y2="190" class="muted-line" stroke-dasharray="4 5"/>
+      <g transform="translate(400,10)">
+        <text x="160" y="16" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--heat)">Irreversible phase change</text>
+        <ellipse cx="70" cy="100" rx="50" ry="18" class="liquid"/>
+        <text x="70" y="70" text-anchor="middle" class="t-small">supercooled</text>
+        <path d="M130 88 H 200" class="ink-line" stroke-width="3"/><polygon points="206,88 194,82 194,94" fill="var(--ink)"/>
+        <text x="168" y="78" text-anchor="middle" class="t-small t-heat">sudden!</text>
+        <rect x="225" y="55" width="70" height="70" rx="6" class="ice"/>
+        <text x="160" y="150" text-anchor="middle" class="t-small">water at <b>−10 °C</b> freezes all at once</text>
+        <text x="160" y="170" text-anchor="middle" class="t-small t-muted">a tiny warming will NOT melt it back</text>
+      </g>
+    </svg>
+  </figure>
+
+  <h2 id="compare" data-short="Summary comparison">Side-by-side summary</h2>
+  <div class="table-wrap">
+    <table class="cmp-table">
+      <tr><th></th><th style="color:var(--work)">Reversible</th><th style="color:var(--heat)">Irreversible</th></tr>
+      <tr><td>Driving force</td><td>Infinitesimal (d<var>P</var>, d<var>T</var>)</td><td>Finite (Δ<var>P</var>, Δ<var>T</var>)</td></tr>
+      <tr><td>Speed</td><td>Infinitely slow</td><td>Finite, often fast</td></tr>
+      <tr><td>Equilibrium?</td><td>At every stage</td><td>Only at start and end</td></tr>
+      <tr><td>Work for expansion</td><td>Maximum |<var>w</var>| out</td><td>Less work out</td></tr>
+      <tr><td>Work for compression</td><td>Minimum <var>w</var> in</td><td>More work in</td></tr>
+      <tr><td>Heat (isothermal gas expansion)</td><td><var>q</var><sub>rev</sub> larger</td><td><var>q</var><sub>irr</sub> smaller</td></tr>
+      <tr><td>Δ<var>U</var></td><td colspan="2" style="text-align:center">Same for both — <span class="u">U</span> is a state function</td></tr>
+      <tr><td>Entropy of universe</td><td>Unchanged</td><td>Increases</td></tr>
+      <tr><td>Exists in reality?</td><td>No — an ideal limit</td><td>Yes — every real process</td></tr>
+    </table>
+  </div>
+
+  <h2 id="solids-liquids" data-short="Solids & liquids?">Can we compare reversible and irreversible work for solids and liquids?</h2>
+  <p><b>In principle, yes.</b> Any substance can be compressed slowly (reversibly) or suddenly (irreversibly), and the same definitions apply. <b>In practice, the difference is tiny</b>, because solids and liquids are nearly <b>incompressible</b>: even huge pressures squeeze them only slightly, so Δ<var>V</var> — and therefore the work — is very small whichever path you take.</p>
+
+  <h3>A simple way to see it</h3>
+  <p>For a liquid or solid, the volume shrinks almost exactly in proportion to the pressure increase. On a P–V diagram that's a <b>nearly vertical straight line</b>. The area under a straight line is just (average height) × (width):</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;color:var(--work)">Reversible compression</h3>
+      <p><var>P</var><sub>ext</sub> rises gradually from <var>P</var><sub>1</sub> to <var>P</var><sub>2</sub>, so the average pressure is about ½(<var>P</var><sub>1</sub> + <var>P</var><sub>2</sub>):</p>
+      <p style="font-family:var(--serif);text-align:center;font-size:1.15rem"><var>w</var><sub>rev</sub> ≈ −½(<var>P</var><sub>1</sub> + <var>P</var><sub>2</sub>) Δ<var>V</var></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;color:var(--heat)">Irreversible (sudden) compression</h3>
+      <p>The full pressure <var>P</var><sub>2</sub> is applied at once:</p>
+      <p style="font-family:var(--serif);text-align:center;font-size:1.15rem"><var>w</var><sub>irr</sub> = −<var>P</var><sub>2</sub> Δ<var>V</var></p>
+      <p style="margin-bottom:0">When <var>P</var><sub>2</sub> ≫ <var>P</var><sub>1</sub>, that's about <b>twice</b> the reversible work — but twice a tiny number is still tiny.</p>
+    </div>
+  </div>
+  <p style="font-size:.93rem">Here Δ<var>V</var> = −κ<var>V</var>Δ<var>P</var>, where κ (the <i>compressibility</i>) is a property of the material: about 4.6 × 10⁻⁵ atm⁻¹ for water and 6 × 10⁻⁷ atm⁻¹ for iron. An ideal gas, by contrast, halves its volume when the pressure doubles.</p>
+
+  <div class="widget" id="slw">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Compress 1.00 L of different substances</h3></div>
+    <div class="widget-body">
+      <p>Each sample starts as <b>1.00 L at 1 atm and 25 °C</b> and is compressed isothermally to the final pressure you choose — either reversibly or in one sudden step.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <div class="seg" role="group" aria-label="Substance" id="subSeg">
+          <button class="on" data-sub="water">Water (l)</button>
+          <button data-sub="ethanol">Ethanol (l)</button>
+          <button data-sub="mercury">Mercury (l)</button>
+          <button data-sub="iron">Iron (s)</button>
+          <button data-sub="copper">Copper (s)</button>
+        </div>
+      </div>
+      <div class="control" style="margin-top:12px"><label for="slP">Final pressure, P<sub>2</sub> <output id="slPOut">100 atm</output></label><input type="range" id="slP" min="0.3" max="2.7" step="0.01" value="2"></div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="slPV" viewBox="0 0 380 280" role="img" aria-label="P-V diagram comparing gas and condensed phase compression"></svg>
+        <div>
+          <div class="table-wrap" style="margin-top:0">
+            <table>
+              <tr><th></th><th class="num">ideal gas</th><th class="num" id="slName">water</th></tr>
+              <tr><td>ΔV</td><td class="num" id="gDV"></td><td class="num" id="lDV"></td></tr>
+              <tr><td style="color:var(--work);font-weight:600">w<sub>rev</sub></td><td class="num" id="gRev"></td><td class="num" id="lRev"></td></tr>
+              <tr><td style="color:var(--heat);font-weight:600">w<sub>irr</sub></td><td class="num" id="gIrr"></td><td class="num" id="lIrr"></td></tr>
+              <tr><td>w<sub>irr</sub> − w<sub>rev</sub></td><td class="num" id="gDiff"></td><td class="num" id="lDiff"></td></tr>
+            </table>
+          </div>
+          <p id="slMsg" style="font-size:.93rem;margin-bottom:0"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <caption style="text-align:left;font-weight:700;padding:6px 0">Compressing 1.00 L from 1 atm to 100 atm at 25 °C</caption>
+      <tr><th>Substance</th><th class="num">ΔV</th><th class="num">w<sub>rev</sub></th><th class="num">w<sub>irr</sub> (sudden)</th><th class="num">difference</th></tr>
+      <tr><td>Ideal gas</td><td class="num">−0.990 L</td><td class="num">+467 J</td><td class="num">+10,031 J</td><td class="num"><b>9,565 J</b></td></tr>
+      <tr><td>Water (l)</td><td class="num">−0.0045 L</td><td class="num">+23 J</td><td class="num">+46 J</td><td class="num"><b>23 J</b></td></tr>
+      <tr><td>Iron (s)</td><td class="num">−0.00006 L</td><td class="num">+0.31 J</td><td class="num">+0.61 J</td><td class="num"><b>0.3 J</b></td></tr>
+    </table>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">Answer: solids and liquids</span>
+    <ul style="margin:0;padding-left:1.2em">
+      <li><b>Work:</b> Yes, we can compare reversible and irreversible <var>PV</var> work for solids and liquids, and the irreversible work is larger for compression (by up to ~2×). But both values are so small — tens of joules or less, versus thousands for a gas — that the difference is usually <b>negligible</b>. In practice we set <var>w</var> ≈ 0 for condensed phases.</li>
+      <li><b>Heat:</b> Heating a solid or liquid reversibly or irreversibly transfers the <b>same <var>q</var></b> (= <var>mc</var>Δ<var>T</var> ≈ Δ<var>U</var>), because there's essentially no work to differ. The irreversibility shows up only as entropy created.</li>
+      <li><b>Where it does matter:</b> phase changes that make or consume a gas (boiling, sublimation), reactions that change Δ<var>n</var><sub>gas</sub>, and processes at enormous pressures (geology, materials science).</li>
+    </ul>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">A gas expands isothermally from the same initial state to the same final state by two paths: (A) in one step against a constant low pressure, (B) reversibly. Which statement is correct?</p>
+    <div class="quiz-opts">
+      <button data-why="ΔU is the same for both (state function, ideal gas, constant T → ΔU = 0). It's q and w that differ.">ΔU is larger for path B.</button>
+      <button>Path B does more work on the surroundings and absorbs more heat.</button>
+      <button data-why="Work is a path function. The reversible path does the most work possible.">Both paths do the same work because the states are the same.</button>
+      <button data-why="It's the reverse: the reversible path does the maximum work for an expansion.">Path A does more work because it's faster.</button>
+    </div>
+    <div class="quiz-fb" data-right="Reversible expansion gives maximum work out. With ΔU = 0, q = −w, so it also absorbs the most heat."></div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">Why is the distinction between reversible and irreversible work usually ignored for liquids?</p>
+    <div class="quiz-opts">
+      <button data-why="Liquids can certainly be compressed slowly or quickly — the concepts apply.">Liquids can't undergo reversible processes.</button>
+      <button data-why="The irreversible work is actually larger (up to about 2× for compression); it's the absolute size that's negligible.">The reversible and irreversible works are exactly equal for liquids.</button>
+      <button>Liquids are nearly incompressible, so ΔV — and hence both works — are tiny.</button>
+    </div>
+    <div class="quiz-fb" data-right="Compressing 1 L of water to 100 atm takes only ~23 J reversibly or ~46 J suddenly, compared with ~10,000 J for 1 L of gas."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">Which process is closest to reversible?</p>
+    <div class="quiz-opts">
+      <button>Ice melting in a glass of ice water kept at exactly 0 °C</button>
+      <button data-why="A gas rushing into a vacuum is the textbook irreversible process: it never spontaneously goes back.">A gas rushing into an evacuated flask</button>
+      <button data-why="A 60 °C temperature gap is a large, finite driving force: irreversible.">A cold spoon dropped into hot soup</button>
+      <button data-why="Combustion is fast and driven far from equilibrium: highly irreversible.">Gasoline burning in an engine</button>
+    </div>
+    <div class="quiz-fb" data-right="At 0 °C ice and water are in equilibrium; an infinitesimal temperature change decides whether ice melts or water freezes."></div>
+  </div>
+
+  <h2 id="wrap-up">Module wrap-up</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 260" role="img" aria-label="Concept map of the module">
+      <g class="t-mid" style="font-weight:600">
+        <rect x="290" y="10" width="180" height="46" rx="10" fill="var(--energy-fill)" stroke="var(--energy)" stroke-width="2"/>
+        <text x="380" y="39" text-anchor="middle">First law: ΔU = q + w</text>
+        <rect x="20" y="100" width="200" height="46" rx="10" class="sys-box"/><text x="120" y="129" text-anchor="middle">System | surroundings</text>
+        <rect x="280" y="100" width="200" height="46" rx="10" fill="var(--energy-fill)" stroke="var(--energy)" stroke-width="2"/><text x="380" y="129" text-anchor="middle">U: state function</text>
+        <rect x="540" y="100" width="200" height="46" rx="10" fill="var(--heat-fill)" stroke="var(--heat)" stroke-width="2"/><text x="640" y="129" text-anchor="middle">q, w: path functions</text>
+        <rect x="430" y="195" width="150" height="46" rx="10" fill="var(--work-fill)" stroke="var(--work)" stroke-width="2"/><text x="505" y="224" text-anchor="middle">Reversible</text>
+        <rect x="600" y="195" width="150" height="46" rx="10" fill="var(--heat-fill)" stroke="var(--heat)" stroke-width="2"/><text x="675" y="224" text-anchor="middle">Irreversible</text>
+        <rect x="20" y="195" width="380" height="46" rx="10" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-width="1.5"/><text x="210" y="224" text-anchor="middle">Gases: w matters · solids/liquids: w ≈ 0</text>
+      </g>
+      <g class="muted-line" stroke-width="2">
+        <path d="M330 56 L 160 100"/><path d="M380 56 V 100"/><path d="M430 56 L 610 100"/>
+        <path d="M600 146 L 520 195"/><path d="M660 146 L 670 195"/><path d="M120 146 L 180 195"/><path d="M380 146 L 280 195"/>
+      </g>
+    </svg>
+  </figure>
+  <p>You now have the tools for every first-law problem: choose a system, track energy across its boundary as <span class="q">q</span> and <span class="w">w</span> with the right signs, and remember that only Δ<span class="u">U</span> is independent of path. Next up: the <b>second law</b> — why some processes happen on their own and others don't.</p>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/gas.js"></script>
+<script src="../assets/js/work-race.js"></script>
+<script>
+  // ================= N-step widget =================
+  (function () {
+    const nRT = 24.4653, P1 = 4, P2 = 1, V1 = nRT / P1, V2 = nRT / P2; // L·atm, atm, L
+    const wRev = nRT * Math.log(V2 / V1); // magnitude, L·atm
+    const NS = [1, 2, 3, 4, 6, 10, 20, 50, 200, Infinity];
+    let dir = "exp", N = 1;
+    const svg = document.getElementById("pvSteps");
+    const X = (v) => 50 + v / 27 * 355, Y = (p) => 260 - p / 4.4 * 240;
+    const gas = new GasCylinder(document.getElementById("stepCanvas"), { n: 36, vf: V1 / 27, T: 298 });
+    gas.setBath(false);
+
+    // returns list of [P_ext, Vstart, Vend] for each step
+    function stepsFor(direction, n) {
+      const out = [];
+      if (direction === "exp") {
+        let v = V1;
+        for (let k = 1; k <= n; k++) { const p = P1 - k * (P1 - P2) / n, ve = nRT / p; out.push([p, v, ve]); v = ve; }
+      } else {
+        let v = V2;
+        for (let k = 1; k <= n; k++) { const p = P2 + k * (P1 - P2) / n, ve = nRT / p; out.push([p, v, ve]); v = ve; }
+      }
+      return out;
+    }
+    const workOf = (st) => st.reduce((s, [p, a, b]) => s - p * (b - a), 0); // L·atm, sign-correct
+    function stairPath(st, startP) {
+      let d = `M${X(st[0][1])} ${Y(startP)}`;
+      st.forEach(([p, a, b]) => { d += ` L${X(a)} ${Y(p)} L${X(b)} ${Y(p)}`; });
+      return d;
+    }
+    function areaPath(st) {
+      let d = "";
+      st.forEach(([p, a, b]) => { d += `M${X(a)} ${Y(0)} L${X(a)} ${Y(p)} L${X(b)} ${Y(p)} L${X(b)} ${Y(0)} Z `; });
+      return d;
+    }
+    function isoPath() {
+      let d = "";
+      for (let i = 0; i <= 60; i++) { const v = V1 + (V2 - V1) * i / 60; d += (i ? " L" : "M") + X(v) + " " + Y(nRT / v); }
+      return d;
+    }
+    const isoArea = () => isoPath() + ` L${X(V2)} ${Y(0)} L${X(V1)} ${Y(0)} Z`;
+
+    function draw(progress = 1) {
+      const inf = !isFinite(N);
+      let s = `
+        <line x1="50" y1="260" x2="410" y2="260" stroke="var(--ink)" stroke-width="2"/>
+        <line x1="50" y1="260" x2="50" y2="12" stroke="var(--ink)" stroke-width="2"/>
+        <text x="230" y="292" text-anchor="middle" class="t-small">V (L)</text>
+        <text x="16" y="140" text-anchor="middle" class="t-small" transform="rotate(-90 16 140)">P (atm)</text>
+        ${[0, 5, 10, 15, 20, 25].map(v => `<text x="${X(v)}" y="276" text-anchor="middle" class="t-small t-muted">${v}</text>`).join("")}
+        ${[0, 1, 2, 3, 4].map(p => `<text x="44" y="${Y(p) + 4}" text-anchor="end" class="t-small t-muted">${p}</text><line x1="50" x2="410" y1="${Y(p)}" y2="${Y(p)}" stroke="var(--line)"/>`).join("")}`;
+      if (dir === "cycle") {
+        const e = stepsFor("exp", inf ? 400 : N), c = stepsFor("comp", inf ? 400 : N);
+        // area between = region under compression stairs minus under expansion stairs
+        s += `<path d="${areaPath(c)}" fill="var(--heat)" opacity=".45"/>`;
+        s += `<path d="${areaPath(e)}" fill="var(--surface)"/>`;
+        s += `<path d="${areaPath(e)}" fill="var(--work-fill)" opacity=".5"/>`;
+        s += `<path d="${isoPath()}" fill="none" stroke="var(--energy)" stroke-width="2" stroke-dasharray="5 4"/>`;
+        if (!inf) {
+          s += `<path d="${stairPath(e, P1)}" fill="none" stroke="var(--work)" stroke-width="3"/>`;
+          s += `<path d="${stairPath(c, P2)}" fill="none" stroke="var(--heat)" stroke-width="3"/>`;
+        }
+        s += `<text x="${X(12)}" y="${Y(2.9)}" class="t-small t-heat">net work done on gas</text>`;
+        s += `<text x="${X(12)}" y="${Y(2.65)}" class="t-small t-heat">= shaded area between paths</text>`;
+      } else {
+        const st = stepsFor(dir, inf ? 400 : N);
+        const shown = Math.max(1, Math.ceil(st.length * progress));
+        const sub = st.slice(0, shown);
+        s += `<path d="${isoArea()}" fill="none"/>`;
+        s += `<path d="${areaPath(sub)}" fill="${dir === "exp" ? "var(--work-fill)" : "var(--heat-fill)"}"/>`;
+        s += `<path d="${isoPath()}" fill="none" stroke="var(--energy)" stroke-width="2.5" stroke-dasharray="${inf ? "0" : "5 4"}"/>`;
+        if (!inf) s += `<path d="${stairPath(sub, dir === "exp" ? P1 : P2)}" fill="none" stroke="${dir === "exp" ? "var(--work)" : "var(--heat)"}" stroke-width="3"/>`;
+        const last = sub[sub.length - 1];
+        s += `<circle cx="${X(last[2])}" cy="${Y(nRT / last[2])}" r="6" fill="var(--ink)"/>`;
+        s += `<text x="${X(17)}" y="${Y(2.4)}" class="t-small t-energy">reversible path</text>`;
+        s += `<text x="${X(17)}" y="${Y(2.15)}" class="t-small t-energy">(isotherm, P = nRT/V)</text>`;
+        // gas animation state
+        gas.setVolumeFrac(last[2] / 27); gas.setSand(Math.min(1, (last[0] - 0.6) / 3.4));
+      }
+      s += `<circle cx="${X(V1)}" cy="${Y(P1)}" r="5" fill="var(--sys)"/><text x="${X(V1) + 8}" y="${Y(P1) - 6}" class="t-small t-sys">4 atm, 6.1 L</text>`;
+      s += `<circle cx="${X(V2)}" cy="${Y(P2)}" r="5" fill="var(--sys)"/><text x="${X(V2)}" y="${Y(P2) + 18}" text-anchor="end" class="t-small t-sys">1 atm, 24.5 L</text>`;
+      svg.innerHTML = s;
+    }
+
+    function readouts() {
+      const inf = !isFinite(N);
+      const J = 101.325;
+      let w, wr, msg;
+      if (dir === "cycle") {
+        const we = inf ? -wRev : workOf(stepsFor("exp", N)), wc = inf ? wRev : workOf(stepsFor("comp", N));
+        w = we + wc; wr = 0;
+        document.getElementById("lblW").textContent = "net w, whole cycle";
+        document.getElementById("rPct").textContent = inf ? "0 — no cost" : "costs " + fmt(w * J, 0) + " J";
+        msg = inf ? `<b>Reversible cycle:</b> the expansion and compression follow the same curve, so the work out exactly cancels the work in. Net w = 0 and the surroundings are restored: the process is truly <i>reversible</i>.`
+          : `Expand in ${N} step${N > 1 ? "s" : ""} (w = ${fmt(we * J, 0)} J), then compress back in ${N} step${N > 1 ? "s" : ""} (w = +${fmt(wc * J, 0)} J). The gas is back where it started (ΔU = 0), but the surroundings have done <b>${fmt(w * J, 0)} J</b> of net work on it, and received the same amount back as heat. The surroundings are permanently changed — that's what makes it <b>irreversible</b>.`;
+      } else {
+        w = inf ? (dir === "exp" ? -wRev : wRev) : workOf(stepsFor(dir, N));
+        wr = dir === "exp" ? -wRev : wRev;
+        document.getElementById("lblW").textContent = isFinite(N) ? `w (${N} step${N > 1 ? "s" : ""})` : "w (∞ steps)";
+        document.getElementById("rPct").textContent = (Math.abs(w) / wRev * 100).toFixed(0) + "%";
+        if (dir === "exp") msg = inf ? "With infinitely many steps the external pressure follows the isotherm exactly: this is the <b>reversible</b> path and the <b>maximum</b> work an expanding gas can do (3.44 kJ)."
+          : `In each step, P<sub>ext</sub> drops suddenly and the gas expands against it. The shaded area (|w|) lies <b>under</b> the isotherm, so the gas does <b>less</b> work than the reversible maximum. Add more steps and the staircase hugs the curve.`;
+        else msg = inf ? "Reversible compression: the <b>minimum</b> work needed to push the gas back (3.44 kJ). Any faster way costs more."
+          : `In each step, P<sub>ext</sub> jumps up and crushes the gas to a new equilibrium. The staircase lies <b>above</b> the isotherm, so the surroundings must do <b>more</b> work than the reversible minimum. One step needs 7.44 kJ — more than double!`;
+      }
+      document.getElementById("rW").textContent = signed(w * J, 0) + " J";
+      document.getElementById("rRev").textContent = dir === "cycle" ? "0 J" : signed(wr * J, 0) + " J";
+      document.getElementById("stepMsg").innerHTML = msg;
+    }
+
+    // convergence chart
+    function conv() {
+      const c = document.getElementById("convChart");
+      const xs = [1, 2, 3, 4, 6, 10, 20, 50, 200];
+      const X2 = (n) => 70 + Math.log10(n) / Math.log10(200) * 520, Y2 = (wj) => 260 - wj / 8000 * 230;
+      const J = 101.325;
+      let s = `<line x1="70" y1="260" x2="600" y2="260" stroke="var(--ink)" stroke-width="2"/><line x1="70" y1="260" x2="70" y2="20" stroke="var(--ink)" stroke-width="2"/>`;
+      [0, 2000, 4000, 6000, 8000].forEach(v => s += `<line x1="70" x2="600" y1="${Y2(v)}" y2="${Y2(v)}" stroke="var(--line)"/><text x="62" y="${Y2(v) + 4}" text-anchor="end" class="t-small t-muted">${v / 1000} kJ</text>`);
+      xs.forEach(n => s += `<text x="${X2(n)}" y="278" text-anchor="middle" class="t-small t-muted">${n}</text>`);
+      s += `<text x="335" y="296" text-anchor="middle" class="t-small">number of steps, N (log scale)</text>`;
+      s += `<text x="16" y="140" text-anchor="middle" class="t-small" transform="rotate(-90 16 140)">|w|</text>`;
+      s += `<line x1="70" x2="600" y1="${Y2(wRev * J)}" y2="${Y2(wRev * J)}" stroke="var(--energy)" stroke-width="2.5" stroke-dasharray="6 4"/>`;
+      s += `<text x="606" y="${Y2(wRev * J) + 4}" class="t-small t-energy">reversible</text><text x="606" y="${Y2(wRev * J) + 18}" class="t-small t-energy">3.44 kJ</text>`;
+      const line = (d, col) => {
+        const pts = xs.map(n => [X2(n), Y2(Math.abs(workOf(stepsFor(d, n))) * J)]);
+        return `<polyline points="${pts.map(p => p.join(",")).join(" ")}" fill="none" stroke="${col}" stroke-width="3"/>` + pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="${col}"/>`).join("");
+      };
+      s += line("comp", "var(--heat)") + line("exp", "var(--work)");
+      s += `<text x="${X2(1) + 10}" y="${Y2(7437) - 8}" class="t-small t-heat">compression: work needed</text>`;
+      s += `<text x="${X2(1) + 10}" y="${Y2(1859) + 20}" class="t-small t-work">expansion: work obtained</text>`;
+      if (isFinite(N) && dir !== "cycle") {
+        const wj = Math.abs(workOf(stepsFor(dir, N))) * J;
+        s += `<circle cx="${X2(N)}" cy="${Y2(wj)}" r="9" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
+      }
+      c.innerHTML = s;
+    }
+
+    const slider = document.getElementById("stepN");
+    const set = () => {
+      N = NS[+slider.value];
+      document.getElementById("stepNOut").textContent = isFinite(N) ? N : "∞ (reversible)";
+      draw(); readouts(); conv();
+    };
+    slider.addEventListener("input", set);
+    document.querySelectorAll("#steps [data-dir]").forEach(b => b.addEventListener("click", () => {
+      dir = b.dataset.dir;
+      document.querySelectorAll("#steps [data-dir]").forEach(x => x.classList.toggle("on", x === b));
+      set();
+    }));
+    document.getElementById("stepPlay").addEventListener("click", () => {
+      if (dir === "cycle") return;
+      const t0 = performance.now(), dur = 2500;
+      const st = (now) => { const f = Math.min(1, (now - t0) / dur); draw(f); if (f < 1) requestAnimationFrame(st); };
+      requestAnimationFrame(st);
+    });
+    set();
+  })();
+
+  // ================= heat ladder =================
+  (function () {
+    const NS = [1, 2, 3, 6, 12, 60];
+    const m = 100, c = 4.184, T1 = 20, T2 = 80, q = m * c * (T2 - T1);
+    const tempCol = (T) => { const f = (T - 20) / 60; return `rgb(${Math.round(80 + 137 * f)}, ${Math.round(150 - 94 * f)}, ${Math.round(220 - 190 * f)})`; };
+    const sGen = (N) => { const mc = m * c; let s = mc * Math.log((T2 + 273.15) / (T1 + 273.15)); for (let k = 1; k <= N; k++) s -= mc * (T2 - T1) / N / (T1 + 273.15 + k * (T2 - T1) / N); return s; };
+    const sl = document.getElementById("ladN"), lad = document.getElementById("ladder");
+    let N = 1, running = false;
+    const render = (activeK = -1, Tb = T1) => {
+      lad.innerHTML = Array.from({ length: N }, (_, k) => {
+        const T = T1 + (k + 1) * (T2 - T1) / N;
+        return `<div class="${k === activeK ? "on" : ""}" style="height:${20 + (k + 1) / N * 50}px;background:${tempCol(T)}" title="${T.toFixed(1)} °C"></div>`;
+      }).join("");
+      const kk = Math.max(0, activeK), TR = T1 + (kk + 1) * (T2 - T1) / N;
+      document.getElementById("resv").setAttribute("fill", tempCol(TR));
+      document.getElementById("resvT").textContent = `reservoir ${activeK + 1 > 0 ? activeK + 1 : 1} of ${N}: ${TR.toFixed(1)} °C`;
+      document.getElementById("blk").setAttribute("fill", tempCol(Tb));
+      document.getElementById("blkT").textContent = Tb.toFixed(1) + " °C";
+      document.getElementById("gapT").textContent = `temperature gap at contact: ${(TR - Tb).toFixed(1)} °C`;
+      document.getElementById("ladArrow").style.opacity = TR - Tb > 0.05 ? 1 : 0;
+    };
+    const update = () => {
+      N = NS[+sl.value];
+      document.getElementById("ladNOut").textContent = N;
+      document.getElementById("ladQ").textContent = "+" + (q / 1000).toFixed(1) + " kJ";
+      document.getElementById("ladGap").textContent = ((T2 - T1) / N).toFixed(1) + " °C";
+      document.getElementById("ladS").textContent = sGen(N).toFixed(2) + " J/K";
+      document.getElementById("ladMsg").innerHTML = N === 1
+        ? "One hot plate: the water meets an 80 °C surface while it's still at 20 °C — a big, finite gap. Very <b>irreversible</b>."
+        : `Each reservoir is only ${((T2 - T1) / N).toFixed(1)} °C hotter than the water when they meet. The total heat is <b>still 25.1 kJ</b> — but the process is closer to reversible. As N → ∞, the gap → dT and entropy created → 0.`;
+      render(-1, T1);
+    };
+    sl.addEventListener("input", () => { if (!running) update(); });
+    document.getElementById("ladGo").addEventListener("click", () => {
+      if (running) return; running = true;
+      const t0 = performance.now(), per = Math.max(120, 2400 / N);
+      const step = (now) => {
+        const el = now - t0, k = Math.min(N - 1, Math.floor(el / per)), f = Math.min(1, (el - k * per) / per);
+        const Tstart = T1 + k * (T2 - T1) / N, Tend = T1 + (k + 1) * (T2 - T1) / N;
+        const Tb = Tstart + (Tend - Tstart) * (1 - Math.pow(1 - f, 3));
+        render(k, Tb);
+        if (el < N * per) requestAnimationFrame(step); else { running = false; render(N - 1, T2); }
+      };
+      requestAnimationFrame(step);
+    });
+    update();
+  })();
+
+  // ================= solids & liquids compression =================
+  (function () {
+    const kap = { water: 4.56e-5, ethanol: 1.11e-4, mercury: 4.0e-6, iron: 6.1e-7, copper: 7.2e-7 };
+    const names = { water: "water", ethanol: "ethanol", mercury: "mercury", iron: "iron", copper: "copper" };
+    let sub = "water";
+    const sl = document.getElementById("slP"), svg = document.getElementById("slPV");
+    const J = 101.325, V = 1, P1 = 1;
+    const fmtJ = (x) => {
+      const a = Math.abs(x);
+      const s = a >= 100 ? fmt(x, 0) : a >= 1 ? fmt(x, 1) : a >= 0.01 ? fmt(x, 3) : x.toExponential(1).replace("-", "−");
+      return (x > 0 ? "+" : "") + s + " J";
+    };
+    const fmtL = (x) => { const a = Math.abs(x); return (a >= 0.01 ? fmt(x, 3) : x.toExponential(1).replace("-", "−")) + " L"; };
+    const update = () => {
+      const raw = Math.pow(10, +sl.value);
+      const P2 = raw < 10 ? Math.round(raw * 10) / 10 : Math.round(raw);
+      document.getElementById("slPOut").textContent = P2 + " atm";
+      // gas
+      const gV2 = V * P1 / P2, gDV = gV2 - V, gRev = P1 * V * Math.log(P2 / P1) * J, gIrr = -P2 * gDV * J;
+      // condensed
+      const k = kap[sub], lDV = -k * V * (P2 - P1), lRev = k * V * (P2 * P2 - P1 * P1) / 2 * J, lIrr = -P2 * lDV * J;
+      document.getElementById("slName").textContent = names[sub];
+      document.getElementById("gDV").textContent = fmtL(gDV);
+      document.getElementById("lDV").textContent = fmtL(lDV);
+      document.getElementById("gRev").textContent = fmtJ(gRev);
+      document.getElementById("lRev").textContent = fmtJ(lRev);
+      document.getElementById("gIrr").textContent = fmtJ(gIrr);
+      document.getElementById("lIrr").textContent = fmtJ(lIrr);
+      document.getElementById("gDiff").textContent = fmtJ(gIrr - gRev);
+      document.getElementById("lDiff").textContent = fmtJ(lIrr - lRev);
+      document.getElementById("slMsg").innerHTML =
+        `Squeezing 1 L of ${names[sub]} to ${P2} atm shrinks it by only <b>${(Math.abs(lDV) * 1000).toPrecision(2)} mL</b>. The gas loses <b>${(Math.abs(gDV) * 1000).toFixed(0)} mL</b>. ` +
+        `The reversible/irreversible difference is <b>${fmtJ(gIrr - gRev).replace("+", "")}</b> for the gas but only <b>${fmtJ(lIrr - lRev).replace("+", "")}</b> for ${names[sub]}.`;
+      // P-V picture
+      const X = (v) => 40 + v * 320, Y = (p) => 240 - p / P2 * 210;
+      let s = `<line x1="40" y1="240" x2="370" y2="240" stroke="var(--ink)" stroke-width="2"/><line x1="40" y1="240" x2="40" y2="20" stroke="var(--ink)" stroke-width="2"/>
+        <text x="205" y="268" text-anchor="middle" class="t-small">V (L)</text>
+        <text x="40" y="254" text-anchor="middle" class="t-small t-muted">0</text><text x="${X(1)}" y="254" text-anchor="middle" class="t-small t-muted">1.00</text>
+        <text x="34" y="${Y(P2) + 4}" text-anchor="end" class="t-small t-muted">${P2}</text>
+        <text x="16" y="130" text-anchor="middle" class="t-small" transform="rotate(-90 16 130)">P (atm)</text>`;
+      // gas isotherm area
+      let d = ""; for (let i = 0; i <= 80; i++) { const v = gV2 + (V - gV2) * i / 80; d += (i ? " L" : "M") + X(v) + " " + Y(P1 * V / v); }
+      s += `<path d="${d} L${X(V)} ${Y(0)} L${X(gV2)} ${Y(0)} Z" fill="var(--sys-fill)"/>`;
+      s += `<path d="${d}" fill="none" stroke="var(--sys)" stroke-width="2.5"/>`;
+      s += `<rect x="${X(gV2)}" y="${Y(P2)}" width="${X(V) - X(gV2)}" height="${Y(0) - Y(P2)}" fill="none" stroke="var(--heat)" stroke-width="2" stroke-dasharray="5 4"/>`;
+      s += `<text x="${X(gV2) + 6}" y="${Y(P2) + 16}" class="t-small t-heat">gas, sudden: whole rectangle</text>`;
+      s += `<text x="${X(0.5)}" y="${Y(P2 * 0.25)}" class="t-small t-sys" text-anchor="middle">gas, reversible: under curve</text>`;
+      // condensed line (nearly vertical at V=1) — exaggerate width visibly by min 2px
+      const lx2 = X(V + lDV), lx1 = X(V);
+      s += `<polygon points="${lx1},${Y(0)} ${lx1},${Y(P1)} ${lx2},${Y(P2)} ${lx2},${Y(0)}" fill="var(--surr)" stroke="var(--surr)" stroke-width="2.5"/>`;
+      s += `<text x="${lx1 - 8}" y="${Y(P2 * 0.62)}" text-anchor="end" class="t-small t-surr">${names[sub]}: a</text>`;
+      s += `<text x="${lx1 - 8}" y="${Y(P2 * 0.62) + 15}" text-anchor="end" class="t-small t-surr">near-vertical line,</text>`;
+      s += `<text x="${lx1 - 8}" y="${Y(P2 * 0.62) + 30}" text-anchor="end" class="t-small t-surr">almost zero area</text>`;
+      svg.innerHTML = s;
+    };
+    sl.addEventListener("input", update);
+    document.querySelectorAll("#subSeg [data-sub]").forEach(b => b.addEventListener("click", () => {
+      sub = b.dataset.sub;
+      document.querySelectorAll("#subSeg [data-sub]").forEach(x => x.classList.toggle("on", x === b));
+      update();
+    }));
+    update();
+  })();
+</script>
+</body>
+</html>

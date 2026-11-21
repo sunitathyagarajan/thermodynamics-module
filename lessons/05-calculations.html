@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worked Calculations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .try { border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 12px; }
+    .try b:first-child { color: var(--accent); }
+    .strategy { counter-reset: s; list-style: none; padding: 0; display: grid; gap: 8px; }
+    .strategy li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px 10px 48px; position: relative; }
+    .strategy li::before { content: counter(s); position: absolute; left: 12px; top: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--energy); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .85rem; }
+    .ex-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin: 1em 0; }
+    .ex-index a { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: .92rem; }
+    .ex-index a:hover { border-color: var(--accent); }
+    .ex-index .example-num { flex: none; }
+    #practice .prob { font-size: 1.02rem; }
+  </style>
+</head>
+<body data-lesson="5" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 5</p>
+  <h1>Worked calculations</h1>
+  <p class="lede">Nine worked examples, each a different <b>kind</b> of problem, spanning gases, liquids, solids and chemical reactions. Reveal each solution one step at a time — try the next step yourself before you click! Then try the variation underneath.</p>
+
+  <h2 id="strategy">A strategy for every first-law problem</h2>
+  <ol class="strategy">
+    <li><b>Define the system.</b> Draw a box around it. What crosses the boundary?</li>
+    <li><b>Assign signs</b> from the system's point of view: energy in (+), energy out (−).</li>
+    <li><b>Find q</b> — from <var>mc</var>Δ<var>T</var>, <var>n</var>Δ<var>H</var>, calorimetry, or "q = 0" if insulated.</li>
+    <li><b>Find w</b> — from −<var>P</var><sub>ext</sub>Δ<var>V</var>, −Δ<var>n</var><sub>gas</sub><var>RT</var>, or "w = 0" if Δ<var>V</var> = 0 or <var>P</var><sub>ext</sub> = 0.</li>
+    <li><b>Combine with Δ<var>U</var> = <var>q</var> + <var>w</var></b>, converting units first (L·atm → J; kJ ↔ J).</li>
+    <li><b>Sanity check</b> the sign and size. Did the system gain or lose energy? Does that make physical sense?</li>
+  </ol>
+
+  <div class="ex-index">
+    <a href="#ex1"><span class="example-num">1</span>ΔU from q and w <span class="tag gas">gas</span></a>
+    <a href="#ex2"><span class="example-num">2</span>Expansion work, constant P<sub>ext</sub> <span class="tag gas">gas</span></a>
+    <a href="#ex3"><span class="example-num">3</span>Finding q from ΔU <span class="tag gas">gas</span></a>
+    <a href="#ex4"><span class="example-num">4</span>Heating a metal block <span class="tag solid">solid</span></a>
+    <a href="#ex5"><span class="example-num">5</span>Boiling water <span class="tag liquid">liquid → gas</span></a>
+    <a href="#ex6"><span class="example-num">6</span>Melting ice <span class="tag solid">solid → liquid</span></a>
+    <a href="#ex7"><span class="example-num">7</span>Reaction that makes a gas <span class="tag rxn">reaction</span></a>
+    <a href="#ex8"><span class="example-num">8</span>Bomb calorimetry <span class="tag rxn">reaction</span></a>
+    <a href="#ex9"><span class="example-num">9</span>Same change, two paths <span class="tag gas">gas</span></a>
+  </div>
+
+  <h2 id="examples">The examples</h2>
+
+  <!-- ===== Example 1 ===== -->
+  <div class="example" id="ex1">
+    <div class="example-head"><span class="example-num">Example 1</span><h3>Internal energy change from q and w</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0">A gas in a cylinder <b>absorbs 250 J of heat</b> from a hot plate and, at the same time, <b>does 75 J of work</b> pushing a piston outward. What is Δ<var>U</var> for the gas?</p>
+        <svg viewBox="0 0 220 160" aria-hidden="true">
+          <path d="M60 20 V 130 H 160 V 20" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="62" y="60" width="96" height="68" class="gas"/><rect x="62" y="50" width="96" height="10" class="piston"/>
+          <path d="M100 158 V 142" class="heat-arrow" style="stroke-width:4"/><polygon points="100,134 93,146 107,146" class="heat-fill"/><text x="120" y="152" class="t-small t-heat">q = +250 J</text>
+          <path d="M175 60 V 25" class="work-arrow" style="stroke-width:4"/><polygon points="175,18 168,30 182,30" class="work-fill"/>
+          <text x="140" y="14" class="t-small t-work">by gas: 75 J</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>System:</b> the gas. Heat is <b>absorbed</b> → enters the system → <span class="q">q = +250 J</span>.</li>
+        <li>The gas <b>does</b> work on the surroundings → energy leaves → <span class="w">w = −75 J</span>.</li>
+        <li>Δ<var>U</var> = <var>q</var> + <var>w</var> = (+250 J) + (−75 J) = <b>+175 J</b>.</li>
+        <li class="answer-box">Δ<var>U</var> = +175 J. The gas gained energy overall: it took in more as heat than it spent as work.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> A system <b>releases 120 J</b> of heat while <b>340 J</b> of work is done <b>on</b> it. Find Δ<var>U</var> (in J).
+        <div class="num-check" data-answer="220" data-tol="0.01" data-hint="q is negative (released), w is positive (done on)."><input inputmode="decimal" placeholder="ΔU in J"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 2 ===== -->
+  <div class="example" id="ex2">
+    <div class="example-head"><span class="example-num">Example 2</span><h3>Work of expansion against a constant external pressure</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0">A gas expands from <b>2.0 L to 5.5 L</b> against a constant external pressure of <b>1.2 atm</b>. Calculate the work in joules. What would the work be if the gas expanded into a <b>vacuum</b> instead?</p>
+        <svg viewBox="0 0 220 170" aria-hidden="true">
+          <line x1="30" y1="140" x2="210" y2="140" class="ink-line"/><line x1="30" y1="140" x2="30" y2="15" class="ink-line"/>
+          <text x="120" y="162" text-anchor="middle" class="t-small">V (L)</text><text x="12" y="80" class="t-small" transform="rotate(-90 12 80)" text-anchor="middle">P (atm)</text>
+          <rect x="60" y="62" width="122" height="78" fill="var(--work-fill)" stroke="var(--work)" stroke-width="2"/>
+          <text x="60" y="153" text-anchor="middle" class="t-small t-muted">2.0</text><text x="182" y="153" text-anchor="middle" class="t-small t-muted">5.5</text>
+          <text x="26" y="66" text-anchor="end" class="t-small t-muted">1.2</text>
+          <text x="121" y="105" text-anchor="middle" class="t-small t-work">|w| = area</text>
+          <polygon points="186,62 174,56 174,68" class="work-fill"/>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li>Δ<var>V</var> = <var>V</var><sub>2</sub> − <var>V</var><sub>1</sub> = 5.5 L − 2.0 L = <b>+3.5 L</b> (expansion, so positive).</li>
+        <li><var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(1.2 atm)(3.5 L) = <b>−4.2 L·atm</b>.</li>
+        <li>Convert: −4.2 L·atm × (101.325 J / 1 L·atm) = <b>−426 J</b> (−425.6 J).</li>
+        <li>Into a vacuum, <var>P</var><sub>ext</sub> = 0, so <var>w</var> = −(0)(3.5 L) = <b>0</b>. The gas has nothing to push against, so it does no work — even though its volume grows by the same amount.</li>
+        <li class="answer-box"><var>w</var> = −426 J against 1.2 atm; <var>w</var> = 0 into a vacuum. Work is a <b>path function</b>: same Δ<var>V</var>, different work.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> A gas expands from 3.0 L to 8.0 L against a constant 0.80 atm. Find <var>w</var> in joules.
+        <div class="num-check" data-answer="-405.3" data-tol="0.01" data-hint="w = −P_ext ΔV, then × 101.325 J/(L·atm)."><input inputmode="decimal" placeholder="w in J"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 3 ===== -->
+  <div class="example" id="ex3">
+    <div class="example-head"><span class="example-num">Example 3</span><h3>Finding heat from ΔU during a compression</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0">A gas is compressed from <b>10.0 L to 4.0 L</b> by a constant external pressure of <b>3.0 atm</b>. During the process its internal energy <b>increases by 1.20 kJ</b>. Was heat absorbed or released, and how much?</p>
+        <svg viewBox="0 0 220 160" aria-hidden="true">
+          <path d="M60 20 V 140 H 160 V 20" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="62" y="90" width="96" height="48" class="gas"/><rect x="62" y="80" width="96" height="10" class="piston"/>
+          <rect x="62" y="40" width="96" height="40" fill="none" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+          <path d="M110 10 V 70" class="work-arrow" style="stroke-width:4"/><polygon points="110,76 103,64 117,64" class="work-fill"/>
+          <text x="118" y="30" class="t-small t-work">w &gt; 0</text>
+          <path d="M165 115 H 196" class="heat-arrow" style="stroke-width:4"/><polygon points="206,115 194,108 194,122" class="heat-fill"/><text x="170" y="105" class="t-small t-heat">q = ?</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li>Δ<var>V</var> = 4.0 L − 10.0 L = <b>−6.0 L</b> (compression, so negative).</li>
+        <li><var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(3.0 atm)(−6.0 L) = <b>+18 L·atm</b> = 18 × 101.325 J = <b>+1824 J</b>. Positive: the surroundings did work on the gas.</li>
+        <li>Rearrange the first law: <var>q</var> = Δ<var>U</var> − <var>w</var> = 1200 J − 1824 J = <b>−624 J</b>.</li>
+        <li class="answer-box"><var>q</var> = −624 J: the gas <b>released</b> 624 J of heat. The surroundings put 1824 J in as work; 1200 J stayed as internal energy and 624 J leaked out as heat.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> A gas is compressed from 6.0 L to 2.0 L by a constant 2.5 atm, and Δ<var>U</var> = +500 J. Find <var>q</var> in J.
+        <div class="num-check" data-answer="-513" data-tol="0.01" data-hint="Find w first (it's positive), then q = ΔU − w."><input inputmode="decimal" placeholder="q in J"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 4 ===== -->
+  <div class="example" id="ex4">
+    <div class="example-head"><span class="example-num">Example 4</span><h3>Heating a solid: is the work really negligible?</h3><span class="tag solid">solid</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0">A <b>150 g aluminum</b> block is heated from <b>25 °C to 95 °C</b> at 1 atm. Find <var>q</var>, <var>w</var> and Δ<var>U</var>. <br><small>Data: <var>c</var><sub>Al</sub> = 0.897 J g⁻¹ °C⁻¹; density 2.70 g/cm³; aluminum's volume grows by 6.9 × 10⁻⁵ of its volume per °C.</small></p>
+        <svg viewBox="0 0 220 160" aria-hidden="true">
+          <rect x="60" y="40" width="100" height="70" fill="var(--surr)" opacity=".85"/>
+          <rect x="57" y="37" width="106" height="76" fill="none" stroke="var(--heat)" stroke-dasharray="3 3"/>
+          <path class="flame anim-flicker" d="M95 150 Q 91 132 103 122 Q 105 136 111 138 Q 115 126 123 124 Q 131 138 123 150 Z"/>
+          <text x="110" y="80" text-anchor="middle" class="t-small" style="fill:#fff;font-weight:700">Al, 150 g</text>
+          <text x="168" y="34" class="t-small t-muted">tiny</text><text x="168" y="48" class="t-small t-muted">expansion</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>Heat:</b> <var>q</var> = <var>mc</var>Δ<var>T</var> = (150 g)(0.897 J g⁻¹ °C⁻¹)(95 − 25 °C) = <b>+9418 J ≈ +9.42 kJ</b>.</li>
+        <li><b>Volume change:</b> <var>V</var> = 150 g ÷ 2.70 g/cm³ = 55.6 cm³. Δ<var>V</var> = (6.9 × 10⁻⁵ °C⁻¹)(55.6 cm³)(70 °C) = <b>0.27 cm³</b> = 2.7 × 10⁻⁴ L.</li>
+        <li><b>Work:</b> <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(1 atm)(2.7 × 10⁻⁴ L) = −2.7 × 10⁻⁴ L·atm × 101.325 = <b>−0.027 J</b>.</li>
+        <li>Δ<var>U</var> = 9418 J + (−0.027 J) = <b>9418 J</b>. The work is about 3 parts in a million of <var>q</var>!</li>
+        <li class="answer-box"><var>q</var> = +9.42 kJ, <var>w</var> ≈ −0.03 J, Δ<var>U</var> ≈ +9.42 kJ. <b>For solids (and liquids) heated without a phase change, Δ<var>U</var> ≈ <var>q</var>.</b></li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> 250 g of iron (<var>c</var> = 0.449 J g⁻¹ °C⁻¹) is heated from 20 °C to 80 °C. Find Δ<var>U</var> in <b>kJ</b> (treat <var>w</var> as negligible).
+        <div class="num-check" data-answer="6.735" data-tol="0.01" data-hint="q = m c ΔT; divide J by 1000 to get kJ."><input inputmode="decimal" placeholder="ΔU in kJ"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 5 ===== -->
+  <div class="example" id="ex5">
+    <div class="example-head"><span class="example-num">Example 5</span><h3>Vaporizing a liquid: q, w and ΔU for boiling water</h3><span class="tag liquid">liquid → gas</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0"><b>1.00 mol of water</b> boils at <b>100 °C and 1.00 atm</b>. Δ<var>H</var><sub>vap</sub> = 40.7 kJ/mol. Find <var>q</var>, <var>w</var> and Δ<var>U</var>. Treat the steam as an ideal gas.</p>
+        <svg viewBox="0 0 220 170" aria-hidden="true">
+          <path d="M50 20 V 150 H 170 V 20" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="52" y="60" width="116" height="78" class="gas"/>
+          <rect x="52" y="138" width="116" height="10" class="liquid"/>
+          <rect x="52" y="50" width="116" height="10" class="piston"/>
+          <text x="110" y="100" text-anchor="middle" class="t-small t-sys">steam: 30.6 L</text>
+          <text x="110" y="134" text-anchor="middle" class="t-small" style="fill:#1b6fa8">liquid: 0.019 L</text>
+          <path d="M185 60 V 25" class="work-arrow" style="stroke-width:4"/><polygon points="185,18 178,30 192,30" class="work-fill"/>
+          <path d="M150 170 V 160" class="heat-arrow" style="stroke-width:4"/><polygon points="150,152 143,163 157,163" class="heat-fill"/>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>Heat</b> (constant <var>P</var>, phase change): <var>q</var> = <var>n</var>Δ<var>H</var><sub>vap</sub> = (1.00 mol)(40.7 kJ/mol) = <b>+40.7 kJ</b>.</li>
+        <li><b>Volume change:</b> <var>V</var><sub>gas</sub> = <var>nRT</var>/<var>P</var> = (1.00)(0.08206)(373.15)/(1.00) = 30.6 L. <var>V</var><sub>liquid</sub> = 18.0 g ÷ 0.958 g/mL ≈ 0.019 L — negligible. So Δ<var>V</var> ≈ +30.6 L.</li>
+        <li><b>Work:</b> <var>w</var> = −<var>P</var>Δ<var>V</var> ≈ −<var>nRT</var> = −(1.00 mol)(8.314 J mol⁻¹ K⁻¹)(373.15 K) = <b>−3102 J = −3.10 kJ</b>. (Check: −30.6 L·atm × 101.325 = −3100 J ✓)</li>
+        <li>Δ<var>U</var> = <var>q</var> + <var>w</var> = 40.7 kJ − 3.10 kJ = <b>+37.6 kJ</b>.</li>
+        <li class="answer-box"><var>q</var> = +40.7 kJ, <var>w</var> = −3.10 kJ, Δ<var>U</var> = +37.6 kJ. About 92% of the heat goes into pulling the molecules apart (Δ<var>U</var>); 8% is spent pushing back the atmosphere to make room for the steam.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> 2.00 mol of ethanol boils at 78 °C (351.15 K) and 1 atm; Δ<var>H</var><sub>vap</sub> = 38.6 kJ/mol. Find Δ<var>U</var> in <b>kJ</b>.
+        <div class="num-check" data-answer="71.36" data-tol="0.01" data-hint="q = nΔH_vap; w ≈ −nRT (in kJ); ΔU = q + w."><input inputmode="decimal" placeholder="ΔU in kJ"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 6 ===== -->
+  <div class="example" id="ex6">
+    <div class="example-head"><span class="example-num">Example 6</span><h3>Melting a solid: when the atmosphere does work on the system</h3><span class="tag solid">solid → liquid</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0"><b>1.00 mol (18.02 g) of ice</b> melts at <b>0 °C and 1.00 atm</b>. Δ<var>H</var><sub>fus</sub> = 6.01 kJ/mol. Densities: ice 0.917 g/mL, liquid water 1.000 g/mL. Find <var>q</var>, <var>w</var> and Δ<var>U</var>.</p>
+        <svg viewBox="0 0 220 150" aria-hidden="true">
+          <rect x="20" y="40" width="66" height="66" rx="6" class="ice"/>
+          <text x="53" y="128" text-anchor="middle" class="t-small">19.65 mL</text>
+          <path d="M96 73 H 120" class="ink-line"/><polygon points="126,73 116,67 116,79" fill="var(--ink)"/>
+          <rect x="140" y="48" width="62" height="60" rx="4" class="liquid"/>
+          <text x="171" y="128" text-anchor="middle" class="t-small">18.02 mL</text>
+          <path d="M171 10 V 40" class="work-arrow" style="stroke-width:4"/><polygon points="171,46 164,34 178,34" class="work-fill"/>
+          <text x="140" y="18" class="t-small t-work" text-anchor="end">P<tspan dy="3" font-size="8">atm</tspan></text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>Heat:</b> <var>q</var> = <var>n</var>Δ<var>H</var><sub>fus</sub> = (1.00 mol)(6.01 kJ/mol) = <b>+6.01 kJ = +6010 J</b>.</li>
+        <li><b>Volumes:</b> <var>V</var><sub>ice</sub> = 18.02 g ÷ 0.917 g/mL = 19.65 mL; <var>V</var><sub>water</sub> = 18.02 mL. Δ<var>V</var> = 18.02 − 19.65 = <b>−1.63 mL = −1.63 × 10⁻³ L</b>. The volume <i>decreases</i> — ice is unusual!</li>
+        <li><b>Work:</b> <var>w</var> = −<var>P</var>Δ<var>V</var> = −(1.00 atm)(−1.63 × 10⁻³ L) = +1.63 × 10⁻³ L·atm × 101.325 = <b>+0.165 J</b>. Positive: the atmosphere pushes in on the shrinking sample.</li>
+        <li>Δ<var>U</var> = 6010 J + 0.165 J = <b>6010 J</b>.</li>
+        <li class="answer-box"><var>q</var> = +6.01 kJ, <var>w</var> = +0.17 J, Δ<var>U</var> = +6.01 kJ. Compare with Example 5: |<var>w</var>| for <b>boiling</b> is ~19,000 times larger than for <b>melting</b>, because only boiling creates a gas.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> About how many times larger is <var>q</var> than <var>w</var> for melting ice? (Use the values above; within 5% counts.)
+        <div class="num-check" data-answer="36400" data-tol="0.05" data-hint="Divide 6010 J by 0.165 J."><input inputmode="decimal" placeholder="ratio"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 7 ===== -->
+  <div class="example" id="ex7">
+    <div class="example-head"><span class="example-num">Example 7</span><h3>A reaction that produces a gas: ΔU vs ΔH</h3><span class="tag rxn">reaction</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0">Zinc dissolves in hydrochloric acid in an open flask at <b>25 °C and 1 atm</b>:<br>
+          Zn(s) + 2 HCl(aq) → ZnCl<sub>2</sub>(aq) + H<sub>2</sub>(g) &nbsp;&nbsp; Δ<var>H</var> = −153.9 kJ/mol<br>
+          For a reaction that produces <b>0.500 mol H<sub>2</sub></b>, find <var>q</var>, <var>w</var> and Δ<var>U</var>.</p>
+        <svg viewBox="0 0 220 170" aria-hidden="true">
+          <path d="M85 20 V 60 L 45 140 Q 40 150 52 150 H 168 Q 180 150 175 140 L 135 60 V 20" fill="none" stroke="var(--ink)" stroke-width="3"/>
+          <path d="M65 110 H 155 L 172 144 H 48 Z" class="liquid"/>
+          <rect x="95" y="128" width="30" height="10" fill="var(--ink-3)"/>
+          <circle cx="100" cy="115" r="4" fill="var(--surface)" class="anim-rise"/><circle cx="115" cy="120" r="5" fill="var(--surface)" class="anim-rise" style="animation-delay:.6s"/>
+          <path d="M110 15 V 0" class="work-arrow" style="stroke-width:4"/>
+          <text x="140" y="14" class="t-small t-work">H₂ pushes</text><text x="140" y="28" class="t-small t-work">air back</text>
+          <path d="M180 120 H 204" class="heat-arrow" style="stroke-width:4"/><polygon points="214,120 202,113 202,127" class="heat-fill"/><text x="182" y="110" class="t-small t-heat">q &lt; 0</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>System:</b> the reacting chemicals. At constant <var>P</var>, <var>q</var> = Δ<var>H</var>. For 0.500 mol: <var>q</var> = (0.500 mol)(−153.9 kJ/mol) = <b>−76.9 kJ</b> (exothermic).</li>
+        <li><b>Work:</b> only the gas matters. Δ<var>n</var><sub>gas</sub> = +0.500 mol (H<sub>2</sub> produced; aqueous species and Zn(s) take up negligible volume). <var>w</var> = −<var>P</var>Δ<var>V</var> = −Δ<var>n</var><sub>gas</sub><var>RT</var> = −(0.500)(8.314)(298.15) = <b>−1239 J = −1.24 kJ</b>.</li>
+        <li>Δ<var>U</var> = <var>q</var> + <var>w</var> = −76.9 kJ + (−1.24 kJ) = <b>−78.2 kJ</b>.</li>
+        <li class="answer-box"><var>q</var> = −76.9 kJ, <var>w</var> = −1.24 kJ, Δ<var>U</var> = −78.2 kJ. The system loses energy two ways: heat to the solution <i>and</i> work pushing back the air. Δ<var>U</var> and Δ<var>H</var> differ by Δ<var>n</var><sub>gas</sub><var>RT</var>.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> Propane burns at 25 °C: C<sub>3</sub>H<sub>8</sub>(g) + 5 O<sub>2</sub>(g) → 3 CO<sub>2</sub>(g) + 4 H<sub>2</sub>O(l). Find <var>w</var> in <b>kJ</b> per mole of propane. (Watch which species are gases!)
+        <div class="num-check" data-answer="7.437" data-tol="0.01" data-hint="Δn_gas = (moles gaseous products) − (moles gaseous reactants). Liquid water doesn't count."><input inputmode="decimal" placeholder="w in kJ"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 8 ===== -->
+  <div class="example" id="ex8">
+    <div class="example-head"><span class="example-num">Example 8</span><h3>Bomb calorimetry: measuring ΔU directly</h3><span class="tag rxn">reaction</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0"><b>0.500 g of glucose</b> (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>, 180.16 g/mol) is burned in a bomb calorimeter whose total heat capacity is <b>10.0 kJ/°C</b>. The temperature rises by <b>0.780 °C</b>. Find Δ<var>U</var> of combustion in kJ/mol.</p>
+        <svg viewBox="0 0 220 160" aria-hidden="true">
+          <rect x="20" y="20" width="180" height="130" rx="10" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-dasharray="5 4" stroke-width="2"/>
+          <rect x="34" y="40" width="152" height="100" class="liquid"/>
+          <rect x="80" y="62" width="60" height="62" rx="8" fill="var(--ink-3)" stroke="var(--ink)" stroke-width="3"/>
+          <rect x="86" y="68" width="48" height="50" rx="5" class="sys-box"/>
+          <path d="M145 93 h22 M75 93 h-22" class="heat-arrow anim-flow" style="stroke-width:3"/>
+          <text x="110" y="14" text-anchor="middle" class="t-small" style="font-weight:700">ΔV = 0 → w = 0</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>Heat absorbed by the calorimeter</b> (surroundings): <var>q</var><sub>cal</sub> = <var>C</var><sub>cal</sub>Δ<var>T</var> = (10.0 kJ/°C)(0.780 °C) = <b>+7.80 kJ</b>.</li>
+        <li>Energy conservation: the reaction (system) released that heat, so <var>q</var><sub>rxn</sub> = −<var>q</var><sub>cal</sub> = <b>−7.80 kJ</b>.</li>
+        <li>The bomb is rigid, so <var>w</var> = 0 and Δ<var>U</var> = <var>q</var><sub>V</sub> = −7.80 kJ for this sample.</li>
+        <li>Moles of glucose: 0.500 g ÷ 180.16 g/mol = 2.775 × 10⁻³ mol. Δ<var>U</var> = −7.80 kJ ÷ 2.775 × 10⁻³ mol = <b>−2810 kJ/mol</b>.</li>
+        <li class="answer-box">Δ<var>U</var><sub>comb</sub> = −2.81 × 10³ kJ/mol. (For glucose, C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(s) + 6 O<sub>2</sub>(g) → 6 CO<sub>2</sub>(g) + 6 H<sub>2</sub>O(l), Δ<var>n</var><sub>gas</sub> = 0, so Δ<var>H</var> ≈ Δ<var>U</var> here.) This is the energy your body gets from glucose!</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> In the same calorimeter, a sample's combustion raises the temperature by 1.65 °C. Find Δ<var>U</var> for the reaction in <b>kJ</b> (for the sample, not per mole).
+        <div class="num-check" data-answer="-16.5" data-tol="0.01" data-hint="q_cal = C ΔT; the reaction's q is the negative of that."><input inputmode="decimal" placeholder="ΔU in kJ"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Example 9 ===== -->
+  <div class="example" id="ex9">
+    <div class="example-head"><span class="example-num">Example 9</span><h3>Same change, two paths: one-step vs reversible isothermal expansion</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <div class="given">
+        <p style="margin:0"><b>1.00 mol</b> of an ideal gas at <b>298 K</b> expands isothermally from <b>10.0 L to 20.0 L</b>. Find <var>w</var>, <var>q</var> and Δ<var>U</var> if (a) it expands in one step against a constant <var>P</var><sub>ext</sub> equal to the final pressure, and (b) it expands reversibly. <i>(Lesson 6 explains reversible processes in detail.)</i></p>
+        <svg viewBox="0 0 220 170" aria-hidden="true">
+          <line x1="30" y1="145" x2="210" y2="145" class="ink-line"/><line x1="30" y1="145" x2="30" y2="10" class="ink-line"/>
+          <path d="M60 25 C 80 60, 110 80, 200 105 L 200 145 L 60 145 Z" fill="var(--energy-fill)" opacity=".6"/>
+          <path d="M60 25 C 80 60, 110 80, 200 105" fill="none" stroke="var(--energy)" stroke-width="3"/>
+          <rect x="60" y="105" width="140" height="40" fill="var(--work-fill)" stroke="var(--work)" stroke-width="2"/>
+          <text x="130" y="130" text-anchor="middle" class="t-small t-work">(a) one step</text>
+          <text x="128" y="75" class="t-small t-energy">(b) reversible</text>
+          <text x="120" y="162" text-anchor="middle" class="t-small">V</text><text x="18" y="80" class="t-small">P</text>
+        </svg>
+      </div>
+      <ol class="steps">
+        <li><b>Either path:</b> ideal gas, constant <var>T</var> → Δ<var>U</var> = 0, so <var>q</var> = −<var>w</var>.</li>
+        <li><b>(a)</b> <var>P</var><sub>final</sub> = <var>nRT</var>/<var>V</var><sub>2</sub> = (1.00)(0.08206)(298)/(20.0) = 1.22 atm. <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(1.22 atm)(10.0 L) = −12.2 L·atm = <b>−1239 J</b>. So <var>q</var> = <b>+1239 J</b>.</li>
+        <li><b>(b)</b> Reversible isothermal: <var>w</var> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>) = −(1.00)(8.314)(298) ln(2) = <b>−1717 J</b>. So <var>q</var> = <b>+1717 J</b>.</li>
+        <li class="answer-box">(a) <var>w</var> = −1.24 kJ, <var>q</var> = +1.24 kJ; (b) <var>w</var> = −1.72 kJ, <var>q</var> = +1.72 kJ; Δ<var>U</var> = 0 for both. Same initial and final states, same Δ<var>U</var> — but the reversible path gets <b>39% more work</b> out of the gas.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try"><b>Try it:</b> 2.00 mol of ideal gas expands reversibly and isothermally at 300 K from 5.0 L to 15.0 L. Find <var>w</var> in <b>kJ</b>.
+        <div class="num-check" data-answer="-5.480" data-tol="0.01" data-hint="w = −nRT ln(V₂/V₁), with R = 8.314 J/(mol·K); convert to kJ."><input inputmode="decimal" placeholder="w in kJ"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="summary-table" data-short="Comparing the results">Comparing the results</h2>
+  <p>Put the examples side by side and a clear pattern appears: <b>work is significant only when a gas is involved.</b></p>
+  <figure class="diagram">
+    <svg id="cmpChart" viewBox="0 0 760 300" role="img" aria-label="Bar chart comparing the size of q and w in examples 4 to 7 on a log scale"></svg>
+    <figcaption>|<span class="q">q</span>| and |<span class="w">w</span>| on a <b>logarithmic</b> scale (each gridline is 10× bigger). For the solid and the melting ice, |<var>w</var>| is a million-fold or more smaller than |<var>q</var>|.</figcaption>
+  </figure>
+
+  <h2 id="practice">Unlimited practice</h2>
+  <div class="widget" id="practiceW">
+    <div class="widget-head"><span class="badge">Practice</span><h3>New problem generator</h3></div>
+    <div class="widget-body" id="practice">
+      <p class="prob" id="probText"></p>
+      <div class="num-check" id="probCheck" data-answer="0" data-tol="0.015"><input inputmode="decimal" placeholder="your answer"><button class="btn">Check</button><span class="result"></span></div>
+      <div class="btn-row"><button class="btn ghost" id="probSol">Show solution</button><button class="btn" id="probNew">New problem ↻</button></div>
+      <div id="probSolText" class="callout tip" style="display:none"></div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  // ---------- log-scale comparison chart ----------
+  (function () {
+    const data = [
+      ["Ex 4: heat Al block", 9418, 0.027, "solid"],
+      ["Ex 6: melt ice", 6010, 0.165, "solid → liquid"],
+      ["Ex 5: boil water", 40700, 3102, "liquid → gas"],
+      ["Ex 7: Zn + HCl", 76900, 1239, "makes gas"],
+    ];
+    const svg = document.getElementById("cmpChart");
+    const x0 = 180, x1 = 740, lo = -2, hi = 5;
+    const X = (v) => x0 + (Math.log10(v) - lo) / (hi - lo) * (x1 - x0);
+    let s = "";
+    for (let e = lo; e <= hi; e++) {
+      s += `<line x1="${X(10 ** e)}" y1="20" x2="${X(10 ** e)}" y2="255" stroke="var(--line)"/>`;
+      s += `<text x="${X(10 ** e)}" y="275" text-anchor="middle" class="t-small t-muted">${e < 0 ? (10 ** e).toFixed(-e) : (10 ** e).toLocaleString()} J</text>`;
+    }
+    data.forEach(([lab, q, w, tag], i) => {
+      const y = 30 + i * 58;
+      s += `<text x="${x0 - 10}" y="${y + 16}" text-anchor="end" class="t-small" style="font-weight:600">${lab}</text>`;
+      s += `<text x="${x0 - 10}" y="${y + 32}" text-anchor="end" class="t-small t-muted">${tag}</text>`;
+      s += `<rect x="${x0}" y="${y}" width="${X(q) - x0}" height="18" rx="3" fill="var(--heat)"/>`;
+      s += `<text x="${X(q) + 6}" y="${y + 14}" class="t-small t-heat">|q| = ${q.toLocaleString()} J</text>`;
+      s += `<rect x="${x0}" y="${y + 22}" width="${X(w) - x0}" height="18" rx="3" fill="var(--work)"/>`;
+      s += `<text x="${X(w) + 6}" y="${y + 36}" class="t-small t-work">|w| = ${w.toLocaleString()} J</text>`;
+    });
+    svg.innerHTML = s;
+  })();
+
+  // ---------- practice generator ----------
+  (function () {
+    const R = 8.314, rnd = (a, b, step) => Math.round((a + Math.random() * (b - a)) / step) * step;
+    const r = (x, d) => Number(x.toFixed(d));
+    const gens = [
+      () => { // dU from q and w
+        const qa = rnd(50, 800, 10) * (Math.random() < .5 ? 1 : -1), wa = rnd(50, 800, 10) * (Math.random() < .5 ? 1 : -1);
+        const qs = qa > 0 ? `absorbs ${qa} J of heat` : `releases ${-qa} J of heat`;
+        const ws = wa > 0 ? `has ${wa} J of work done on it` : `does ${-wa} J of work on the surroundings`;
+        return { text: `A system ${qs} and ${ws}. Calculate ΔU in J.`, ans: qa + wa, unit: "J",
+          sol: `q = ${signed(qa)} J (${qa > 0 ? "absorbed" : "released"}); w = ${signed(wa)} J (${wa > 0 ? "done on" : "done by"} the system). ΔU = q + w = <b>${signed(qa + wa)} J</b>.` };
+      },
+      () => { // expansion/compression work
+        const P = rnd(0.5, 4, 0.1), V1 = rnd(1, 12, 0.5); let V2 = rnd(1, 12, 0.5); if (V2 === V1) V2 = V1 + 2;
+        const w = -P * (V2 - V1) * 101.325;
+        return { text: `A gas ${V2 > V1 ? "expands" : "is compressed"} from ${V1.toFixed(1)} L to ${V2.toFixed(1)} L against a constant external pressure of ${P.toFixed(1)} atm. Calculate w in J.`, ans: w, unit: "J",
+          sol: `ΔV = ${V2.toFixed(1)} − ${V1.toFixed(1)} = ${signed(V2 - V1, 1)} L. w = −P<sub>ext</sub>ΔV = −(${P.toFixed(1)} atm)(${signed(V2 - V1, 1)} L) = ${signed(-P * (V2 - V1), 2)} L·atm × 101.325 J/(L·atm) = <b>${signed(w, 0)} J</b>.` };
+      },
+      () => { // q = m c dT
+        const subs = [["water", 4.184], ["aluminum", 0.897], ["iron", 0.449], ["copper", 0.385], ["ethanol", 2.44]];
+        const [name, c] = subs[Math.floor(Math.random() * subs.length)];
+        let d = rnd(-30, 70, 1); if (d === 0) d = 15;
+        const m = rnd(20, 500, 5), T1 = rnd(10, 40, 1), T2 = T1 + d;
+        const q = m * c * (T2 - T1);
+        return { text: `${m} g of ${name} (c = ${c} J g⁻¹ °C⁻¹) changes temperature from ${T1} °C to ${T2} °C. Calculate q in J. (Assume w ≈ 0, so this is also ΔU.)`, ans: q, unit: "J",
+          sol: `q = m c ΔT = (${m} g)(${c} J g⁻¹ °C⁻¹)(${T2} − ${T1} °C) = <b>${signed(q, 0)} J</b>. ${T2 < T1 ? "Negative: the sample lost heat as it cooled." : ""}` };
+      },
+      () => { // q from dU and constant-P work
+        const P = rnd(1, 3, 0.5), V1 = rnd(8, 15, 1), V2 = rnd(2, 6, 1), dU = rnd(200, 1500, 50);
+        const w = -P * (V2 - V1) * 101.325, q = dU - w;
+        return { text: `A gas is compressed from ${V1} L to ${V2} L by a constant external pressure of ${P.toFixed(1)} atm, and its internal energy rises by ${dU} J. Calculate q in J.`, ans: q, unit: "J",
+          sol: `w = −(${P.toFixed(1)} atm)(${V2} − ${V1} L) = ${signed(-P * (V2 - V1), 1)} L·atm = ${signed(w, 0)} J. q = ΔU − w = ${dU} − (${signed(w, 0)}) = <b>${signed(q, 0)} J</b>.` };
+      },
+      () => { // dn_gas RT
+        const rx = [
+          ["2 H₂(g) + O₂(g) → 2 H₂O(l)", -3], ["N₂(g) + 3 H₂(g) → 2 NH₃(g)", -2], ["CaCO₃(s) → CaO(s) + CO₂(g)", 1],
+          ["2 H₂O₂(l) → 2 H₂O(l) + O₂(g)", 1], ["CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", -2], ["2 NaN₃(s) → 2 Na(s) + 3 N₂(g)", 3],
+        ];
+        const [eq, dn] = rx[Math.floor(Math.random() * rx.length)];
+        const T = rnd(298, 500, 1), w = -dn * R * T / 1000;
+        return { text: `For the reaction ${eq}, as written, at ${T} K and constant pressure, calculate w in kJ.`, ans: w, unit: "kJ",
+          sol: `Count only gases: Δn<sub>gas</sub> = ${dn > 0 ? "+" : ""}${dn} mol. w = −Δn<sub>gas</sub>RT = −(${dn})(8.314 J mol⁻¹K⁻¹)(${T} K) = <b>${signed(w, 2)} kJ</b>. ${dn < 0 ? "Gas is consumed, so the atmosphere does work on the system (w > 0)." : "Gas is produced, so the system pushes back the atmosphere (w < 0)."}` };
+      },
+      () => { // reversible isothermal
+        const n = rnd(0.5, 3, 0.25), T = rnd(273, 400, 1), V1 = rnd(2, 10, 1), V2 = V1 * rnd(1.5, 4, 0.5);
+        const w = -n * R * T * Math.log(V2 / V1) / 1000;
+        return { text: `${n} mol of an ideal gas expands reversibly and isothermally at ${T} K from ${V1} L to ${V2} L. Calculate q in kJ.`, ans: -w, unit: "kJ",
+          sol: `w = −nRT ln(V₂/V₁) = −(${n})(8.314)(${T}) ln(${V2}/${V1}) = ${signed(w, 2)} kJ. For an ideal gas at constant T, ΔU = 0, so q = −w = <b>${signed(-w, 2)} kJ</b>.` };
+      },
+    ];
+    const nc = document.getElementById("probCheck");
+    bindNumCheck(nc);
+    let cur;
+    const next = () => {
+      cur = gens[Math.floor(Math.random() * gens.length)]();
+      document.getElementById("probText").innerHTML = cur.text;
+      nc.dataset.answer = cur.ans;
+      nc.querySelector("input").value = ""; nc.querySelector("input").placeholder = "answer in " + cur.unit;
+      nc.querySelector(".result").textContent = "";
+      const st = document.getElementById("probSolText"); st.style.display = "none"; st.innerHTML = cur.sol;
+    };
+    document.getElementById("probNew").addEventListener("click", next);
+    document.getElementById("probSol").addEventListener("click", () => document.getElementById("probSolText").style.display = "block");
+    next();
+  })();
+</script>
+</body>
+</html>
