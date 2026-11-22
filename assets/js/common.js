@@ -15,6 +15,8 @@ const LESSONS = [
   { n: 5, file: "05-state-path-functions.html",   title: "State vs path functions" },
   { n: 6, file: "06-calculations.html",           title: "Worked calculations" },
   { n: 7, file: "07-reversible-irreversible.html", title: "Reversible vs irreversible" },
+  { n: 8, file: "08-enthalpy.html",               title: "Enthalpy" },
+  { n: 9, file: "09-hess-law.html",               title: "Hess's law & calculating ΔH" },
 ];
 
 const store = {

@@ -18,6 +18,8 @@ An interactive learning module on the principles of thermodynamics for first-yea
 | 5 | `lessons/05-state-path-functions.html` | State vs path functions: route analogy, a drag-the-path P–V tool (ΔU fixed while q and w change, with a path log), why U is a state function (property of the state; perpetual-motion argument), why q and w are path functions (energy in transit, pond analogy, work as area, q = ΔU − w), an animated cycle, and a sorting activity |
 | 6 | `lessons/06-calculations.html` | Nine step-by-step worked examples of different kinds (gas, solid, liquid → gas, solid → liquid, reactions, bomb calorimetry, reversible vs one-step), each with a "try it" check, plus a random practice-problem generator |
 | 7 | `lessons/07-reversible-irreversible.html` | Reversible vs irreversible work and heat, a side-by-side animation (blocks moved at once vs sand moved grain by grain, with live P–V traces and work bars), the N-step P–V widget with convergence chart and cycles, the reservoir ladder for heat, a summary table, reversible work in gases, liquids and solids (compressibility chart, sound waves, boiling, surface work, a Daniell cell, an elastic-vs-plastic steel-wire interactive, compression comparison) and a numbered reference list with in-text citations |
+| 8 | `lessons/08-enthalpy.html` | Enthalpy: H = U + PV and ΔH = q_P (derivation and diagram), measuring ΔH for gases, liquids and solids (calorimeters, ΔH vs ΔU interactive), the forms of ΔH (formation, combustion, fusion, vaporization, sublimation, solution, neutralization, bond, atomization, ionization, electron gain, lattice), enthalpy of phases (level diagram, phase-change calculator, heating/cooling calculator for water), with references |
+| 9 | `lessons/09-hess-law.html` | Hess's law: statement and rules, interactive Hess puzzles with a waterfall diagram, and every method for ΔH — coffee-cup and bomb calorimetry, Hess's law, formation enthalpies (calculator with Hess cycle), bond enthalpies (interactive), heating/phase changes, Kirchhoff's law (interactive), Born–Haber cycle (step-through), a method-selection table, module wrap-up, with references |
 
 Every diagram uses the same colour code: blue = system, sand = surroundings, orange-red = heat (q), green = work (w), indigo = internal energy (U). Pages support light and dark mode.
 
@@ -37,7 +39,7 @@ To publish: in the GitHub repository settings, enable **Pages** from the `main` 
 
 ```
 index.html
-lessons/          seven lesson pages
+lessons/          nine lesson pages
 assets/css/       shared stylesheet (colour tokens, layout, widgets)
 assets/js/        common.js (navigation, quizzes, step reveal, answer checks)
                   gas.js (animated gas-in-a-piston canvas used by lessons 3, 4 and 7)

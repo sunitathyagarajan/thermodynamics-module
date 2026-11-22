@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enthalpy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .deriv { counter-reset: d; list-style: none; padding: 0; display: grid; gap: 8px; }
+    .deriv li { counter-increment: d; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px 10px 48px; position: relative; }
+    .deriv li::before { content: counter(d); position: absolute; left: 12px; top: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--energy); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .85rem; }
+    .forms td:first-child { font-weight: 700; white-space: nowrap; }
+    .forms td:nth-child(2) { white-space: nowrap; }
+    .steptbl td, .steptbl th { font-size: .9rem; padding: 6px 10px; }
+  </style>
+</head>
+<body data-lesson="8" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 8</p>
+  <h1>Enthalpy</h1>
+  <p class="lede">Most chemistry happens in open beakers at constant atmospheric pressure. Enthalpy, <var>H</var>, is the energy bookkeeping tool built for exactly those conditions: at constant pressure, the heat a process absorbs or releases <b>is</b> its enthalpy change.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Define enthalpy and show why Δ<var>H</var> = <var>q</var><sub>P</sub>.</li>
+      <li>Explain how Δ<var>H</var> is measured for solids, liquids and gases, and how they differ.</li>
+      <li>Recognise the different forms of enthalpy change (formation, combustion, fusion, solution, bond, lattice…).</li>
+      <li>Calculate enthalpy changes for heating, cooling and changes of phase.</li>
+    </ul>
+  </div>
+
+  <h2 id="definition" data-short="What is enthalpy?">What is enthalpy?</h2>
+  <div class="eq big"><var>H</var> = <span class="u">U</span> + <var>PV</var>
+    <span class="label">enthalpy = internal energy + pressure × volume</span></div>
+  <p>Enthalpy adds to the internal energy the "<var>PV</var>" energy the system needs to make room for itself against the surrounding pressure.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup> Because <var>U</var>, <var>P</var> and <var>V</var> are all state functions, <b><var>H</var> is a state function too</b> (Lesson 5): Δ<var>H</var> depends only on the initial and final states.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup> Like <var>U</var>, its absolute value can't be measured — only changes, Δ<var>H</var> = <var>H</var><sub>final</sub> − <var>H</var><sub>initial</sub>. It is <b>extensive</b>: double the amount of material and you double Δ<var>H</var>. Its units are joules (usually kJ or kJ/mol).</p>
+
+  <h2 id="q" data-short="Enthalpy and heat">How is enthalpy related to <span class="q">q</span>?</h2>
+  <p>Start from the first law and add one condition — <b>constant pressure</b>, with only pressure–volume work:<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></p>
+  <ol class="deriv">
+    <li>First law: Δ<span class="u">U</span> = <span class="q">q</span> + <span class="w">w</span></li>
+    <li>At constant pressure, the only work is expansion work: <span class="w">w</span> = −<var>P</var>Δ<var>V</var>. So Δ<span class="u">U</span> = <span class="q">q</span><sub>P</sub> − <var>P</var>Δ<var>V</var>.</li>
+    <li>Rearrange: <span class="q">q</span><sub>P</sub> = Δ<span class="u">U</span> + <var>P</var>Δ<var>V</var>.</li>
+    <li>At constant <var>P</var>, Δ<var>H</var> = Δ(<var>U</var> + <var>PV</var>) = Δ<span class="u">U</span> + <var>P</var>Δ<var>V</var>. Therefore:</li>
+  </ol>
+  <div class="eq big">Δ<var>H</var> = <span class="q">q</span><sub><var>P</var></sub>
+    <span class="label">at constant pressure, when the only work is pressure–volume work</span></div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="Heat added at constant pressure splits into internal energy and expansion work; enthalpy counts both">
+      <g transform="translate(30,20)">
+        <path d="M40 20 V 230 H 200 V 20" fill="none" stroke="var(--ink)" stroke-width="4"/>
+        <rect x="42" y="100" width="156" height="128" class="gas"/>
+        <rect x="42" y="90" width="156" height="10" class="piston"/>
+        <rect x="42" y="100" width="156" height="30" fill="var(--work-fill)" opacity=".9"/>
+        <path d="M120 46 V 82" class="ink-line" stroke-width="3"/><polygon points="120,88 113,76 127,76" fill="var(--ink)"/>
+        <text x="48" y="36" class="t-small" style="font-weight:700">P<tspan dy="3" font-size="9">ext</tspan><tspan dy="-3"> = constant</tspan></text>
+        <path d="M215 110 V 70" class="work-arrow anim-flow"/><polygon points="215,62 208,76 222,76" class="work-fill"/>
+        <text x="225" y="92" class="t-small t-work">w = −PΔV</text>
+        <path class="flame anim-flicker" d="M100 272 Q 96 252 110 240 Q 112 256 120 258 Q 126 244 134 242 Q 144 258 136 272 Z"/>
+        <text x="160" y="262" class="t-small t-heat">q<tspan dy="3" font-size="9">P</tspan></text>
+      </g>
+      <g transform="translate(330,30)">
+        <text x="0" y="10" class="t-mid" style="font-weight:700">Where the heat goes</text>
+        <rect x="0" y="30" width="380" height="40" rx="6" fill="var(--heat)" opacity=".85"/>
+        <text x="190" y="56" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:15px">heat in at constant P:  q<tspan dy="3" font-size="10">P</tspan></text>
+        <rect x="0" y="90" width="270" height="40" rx="6" fill="var(--energy)" opacity=".85"/>
+        <text x="135" y="116" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">raises U:  ΔU</text>
+        <rect x="276" y="90" width="104" height="40" rx="6" fill="var(--work)" opacity=".85"/>
+        <text x="328" y="116" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:13px">pushes air: PΔV</text>
+        <path d="M0 150 H 380" class="ink-line"/>
+        <text x="190" y="176" text-anchor="middle" class="t-mid">ΔH = ΔU + PΔV = q<tspan dy="3" font-size="10">P</tspan></text>
+        <text x="190" y="206" text-anchor="middle" class="t-small t-muted">Enthalpy "pre-pays" the expansion work, so the heat measured at</text>
+        <text x="190" y="222" text-anchor="middle" class="t-small t-muted">constant pressure equals ΔH exactly.</text>
+      </g>
+    </svg>
+    <figcaption>At constant pressure, part of the heat raises <span class="u">U</span> and part does work pushing back the surroundings. Δ<var>H</var> counts both, so Δ<var>H</var> equals the heat.<sup class="cite"><a href="#ref-1">1</a></sup> At constant <b>volume</b>, there is no expansion work and the heat equals Δ<var>U</var> instead (Lesson 4).</figcaption>
+  </figure>
+
+  <div class="grid-2">
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 230" role="img" aria-label="Exothermic enthalpy diagram">
+        <text x="165" y="18" text-anchor="middle" class="t-mid" style="font-weight:700">Exothermic: ΔH &lt; 0</text>
+        <line x1="40" y1="30" x2="40" y2="210" class="ink-line"/><polygon points="40,24 34,38 46,38" fill="var(--ink)"/>
+        <text x="28" y="120" class="t-small" transform="rotate(-90 28 120)" text-anchor="middle">H</text>
+        <line x1="70" y1="60" x2="170" y2="60" stroke="var(--ink)" stroke-width="4"/><text x="120" y="50" text-anchor="middle" class="t-small">reactants</text>
+        <line x1="190" y1="180" x2="290" y2="180" stroke="var(--ink)" stroke-width="4"/><text x="240" y="200" text-anchor="middle" class="t-small">products</text>
+        <path d="M180 64 V 170" class="heat-arrow"/><polygon points="180,178 173,164 187,164" class="heat-fill"/>
+        <text x="190" y="120" class="t-small t-heat">heat released</text>
+        <text x="190" y="136" class="t-small t-heat">q<tspan dy="3" font-size="8">P</tspan><tspan dy="-3"> = ΔH &lt; 0</tspan></text>
+      </svg>
+    </figure>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 230" role="img" aria-label="Endothermic enthalpy diagram">
+        <text x="165" y="18" text-anchor="middle" class="t-mid" style="font-weight:700">Endothermic: ΔH &gt; 0</text>
+        <line x1="40" y1="30" x2="40" y2="210" class="ink-line"/><polygon points="40,24 34,38 46,38" fill="var(--ink)"/>
+        <text x="28" y="120" class="t-small" transform="rotate(-90 28 120)" text-anchor="middle">H</text>
+        <line x1="70" y1="180" x2="170" y2="180" stroke="var(--ink)" stroke-width="4"/><text x="120" y="200" text-anchor="middle" class="t-small">reactants</text>
+        <line x1="190" y1="60" x2="290" y2="60" stroke="var(--ink)" stroke-width="4"/><text x="240" y="50" text-anchor="middle" class="t-small">products</text>
+        <path d="M180 176 V 70" class="heat-arrow"/><polygon points="180,62 173,76 187,76" class="heat-fill"/>
+        <text x="190" y="120" class="t-small t-heat">heat absorbed</text>
+        <text x="190" y="136" class="t-small t-heat">q<tspan dy="3" font-size="8">P</tspan><tspan dy="-3"> = ΔH &gt; 0</tspan></text>
+      </svg>
+    </figure>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">Key facts about ΔH</span>
+    <ul style="margin:.3em 0 0;padding-left:1.2em">
+      <li><b>Sign:</b> Δ<var>H</var> &lt; 0 is exothermic (heat released); Δ<var>H</var> &gt; 0 is endothermic (heat absorbed).<sup class="cite"><a href="#ref-1">1</a></sup></li>
+      <li><b>Extensive:</b> 2 CH<sub>4</sub> burning releases twice the heat of 1 CH<sub>4</sub>.</li>
+      <li><b>Reversing a process reverses the sign:</b> Δ<var>H</var><sub>freezing</sub> = −Δ<var>H</var><sub>melting</sub>.</li>
+      <li><b>Physical states matter:</b> forming H<sub>2</sub>O(l) releases 44.0 kJ/mol more than forming H<sub>2</sub>O(g) at 25 °C.<sup class="cite"><a href="#ref-7">7</a></sup></li>
+      <li><b>The condition matters:</b> Δ<var>H</var> = <var>q</var> only at constant pressure with no non-<var>PV</var> work. A battery doing electrical work, for example, releases less heat than its Δ<var>H</var>.<sup class="cite"><a href="#ref-3">3</a></sup></li>
+    </ul>
+  </div>
+
+  <h2 id="measuring" data-short="Measuring ΔH by phase">Can we measure enthalpy for solids, liquids and gases?</h2>
+  <p><b>Yes — we can measure Δ<var>H</var> for processes involving any phase</b> (never an absolute <var>H</var>). The basic method is always calorimetry: measure the heat at constant pressure, or measure it at constant volume and correct it.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-3">3</a></sup> What differs between phases is <b>how big the <var>PV</var> term is</b>, and therefore how different Δ<var>H</var> is from Δ<var>U</var>.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 250" role="img" aria-label="Three calorimeters: coffee-cup, bomb, and differential scanning calorimeter">
+      <!-- coffee cup -->
+      <g transform="translate(20,10)">
+        <text x="115" y="16" text-anchor="middle" class="t-mid" style="font-weight:700">Coffee-cup calorimeter</text>
+        <path d="M60 50 L 72 190 L 158 190 L 170 50 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/>
+        <path d="M66 90 L 164 90 L 156 186 L 74 186 Z" class="liquid"/>
+        <rect x="52" y="42" width="126" height="9" rx="3" class="piston"/>
+        <line x1="115" y1="20" x2="115" y2="170" class="ink-line" stroke-width="3"/><circle cx="115" cy="172" r="6" fill="var(--hot)"/>
+        <text x="115" y="212" text-anchor="middle" class="t-small" style="font-weight:700">constant P → q = ΔH</text>
+        <text x="115" y="230" text-anchor="middle" class="t-small t-muted">solutions, dissolving, neutralization</text>
+      </g>
+      <!-- bomb -->
+      <g transform="translate(270,10)">
+        <text x="115" y="16" text-anchor="middle" class="t-mid" style="font-weight:700">Bomb calorimeter</text>
+        <rect x="30" y="40" width="170" height="150" rx="10" fill="var(--surface-2)" stroke="var(--ink-3)" stroke-dasharray="5 4" stroke-width="2"/>
+        <rect x="45" y="65" width="140" height="115" class="liquid"/>
+        <rect x="85" y="85" width="60" height="70" rx="8" fill="var(--ink-3)" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="92" y="92" width="46" height="56" rx="5" class="sys-box"/>
+        <text x="115" y="212" text-anchor="middle" class="t-small" style="font-weight:700">constant V → q = ΔU</text>
+        <text x="115" y="230" text-anchor="middle" class="t-small t-muted">then ΔH = ΔU + Δn<tspan dy="3" font-size="8">gas</tspan><tspan dy="-3">RT</tspan></text>
+      </g>
+      <!-- DSC -->
+      <g transform="translate(520,10)">
+        <text x="115" y="16" text-anchor="middle" class="t-mid" style="font-weight:700">Differential scanning (DSC)</text>
+        <rect x="40" y="70" width="60" height="40" rx="6" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="130" y="70" width="60" height="40" rx="6" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="55" y="80" width="30" height="20" rx="3" fill="var(--surr)"/>
+        <text x="70" y="128" text-anchor="middle" class="t-small">sample</text><text x="160" y="128" text-anchor="middle" class="t-small">reference</text>
+        <path d="M40 180 H 90 Q 105 180 110 150 Q 115 180 130 180 H 200" fill="none" stroke="var(--heat)" stroke-width="3"/>
+        <text x="115" y="145" text-anchor="middle" class="t-small t-heat">melting peak</text>
+        <text x="115" y="212" text-anchor="middle" class="t-small" style="font-weight:700">constant P, heated steadily</text>
+        <text x="115" y="230" text-anchor="middle" class="t-small t-muted">ΔH<tspan dy="3" font-size="8">fus</tspan><tspan dy="-3"> and C</tspan><tspan dy="3" font-size="8">P</tspan><tspan dy="-3"> of solids and liquids</tspan></text>
+      </g>
+    </svg>
+    <figcaption>Three common ways to measure enthalpy changes.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-9">9</a></sup> The coffee-cup calorimeter and DSC work at constant pressure, so they give Δ<var>H</var> directly; the bomb calorimeter gives Δ<var>U</var>, which is converted to Δ<var>H</var>.</figcaption>
+  </figure>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Gases</th><th>Liquids</th><th>Solids</th></tr>
+      <tr><td><b>Size of the <var>PV</var> term</b></td><td>Large — volume changes a lot</td><td>Tiny</td><td>Tiny</td></tr>
+      <tr><td><b>Δ<var>H</var> vs Δ<var>U</var> on heating</b></td><td>Different: Δ<var>H</var> − Δ<var>U</var> = <var>nR</var>Δ<var>T</var>, so <var>C</var><sub>P</sub> − <var>C</var><sub>V</sub> = <var>R</var> (ideal gas)<sup class="cite"><a href="#ref-5">5</a></sup></td><td>Essentially equal (Δ<var>H</var> ≈ Δ<var>U</var>)</td><td>Essentially equal (Δ<var>H</var> ≈ Δ<var>U</var>)</td></tr>
+      <tr><td><b>Δ<var>H</var> vs Δ<var>U</var> for a reaction</b></td><td>Differ by Δ<var>n</var><sub>gas</sub><var>RT</var> (2.48 kJ per mole of gas at 25 °C)<sup class="cite"><a href="#ref-3">3</a></sup></td><td colspan="2">Equal if no gases are made or used</td></tr>
+      <tr><td><b>Typical measurement</b></td><td>Bomb calorimetry (then correct), flow calorimetry</td><td>Coffee-cup calorimetry, DSC</td><td>DSC, drop calorimetry, dissolving the solid in a calorimeter<sup class="cite"><a href="#ref-9">9</a></sup></td></tr>
+      <tr><td><b>Example</b></td><td>Heating 1 mol He by 10 K: Δ<var>H</var> = 208 J, Δ<var>U</var> = 125 J</td><td>Heating 1 mol water by 10 K: Δ<var>H</var> = 753 J, Δ<var>U</var> = 753 J</td><td>Melting 1 mol ice: Δ<var>H</var> = 6.01 kJ ≈ Δ<var>U</var></td></tr>
+    </table>
+  </div>
+
+  <div class="widget" id="hu">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>ΔH vs ΔU when 1 mol is heated at 1 atm</h3></div>
+    <div class="widget-body">
+      <p>Pick a substance and a temperature rise (no phase change). At constant pressure the heat is Δ<var>H</var>; subtracting the expansion work <var>P</var>Δ<var>V</var> gives Δ<var>U</var>.</p>
+      <div class="seg" role="group" aria-label="Substance" id="huSeg">
+        <button class="on" data-s="He">He (g)</button><button data-s="N2">N₂ (g)</button><button data-s="CO2">CO₂ (g)</button>
+        <button data-s="H2O">water (l)</button><button data-s="EtOH">ethanol (l)</button><button data-s="Al">Al (s)</button><button data-s="Fe">Fe (s)</button>
+      </div>
+      <div class="control" style="margin-top:12px"><label for="huT">Temperature rise, ΔT <output id="huTOut">10 K</output></label><input type="range" id="huT" min="1" max="50" step="1" value="10"></div>
+      <div class="bars" style="margin-top:12px">
+        <div class="bar-row"><span class="q">ΔH</span><div class="race-track" style="height:22px;background:var(--surface-2);border-radius:6px;overflow:hidden"><div id="huBH" style="height:100%;background:var(--heat);width:0"></div></div><span class="bar-val" id="huH"></span></div>
+        <div class="bar-row"><span class="u">ΔU</span><div style="height:22px;background:var(--surface-2);border-radius:6px;overflow:hidden"><div id="huBU" style="height:100%;background:var(--energy);width:0"></div></div><span class="bar-val" id="huU"></span></div>
+        <div class="bar-row"><span class="w">PΔV</span><div style="height:22px;background:var(--surface-2);border-radius:6px;overflow:hidden"><div id="huBW" style="height:100%;background:var(--work);width:0"></div></div><span class="bar-val" id="huW"></span></div>
+      </div>
+      <p id="huMsg" style="font-size:.93rem"></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Data: molar heat capacities at 25 °C from the NIST Chemistry WebBook;<sup class="cite"><a href="#ref-6">6</a></sup> expansion coefficients of the liquids and solids from Kell (water)<sup class="cite"><a href="#ref-10">10</a></sup> and standard tables. For an ideal gas, <var>P</var>Δ<var>V</var> = <var>nR</var>Δ<var>T</var>.<sup class="cite"><a href="#ref-5">5</a></sup></p>
+    </div>
+  </div>
+
+  <h2 id="forms" data-short="Forms of ΔH">The different forms of enthalpy change</h2>
+  <p>Chemists give special names to the enthalpy changes of common processes. A superscript ° means <b>standard conditions</b>: pure substances at 1 bar (≈ 1 atm), solutions at 1 M, usually at 25 °C (298.15 K).<sup class="cite"><a href="#ref-8">8</a></sup> Values below are per mole of the substance named.<sup class="cite"><a href="#ref-7">7</a></sup></p>
+  <div class="table-wrap">
+    <table class="forms">
+      <tr><th>Name</th><th>Symbol</th><th>The enthalpy change when…</th><th>Example</th><th class="num">Value</th></tr>
+      <tr><td>Reaction</td><td>Δ<var>H</var><sub>rxn</sub></td><td>a reaction occurs as written</td><td>N₂(g) + 3 H₂(g) → 2 NH₃(g)</td><td class="num">−91.8 kJ</td></tr>
+      <tr><td>Formation</td><td>Δ<var>H</var><sub>f</sub>°</td><td>1 mol of a compound forms from its elements in their standard states</td><td>C(s) + O₂(g) → CO₂(g)</td><td class="num">−393.5 kJ/mol</td></tr>
+      <tr><td>Combustion</td><td>Δ<var>H</var><sub>c</sub>°</td><td>1 mol of a substance burns completely in O₂</td><td>CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)</td><td class="num">−890 kJ/mol</td></tr>
+      <tr><td>Fusion</td><td>Δ<var>H</var><sub>fus</sub></td><td>1 mol of solid melts</td><td>H₂O(s) → H₂O(l) at 0 °C</td><td class="num">+6.01 kJ/mol</td></tr>
+      <tr><td>Vaporization</td><td>Δ<var>H</var><sub>vap</sub></td><td>1 mol of liquid vaporizes</td><td>H₂O(l) → H₂O(g) at 100 °C</td><td class="num">+40.7 kJ/mol</td></tr>
+      <tr><td>Sublimation</td><td>Δ<var>H</var><sub>sub</sub></td><td>1 mol of solid turns directly to gas</td><td>CO₂(s) → CO₂(g) at −78.5 °C</td><td class="num">+25.2 kJ/mol</td></tr>
+      <tr><td>Solution</td><td>Δ<var>H</var><sub>soln</sub></td><td>1 mol of solute dissolves in a solvent</td><td>NH₄NO₃(s) → NH₄⁺(aq) + NO₃⁻(aq)</td><td class="num">+25.7 kJ/mol</td></tr>
+      <tr><td>Neutralization</td><td>Δ<var>H</var><sub>neut</sub></td><td>1 mol of water forms from H⁺ and OH⁻</td><td>H⁺(aq) + OH⁻(aq) → H₂O(l)</td><td class="num">−55.8 kJ/mol</td></tr>
+      <tr><td>Bond enthalpy</td><td><var>D</var>(X–Y)</td><td>1 mol of a bond breaks in the gas phase</td><td>H₂(g) → 2 H(g)</td><td class="num">+436 kJ/mol</td></tr>
+      <tr><td>Atomization</td><td>Δ<var>H</var><sub>atom</sub></td><td>1 mol of gaseous atoms forms from an element</td><td>C(s, graphite) → C(g)</td><td class="num">+716.7 kJ/mol</td></tr>
+      <tr><td>Ionization</td><td><var>IE</var></td><td>1 mol of electrons is removed from gaseous atoms</td><td>Na(g) → Na⁺(g) + e⁻</td><td class="num">+496 kJ/mol</td></tr>
+      <tr><td>Electron gain</td><td>Δ<var>H</var><sub>eg</sub> (≈ −<var>EA</var>)</td><td>1 mol of electrons is added to gaseous atoms</td><td>Cl(g) + e⁻ → Cl⁻(g)</td><td class="num">−349 kJ/mol</td></tr>
+      <tr><td>Lattice</td><td>Δ<var>H</var><sub>lattice</sub></td><td>1 mol of ionic solid separates into gaseous ions</td><td>NaCl(s) → Na⁺(g) + Cl⁻(g)</td><td class="num">+787 kJ/mol</td></tr>
+      <tr><td>Heating</td><td><var>nC</var><sub>P</sub>Δ<var>T</var></td><td>a substance is warmed without changing phase</td><td>1 mol water, 25 → 35 °C</td><td class="num">+0.753 kJ</td></tr>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--ink-3)">Sources: formation, combustion, neutralization and reaction values from standard tables;<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup> phase changes;<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-6">6</a></sup> solution;<sup class="cite"><a href="#ref-13">13</a></sup> bond and lattice enthalpies;<sup class="cite"><a href="#ref-11">11</a></sup> ionization energy and electron affinity.<sup class="cite"><a href="#ref-12">12</a></sup> The neutralization value follows from formation enthalpies: −285.8 − (−230.0) = −55.8 kJ/mol.<sup class="cite"><a href="#ref-7">7</a></sup> Tables differ slightly, so you may see values a few tenths of a kJ different elsewhere.</p>
+
+  <h2 id="phases" data-short="Enthalpy of phases">Enthalpy of different phases</h2>
+  <p>For the same substance at the same temperature, the phases are ordered <b>H<sub>solid</sub> &lt; H<sub>liquid</sub> &lt; H<sub>gas</sub></b>: energy must be added to loosen molecules from a solid into a liquid, and much more to separate them completely into a gas.<sup class="cite"><a href="#ref-4">4</a></sup> That's why Δ<var>H</var><sub>vap</sub> is much larger than Δ<var>H</var><sub>fus</sub> (40.7 vs 6.01 kJ/mol for water). Because <var>H</var> is a state function, the enthalpies of the phase changes fit together like a closed loop:</p>
+
+  <div class="grid-2" style="align-items:center">
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 340 300" role="img" aria-label="Enthalpy levels of solid, liquid and gas water with arrows for each phase change">
+        <line x1="36" y1="20" x2="36" y2="280" class="ink-line"/><polygon points="36,14 30,28 42,28" fill="var(--ink)"/>
+        <text x="22" y="150" class="t-small" transform="rotate(-90 22 150)" text-anchor="middle">H</text>
+        <line x1="60" y1="50" x2="300" y2="50" stroke="var(--heat)" stroke-width="5"/><text x="305" y="55" class="t-small" style="font-weight:700">gas</text>
+        <line x1="60" y1="215" x2="300" y2="215" stroke="#3f8fd6" stroke-width="5"/><text x="305" y="220" class="t-small" style="font-weight:700">liquid</text>
+        <line x1="60" y1="255" x2="300" y2="255" stroke="var(--sys)" stroke-width="5"/><text x="305" y="260" class="t-small" style="font-weight:700">solid</text>
+        <!-- fusion -->
+        <path d="M90 252 V 222" stroke="var(--heat)" stroke-width="3"/><polygon points="90,216 84,228 96,228" fill="var(--heat)"/>
+        <text x="96" y="242" class="t-small t-heat">fus</text>
+        <path d="M130 218 V 248" stroke="var(--work)" stroke-width="3"/><polygon points="130,254 124,242 136,242" fill="var(--work)"/>
+        <text x="136" y="242" class="t-small t-work">freeze</text>
+        <!-- vaporization -->
+        <path d="M180 212 V 58" stroke="var(--heat)" stroke-width="3"/><polygon points="180,52 174,64 186,64" fill="var(--heat)"/>
+        <text x="148" y="140" class="t-small t-heat" transform="rotate(-90 172 140)">vaporize +40.7</text>
+        <path d="M205 54 V 208" stroke="var(--work)" stroke-width="3"/><polygon points="205,214 199,202 211,202" fill="var(--work)"/>
+        <text x="214" y="140" class="t-small t-work">condense</text>
+        <!-- sublimation -->
+        <path d="M265 252 V 58" stroke="var(--heat)" stroke-width="3" stroke-dasharray="6 4"/><polygon points="265,52 259,64 271,64" fill="var(--heat)"/>
+        <text x="245" y="110" class="t-small t-heat" transform="rotate(-90 258 110)">sublime</text>
+      </svg>
+      <figcaption>Up arrows (endothermic, Δ<var>H</var> &gt; 0); down arrows (exothermic, Δ<var>H</var> &lt; 0). Not to scale for clarity of labels.</figcaption>
+    </figure>
+    <div>
+      <div class="eq" style="font-size:1.15rem">Δ<var>H</var><sub>sub</sub> = Δ<var>H</var><sub>fus</sub> + Δ<var>H</var><sub>vap</sub>
+        <span class="label">(both at the same temperature)</span></div>
+      <div class="eq" style="font-size:1.15rem">Δ<var>H</var><sub>freeze</sub> = −Δ<var>H</var><sub>fus</sub> &nbsp;·&nbsp; Δ<var>H</var><sub>condense</sub> = −Δ<var>H</var><sub>vap</sub></div>
+      <p><b>Example (sublimation of ice at 0 °C):</b> Δ<var>H</var><sub>fus</sub> = 6.01 kJ/mol and Δ<var>H</var><sub>vap</sub> at 0 °C = 45.05 kJ/mol, so Δ<var>H</var><sub>sub</sub> = <b>51.06 kJ/mol</b>.<sup class="cite"><a href="#ref-6">6</a></sup> (Using the 100 °C value, 40.7 kJ/mol, would underestimate it — Δ<var>H</var><sub>vap</sub> depends on temperature; Lesson 9 shows how to correct for this.)</p>
+    </div>
+  </div>
+
+  <h3>Phase-change data for some common substances</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Substance</th><th class="num">Melting point</th><th class="num">Δ<var>H</var><sub>fus</sub> (kJ/mol)</th><th class="num">Boiling point</th><th class="num">Δ<var>H</var><sub>vap</sub> (kJ/mol)</th></tr>
+      <tr><td>Water, H₂O</td><td class="num">0.0 °C</td><td class="num">6.01</td><td class="num">100.0 °C</td><td class="num">40.7</td></tr>
+      <tr><td>Ethanol, C₂H₅OH</td><td class="num">−114.1 °C</td><td class="num">4.93</td><td class="num">78.3 °C</td><td class="num">38.6</td></tr>
+      <tr><td>Benzene, C₆H₆</td><td class="num">5.5 °C</td><td class="num">9.87</td><td class="num">80.1 °C</td><td class="num">30.7</td></tr>
+      <tr><td>Ammonia, NH₃</td><td class="num">−77.7 °C</td><td class="num">5.65</td><td class="num">−33.3 °C</td><td class="num">23.3</td></tr>
+      <tr><td>Mercury, Hg</td><td class="num">−38.8 °C</td><td class="num">2.29</td><td class="num">356.7 °C</td><td class="num">59.1</td></tr>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--ink-3)">Values at the normal melting and boiling points (1 atm), from the NIST Chemistry WebBook<sup class="cite"><a href="#ref-6">6</a></sup> and OpenStax <i>Chemistry 2e</i>.<sup class="cite"><a href="#ref-4">4</a></sup></p>
+
+  <div class="widget" id="pc">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Phase-change enthalpy calculator</h3></div>
+    <div class="widget-body">
+      <p>Choose a substance, a process and a mass. At the transition temperature, <var>q</var> = Δ<var>H</var> = <var>n</var> × Δ<var>H</var><sub>transition</sub>, with the sign set by the direction.<sup class="cite"><a href="#ref-4">4</a></sup></p>
+      <div style="display:grid;gap:10px">
+        <div class="seg" role="group" aria-label="Substance" id="pcSub">
+          <button class="on" data-s="0">water</button><button data-s="1">ethanol</button><button data-s="2">benzene</button><button data-s="3">ammonia</button><button data-s="4">mercury</button>
+        </div>
+        <div class="seg" role="group" aria-label="Process" id="pcProc">
+          <button class="on" data-p="melt">melt</button><button data-p="freeze">freeze</button><button data-p="vap">vaporize</button><button data-p="cond">condense</button>
+        </div>
+        <div class="control"><label for="pcM">Mass <output id="pcMOut">50 g</output></label><input type="range" id="pcM" min="1" max="500" step="1" value="50"></div>
+      </div>
+      <div class="widget-row" style="margin-top:10px">
+        <div class="readout" style="grid-template-columns:repeat(2,1fr);margin-top:0">
+          <div><span class="k">Moles, n</span><span class="v" id="pcN"></span></div>
+          <div><span class="k">Temperature</span><span class="v" id="pcT"></span></div>
+          <div><span class="k">ΔH per mole</span><span class="v" id="pcH1"></span></div>
+          <div><span class="k">ΔH = q (total)</span><span class="v q" id="pcQ"></span></div>
+        </div>
+        <svg id="pcSvg" viewBox="0 0 300 200" role="img" aria-label="Enthalpy levels with the chosen phase change highlighted"></svg>
+      </div>
+      <p id="pcMsg" style="font-size:.93rem;margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <h3>Heating and cooling across phases</h3>
+  <p>To find Δ<var>H</var> for a change that crosses phase boundaries, break it into steps and add them (Hess's law again!): use <var>q</var> = <var>mc</var>Δ<var>T</var> within each phase and <var>q</var> = <var>n</var>Δ<var>H</var><sub>transition</sub> at each phase change.<sup class="cite"><a href="#ref-4">4</a></sup></p>
+
+  <div class="widget" id="hc8">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Enthalpy calculator: heat or cool water between any two temperatures</h3></div>
+    <div class="widget-body">
+      <div class="grid-3">
+        <div class="control"><label for="hcM">Mass of water <output id="hcMOut">100 g</output></label><input type="range" id="hcM" min="1" max="500" step="1" value="100"></div>
+        <div class="control"><label for="hcA">Start temperature <output id="hcAOut">−20 °C</output></label><input type="range" id="hcA" min="-50" max="150" step="1" value="-20"></div>
+        <div class="control"><label for="hcB">Final temperature <output id="hcBOut">120 °C</output></label><input type="range" id="hcB" min="-50" max="150" step="1" value="120"></div>
+      </div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="hcSvg" viewBox="0 0 420 300" role="img" aria-label="Temperature versus cumulative enthalpy for the chosen change"></svg>
+        <div>
+          <div class="table-wrap" style="margin-top:0">
+            <table class="steptbl"><thead><tr><th>Step</th><th>Equation</th><th class="num">ΔH</th></tr></thead><tbody id="hcBody"></tbody></table>
+          </div>
+          <div class="answer-box" id="hcTotal"></div>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Data: c(ice) = 2.09, c(water) = 4.184, c(steam) = 2.01 J g⁻¹ °C⁻¹; Δ<var>H</var><sub>fus</sub> = 6.01 kJ/mol at 0 °C and Δ<var>H</var><sub>vap</sub> = 40.7 kJ/mol at 100 °C; M = 18.02 g/mol; 1 atm.<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-6">6</a></sup></p>
+    </div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">Under which condition does the heat absorbed by a system equal its enthalpy change?</p>
+    <div class="quiz-opts">
+      <button data-why="At constant volume, q equals ΔU, not ΔH.">Constant volume</button>
+      <button data-why="Temperature can change; the requirement is constant pressure (and only PV work).">Constant temperature</button>
+      <button>Constant pressure, with only pressure–volume work</button>
+      <button data-why="Insulated means q = 0, which isn't the same as q = ΔH.">An insulated container</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔH = q_P: at constant pressure the expansion work is already included in ΔH."></div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">For which process is the difference between ΔH and ΔU largest (per mole)?</p>
+    <div class="quiz-opts">
+      <button data-why="Melting barely changes the volume, so ΔH ≈ ΔU (they differ by about 0.0002 kJ/mol for ice).">Melting ice at 0 °C</button>
+      <button>Boiling water at 100 °C</button>
+      <button data-why="Heating a liquid changes its volume very little, so PΔV is negligible.">Heating liquid water by 10 °C</button>
+    </div>
+    <div class="quiz-fb" data-right="Boiling makes a gas: ΔH − ΔU = PΔV ≈ RT = 3.1 kJ/mol (40.7 vs 37.6 kJ/mol)."></div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <p class="quiz-q">Which equation represents the standard enthalpy of formation of liquid water?</p>
+    <div class="quiz-opts">
+      <button data-why="This makes 2 mol of water; ΔHf° is defined per 1 mol of product.">2 H₂(g) + O₂(g) → 2 H₂O(l)</button>
+      <button data-why="Atoms are not the standard states of hydrogen and oxygen; the elements must be H₂(g) and O₂(g).">2 H(g) + O(g) → H₂O(l)</button>
+      <button data-why="This forms water vapour, not liquid water.">H₂(g) + ½ O₂(g) → H₂O(g)</button>
+      <button>H₂(g) + ½ O₂(g) → H₂O(l)</button>
+    </div>
+    <div class="quiz-fb" data-right="One mole of the compound, formed from its elements in their standard states (H₂ gas, O₂ gas): ΔHf° = −285.8 kJ/mol."></div>
+  </div>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
+  <ol class="refs">
+    <li id="ref-1">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 5.3, Enthalpy. <a href="https://openstax.org/books/chemistry-2e/pages/5-3-enthalpy">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 5.2, Calorimetry. <a href="https://openstax.org/books/chemistry-2e/pages/5-2-calorimetry">openstax.org</a></li>
+    <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 2, The First Law (enthalpy; thermochemistry).</li>
+    <li id="ref-4">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 10.3, Phase Transitions. <a href="https://openstax.org/books/chemistry-2e/pages/10-3-phase-transitions">openstax.org</a></li>
+    <li id="ref-5">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 3.5, Heat Capacities of an Ideal Gas. <a href="https://openstax.org/books/university-physics-volume-2/pages/3-5-heat-capacities-of-an-ideal-gas">openstax.org</a></li>
+    <li id="ref-6">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> <span class="use">— heat capacities, phase-change enthalpies</span></li>
+    <li id="ref-7">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
+    <li id="ref-8">Cohen, E. R.; Cvitaš, T.; Frey, J. G.; et al. <i>Quantities, Units and Symbols in Physical Chemistry</i> (IUPAC Green Book), 3rd ed.; RSC Publishing: Cambridge, 2007. <span class="use">— standard state (1 bar) and notation for enthalpy changes</span></li>
+    <li id="ref-9">Höhne, G. W. H.; Hemminger, W. F.; Flammersheim, H.-J. <i>Differential Scanning Calorimetry</i>, 2nd ed.; Springer: Berlin, 2003.</li>
+    <li id="ref-10">Kell, G. S. Density, Thermal Expansivity, and Compressibility of Liquid Water from 0° to 150 °C. <i>J. Chem. Eng. Data</i> <b>1975</b>, <i>20</i> (1), 97–105. <a href="https://doi.org/10.1021/je60064a005">doi:10.1021/je60064a005</a></li>
+    <li id="ref-11">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 7.5, Strengths of Ionic and Covalent Bonds. <a href="https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds">openstax.org</a></li>
+    <li id="ref-12">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 6.5, Periodic Variations in Element Properties. <a href="https://openstax.org/books/chemistry-2e/pages/6-5-periodic-variations-in-element-properties">openstax.org</a></li>
+    <li id="ref-13">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 11.1, The Dissolution Process. <a href="https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process">openstax.org</a></li>
+  </ol>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  // ================= ΔH vs ΔU on heating =================
+  (function () {
+    const R = 8.314, P = 101325;
+    // Cp,m (J/mol/K); gas flag; volumetric expansion alpha (1/K) and molar volume (m^3) for condensed phases
+    const S = {
+      He: { name: "helium gas", cp: 20.79, gas: true },
+      N2: { name: "nitrogen gas", cp: 29.12, gas: true },
+      CO2: { name: "carbon dioxide gas", cp: 37.12, gas: true },
+      H2O: { name: "liquid water", cp: 75.3, a: 2.57e-4, vm: 18.07e-6 },
+      EtOH: { name: "liquid ethanol", cp: 112.3, a: 1.1e-3, vm: 58.4e-6 },
+      Al: { name: "solid aluminum", cp: 24.2, a: 6.9e-5, vm: 9.99e-6 },
+      Fe: { name: "solid iron", cp: 25.1, a: 3.5e-5, vm: 7.09e-6 },
+    };
+    let k = "He";
+    const T = document.getElementById("huT");
+    const fmtJ = (x) => x >= 1 ? fmt(x, 1) + " J" : x >= 0.001 ? x.toFixed(4) + " J" : x.toExponential(1) + " J";
+    const draw = () => {
+      const s = S[k], dT = +T.value;
+      const dH = s.cp * dT, pdv = s.gas ? R * dT : P * s.a * s.vm * dT, dU = dH - pdv;
+      document.getElementById("huTOut").textContent = dT + " K";
+      const max = 112.3 * 50;
+      document.getElementById("huBH").style.width = dH / max * 100 + "%";
+      document.getElementById("huBU").style.width = dU / max * 100 + "%";
+      document.getElementById("huBW").style.width = pdv / max * 100 + "%";
+      document.getElementById("huH").textContent = fmtJ(dH);
+      document.getElementById("huU").textContent = fmtJ(dU);
+      document.getElementById("huW").textContent = fmtJ(pdv);
+      const pct = pdv / dH * 100;
+      document.getElementById("huMsg").innerHTML = s.gas
+        ? `For ${s.name}, <b>${pct.toFixed(0)}%</b> of the heat goes into pushing back the atmosphere, so Δ<var>H</var> and Δ<var>U</var> are clearly different. For any ideal gas the difference is exactly <var>R</var>Δ<var>T</var> per mole (C<sub>P</sub> − C<sub>V</sub> = R).`
+        : `For ${s.name}, only <b>${pct < 0.001 ? pct.toExponential(1) : pct.toFixed(4)}%</b> of the heat does expansion work — Δ<var>H</var> and Δ<var>U</var> are equal for all practical purposes. That's why "heat capacity" for solids and liquids is usually quoted without worrying about constant P or V.`;
+    };
+    T.addEventListener("input", draw);
+    document.querySelectorAll("#huSeg button").forEach(b => b.addEventListener("click", () => {
+      k = b.dataset.s; document.querySelectorAll("#huSeg button").forEach(x => x.classList.toggle("on", x === b)); draw();
+    }));
+    draw();
+  })();
+
+  // ================= phase-change calculator =================
+  (function () {
+    const D = [
+      { n: "water", M: 18.02, mp: 0.0, fus: 6.01, bp: 100.0, vap: 40.7 },
+      { n: "ethanol", M: 46.07, mp: -114.1, fus: 4.93, bp: 78.3, vap: 38.6 },
+      { n: "benzene", M: 78.11, mp: 5.5, fus: 9.87, bp: 80.1, vap: 30.7 },
+      { n: "ammonia", M: 17.03, mp: -77.7, fus: 5.65, bp: -33.3, vap: 23.3 },
+      { n: "mercury", M: 200.59, mp: -38.8, fus: 2.29, bp: 356.7, vap: 59.1 },
+    ];
+    let si = 0, proc = "melt";
+    const M = document.getElementById("pcM"), svg = document.getElementById("pcSvg");
+    const draw = () => {
+      const d = D[si], m = +M.value, n = m / d.M;
+      const info = { melt: [d.fus, d.mp, "solid", "liquid"], freeze: [-d.fus, d.mp, "liquid", "solid"], vap: [d.vap, d.bp, "liquid", "gas"], cond: [-d.vap, d.bp, "gas", "liquid"] }[proc];
+      const [h1, T, from, to] = info, q = n * h1;
+      document.getElementById("pcMOut").textContent = m + " g";
+      document.getElementById("pcN").textContent = n.toFixed(3) + " mol";
+      document.getElementById("pcT").textContent = T.toFixed(1) + " °C";
+      document.getElementById("pcH1").textContent = signed(h1, 2) + " kJ/mol";
+      document.getElementById("pcQ").textContent = signed(q, 2) + " kJ";
+      document.getElementById("pcMsg").innerHTML = `${m} g of ${d.n} = ${m} ÷ ${d.M} g/mol = ${n.toFixed(3)} mol. Changing ${from} → ${to} at ${T.toFixed(1)} °C: Δ<var>H</var> = (${n.toFixed(3)} mol)(${signed(h1, 2)} kJ/mol) = <b>${signed(q, 2)} kJ</b>. ` +
+        (q > 0 ? "Positive: the sample <b>absorbs</b> heat (endothermic)." : "Negative: the sample <b>releases</b> heat (exothermic).");
+      // level diagram (scaled to this substance)
+      const top = 30, bot = 170, tot = d.fus + d.vap;
+      const yS = bot, yL = bot - d.fus / tot * (bot - top), yG = top;
+      const lvl = (y, lab, col) => `<line x1="40" x2="220" y1="${y}" y2="${y}" stroke="${col}" stroke-width="4"/><text x="226" y="${y + 4}" class="t-small" style="font-weight:700">${lab}</text>`;
+      let s = `<line x1="20" y1="15" x2="20" y2="185" stroke="var(--ink)" stroke-width="1.5"/><text x="12" y="100" class="t-small" transform="rotate(-90 12 100)" text-anchor="middle">H</text>`;
+      s += lvl(yG, "gas", "var(--heat)") + lvl(yL, "liquid", "#3f8fd6") + lvl(yS, "solid", "var(--sys)");
+      const y0 = { solid: yS, liquid: yL, gas: yG }[from], y1 = { solid: yS, liquid: yL, gas: yG }[to];
+      const col = y1 < y0 ? "var(--heat)" : "var(--work)";
+      const dir = y1 < y0 ? 1 : -1;
+      s += `<path d="M130 ${y0} V ${y1 + dir * 8}" stroke="${col}" stroke-width="4"/><polygon points="130,${y1} 123,${y1 + dir * 12} 137,${y1 + dir * 12}" fill="${col}"/>`;
+      s += `<text x="140" y="${(y0 + y1) / 2 + 4}" class="t-small" style="fill:${col};font-weight:700">${signed(h1, 2)} kJ/mol</text>`;
+      s += `<text x="150" y="196" text-anchor="middle" class="t-small t-muted">${d.n}: levels drawn to scale</text>`;
+      svg.innerHTML = s;
+    };
+    M.addEventListener("input", draw);
+    document.querySelectorAll("#pcSub button").forEach(b => b.addEventListener("click", () => { si = +b.dataset.s; document.querySelectorAll("#pcSub button").forEach(x => x.classList.toggle("on", x === b)); draw(); }));
+    document.querySelectorAll("#pcProc button").forEach(b => b.addEventListener("click", () => { proc = b.dataset.p; document.querySelectorAll("#pcProc button").forEach(x => x.classList.toggle("on", x === b)); draw(); }));
+    draw();
+  })();
+
+  // ================= heating / cooling calculator for water =================
+  (function () {
+    const Mw = 18.02, cI = 2.09, cW = 4.184, cS = 2.01, hF = 6010 / Mw, hV = 40700 / Mw; // J/g
+    const m = document.getElementById("hcM"), A = document.getElementById("hcA"), B = document.getElementById("hcB");
+    const svg = document.getElementById("hcSvg");
+    const phaseAt = (T) => T < 0 ? "ice" : T < 100 ? "water" : "steam";
+    function steps(mass, T1, T2) {
+      const out = [];
+      if (T1 === T2) return out;
+      const up = T2 > T1;
+      // boundaries crossed in order
+      let T = T1;
+      // treat start exactly at 0 or 100 as being in the lower phase when heating, upper when cooling
+      let ph = up ? (T1 <= 0 ? "ice" : T1 <= 100 ? "water" : "steam") : (T1 >= 100 ? "steam" : T1 >= 0 ? "water" : "ice");
+      const c = { ice: cI, water: cW, steam: cS };
+      while (true) {
+        const edge = up ? (ph === "ice" ? 0 : ph === "water" ? 100 : Infinity) : (ph === "steam" ? 100 : ph === "water" ? 0 : -Infinity);
+        const Tend = up ? Math.min(edge, T2) : Math.max(edge, T2);
+        if (Tend !== T) out.push({ kind: "dT", ph, T0: T, T1: Tend, q: mass * c[ph] * (Tend - T) });
+        T = Tend;
+        if (T === T2) break;
+        // phase change at the edge
+        if (up) {
+          if (ph === "ice") { out.push({ kind: "pc", name: "melt", T0: 0, T1: 0, q: mass * hF }); ph = "water"; }
+          else { out.push({ kind: "pc", name: "vaporize", T0: 100, T1: 100, q: mass * hV }); ph = "steam"; }
+        } else {
+          if (ph === "steam") { out.push({ kind: "pc", name: "condense", T0: 100, T1: 100, q: -mass * hV }); ph = "water"; }
+          else { out.push({ kind: "pc", name: "freeze", T0: 0, T1: 0, q: -mass * hF }); ph = "ice"; }
+        }
+        if (T === T2) break;
+      }
+      return out;
+    }
+    function draw() {
+      const mass = +m.value, T1 = +A.value, T2 = +B.value;
+      document.getElementById("hcMOut").textContent = mass + " g";
+      document.getElementById("hcAOut").textContent = T1 + " °C";
+      document.getElementById("hcBOut").textContent = T2 + " °C";
+      const st = steps(mass, T1, T2);
+      const tb = document.getElementById("hcBody");
+      const n = (mass / Mw).toFixed(3);
+      const c = { ice: cI, water: cW, steam: cS };
+      tb.innerHTML = st.length ? st.map((s, i) => s.kind === "dT"
+        ? `<tr><td>${i + 1}. ${s.ph} ${s.T0}→${s.T1} °C</td><td>m c ΔT = (${mass} g)(${c[s.ph]})(${s.T1 - s.T0})</td><td class="num">${signed(s.q / 1000, 2)} kJ</td></tr>`
+        : `<tr><td>${i + 1}. ${s.name} at ${s.T0} °C</td><td>n ΔH = (${n} mol)(${s.name === "melt" || s.name === "freeze" ? (s.q > 0 ? "+" : "−") + "6.01" : (s.q > 0 ? "+" : "−") + "40.7"} kJ/mol)</td><td class="num">${signed(s.q / 1000, 2)} kJ</td></tr>`).join("")
+        : `<tr><td colspan="3">No change — pick different start and final temperatures.</td></tr>`;
+      const tot = st.reduce((a, s) => a + s.q, 0);
+      document.getElementById("hcTotal").innerHTML = `Total ΔH = q<sub>P</sub> = <b>${signed(tot / 1000, 2)} kJ</b> ${tot > 0 ? "(heat absorbed)" : tot < 0 ? "(heat released)" : ""}`;
+      // chart: x = cumulative H, y = T
+      const qs = [0]; st.forEach(s => qs.push(qs[qs.length - 1] + s.q));
+      const qmin = Math.min(...qs), qmax = Math.max(...qs), span = Math.max(1, qmax - qmin);
+      const X = (q) => 50 + (q - qmin) / span * 350, Y = (T) => 260 - (T + 50) / 200 * 240;
+      let s = `<line x1="50" y1="260" x2="405" y2="260" stroke="var(--ink)" stroke-width="2"/><line x1="50" y1="260" x2="50" y2="15" stroke="var(--ink)" stroke-width="2"/>
+        <text x="228" y="292" text-anchor="middle" class="t-small">cumulative ΔH (kJ)</text>
+        <text x="16" y="140" text-anchor="middle" class="t-small" transform="rotate(-90 16 140)">temperature (°C)</text>`;
+      [-50, 0, 50, 100, 150].forEach(T => s += `<text x="44" y="${Y(T) + 4}" text-anchor="end" class="t-small t-muted">${T}</text><line x1="50" x2="405" y1="${Y(T)}" y2="${Y(T)}" stroke="var(--line)"/>`);
+      [qmin, (qmin + qmax) / 2, qmax].forEach(q => s += `<text x="${X(q)}" y="276" text-anchor="middle" class="t-small t-muted">${fmt(q / 1000, 1)}</text>`);
+      let d = `M${X(0)} ${Y(T1)}`, cq = 0;
+      st.forEach(x => { cq += x.q; d += ` L${X(cq)} ${Y(x.T1)}`; });
+      s += `<path d="${d}" fill="none" stroke="var(--heat)" stroke-width="3.5" stroke-linejoin="round"/>`;
+      s += `<circle cx="${X(0)}" cy="${Y(T1)}" r="5" fill="var(--ink)"/><circle cx="${X(cq)}" cy="${Y(T2)}" r="6" fill="var(--heat)"/>`;
+      svg.innerHTML = s;
+    }
+    [m, A, B].forEach(e => e.addEventListener("input", draw));
+    draw();
+  })();
+</script>
+</body>
+</html>
