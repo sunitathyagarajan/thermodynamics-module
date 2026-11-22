@@ -371,3 +371,14 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 
 .footer { text-align: center; font-size: .85rem; color: var(--ink-3); padding: 30px 16px; border-top: 1px solid var(--line); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---------- citations & reference lists ---------- */
+sup.cite { font-size: .72em; line-height: 0; margin-left: 1px; white-space: nowrap; }
+sup.cite a { text-decoration: none; font-weight: 700; color: var(--accent); }
+sup.cite a:hover { text-decoration: underline; }
+sup.cite::before { content: "["; color: var(--ink-3); }
+sup.cite::after { content: "]"; color: var(--ink-3); }
+ol.refs { padding-left: 1.6em; font-size: .92rem; }
+ol.refs li { margin-bottom: .55em; padding-left: .2em; scroll-margin-top: 80px; }
+ol.refs li:target { background: var(--energy-fill); border-radius: 6px; }
+ol.refs .use { color: var(--ink-3); font-size: .88em; }

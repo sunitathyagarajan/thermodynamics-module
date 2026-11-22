@@ -29,13 +29,13 @@
     .race-bar span:last-child { text-align: right; }
   </style>
 </head>
-<body data-lesson="6" data-root="../">
+<body data-lesson="7" data-root="../">
 <header id="topbar"></header>
 <div class="page">
 <aside class="toc"></aside>
 <main>
 
-  <p class="eyebrow">Lesson 6</p>
+  <p class="eyebrow">Lesson 7</p>
   <h1>Reversible vs irreversible processes</h1>
   <p class="lede">Heat and work are path functions — so <b>how</b> a change is carried out matters. The two extremes are a <b>reversible</b> path (infinitely slow and gentle) and an <b>irreversible</b> one (fast, with a finite push). Comparing them reveals the maximum work a process can deliver.</p>
 
@@ -46,7 +46,7 @@
       <li>Explain reversible and irreversible <b>work</b> using a piston and a P–V diagram.</li>
       <li>Explain reversible and irreversible <b>heat</b> transfer.</li>
       <li>Compare reversible and irreversible work quantitatively — and see why expansion gives maximum work and compression needs minimum work when done reversibly.</li>
-      <li>Decide whether the comparison is meaningful for <b>solids and liquids</b>.</li>
+      <li>Explain when <b>solids and liquids</b> can do reversible work, how it compares with gases, and give real examples.</li>
     </ul>
   </div>
 
@@ -58,7 +58,7 @@
         <li>Carried out through a series of tiny steps, so the system is <b>always at (or infinitely close to) equilibrium</b>.</li>
         <li>The driving force is <b>infinitesimal</b>: <var>P</var><sub>ext</sub> differs from <var>P</var><sub>gas</sub> by only d<var>P</var>, or the heat source differs in temperature by only d<var>T</var>.</li>
         <li>Can be <b>reversed at any moment</b> by an infinitesimal change — and both system and surroundings return exactly to their original states.</li>
-        <li>Takes infinitely long: it's an <b>idealisation</b>, a limit we can approach but never reach.</li>
+        <li>Takes infinitely long: it's an <b>idealisation</b>, a limit we can approach but never reach.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-2">2</a></sup></li>
       </ul>
     </div>
     <div class="card" style="border-top:4px solid var(--heat)">
@@ -67,7 +67,7 @@
         <li>Driven by a <b>finite</b> difference: a big pressure imbalance, a big temperature gap.</li>
         <li>Happens at a <b>finite speed</b>; during the process the system is not in equilibrium (turbulence, temperature gradients).</li>
         <li>Can be undone only by doing something that <b>leaves a permanent change</b> in the surroundings.</li>
-        <li><b>All real processes are irreversible</b>: an egg breaking, a gas rushing into a vacuum, a hot pan cooling.</li>
+        <li><b>All real processes are irreversible</b>: an egg breaking, a gas rushing into a vacuum, a hot pan cooling.<sup class="cite"><a href="#ref-1">1</a></sup></li>
       </ul>
     </div>
   </div>
@@ -128,10 +128,10 @@
   </figure>
 
   <h2 id="work" data-short="Reversible vs irreversible work">Reversible and irreversible work</h2>
-  <p>Remember: <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var>, and on a P–V diagram |<var>w</var>| is the <b>area under the external-pressure path</b>. To get the most work out of an expanding gas, we want <var>P</var><sub>ext</sub> to be as <b>high as possible</b> at every stage — but it can't exceed <var>P</var><sub>gas</sub>, or the gas would be compressed instead. The best we can do is <var>P</var><sub>ext</sub> = <var>P</var><sub>gas</sub> − d<var>P</var> all the way: that's the reversible path.</p>
+  <p>Remember: <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var>, and on a P–V diagram |<var>w</var>| is the <b>area under the external-pressure path</b>. To get the most work out of an expanding gas, we want <var>P</var><sub>ext</sub> to be as <b>high as possible</b> at every stage — but it can't exceed <var>P</var><sub>gas</sub>, or the gas would be compressed instead. The best we can do is <var>P</var><sub>ext</sub> = <var>P</var><sub>gas</sub> − d<var>P</var> all the way: that's the reversible path.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-4">4</a></sup></p>
 
   <div class="eq">Reversible, isothermal, ideal gas: &nbsp; <span class="w">w</span><sub>rev</sub> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>)
-    <span class="label">the area under the smooth isotherm P = nRT/V (derived with calculus: w = −∫P dV)</span></div>
+    <span class="label">the area under the smooth isotherm P = nRT/V (derived with calculus: w = −∫P dV)<sup class="cite"><a href="#ref-3">3</a></sup></span></div>
 
   <div class="widget" id="race">
     <div class="widget-head"><span class="badge">Animated</span><h3>Watch it happen: irreversible vs reversible work, side by side</h3></div>
@@ -253,7 +253,7 @@
   </figure>
 
   <h2 id="heat" data-short="Reversible vs irreversible heat">Reversible and irreversible heat</h2>
-  <p>Heat flows because of a temperature difference. If that difference is <b>finite</b> (a 20 °C block dropped on an 80 °C hot plate), the heat flow is <b>irreversible</b> — you can't make heat flow back from the block to the hot plate by a tiny change. If the difference is only <b>infinitesimal</b> (d<var>T</var>), the flow is <b>reversible</b>: lowering the source temperature by d<var>T</var> would reverse the direction.</p>
+  <p>Heat flows because of a temperature difference. If that difference is <b>finite</b> (a 20 °C block dropped on an 80 °C hot plate), the heat flow is <b>irreversible</b> — you can't make heat flow back from the block to the hot plate by a tiny change. If the difference is only <b>infinitesimal</b> (d<var>T</var>), the flow is <b>reversible</b>: lowering the source temperature by d<var>T</var> would reverse the direction.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-2">2</a></sup></p>
 
   <div class="widget" id="ladderW">
     <div class="widget-head"><span class="badge">Interactive</span><h3>Heating a block: one hot plate vs a ladder of reservoirs</h3></div>
@@ -289,10 +289,10 @@
     <span class="callout-title">Is q<sub>rev</sub> different from q<sub>irr</sub>?</span>
     <p>It depends on the path, because <var>q</var> = Δ<var>U</var> − <var>w</var> and Δ<var>U</var> is fixed by the states:</p>
     <ul style="margin:0;padding-left:1.2em">
-      <li><b>When work changes with the path</b> (a gas expanding), <var>q</var> changes too. In Example 9 (Lesson 5) the isothermal expansion absorbed <b><var>q</var><sub>rev</sub> = 1717 J</b> but only <b><var>q</var><sub>irr</sub> = 1239 J</b> in one step. Since Δ<var>U</var> = 0, more work out means more heat in: <b><var>q</var><sub>rev</sub> &gt; <var>q</var><sub>irr</sub></b> for expansion.</li>
+      <li><b>When work changes with the path</b> (a gas expanding), <var>q</var> changes too. In Example 9 (Lesson 6) the isothermal expansion absorbed <b><var>q</var><sub>rev</sub> = 1717 J</b> but only <b><var>q</var><sub>irr</sub> = 1239 J</b> in one step. Since Δ<var>U</var> = 0, more work out means more heat in: <b><var>q</var><sub>rev</sub> &gt; <var>q</var><sub>irr</sub></b> for expansion.</li>
       <li><b>When there is essentially no work</b> (heating water in the widget above), <var>q</var> ≈ Δ<var>U</var> is the same — 25.1 kJ — whether you use one hot plate or a thousand reservoirs. What changes is how much <b>entropy is created</b>.</li>
     </ul>
-    <p style="margin-bottom:0">Reversible heat is special: in the next unit you'll see that entropy is defined as Δ<var>S</var> = <var>q</var><sub>rev</sub>/<var>T</var>.</p>
+    <p style="margin-bottom:0">Reversible heat is special: in the next unit you'll see that entropy is defined as Δ<var>S</var> = <var>q</var><sub>rev</sub>/<var>T</var>.<sup class="cite"><a href="#ref-2">2</a></sup></p>
   </div>
 
   <figure class="diagram">
@@ -318,9 +318,11 @@
         <text x="160" y="170" text-anchor="middle" class="t-small t-muted">a tiny warming will NOT melt it back</text>
       </g>
     </svg>
+    <figcaption>A phase change at its transition temperature (solid and liquid in equilibrium) is the textbook example of a reversible process; freezing a supercooled liquid is irreversible.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup></figcaption>
   </figure>
 
   <h2 id="compare" data-short="Summary comparison">Side-by-side summary</h2>
+  <p>Sources for this summary: <sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-2">2</a>,<a href="#ref-3">3</a></sup>.</p>
   <div class="table-wrap">
     <table class="cmp-table">
       <tr><th></th><th style="color:var(--work)">Reversible</th><th style="color:var(--heat)">Irreversible</th></tr>
@@ -336,11 +338,136 @@
     </table>
   </div>
 
-  <h2 id="solids-liquids" data-short="Solids & liquids?">Can we compare reversible and irreversible work for solids and liquids?</h2>
-  <p><b>In principle, yes.</b> Any substance can be compressed slowly (reversibly) or suddenly (irreversibly), and the same definitions apply. <b>In practice, the difference is tiny</b>, because solids and liquids are nearly <b>incompressible</b>: even huge pressures squeeze them only slightly, so Δ<var>V</var> — and therefore the work — is very small whichever path you take.</p>
+  <h2 id="phases" data-short="Gases, liquids & solids">Reversible work in gases, liquids and solids</h2>
+  <p><b>Reversibility depends on <i>how</i> a process is carried out, not on <i>what</i> is being changed.</b> A process is reversible when it is carried out quasi-statically (through a continuous series of equilibrium states) with nothing that dissipates energy — no friction, no turbulence, no finite pressure or temperature gap.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup> Nothing in that definition mentions gases, so <b>solids and liquids can do reversible work too</b>. What changes from phase to phase is:</p>
+  <ol>
+    <li><b>How much pressure–volume work is available.</b> Gases change volume a lot; solids and liquids barely change at all.</li>
+    <li><b>Which other kinds of work matter.</b> Solids and liquids can do reversible <i>elastic</i>, <i>surface</i> and <i>electrical</i> work, which can be large even when their <var>PV</var> work is negligible.</li>
+  </ol>
 
-  <h3>A simple way to see it</h3>
-  <p>For a liquid or solid, the volume shrinks almost exactly in proportion to the pressure increase. On a P–V diagram that's a <b>nearly vertical straight line</b>. The area under a straight line is just (average height) × (width):</p>
+  <figure class="diagram">
+    <svg id="shrinkChart" viewBox="0 0 760 300" role="img" aria-label="Log-scale bar chart: how much 1 L of each substance shrinks when compressed from 1 to 100 atm"></svg>
+    <figcaption><b>How much does 1.00 L shrink when the pressure rises from 1 atm to 100 atm (25 °C)?</b> Logarithmic scale — each gridline is 10× larger. The ideal gas loses 99% of its volume; liquids lose about 0.04–1%; metals less than 0.01%. Compressibility data from Kell (water),<sup class="cite"><a href="#ref-6">6</a></sup> Kittel (iron, copper)<sup class="cite"><a href="#ref-7">7</a></sup> and the CRC Handbook (ethanol, mercury).<sup class="cite"><a href="#ref-18">18</a></sup></figcaption>
+  </figure>
+
+  <h3>At a glance</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Gas</th><th>Liquid</th><th>Solid</th></tr>
+      <tr><td><b>How compressible?</b></td><td>Very: an ideal gas halves its volume when <var>P</var> doubles</td><td>Barely: water shrinks ~0.0046% per atm<sup class="cite"><a href="#ref-6">6</a></sup></td><td>Least: iron shrinks ~0.00006% per atm<sup class="cite"><a href="#ref-7">7</a></sup></td></tr>
+      <tr><td><b>Typical reversible <var>PV</var> work</b></td><td>1.72 kJ: doubling the volume of 1 mol at 298 K<sup class="cite"><a href="#ref-3">3</a></sup></td><td>23 J: squeezing 1 L of water to 100 atm</td><td>0.3 J: squeezing 1 L of iron to 100 atm</td></tr>
+      <tr><td><b>Other reversible work</b></td><td>Rarely needed — <var>PV</var> work dominates</td><td>Surface work, <var>w</var> = γΔ<var>A</var><sup class="cite"><a href="#ref-8">8</a>,<a href="#ref-9">9</a></sup>; electrical work in cells<sup class="cite"><a href="#ref-10">10</a></sup></td><td>Elastic stretching or bending<sup class="cite"><a href="#ref-11">11</a>,<a href="#ref-12">12</a></sup>; electrical work in batteries<sup class="cite"><a href="#ref-10">10</a></sup></td></tr>
+      <tr><td><b>Nearly reversible in real life</b></td><td>Sound waves<sup class="cite"><a href="#ref-13">13</a>,<a href="#ref-14">14</a></sup>; a piston moved slowly in a constant-temperature bath<sup class="cite"><a href="#ref-1">1</a></sup></td><td>Boiling at the normal boiling point<sup class="cite"><a href="#ref-5">5</a></sup>; a cell discharged through a tiny current<sup class="cite"><a href="#ref-10">10</a></sup></td><td>A spring or wire stretched within its elastic limit<sup class="cite"><a href="#ref-11">11</a>,<a href="#ref-12">12</a></sup>; slow compression in a diamond anvil cell<sup class="cite"><a href="#ref-15">15</a></sup>; melting at the melting point<sup class="cite"><a href="#ref-5">5</a></sup></td></tr>
+      <tr><td><b>Clearly irreversible</b></td><td>Free expansion into a vacuum; explosions<sup class="cite"><a href="#ref-1">1</a></sup></td><td>Stirring (Joule's paddle wheel), splashing, turbulent flow</td><td>Bending a paper clip (plastic flow)<sup class="cite"><a href="#ref-12">12</a></sup>; shock compression<sup class="cite"><a href="#ref-16">16</a></sup>; friction</td></tr>
+    </table>
+  </div>
+
+  <h3>Gases: large, easy-to-see reversible work</h3>
+  <p>Because a gas's volume responds strongly to pressure, the difference between reversible and irreversible work is large — as the animations above showed (3.44 kJ vs 1.86 kJ for the same expansion). For a reversible isothermal change of an ideal gas, <var>w</var> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>); for a reversible adiabatic change, <var>TV</var><sup>γ−1</sup> stays constant.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-4">4</a></sup></p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Example 1 · Sound: a nearly reversible process in air <span class="tag gas">gas</span></h3>
+    <div class="grid-2" style="align-items:center">
+      <div>
+        <p style="margin-top:0">A sound wave is a train of tiny compressions and expansions of the air. Each squeeze is too fast for heat to flow out (adiabatic), but so small and smooth that almost no energy is dissipated — so it behaves as a <b>reversible adiabatic</b> process.<sup class="cite"><a href="#ref-13">13</a></sup></p>
+        <p>Newton assumed the compressions were <i>isothermal</i> and predicted a speed of sound about 15% too low. Laplace corrected this in 1816 by treating them as adiabatic:<sup class="cite"><a href="#ref-14">14</a></sup></p>
+        <p style="text-align:center;font-family:var(--serif)"><var>v</var> = √(γ<var>RT</var>/<var>M</var>) = √(1.40 × 8.314 × 293 / 0.02897) ≈ <b>343 m/s</b> at 20 °C</p>
+        <p style="margin-bottom:0">versus √(<var>RT</var>/<var>M</var>) ≈ 290 m/s for Newton's isothermal assumption. The measured value matches Laplace's.<sup class="cite"><a href="#ref-13">13</a></sup></p>
+      </div>
+      <svg viewBox="0 0 330 170" role="img" aria-label="Sound wave as compressions and rarefactions of air">
+        <g id="soundDots" fill="var(--sys)"></g>
+        <text x="60" y="160" text-anchor="middle" class="t-small t-sys">compression</text>
+        <text x="140" y="160" text-anchor="middle" class="t-small t-muted">rarefaction</text>
+        <path d="M10 25 Q 35 5, 60 25 T 110 25 T 160 25 T 210 25 T 260 25 T 310 25" fill="none" stroke="var(--ink-3)" stroke-width="2"/>
+        <text x="320" y="20" class="t-small t-muted" text-anchor="end">P</text>
+      </svg>
+    </div>
+  </div>
+
+  <h3>Liquids: tiny <var>PV</var> work — unless a gas forms — but other reversible work</h3>
+  <p>Squeezing a liquid takes very little work whether you do it slowly or suddenly (see the compression tool below). But liquids can still take part in substantial reversible work:</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Example 2 · Boiling at the boiling point <span class="tag liquid">liquid → gas</span></h3>
+    <p style="margin:0">At 100 °C and 1 atm, liquid water and steam are in equilibrium, so vaporization there is a reversible phase change: cooling by d<var>T</var> would condense the steam again.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup> Because it <i>makes a gas</i>, it does real <var>PV</var> work: <var>w</var><sub>rev</sub> = −<var>P</var>Δ<var>V</var> ≈ −<var>nRT</var> = −(1.00 mol)(8.314 J mol⁻¹ K⁻¹)(373 K) = <b>−3.10 kJ per mole</b> (Lesson 6, Example 5).<sup class="cite"><a href="#ref-3">3</a></sup> Melting ice at 0 °C is reversible too, but its work is only +0.17 J/mol because no gas is involved.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Example 3 · Surface work: stretching a liquid film <span class="tag liquid">liquid</span></h3>
+    <div class="grid-2" style="align-items:center">
+      <div>
+        <p style="margin-top:0">Creating new liquid surface takes work, <var>w</var> = γΔ<var>A</var>, where γ is the surface tension.<sup class="cite"><a href="#ref-8">8</a></sup> Pull the sliding wire of a soap-film frame out slowly and the film pulls back with the same force: let go gently and it returns the work. Done slowly, this is <b>reversible work by a liquid</b>.</p>
+        <p style="margin-bottom:0"><b>Numbers:</b> water has γ = 72.0 mJ/m² at 25 °C.<sup class="cite"><a href="#ref-9">9</a></sup> Spraying 1.00 L of water into droplets 1 µm across creates about 6000 m² of new surface, so the <b>minimum (reversible) work</b> is 0.072 J/m² × 6000 m² ≈ <b>430 J</b>. Real spray nozzles use far more, because turbulence and friction make the process highly irreversible.</p>
+      </div>
+      <svg viewBox="0 0 320 190" role="img" aria-label="Soap film on a U-shaped wire frame with a sliding wire">
+        <path d="M40 40 H 230 M40 150 H 230 M40 40 V 150" fill="none" stroke="var(--ink)" stroke-width="4"/>
+        <rect id="filmRect" x="42" y="42" width="140" height="106" fill="#c9e4f7" opacity=".8"/>
+        <line id="slider" x1="182" y1="32" x2="182" y2="158" stroke="var(--ink-2)" stroke-width="6" stroke-linecap="round"/>
+        <path id="forceArrow" d="M192 95 H 232" class="work-arrow"/><polygon id="forceHead" points="240,95 228,88 228,102" class="work-fill"/>
+        <text x="110" y="100" text-anchor="middle" class="t-small" style="font-weight:700;fill:#0c3d66">film (2 surfaces)</text>
+        <text x="250" y="80" class="t-small t-work">F = 2γL</text>
+        <text x="160" y="182" text-anchor="middle" class="t-small t-muted">w = γ × 2L × Δx (slow pull: reversible)</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Example 4 · Electrical work from a cell with no gases <span class="tag rxn">solids + solutions</span></h3>
+    <div class="grid-2" style="align-items:center">
+      <div>
+        <p style="margin-top:0">A Daniell cell, Zn(s) | Zn²⁺(aq) || Cu²⁺(aq) | Cu(s), involves only a solid metal and aqueous solutions, so its <var>PV</var> work is essentially zero. Yet if it is discharged <b>reversibly</b> — against an opposing voltage only infinitesimally smaller than its own, so the current is tiny — it delivers the <b>maximum electrical work</b>:<sup class="cite"><a href="#ref-10">10</a></sup></p>
+        <p style="text-align:center;font-family:var(--serif)"><var>w</var><sub>max</sub> = −<var>nFE</var>° = −(2)(96 485 C/mol)(1.10 V) = <b>−212 kJ per mol Zn</b></p>
+        <p style="margin-bottom:0">Short-circuit the same cell and <var>w</var> = 0: the energy comes out entirely as heat (like the battery in Lesson 4). Same reaction, same Δ<var>U</var>, very different work — and condensed phases doing a <i>large</i> amount of reversible work. (This maximum work is Δ<var>G</var>, which you'll meet with the second law.)</p>
+      </div>
+      <svg viewBox="0 0 320 200" role="img" aria-label="Daniell cell with external circuit">
+        <path d="M30 80 V 175 H 130 V 80" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="32" y="110" width="96" height="63" fill="#cfd8e3" opacity=".8"/>
+        <path d="M190 80 V 175 H 290 V 80" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="192" y="110" width="96" height="63" fill="#8cc4f0" opacity=".8"/>
+        <rect x="70" y="60" width="16" height="100" fill="var(--ink-3)"/><text x="78" y="190" text-anchor="middle" class="t-small">Zn(s)</text>
+        <rect x="234" y="60" width="16" height="100" fill="#c97a4a"/><text x="242" y="190" text-anchor="middle" class="t-small">Cu(s)</text>
+        <path d="M110 120 V 95 H 210 V 120" fill="none" stroke="var(--surr)" stroke-width="10" stroke-linecap="round" opacity=".7"/>
+        <text x="160" y="88" text-anchor="middle" class="t-small t-muted">salt bridge</text>
+        <path d="M78 60 V 25 H 140 M180 25 H 242 V 60" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+        <circle cx="160" cy="25" r="18" class="surface" stroke="var(--work)" stroke-width="2.5"/>
+        <text x="160" y="30" text-anchor="middle" class="t-small t-work" style="font-weight:700">load</text>
+        <text x="160" y="58" text-anchor="middle" class="t-small t-work">E° = 1.10 V</text>
+      </svg>
+    </div>
+  </div>
+
+  <h3>Solids: elastic work is reversible, plastic work is not</h3>
+  <p>Compressing a solid takes even less <var>PV</var> work than compressing a liquid. Diamond anvil cells can still squeeze solids slowly to over a million atmospheres, where their volumes shrink noticeably — a good approximation to reversible compression.<sup class="cite"><a href="#ref-15">15</a></sup> The irreversible extreme is <b>shock compression</b> by explosives or projectiles, where a sudden pressure jump heats the solid sharply.<sup class="cite"><a href="#ref-16">16</a></sup></p>
+  <p>The most familiar reversible work by a solid, though, is <b>elastic</b>. Stretch a steel wire or spring within its elastic limit and it springs back along the same line, returning the work you put in. Stretch it past its <b>yield point</b> and it deforms <i>plastically</i>: it stays longer, and part of the work turns into heat. That's why a paper clip bent back and forth gets warm.<sup class="cite"><a href="#ref-11">11</a>,<a href="#ref-12">12</a></sup> A rubber band also warms when stretched quickly and cools when it contracts — close to reversible, though real rubber loses a little energy on each cycle (hysteresis).<sup class="cite"><a href="#ref-17">17</a></sup></p>
+
+  <div class="widget" id="wire">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Example 5 · Stretch a steel wire: elastic (reversible) vs plastic (irreversible)</h3></div>
+    <div class="widget-body">
+      <p>A steel wire 1.00 m long with a 1.00 mm² cross-section (Young's modulus 200 GPa, yield strength about 250 MPa)<sup class="cite"><a href="#ref-11">11</a>,<a href="#ref-12">12</a></sup> is stretched and then slowly released. Choose how far to stretch it and press <b>Stretch &amp; release</b>. The stretch in the picture is exaggerated 70× so you can see it.</p>
+      <div class="control"><label for="wireS">Maximum stretch <output id="wireSOut">1.0 mm</output></label><input type="range" id="wireS" min="0.2" max="6" step="0.1" value="1"></div>
+      <div class="btn-row"><button class="btn" id="wireGo">▶ Stretch &amp; release</button></div>
+      <svg id="wirePic" viewBox="0 0 700 110" role="img" aria-label="Wire being stretched" style="margin-top:10px"></svg>
+      <div class="widget-row" style="margin-top:6px">
+        <svg id="wireSS" viewBox="0 0 420 290" role="img" aria-label="Stress-strain curve for loading and unloading"></svg>
+        <div>
+          <div class="readout" style="grid-template-columns:repeat(2,1fr);margin-top:0">
+            <div><span class="k">Work put in</span><span class="v" id="wIn">—</span></div>
+            <div><span class="k">Work returned</span><span class="v w" id="wOut">—</span></div>
+            <div><span class="k">Lost as heat</span><span class="v q" id="wLost">—</span></div>
+            <div><span class="k">Permanent stretch</span><span class="v" id="wPerm">—</span></div>
+          </div>
+          <p id="wireMsg" style="font-size:.93rem"></p>
+        </div>
+      </div>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">How is this calculated?</summary>
+        <p style="font-size:.92rem">Work per unit volume is the area under the stress–strain curve.<sup class="cite"><a href="#ref-11">11</a></sup> Elastic region: stress = <var>E</var> × strain, so work = ½<var>E</var>(strain)². Beyond the yield strain (0.125%) the wire is modelled as yielding at 250 MPa with slight hardening. On release it unloads along a line with the elastic slope, returning ½(stress)²/<var>E</var> per unit volume; the rest of the area is dissipated.<sup class="cite"><a href="#ref-12">12</a></sup> Multiply by the wire's volume (1.00 × 10⁻⁶ m³) to get joules.</p>
+      </details>
+    </div>
+  </div>
+
+  <h3>Pressure–volume work for liquids and solids</h3>
+  <p>For a liquid or solid, the volume shrinks almost exactly in proportion to the pressure increase.<sup class="cite"><a href="#ref-7">7</a>,<a href="#ref-11">11</a></sup> On a P–V diagram that's a <b>nearly vertical straight line</b>. The area under a straight line is just (average height) × (width):</p>
   <div class="grid-2">
     <div class="card">
       <h3 style="margin-top:0;color:var(--work)">Reversible compression</h3>
@@ -354,12 +481,12 @@
       <p style="margin-bottom:0">When <var>P</var><sub>2</sub> ≫ <var>P</var><sub>1</sub>, that's about <b>twice</b> the reversible work — but twice a tiny number is still tiny.</p>
     </div>
   </div>
-  <p style="font-size:.93rem">Here Δ<var>V</var> = −κ<var>V</var>Δ<var>P</var>, where κ (the <i>compressibility</i>) is a property of the material: about 4.6 × 10⁻⁵ atm⁻¹ for water and 6 × 10⁻⁷ atm⁻¹ for iron. An ideal gas, by contrast, halves its volume when the pressure doubles.</p>
+  <p style="font-size:.93rem">Here Δ<var>V</var> = −κ<var>V</var>Δ<var>P</var>, where κ (the <i>compressibility</i>) is a property of the material: about 4.6 × 10⁻⁵ atm⁻¹ for water<sup class="cite"><a href="#ref-6">6</a></sup> and 6 × 10⁻⁷ atm⁻¹ for iron.<sup class="cite"><a href="#ref-7">7</a></sup> An ideal gas, by contrast, halves its volume when the pressure doubles.</p>
 
   <div class="widget" id="slw">
     <div class="widget-head"><span class="badge">Interactive</span><h3>Compress 1.00 L of different substances</h3></div>
     <div class="widget-body">
-      <p>Each sample starts as <b>1.00 L at 1 atm and 25 °C</b> and is compressed isothermally to the final pressure you choose — either reversibly or in one sudden step.</p>
+      <p>Each sample starts as <b>1.00 L at 1 atm and 25 °C</b> and is compressed isothermally to the final pressure you choose — either reversibly or in one sudden step. Compressibilities from Kell,<sup class="cite"><a href="#ref-6">6</a></sup> Kittel<sup class="cite"><a href="#ref-7">7</a></sup> and the CRC Handbook.<sup class="cite"><a href="#ref-18">18</a></sup></p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
         <div class="seg" role="group" aria-label="Substance" id="subSeg">
           <button class="on" data-sub="water">Water (l)</button>
@@ -390,21 +517,44 @@
 
   <div class="table-wrap">
     <table>
-      <caption style="text-align:left;font-weight:700;padding:6px 0">Compressing 1.00 L from 1 atm to 100 atm at 25 °C</caption>
+      <caption style="text-align:left;font-weight:700;padding:6px 0">Compressing 1.00 L from 1 atm to 100 atm at 25 °C (compressibility data:<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup>)</caption>
       <tr><th>Substance</th><th class="num">ΔV</th><th class="num">w<sub>rev</sub></th><th class="num">w<sub>irr</sub> (sudden)</th><th class="num">difference</th></tr>
       <tr><td>Ideal gas</td><td class="num">−0.990 L</td><td class="num">+467 J</td><td class="num">+10,031 J</td><td class="num"><b>9,565 J</b></td></tr>
       <tr><td>Water (l)</td><td class="num">−0.0045 L</td><td class="num">+23 J</td><td class="num">+46 J</td><td class="num"><b>23 J</b></td></tr>
-      <tr><td>Iron (s)</td><td class="num">−0.00006 L</td><td class="num">+0.31 J</td><td class="num">+0.61 J</td><td class="num"><b>0.3 J</b></td></tr>
+      <tr><td>Iron (s)</td><td class="num">−0.00006 L</td><td class="num">+0.30 J</td><td class="num">+0.60 J</td><td class="num"><b>0.3 J</b></td></tr>
     </table>
   </div>
 
   <div class="callout key">
-    <span class="callout-title">Answer: solids and liquids</span>
+    <span class="callout-title">Summary: reversible work in different phases</span>
     <ul style="margin:0;padding-left:1.2em">
-      <li><b>Work:</b> Yes, we can compare reversible and irreversible <var>PV</var> work for solids and liquids, and the irreversible work is larger for compression (by up to ~2×). But both values are so small — tens of joules or less, versus thousands for a gas — that the difference is usually <b>negligible</b>. In practice we set <var>w</var> ≈ 0 for condensed phases.</li>
-      <li><b>Heat:</b> Heating a solid or liquid reversibly or irreversibly transfers the <b>same <var>q</var></b> (= <var>mc</var>Δ<var>T</var> ≈ Δ<var>U</var>), because there's essentially no work to differ. The irreversibility shows up only as entropy created.</li>
-      <li><b>Where it does matter:</b> phase changes that make or consume a gas (boiling, sublimation), reactions that change Δ<var>n</var><sub>gas</sub>, and processes at enormous pressures (geology, materials science).</li>
+      <li><b>Possible for every phase.</b> Reversibility depends on how the process is carried out (quasi-static, no dissipation), not on whether the substance is a gas, liquid or solid.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></li>
+      <li><b><var>PV</var> work:</b> large for gases, so reversible and irreversible values differ a lot (thousands of joules). Tiny for solids and liquids (tens of joules or less), so the difference is usually negligible and we set <var>w</var> ≈ 0 — <i>unless a gas is made or consumed</i>, as in boiling (−3.10 kJ/mol).<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup></li>
+      <li><b>Other work:</b> solids and liquids can do substantial reversible work of other kinds — electrical (up to 212 kJ per mole of zinc in a Daniell cell),<sup class="cite"><a href="#ref-10">10</a></sup> elastic (a stretched wire or spring)<sup class="cite"><a href="#ref-11">11</a></sup> and surface work (a liquid film).<sup class="cite"><a href="#ref-8">8</a></sup></li>
+      <li><b>Heat:</b> heating a solid or liquid reversibly or irreversibly transfers the same <var>q</var> (= <var>mc</var>Δ<var>T</var> ≈ Δ<var>U</var>); the irreversibility shows up as entropy created.<sup class="cite"><a href="#ref-2">2</a></sup></li>
     </ul>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">Which of these is a solid doing (nearly) reversible work?</p>
+    <div class="quiz-opts">
+      <button>A steel spring stretched slowly within its elastic limit, then released slowly</button>
+      <button data-why="Bending past the yield point causes permanent (plastic) deformation; the work is partly turned into heat and isn't returned.">A paper clip bent back and forth until it breaks</button>
+      <button data-why="Friction always dissipates energy as heat: irreversible.">A block of wood sliding across a rough floor</button>
+      <button data-why="A shock wave is a sudden, finite pressure jump: highly irreversible.">A metal plate hit by a fast projectile</button>
+    </div>
+    <div class="quiz-fb" data-right="Within the elastic limit the spring retraces the same path when released, giving back the work put in."></div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <p class="quiz-q">A Daniell cell contains no gases. Which statement is true?</p>
+    <div class="quiz-opts">
+      <button data-why="Its PV work is negligible, but it can do a lot of electrical work.">It can do essentially no work because its volume doesn't change.</button>
+      <button data-why="Work is a path function: discharging it reversibly gives more work than short-circuiting it.">It does the same work however it is discharged.</button>
+      <button data-why="A short circuit gives w = 0 — all the energy appears as heat. The maximum work comes from reversible discharge.">It does the most work when short-circuited.</button>
+      <button>Discharged reversibly (tiny current), it delivers its maximum electrical work, about 212 kJ per mol Zn.</button>
+    </div>
+    <div class="quiz-fb" data-right="w_max = −nFE° = −(2)(96 485 C/mol)(1.10 V) ≈ −212 kJ/mol. Condensed systems can do large reversible work — just not PV work."></div>
   </div>
 
   <div class="quiz" data-answer="1">
@@ -459,6 +609,29 @@
     </svg>
   </figure>
   <p>You now have the tools for every first-law problem: choose a system, track energy across its boundary as <span class="q">q</span> and <span class="w">w</span> with the right signs, and remember that only Δ<span class="u">U</span> is independent of path. Next up: the <b>second law</b> — why some processes happen on their own and others don't.</p>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources. Section numbers are given for the free OpenStax textbooks, which you can read online.</p>
+  <ol class="refs">
+    <li id="ref-1">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Chapter 4, The Second Law of Thermodynamics (Section 4.1, Reversible and Irreversible Processes; Section 4.5, The Carnot Cycle). <a href="https://openstax.org/books/university-physics-volume-2/pages/4-1-reversible-and-irreversible-processes">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.2, Entropy. <a href="https://openstax.org/books/chemistry-2e/pages/16-2-entropy">openstax.org</a></li>
+    <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 2, The First Law (expansion work; reversible isothermal and adiabatic changes).</li>
+    <li id="ref-4">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 3.2, Work, Heat, and Internal Energy; Section 3.6, Adiabatic Processes for an Ideal Gas. <a href="https://openstax.org/books/university-physics-volume-2/pages/3-2-work-heat-and-internal-energy">openstax.org</a></li>
+    <li id="ref-5">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 10.3, Phase Transitions. <a href="https://openstax.org/books/chemistry-2e/pages/10-3-phase-transitions">openstax.org</a></li>
+    <li id="ref-6">Kell, G. S. Density, Thermal Expansivity, and Compressibility of Liquid Water from 0° to 150 °C: Correlations and Tables for Atmospheric Pressure and Saturation Reviewed and Expressed on 1968 Temperature Scale. <i>J. Chem. Eng. Data</i> <b>1975</b>, <i>20</i> (1), 97–105. <a href="https://doi.org/10.1021/je60064a005">doi:10.1021/je60064a005</a> <span class="use">— compressibility of water</span></li>
+    <li id="ref-7">Kittel, C. <i>Introduction to Solid State Physics</i>, 8th ed.; Wiley: Hoboken, NJ, 2005; Chapter 3, Crystal Binding and Elastic Constants. <span class="use">— bulk moduli (compressibilities) of iron and copper</span></li>
+    <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 10.2, Properties of Liquids (surface tension). <a href="https://openstax.org/books/chemistry-2e/pages/10-2-properties-of-liquids">openstax.org</a></li>
+    <li id="ref-9">Vargaftik, N. B.; Volkov, B. N.; Voljak, L. D. International Tables of the Surface Tension of Water. <i>J. Phys. Chem. Ref. Data</i> <b>1983</b>, <i>12</i> (3), 817–820. <a href="https://doi.org/10.1063/1.555688">doi:10.1063/1.555688</a> <span class="use">— γ of water at 25 °C</span></li>
+    <li id="ref-10">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 17.4, Potential, Free Energy, and Equilibrium. <a href="https://openstax.org/books/chemistry-2e/pages/17-4-potential-free-energy-and-equilibrium">openstax.org</a> <span class="use">— maximum electrical work, w<sub>max</sub> = −nFE</span></li>
+    <li id="ref-11">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 1</i>; OpenStax: Houston, TX, 2016; Section 12.3, Stress, Strain, and Elastic Modulus; Section 12.4, Elasticity and Plasticity. <a href="https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus">openstax.org</a></li>
+    <li id="ref-12">Callister, W. D.; Rethwisch, D. G. <i>Materials Science and Engineering: An Introduction</i>, 10th ed.; Wiley: Hoboken, NJ, 2018; Chapter 6, Mechanical Properties of Metals. <span class="use">— elastic vs plastic deformation, yield strength of steel</span></li>
+    <li id="ref-13">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 1</i>; OpenStax: Houston, TX, 2016; Section 17.3, Speed of Sound. <a href="https://openstax.org/books/university-physics-volume-1/pages/17-3-speed-of-sound">openstax.org</a></li>
+    <li id="ref-14">Finn, B. S. Laplace and the Speed of Sound. <i>Isis</i> <b>1964</b>, <i>55</i> (1), 7–19. <span class="use">— history of Newton's isothermal error and Laplace's adiabatic correction</span></li>
+    <li id="ref-15">Jayaraman, A. Diamond Anvil Cell and High-Pressure Physical Investigations. <i>Rev. Mod. Phys.</i> <b>1983</b>, <i>55</i> (1), 65–108. <a href="https://doi.org/10.1103/RevModPhys.55.65">doi:10.1103/RevModPhys.55.65</a></li>
+    <li id="ref-16">Zel'dovich, Ya. B.; Raizer, Yu. P. <i>Physics of Shock Waves and High-Temperature Hydrodynamic Phenomena</i>; Dover: Mineola, NY, 2002. <span class="use">— shock compression of solids</span></li>
+    <li id="ref-17">Treloar, L. R. G. <i>The Physics of Rubber Elasticity</i>, 3rd ed.; Clarendon Press: Oxford, 1975. <span class="use">— thermoelastic behaviour of rubber</span></li>
+    <li id="ref-18">Rumble, J. R., Ed. <i>CRC Handbook of Chemistry and Physics</i>, 100th ed.; CRC Press: Boca Raton, FL, 2019. <span class="use">— compressibilities of ethanol and mercury</span></li>
+  </ol>
 
   <nav class="lesson-nav"></nav>
 </main>
@@ -674,7 +847,7 @@
 
   // ================= solids & liquids compression =================
   (function () {
-    const kap = { water: 4.56e-5, ethanol: 1.11e-4, mercury: 4.0e-6, iron: 6.1e-7, copper: 7.2e-7 };
+    const kap = { water: 4.56e-5, ethanol: 1.11e-4, mercury: 4.0e-6, iron: 6.0e-7, copper: 7.4e-7 };
     const names = { water: "water", ethanol: "ethanol", mercury: "mercury", iron: "iron", copper: "copper" };
     let sub = "water";
     const sl = document.getElementById("slP"), svg = document.getElementById("slPV");
@@ -734,6 +907,143 @@
       update();
     }));
     update();
+  })();
+</script>
+<script>
+  // ================= shrink chart (log scale) =================
+  (function () {
+    const svg = document.getElementById("shrinkChart");
+    if (!svg) return;
+    const data = [["Ideal gas", 990, "var(--sys)"], ["Ethanol (l)", 11, "#3f8fd6"], ["Water (l)", 4.5, "#3f8fd6"], ["Mercury (l)", 0.40, "#3f8fd6"], ["Copper (s)", 0.073, "var(--surr)"], ["Iron (s)", 0.059, "var(--surr)"]];
+    const x0 = 150, x1 = 700, X = (v) => x0 + (Math.log10(v) + 2) / 5 * (x1 - x0);
+    let s = "";
+    [0.01, 0.1, 1, 10, 100, 1000].forEach(v => {
+      s += `<line x1="${X(v)}" x2="${X(v)}" y1="14" y2="262" stroke="var(--line)"/>`;
+      s += `<text x="${X(v)}" y="280" text-anchor="middle" class="t-small t-muted">${v >= 1 ? v : v} mL</text>`;
+    });
+    data.forEach(([lab, v, col], i) => {
+      const y = 22 + i * 40;
+      s += `<text x="${x0 - 10}" y="${y + 17}" text-anchor="end" class="t-small" style="font-weight:600">${lab}</text>`;
+      s += `<rect x="${x0}" y="${y}" width="${X(v) - x0}" height="24" rx="4" fill="${col}" opacity=".85"/>`;
+      s += `<text x="${Math.min(X(v) + 6, 640)}" y="${y + 17}" class="t-small" style="font-weight:700">${v} mL</text>`;
+    });
+    svg.innerHTML = s;
+  })();
+
+  // ================= sound wave dots =================
+  (function () {
+    const g = document.getElementById("soundDots");
+    if (!g) return;
+    const dots = [];
+    for (let row = 0; row < 5; row++) for (let i = 0; i < 26; i++) {
+      const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("r", 3); g.appendChild(c); dots.push({ c, x0: 12 + i * 12, y: 50 + row * 20 });
+    }
+    const loop = (t) => {
+      const ph = t / 500;
+      dots.forEach(d => {
+        const dx = 5 * Math.sin(d.x0 / 100 * 2 * Math.PI - ph);
+        d.c.setAttribute("cx", (d.x0 - dx).toFixed(1)); d.c.setAttribute("cy", d.y);
+      });
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  })();
+
+  // ================= soap film =================
+  (function () {
+    const r = document.getElementById("filmRect"), sl = document.getElementById("slider");
+    if (!r) return;
+    const fa = document.getElementById("forceArrow"), fh = document.getElementById("forceHead");
+    const loop = (t) => {
+      const x = 160 + 30 * Math.sin(t / 1400);
+      r.setAttribute("width", x - 42); sl.setAttribute("x1", x); sl.setAttribute("x2", x);
+      fa.setAttribute("d", `M${x + 10} 95 H ${x + 48}`); fh.setAttribute("points", `${x + 56},95 ${x + 44},88 ${x + 44},102`);
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  })();
+
+  // ================= stretch a steel wire =================
+  (function () {
+    const E = 200e9, SY = 250e6, EY = SY / E, H = 2e9, VOL = 1e-6, L = 1.0; // SI
+    const sig = (e) => e <= EY ? E * e : SY + H * (e - EY);
+    const workIn = (e) => e <= EY ? 0.5 * E * e * e : 0.5 * SY * EY + SY * (e - EY) + 0.5 * H * (e - EY) ** 2; // J/m^3
+    const ss = document.getElementById("wireSS"), pic = document.getElementById("wirePic");
+    const S = document.getElementById("wireS");
+    const X = (e) => 60 + e / 0.0062 * 340, Y = (p) => 250 - p / 300e6 * 220;
+    let anim = null;
+    function axes() {
+      let s = `<line x1="60" y1="250" x2="410" y2="250" stroke="var(--ink)" stroke-width="2"/><line x1="60" y1="250" x2="60" y2="20" stroke="var(--ink)" stroke-width="2"/>
+        <text x="235" y="282" text-anchor="middle" class="t-small">strain (stretch ÷ length), %</text>
+        <text x="16" y="135" text-anchor="middle" class="t-small" transform="rotate(-90 16 135)">stress (MPa)</text>`;
+      [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6].forEach(p => s += `<text x="${X(p / 100)}" y="266" text-anchor="middle" class="t-small t-muted">${p}</text>`);
+      [0, 100, 200, 300].forEach(m => s += `<text x="54" y="${Y(m * 1e6) + 4}" text-anchor="end" class="t-small t-muted">${m}</text>` + (m ? `<line x1="60" x2="410" y1="${Y(m * 1e6)}" y2="${Y(m * 1e6)}" stroke="var(--line)"/>` : ""));
+      s += `<line x1="${X(EY)}" x2="${X(EY)}" y1="250" y2="${Y(SY)}" stroke="var(--ink-3)" stroke-dasharray="3 4"/>`;
+      s += `<text x="${X(EY) + 4}" y="${Y(SY) - 8}" class="t-small t-muted">yield point</text>`;
+      s += `<text x="${X(0.0006)}" y="${Y(60e6)}" class="t-small t-muted" transform="rotate(-62 ${X(0.0006)} ${Y(60e6)})">elastic</text>`;
+      s += `<text x="${X(0.0035)}" y="${Y(SY) - 8}" class="t-small t-muted">plastic</text>`;
+      return s;
+    }
+    function draw(em, phase) { // phase 0..2: 0-1 loading, 1-2 unloading
+      const sm = sig(em), ep = em - sm / E;
+      const fl = Math.min(1, phase), fu = Math.max(0, Math.min(1, phase - 1));
+      const eNow = phase <= 1 ? em * fl : em - (em - ep) * fu;
+      const sNow = phase <= 1 ? sig(eNow) : sm * (1 - fu);
+      let s = axes();
+      // loading curve so far
+      let d = "M60 250", area = "M60 250";
+      const N = 60;
+      for (let i = 1; i <= N; i++) { const e = em * fl * i / N; d += ` L${X(e)} ${Y(sig(e))}`; area += ` L${X(e)} ${Y(sig(e))}`; }
+      if (phase >= 2) {
+        // dissipated area = between loading and unloading; returned = triangle under unloading
+        s += `<path d="${area} L${X(ep)} 250 Z" fill="var(--heat)" opacity=".25"/>`;
+        s += `<path d="M${X(ep)} 250 L${X(em)} ${Y(sm)} L${X(em)} 250 Z" fill="var(--work)" opacity=".35"/>`;
+      } else if (phase > 0) {
+        s += `<path d="${area} L${X(em * fl)} 250 Z" fill="var(--ink-3)" opacity=".15"/>`;
+      }
+      s += `<path d="${d}" fill="none" stroke="var(--ink)" stroke-width="3"/>`;
+      if (phase > 1) s += `<path d="M${X(em)} ${Y(sm)} L${X(eNow)} ${Y(sNow)}" fill="none" stroke="var(--work)" stroke-width="3" stroke-dasharray="6 4"/>`;
+      if (phase > 0) s += `<circle cx="${X(eNow)}" cy="${Y(sNow)}" r="6" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      if (phase >= 2 && ep > 1e-6) s += `<text x="${X(ep)}" y="242" text-anchor="middle" class="t-small t-heat">permanent</text>`;
+      ss.innerHTML = s;
+      // wire picture (stretch exaggerated 70×)
+      const L0 = 380, k = 70 * L0;
+      const len = L0 + eNow * k, perm0 = L0 + ep * k;
+      let p = `<rect x="20" y="20" width="14" height="70" fill="var(--ink-3)"/>
+        <line x1="34" y1="55" x2="${34 + L0}" y2="55" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/>
+        <line x1="${34 + L0}" y1="30" x2="${34 + L0}" y2="80" stroke="var(--ink-3)" stroke-dasharray="3 3"/>
+        <text x="${34 + L0}" y="98" text-anchor="middle" class="t-small t-muted">original end</text>
+        <line x1="34" y1="55" x2="${34 + len}" y2="55" stroke="var(--ink-2)" stroke-width="5" stroke-linecap="round"/>
+        <rect x="${34 + len}" y="42" width="18" height="26" rx="4" fill="var(--ink)"/>`;
+      if (sNow > 1e3) p += `<path d="M${56 + len} 55 H ${100 + len}" class="work-arrow"/><polygon points="${108 + len},55 ${96 + len},48 ${96 + len},62" class="work-fill"/><text x="${80 + len}" y="40" text-anchor="middle" class="t-small t-work">F = ${(sNow * 1e-6).toFixed(0)} N</text>`;
+      if (phase >= 2 && ep > 1e-6) p += `<text x="${34 + perm0}" y="22" text-anchor="middle" class="t-small t-heat">${(ep * 1000).toFixed(1)} mm longer for good</text>`;
+      pic.innerHTML = p;
+      // readouts
+      if (phase >= 2) {
+        const wi = workIn(em) * VOL, wo = 0.5 * sm * sm / E * VOL, wl = wi - wo;
+        const f = (x) => x < 0.01 ? x.toFixed(4) + " J" : x.toFixed(3) + " J";
+        document.getElementById("wIn").textContent = f(wi);
+        document.getElementById("wOut").textContent = f(wo);
+        document.getElementById("wLost").textContent = wl < 1e-6 ? "0 J" : f(wl);
+        document.getElementById("wPerm").textContent = ep < 1e-7 ? "0 mm" : (ep * 1000).toFixed(1) + " mm";
+        document.getElementById("wireMsg").innerHTML = em <= EY
+          ? `<b>Elastic → reversible.</b> The wire unloaded along exactly the same line it was loaded on, so every joule put in (${f(wi)}) came back. Nothing was lost as heat and the wire returned to its original length.`
+          : `<b>Plastic → irreversible.</b> Past the yield point the wire flowed. On release it unloaded along a steeper line, returning only ${f(wo)} of the ${f(wi)} put in; the other ${f(wl)} (orange area) became heat, and the wire is now ${(ep * 1000).toFixed(1)} mm longer.`;
+      } else {
+        ["wIn", "wOut", "wLost", "wPerm"].forEach(id => document.getElementById(id).textContent = "—");
+        document.getElementById("wireMsg").innerHTML = phase === 0 ? `Elastic limit for this wire: a stretch of ${(EY * L * 1000).toFixed(2)} mm. Try one stretch below it and one above it.` : phase <= 1 ? "Stretching…" : "Releasing slowly…";
+      }
+    }
+    const reset = () => { cancelAnimationFrame(anim); document.getElementById("wireSOut").textContent = (+S.value).toFixed(1) + " mm"; draw(+S.value / 1000 / L, 0); };
+    S.addEventListener("input", reset);
+    document.getElementById("wireGo").addEventListener("click", () => {
+      cancelAnimationFrame(anim);
+      const em = +S.value / 1000 / L, t0 = performance.now(), dur = 4000;
+      const step = (now) => { const ph = Math.min(2, (now - t0) / dur * 2); draw(em, ph); if (ph < 2) anim = requestAnimationFrame(step); };
+      anim = requestAnimationFrame(step);
+    });
+    reset();
   })();
 </script>
 </body>

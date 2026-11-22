@@ -12,8 +12,9 @@ const LESSONS = [
   { n: 2, file: "02-system-surroundings.html",    title: "System & surroundings" },
   { n: 3, file: "03-energy-heat-work.html",       title: "Internal energy, heat & work" },
   { n: 4, file: "04-first-law.html",              title: "The first law" },
-  { n: 5, file: "05-calculations.html",           title: "Worked calculations" },
-  { n: 6, file: "06-reversible-irreversible.html", title: "Reversible vs irreversible" },
+  { n: 5, file: "05-state-path-functions.html",   title: "State vs path functions" },
+  { n: 6, file: "06-calculations.html",           title: "Worked calculations" },
+  { n: 7, file: "07-reversible-irreversible.html", title: "Reversible vs irreversible" },
 ];
 
 const store = {

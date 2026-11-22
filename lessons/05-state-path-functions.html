@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>State and Path Functions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #pathSvg { touch-action: none; user-select: none; }
+    #pathSvg .handle { cursor: grab; }
+    #pathSvg .handle:active { cursor: grabbing; }
+    .log td, .log th { font-size: .9rem; padding: 6px 10px; }
+    .log tr.latest { background: var(--sys-fill); }
+    #paths .readout { grid-template-columns: repeat(2, 1fr); }
+    .sort-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .sort-row .seg button { padding: 6px 12px; font-size: .88rem; }
+    .sort-row .why { grid-column: 1 / -1; font-size: .88rem; color: var(--ink-2); display: none; }
+    .sort-row.done .why { display: block; }
+    @media (max-width: 560px) { .sort-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-lesson="5" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 5</p>
+  <h1>State functions vs path functions</h1>
+  <p class="lede">Some quantities care only about <b>where you are</b>. Others care about <b>how you got there</b>. Knowing which is which explains why we write Δ<span class="u">U</span> but never "Δ<span class="q">q</span>" — and why the first law is so useful.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Define state functions and path functions, and give examples of each.</li>
+      <li>Use an interactive P–V diagram to see that Δ<var>U</var> stays fixed while <var>q</var> and <var>w</var> change with the path.</li>
+      <li>Explain <b>why</b> internal energy is a state function.</li>
+      <li>Explain <b>why</b> heat and work are path functions.</li>
+      <li>See what happens to each kind of quantity around a closed cycle.</li>
+    </ul>
+  </div>
+
+  <h2 id="definitions">The two kinds of quantities</h2>
+  <div class="grid-2">
+    <div class="card" style="border-top:4px solid var(--energy)">
+      <h3 style="margin-top:0">State function</h3>
+      <p>A property whose value depends <b>only on the present state</b> of the system (its <var>P</var>, <var>V</var>, <var>T</var>, amount and composition) — not on its history.</p>
+      <ul style="padding-left:1.2em">
+        <li>The change depends only on the start and the end: Δ<var>X</var> = <var>X</var><sub>final</sub> − <var>X</var><sub>initial</sub>.</li>
+        <li>Around any closed loop (back to the start), Δ<var>X</var> = 0.</li>
+      </ul>
+      <p style="margin-bottom:0"><b>Examples:</b> <var>P</var>, <var>V</var>, <var>T</var>, <var>n</var>, density, <span class="u">internal energy U</span>, enthalpy <var>H</var>, entropy <var>S</var>.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--heat)">
+      <h3 style="margin-top:0">Path function</h3>
+      <p>A quantity whose value depends on <b>the route taken</b> between two states. It describes a <b>process</b>, not a state.</p>
+      <ul style="padding-left:1.2em">
+        <li>It has no value "at" a state, so there is nothing to subtract: we write <var>q</var> and <var>w</var>, <b>never</b> Δ<var>q</var> or Δ<var>w</var>.</li>
+        <li>Around a closed loop it is usually <b>not</b> zero.</li>
+      </ul>
+      <p style="margin-bottom:0"><b>Examples:</b> <span class="q">heat q</span>, <span class="w">work w</span> (and, on a trip, distance travelled or fuel used).</p>
+    </div>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="Two routes from home to campus: same displacement, different distance">
+      <rect x="10" y="10" width="740" height="250" rx="14" class="surface-2"/>
+      <!-- grid streets -->
+      <g stroke="var(--line)" stroke-width="2">
+        <path d="M60 40 V 240 M160 40 V 240 M260 40 V 240 M360 40 V 240 M460 40 V 240"/>
+        <path d="M40 60 H 480 M40 120 H 480 M40 180 H 480 M40 230 H 480"/>
+      </g>
+      <!-- home & campus -->
+      <rect x="44" y="214" width="32" height="28" rx="4" class="sys-box"/><polygon points="40,216 60,198 80,216" fill="var(--sys)"/>
+      <text x="60" y="258" text-anchor="middle" class="t-small" style="font-weight:700">Home</text>
+      <rect x="440" y="38" width="44" height="34" rx="4" fill="var(--surr-fill)" stroke="var(--surr)" stroke-width="2"/>
+      <text x="462" y="30" text-anchor="middle" class="t-small" style="font-weight:700">Campus</text>
+      <!-- straight displacement -->
+      <path d="M60 228 L 462 56" stroke="var(--energy)" stroke-width="4" stroke-dasharray="2 0"/>
+      <polygon points="462,56 446,58 452,70" fill="var(--energy)"/>
+      <text x="230" y="130" class="t-mid t-energy" transform="rotate(-23 230 130)">displacement: 4.4 km NE</text>
+      <!-- route A -->
+      <path d="M60 228 V 60 H 440" fill="none" stroke="var(--heat)" stroke-width="4" stroke-dasharray="9 6" class="anim-flow"/>
+      <!-- route B -->
+      <path d="M76 230 H 360 V 120 H 160 V 60 H 440" fill="none" stroke="var(--work)" stroke-width="4" stroke-dasharray="9 6" class="anim-flow"/>
+      <!-- legend -->
+      <g transform="translate(520,50)">
+        <text x="0" y="0" class="t-mid" style="font-weight:700">Two routes, same trip</text>
+        <rect x="0" y="22" width="210" height="58" rx="8" class="surface"/>
+        <text x="12" y="44" class="t-small t-energy">Displacement (state-like)</text>
+        <text x="12" y="66" class="t-small">Route A: 4.4 km · Route B: 4.4 km</text>
+        <rect x="0" y="92" width="210" height="58" rx="8" class="surface"/>
+        <text x="12" y="114" class="t-small" style="fill:var(--heat);font-weight:700">Distance driven (path-like)</text>
+        <text x="12" y="136" class="t-small">Route A: 5.5 km · <tspan style="fill:var(--work)">Route B: 9.4 km</tspan></text>
+        <text x="0" y="180" class="t-small t-muted">Where you end up depends only on</text>
+        <text x="0" y="196" class="t-small t-muted">start and finish. How far you drove</text>
+        <text x="0" y="212" class="t-small t-muted">depends on the route.</text>
+      </g>
+    </svg>
+    <figcaption>An everyday analogy. Your <b>position</b> (and so your displacement) is like a state function; the <b>distance on the odometer</b> is like a path function.</figcaption>
+  </figure>
+
+  <h2 id="explore" data-short="Interactive: design a path">Interactive: one change, many paths</h2>
+  <p>Here is a real system: <b>1.00 mol of helium</b> (a monatomic ideal gas). It starts in state <b>A</b> (2.00 atm, 10.0 L, 244 K) and ends in state <b>B</b> (1.00 atm, 30.0 L, 366 K). The route between them is up to you.</p>
+
+  <div class="widget" id="paths">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Design your own path from A to B</h3></div>
+    <div class="widget-body">
+      <p><b>Drag the purple point C</b> anywhere on the diagram — the gas travels A → C → B in straight lines. Or pick a preset. Watch which numbers change and which never do.</p>
+      <div class="btn-row" style="margin-top:0">
+        <button class="btn ghost" data-preset="1">Path 1: expand, then cool</button>
+        <button class="btn ghost" data-preset="2">Path 2: cool, then expand</button>
+        <button class="btn ghost" data-preset="3">Path 3: straight line</button>
+        <button class="btn ghost" data-preset="4">Path 4: a big detour</button>
+      </div>
+      <div class="widget-row" style="margin-top:12px">
+        <div>
+          <svg id="pathSvg" viewBox="0 0 520 380" role="img" aria-label="P-V diagram with draggable intermediate state C"></svg>
+          <p style="font-size:.85rem;color:var(--ink-2);margin:4px 0 0">Dashed curves are constant-temperature lines. For an ideal gas, U is the same everywhere on each one: <span class="u">3040 J</span> on the 244 K curve (through A) and <span class="u">4560 J</span> on the 366 K curve (through B).</p>
+        </div>
+        <div>
+          <div class="readout" style="margin-top:0">
+            <div style="background:var(--energy-fill)"><span class="k">ΔU (state)</span><span class="v u" id="pdU"></span></div>
+            <div style="background:var(--energy-fill)"><span class="k">ΔT (state)</span><span class="v u" id="pdT"></span></div>
+            <div style="background:var(--work-fill)"><span class="k">w (path)</span><span class="v w" id="pW"></span></div>
+            <div style="background:var(--heat-fill)"><span class="k">q (path)</span><span class="v q" id="pQ"></span></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="u">ΔU</span><div class="bar-track"><div class="bar-fill" id="bU" style="background:var(--energy)"></div></div><span class="bar-val" id="bUv"></span></div>
+            <div class="bar-row"><span class="q">q</span><div class="bar-track"><div class="bar-fill" id="bQ" style="background:var(--heat)"></div></div><span class="bar-val" id="bQv"></span></div>
+            <div class="bar-row"><span class="w">w</span><div class="bar-track"><div class="bar-fill" id="bW" style="background:var(--work)"></div></div><span class="bar-val" id="bWv"></span></div>
+          </div>
+          <p id="pC" style="font-size:.9rem;margin:12px 0 0"></p>
+          <p id="pMsg" style="font-size:.92rem"></p>
+        </div>
+      </div>
+      <h4 style="margin:10px 0 4px">Your path log</h4>
+      <div class="table-wrap" style="margin-top:0">
+        <table class="log">
+          <thead><tr><th>Path</th><th class="num">ΔU</th><th class="num">w</th><th class="num">q</th><th class="num">q + w</th></tr></thead>
+          <tbody id="pLog"></tbody>
+        </table>
+      </div>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">How are these numbers calculated?</summary>
+        <p style="font-size:.93rem">For a monatomic ideal gas, <var>U</var> = <sup>3</sup>⁄<sub>2</sub><var>nRT</var> = <sup>3</sup>⁄<sub>2</sub><var>PV</var>, so <var>U</var> is fixed by the point you're at: <var>U</var><sub>A</sub> = 1.5 × 2.00 × 10.0 = 30.0 L·atm and <var>U</var><sub>B</sub> = 1.5 × 1.00 × 30.0 = 45.0 L·atm, giving Δ<var>U</var> = 15.0 L·atm = <b>+1520 J</b> for every path.
+        The work is <var>w</var> = −(area under the path), each straight segment being a trapezoid: <var>w</var> = −½(<var>P</var><sub>start</sub> + <var>P</var><sub>end</sub>)Δ<var>V</var>. The heat then follows from the first law: <var>q</var> = Δ<var>U</var> − <var>w</var>. (The gas pushes on a piston with <var>P</var><sub>ext</sub> = <var>P</var><sub>gas</sub> the whole way.)</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">What the tool shows</span>
+    <ul style="margin:.3em 0 0;padding-left:1.2em">
+      <li><b>Δ<span class="u">U</span> = +1520 J and Δ<var>T</var> = +122 K for every path</b> — because they depend only on the points A and B.</li>
+      <li><b><span class="w">w</span> changes</b> with every move of C, because the <b>area under the path</b> changes.</li>
+      <li><b><span class="q">q</span> changes too</b>, in exactly the opposite way, so that <span class="q">q</span> + <span class="w">w</span> always comes back to the same Δ<span class="u">U</span>.</li>
+    </ul>
+  </div>
+
+  <h2 id="why-u" data-short="Why U is a state function">Why internal energy is a state function</h2>
+
+  <h3>Reason 1 — U is something the system <i>has</i></h3>
+  <p>Internal energy is the total kinetic and potential energy of all the particles in the system (Lesson 3). Once the state is fixed — the temperature, pressure, volume, amount and composition — the particles' motions and the forces between them are fixed too, and so is their total energy. Like mass or volume, <span class="u">U</span> is a <b>property</b> of the system in that state. The system doesn't "remember" how it got there.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 240" role="img" aria-label="Two samples of gas prepared different ways are identical once they are in the same state">
+      <g transform="translate(20,20)">
+        <rect width="200" height="190" rx="12" class="surface-2"/>
+        <text x="100" y="24" text-anchor="middle" class="t-small" style="font-weight:700">Sample 1</text>
+        <text x="100" y="42" text-anchor="middle" class="t-small t-muted">heated on a hot plate</text>
+        <rect x="45" y="60" width="110" height="90" rx="8" class="sys-box"/>
+        <g fill="var(--sys)"><circle cx="65" cy="80" r="4"/><circle cx="110" cy="75" r="4"/><circle cx="140" cy="95" r="4"/><circle cx="80" cy="120" r="4"/><circle cx="125" cy="135" r="4"/><circle cx="60" cy="140" r="4"/><circle cx="100" cy="105" r="4"/></g>
+        <path class="flame anim-flicker" d="M88 182 Q 84 166 96 156 Q 98 170 104 172 Q 108 160 116 158 Q 124 172 116 182 Z"/>
+      </g>
+      <g transform="translate(280,20)">
+        <rect width="200" height="190" rx="12" class="surface-2"/>
+        <text x="100" y="24" text-anchor="middle" class="t-small" style="font-weight:700">Sample 2</text>
+        <text x="100" y="42" text-anchor="middle" class="t-small t-muted">compressed, then expanded</text>
+        <rect x="45" y="60" width="110" height="90" rx="8" class="sys-box"/>
+        <g fill="var(--sys)"><circle cx="70" cy="85" r="4"/><circle cx="120" cy="72" r="4"/><circle cx="135" cy="110" r="4"/><circle cx="90" cy="128" r="4"/><circle cx="60" cy="110" r="4"/><circle cx="105" cy="98" r="4"/><circle cx="140" cy="138" r="4"/></g>
+        <path d="M100 175 V 158" class="work-arrow" style="stroke-width:3"/><polygon points="100,152 94,162 106,162" class="work-fill"/>
+      </g>
+      <g transform="translate(540,30)" class="t-mid">
+        <text y="20" style="font-weight:700">Both now at:</text>
+        <text y="46">P = 1.00 atm</text>
+        <text y="70">V = 30.0 L</text>
+        <text y="94">T = 366 K</text>
+        <text y="128" class="t-energy">Same state →</text>
+        <text y="152" class="t-energy">same U (4560 J)</text>
+        <text y="186" class="t-small t-muted">No experiment on the gas</text>
+        <text y="202" class="t-small t-muted">could tell them apart.</text>
+      </g>
+    </svg>
+  </figure>
+
+  <h3>Reason 2 — if it weren't, we could create energy from nothing</h3>
+  <p>Suppose Δ<span class="u">U</span> for A → B were different along two paths, say +1520 J along path 1 and only +1000 J along path 2. Then we could take the gas from A to B along path 2 and bring it back along path 1. The gas ends exactly where it started, yet we'd have 520 J left over, every cycle, forever — a perpetual-motion machine. That would break conservation of energy. So <b>the first law requires Δ<span class="u">U</span> to be the same for every path</b>.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 285" role="img" aria-label="Thought experiment: if delta U depended on path, a cycle would create energy">
+      <g transform="translate(30,10)">
+        <line x1="40" y1="220" x2="340" y2="220" class="ink-line"/><line x1="40" y1="220" x2="40" y2="20" class="ink-line"/>
+        <text x="190" y="246" text-anchor="middle" class="t-small">V</text><text x="22" y="120" class="t-small">P</text>
+        <circle cx="90" cy="60" r="7" fill="var(--ink)"/><text x="72" y="52" class="t-mid" style="font-weight:700">A</text>
+        <circle cx="300" cy="170" r="7" fill="var(--ink)"/><text x="310" y="166" class="t-mid" style="font-weight:700">B</text>
+        <path d="M90 60 C 200 30, 300 80, 300 165" fill="none" stroke="var(--heat)" stroke-width="3.5"/>
+        <polygon points="300,165 294,151 307,152" fill="var(--heat)"/>
+        <text x="235" y="58" class="t-small t-heat">path 2: "ΔU = +1000 J"</text>
+        <path d="M296 174 C 200 200, 100 150, 92 70" fill="none" stroke="var(--work)" stroke-width="3.5"/>
+        <polygon points="92,68 86,82 99,81" fill="var(--work)"/>
+        <text x="110" y="200" class="t-small t-work">back along path 1: "ΔU = −1520 J"</text>
+      </g>
+      <g transform="translate(420,40)" class="t-mid">
+        <text y="10" style="font-weight:700">Around the loop:</text>
+        <text y="44">ΔU = +1000 − 1520 = −520 J?</text>
+        <text y="78">The gas is back at A, unchanged…</text>
+        <text y="104">…but 520 J has appeared in the</text>
+        <text y="128">surroundings from nowhere.</text>
+        <text y="172" style="fill:var(--bad);font-weight:700">✗ Impossible — breaks the first law.</text>
+        <text y="204" class="t-energy">So ΔU must be +1520 J on every path,</text>
+        <text y="228" class="t-energy">and 0 around every closed loop.</text>
+      </g>
+    </svg>
+  </figure>
+
+  <h2 id="why-qw" data-short="Why q and w are path functions">Why heat and work are path functions</h2>
+
+  <h3>Reason 1 — they are energy <i>in transit</i>, not energy stored</h3>
+  <p>Heat and work only exist <b>while energy is crossing the boundary</b>. Once the energy is inside, it is simply internal energy; there is no "heat content" or "work content" left in the system to measure. A system in state B cannot tell you how much of its energy arrived as heat and how much as work — just as a pond can't tell you how much of its water fell as rain.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="Pond analogy: rain and a stream add water; evaporation and an outlet remove it; the water level is the internal energy">
+      <!-- cloud and rain -->
+      <g transform="translate(130,20)">
+        <ellipse cx="60" cy="30" rx="60" ry="24" fill="var(--surface-2)" stroke="var(--ink-3)"/>
+        <ellipse cx="25" cy="38" rx="30" ry="18" fill="var(--surface-2)" stroke="var(--ink-3)"/>
+        <ellipse cx="100" cy="40" rx="30" ry="16" fill="var(--surface-2)" stroke="var(--ink-3)"/>
+        <g fill="var(--heat)">
+          <rect x="20" y="60" width="3" height="12" rx="1.5"><animate attributeName="y" values="60;150" dur="1.1s" repeatCount="indefinite"/></rect>
+          <rect x="50" y="60" width="3" height="12" rx="1.5"><animate attributeName="y" values="60;150" dur="1.1s" begin=".35s" repeatCount="indefinite"/></rect>
+          <rect x="80" y="60" width="3" height="12" rx="1.5"><animate attributeName="y" values="60;150" dur="1.1s" begin=".7s" repeatCount="indefinite"/></rect>
+          <rect x="105" y="60" width="3" height="12" rx="1.5"><animate attributeName="y" values="60;150" dur="1.1s" begin=".2s" repeatCount="indefinite"/></rect>
+        </g>
+        <text x="60" y="-2" text-anchor="middle" class="t-mid t-heat">rain = heat in (q &gt; 0)</text>
+      </g>
+      <!-- stream in -->
+      <path d="M20 170 C 90 160, 150 200, 230 205" fill="none" stroke="var(--work)" stroke-width="12" stroke-linecap="round" opacity=".8"/>
+      <path d="M20 170 C 90 160, 150 200, 230 205" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="6 10" class="anim-flow" opacity=".8"/>
+      <text x="30" y="150" class="t-mid t-work">stream in = work on (w &gt; 0)</text>
+      <!-- pond -->
+      <path d="M200 200 Q 380 300 560 200 Z" fill="var(--energy)" opacity=".75"/>
+      <path d="M200 200 Q 380 300 560 200" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <text x="380" y="232" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:16px">water in pond = U</text>
+      <!-- evaporation -->
+      <g transform="translate(470,120)">
+        <path d="M0 60 q-8 -12 2 -24 q8 -12 -2 -24" class="heat-arrow anim-rise" style="stroke-width:3"/>
+        <path d="M24 60 q-8 -12 2 -24 q8 -12 -2 -24" class="heat-arrow anim-rise" style="stroke-width:3;animation-delay:.8s"/>
+        <text x="40" y="20" class="t-mid t-heat">evaporation = heat out (q &lt; 0)</text>
+      </g>
+      <!-- outlet -->
+      <path d="M555 205 C 620 210, 680 230, 745 240" fill="none" stroke="var(--work)" stroke-width="10" stroke-linecap="round" opacity=".6"/>
+      <text x="600" y="270" class="t-mid t-work">outlet = work by (w &lt; 0)</text>
+    </svg>
+    <figcaption><b>The pond analogy.</b> The amount of water in the pond (like <span class="u">U</span>) is a definite property you can measure at any time. Rain and the stream (like <span class="q">q</span> and <span class="w">w</span>) describe <i>how</i> water got there. Once it's in, rainwater and stream water are indistinguishable — and the same water level can be reached by lots of rain and a little stream, or the other way round.</figcaption>
+  </figure>
+
+  <h3>Reason 2 — work is an area, and different paths have different areas</h3>
+  <p>For pressure–volume work, <span class="w">w</span> = −(area under the path on a P–V diagram). Two paths between the same points generally enclose <b>different areas</b>, so they do different amounts of work — exactly what you saw in the interactive tool:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="Three P-V diagrams for paths 1, 2 and 3 with different shaded areas">
+      <g id="miniPaths"></g>
+    </svg>
+    <figcaption>Same A, same B, three different areas: |<span class="w">w</span>| = 4053 J, 2027 J and 3040 J.</figcaption>
+  </figure>
+
+  <h3>Reason 3 — the first law then forces q to depend on the path too</h3>
+  <p>The first law says <span class="q">q</span> = Δ<span class="u">U</span> − <span class="w">w</span>. Δ<span class="u">U</span> is fixed by the states, so whenever <span class="w">w</span> changes, <span class="q">q</span> must change by the same amount in the other direction:</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Path (A → B)</th><th class="num">Δ<var>U</var> (state)</th><th class="num"><var>w</var> (path)</th><th class="num"><var>q</var> = Δ<var>U</var> − <var>w</var> (path)</th></tr>
+      <tr><td>1 · expand at 2 atm, then cool at constant V</td><td class="num u">+1520 J</td><td class="num w">−4053 J</td><td class="num q">+5573 J</td></tr>
+      <tr><td>2 · cool at constant V, then expand at 1 atm</td><td class="num u">+1520 J</td><td class="num w">−2027 J</td><td class="num q">+3546 J</td></tr>
+      <tr><td>3 · straight line</td><td class="num u">+1520 J</td><td class="num w">−3040 J</td><td class="num q">+4560 J</td></tr>
+    </table>
+  </div>
+
+  <h2 id="cycles">Around a closed loop</h2>
+  <p>The clearest test of a state function: take the system around a loop and back to where it started. A state function must return to its original value; a path function need not.</p>
+
+  <div class="widget" id="cycleW">
+    <div class="widget-head"><span class="badge">Animated</span><h3>Go out by path 1, come back by path 2</h3></div>
+    <div class="widget-body">
+      <div class="widget-row">
+        <svg id="cycleSvg" viewBox="0 0 420 300" role="img" aria-label="Animated cycle on P-V diagram"></svg>
+        <div>
+          <div class="btn-row" style="margin-top:0"><button class="btn" id="cycGo">▶ Run the cycle</button></div>
+          <div class="readout">
+            <div><span class="k">Stage</span><span class="v" id="cycStage" style="font-size:.95rem">at A</span></div>
+            <div><span class="k">U now</span><span class="v u" id="cycU">3040 J</span></div>
+            <div><span class="k">ΔU so far</span><span class="v u" id="cycDU">0 J</span></div>
+            <div><span class="k">w so far</span><span class="v w" id="cycW">0 J</span></div>
+            <div><span class="k">q so far</span><span class="v q" id="cycQ">0 J</span></div>
+          </div>
+          <p id="cycMsg" style="font-size:.93rem"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">Around any cycle</span>
+    Δ<span class="u">U</span> = 0 (state function), but the net <span class="w">w</span> equals minus the <b>area enclosed</b> by the loop, and <span class="q">q</span> = −<span class="w">w</span> ≠ 0. This is exactly how an engine works: it runs in a cycle, returns to its starting state every time, and turns net heat into net work.
+  </div>
+
+  <h2 id="why-it-matters" data-short="Why it matters">Why this matters in chemistry</h2>
+  <ul>
+    <li><b>We can calculate Δ<var>U</var> (and Δ<var>H</var>) along any convenient path</b> — even an imaginary one — and the answer applies to the real process. This is the idea behind <b>Hess's law</b>.</li>
+    <li><b>Special conditions turn heat into a state-function change.</b> At constant volume, <var>w</var> = 0 so <var>q</var><sub>V</sub> = Δ<var>U</var>; at constant pressure, <var>q</var><sub>P</sub> = Δ<var>H</var>. That's why calorimeters (Lesson 4) measure state functions even though heat is a path function.</li>
+    <li><b>Reversible vs irreversible processes</b> (Lesson 7) are two different paths between the same states — so they give different <var>q</var> and <var>w</var> but the same Δ<var>U</var>.</li>
+  </ul>
+
+  <h3>Practice: state or path?</h3>
+  <div class="card" id="sortCard">
+    <p style="margin-top:0">Classify each quantity. Feedback appears instantly.</p>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">A gas goes from state X to state Y by two different routes. Route 1: q = +500 J, w = −200 J. Route 2: w = −450 J. What is q for route 2?</p>
+    <div class="quiz-opts">
+      <button data-why="q is a path function, so it doesn't have to equal route 1's value. Use ΔU, which is the same for both routes.">+500 J</button>
+      <button>+750 J</button>
+      <button data-why="ΔU = 500 + (−200) = +300 J for both routes. Then q = ΔU − w = 300 − (−450) = +750 J.">+250 J</button>
+      <button data-why="Check the sign: q = ΔU − w = 300 − (−450).">−150 J</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔU = q + w = +300 J by route 1, and ΔU is a state function so it's +300 J by route 2 as well. q = ΔU − w = 300 − (−450) = +750 J."></div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">Why is it wrong to say "this hot block contains a lot of heat"?</p>
+    <div class="quiz-opts">
+      <button data-why="Hot objects certainly have more internal energy. The issue is the word 'heat'.">Hot objects have no energy until they touch something cold.</button>
+      <button data-why="Heat is measured in joules, like any energy. The problem is what heat is, not its units.">Heat is measured in degrees, not joules.</button>
+      <button>Heat is energy in transit across a boundary; what the block contains is internal energy.</button>
+    </div>
+    <div class="quiz-fb" data-right="A system has internal energy (a state function). Heat describes a transfer during a process (a path function)."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">A system is taken around a complete cycle and does 800 J of net work on the surroundings. Which is true for the cycle?</p>
+    <div class="quiz-opts">
+      <button>ΔU = 0 and q = +800 J</button>
+      <button data-why="Work is a path function — it need not be zero around a cycle. Only ΔU must be.">ΔU = 0, q = 0 and w = 0</button>
+      <button data-why="The system returns to its starting state, so ΔU must be zero.">ΔU = −800 J and q = 0</button>
+    </div>
+    <div class="quiz-fb" data-right="Back at the start, ΔU = 0. The system did work, so w = −800 J, and q = ΔU − w = +800 J of net heat absorbed."></div>
+  </div>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  const LA = 101.325; // J per L·atm
+  const A = { V: 10, P: 2 }, B = { V: 30, P: 1 };
+  const U = (p) => 1.5 * p.P * p.V;             // L·atm, monatomic ideal gas
+  const Tof = (p) => p.P * p.V / 0.082057;      // K, n = 1
+  const seg = (p, q) => -0.5 * (p.P + q.P) * (q.V - p.V); // w for a straight segment, L·atm
+  function setBar(el, v, max) {
+    const f = Math.max(-1, Math.min(1, v / max));
+    el.style.left = (f >= 0 ? 50 : 50 + f * 50) + "%"; el.style.width = Math.abs(f) * 50 + "%";
+  }
+
+  // ================= design-a-path =================
+  (function () {
+    const svg = document.getElementById("pathSvg");
+    const NS = "http://www.w3.org/2000/svg";
+    const X = (v) => 60 + v / 36 * 440, Y = (p) => 330 - p / 3 * 300;
+    const iX = (x) => (x - 60) / 440 * 36, iY = (y) => (330 - y) / 300 * 3;
+    let C = { V: 30, P: 2 }, name = "Path 1", count = 0;
+    const presets = { 1: [{ V: 30, P: 2 }, "Path 1"], 2: [{ V: 10, P: 1 }, "Path 2"], 3: [{ V: 20, P: 1.5 }, "Path 3"], 4: [{ V: 4, P: 2.8 }, "Path 4"] };
+
+    // static layer
+    let st = `<line x1="60" y1="330" x2="505" y2="330" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="60" y1="330" x2="60" y2="20" stroke="var(--ink)" stroke-width="2"/>
+      <text x="282" y="368" text-anchor="middle" class="t-small">V (L)</text>
+      <text x="20" y="175" text-anchor="middle" class="t-small" transform="rotate(-90 20 175)">P (atm)</text>`;
+    [0, 5, 10, 15, 20, 25, 30, 35].forEach(v => st += `<text x="${X(v)}" y="346" text-anchor="middle" class="t-small t-muted">${v}</text>`);
+    [0, 0.5, 1, 1.5, 2, 2.5, 3].forEach(p => st += `<text x="54" y="${Y(p) + 4}" text-anchor="end" class="t-small t-muted">${p}</text>` + (p ? `<line x1="60" x2="505" y1="${Y(p)}" y2="${Y(p)}" stroke="var(--line)"/>` : ""));
+    // isotherms through A and B (same U along each)
+    [[A, "244 K"], [B, "366 K"]].forEach(([pt, lab]) => {
+      const k = pt.P * pt.V; let d = "";
+      for (let v = Math.max(1.5, k / 2.95); v <= 35; v += 0.25) d += (d ? " L" : "M") + X(v).toFixed(1) + " " + Y(k / v).toFixed(1);
+      st += `<path d="${d}" fill="none" stroke="var(--energy)" stroke-width="1.5" stroke-dasharray="3 5" opacity=".7"/>`;
+      st += `<text x="${X(k / 2.9) + 6}" y="${Y(2.9) + 4}" class="t-small t-energy">${lab}</text>`;
+    });
+    svg.innerHTML = st + `<g id="dyn"></g>`;
+    const dyn = svg.querySelector("#dyn");
+
+    const fmtJ = (x) => signed(x * LA, 0) + " J";
+    function draw() {
+      const w1 = seg(A, C), w2 = seg(C, B), w = w1 + w2, dU = U(B) - U(A), q = dU - w;
+      const area = (p, r) => `M${X(p.V)} ${Y(0)} L${X(p.V)} ${Y(p.P)} L${X(r.V)} ${Y(r.P)} L${X(r.V)} ${Y(0)} Z`;
+      const fill = (p, r) => r.V >= p.V ? "var(--work)" : "var(--heat)";
+      dyn.innerHTML = `
+        <path d="${area(A, C)}" fill="${fill(A, C)}" opacity=".18"/>
+        <path d="${area(C, B)}" fill="${fill(C, B)}" opacity=".18"/>
+        <path d="M${X(A.V)} ${Y(A.P)} L${X(C.V)} ${Y(C.P)} L${X(B.V)} ${Y(B.P)}" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="${X(A.V)}" cy="${Y(A.P)}" r="7" fill="var(--sys)"/><text x="${X(A.V) - 12}" y="${Y(A.P) - 10}" class="t-mid t-sys">A</text>
+        <circle cx="${X(B.V)}" cy="${Y(B.P)}" r="7" fill="var(--sys)"/><text x="${X(B.V) + 10}" y="${Y(B.P) + 20}" class="t-mid t-sys">B</text>
+        <circle class="handle" cx="${X(C.V)}" cy="${Y(C.P)}" r="16" fill="var(--energy)" opacity=".18"/>
+        <circle class="handle" cx="${X(C.V)}" cy="${Y(C.P)}" r="9" fill="var(--energy)" stroke="#fff" stroke-width="2"/>
+        <text x="${X(C.V) + 14}" y="${Y(C.P) - 12}" class="t-mid t-energy">C</text>`;
+      document.getElementById("pdU").textContent = fmtJ(dU);
+      document.getElementById("pdT").textContent = "+" + (Tof(B) - Tof(A)).toFixed(0) + " K";
+      document.getElementById("pW").textContent = fmtJ(w);
+      document.getElementById("pQ").textContent = fmtJ(q);
+      const M = 12000;
+      setBar(document.getElementById("bU"), dU * LA, M); document.getElementById("bUv").textContent = fmtJ(dU);
+      setBar(document.getElementById("bQ"), q * LA, M); document.getElementById("bQv").textContent = fmtJ(q);
+      setBar(document.getElementById("bW"), w * LA, M); document.getElementById("bWv").textContent = fmtJ(w);
+      document.getElementById("pC").innerHTML = `Point C: <b>${C.P.toFixed(2)} atm, ${C.V.toFixed(1)} L, ${Tof(C).toFixed(0)} K</b> · U<sub>C</sub> = ${fmt(U(C) * LA, 0)} J <span style="color:var(--ink-3)">(depends only on where C is)</span>`;
+      const back = C.V < A.V || C.V > B.V;
+      document.getElementById("pMsg").innerHTML = back
+        ? "Part of this path moves to the <b>left</b> (compression, orange shading): there the surroundings do work <i>on</i> the gas, which cancels some of the area. Notice that ΔU still hasn't budged."
+        : "Shaded area under the path = |w|. Move C up to make the area (and |w|) bigger, or down to make it smaller. ΔU never changes.";
+      return { dU, w, q };
+    }
+    function log() {
+      const { dU, w, q } = draw();
+      count++;
+      const tb = document.getElementById("pLog");
+      tb.querySelectorAll("tr").forEach(r => r.classList.remove("latest"));
+      const tr = document.createElement("tr"); tr.className = "latest";
+      tr.innerHTML = `<td>${name}</td><td class="num u">${fmtJ(dU)}</td><td class="num w">${fmtJ(w)}</td><td class="num q">${fmtJ(q)}</td><td class="num u">${fmtJ(q + w)}</td>`;
+      tb.prepend(tr);
+      while (tb.children.length > 6) tb.lastChild.remove();
+    }
+    document.querySelectorAll("#paths [data-preset]").forEach(b => b.addEventListener("click", () => {
+      [C, name] = [{ ...presets[b.dataset.preset][0] }, presets[b.dataset.preset][1]]; log();
+    }));
+    // dragging
+    let dragging = false, customN = 0;
+    const toSvg = (e) => { const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); };
+    svg.addEventListener("pointerdown", (e) => {
+      const p = toSvg(e);
+      if (Math.hypot(p.x - X(C.V), p.y - Y(C.P)) < 26) { dragging = true; try { svg.setPointerCapture(e.pointerId); } catch (err) { /* capture unsupported */ } e.preventDefault(); }
+    });
+    svg.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const p = toSvg(e);
+      C = { V: Math.round(Math.max(2, Math.min(35, iX(p.x))) * 2) / 2, P: Math.round(Math.max(0.2, Math.min(2.9, iY(p.y))) * 20) / 20 };
+      draw();
+    });
+    const end = () => { if (dragging) { dragging = false; customN++; name = "Your path " + customN; log(); } };
+    svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end);
+    // keyboard access
+    svg.setAttribute("tabindex", "0");
+    svg.addEventListener("keydown", (e) => {
+      const k = { ArrowLeft: [-0.5, 0], ArrowRight: [0.5, 0], ArrowUp: [0, 0.05], ArrowDown: [0, -0.05] }[e.key];
+      if (!k) return; e.preventDefault();
+      C = { V: Math.max(2, Math.min(35, C.V + k[0])), P: Math.max(0.2, Math.min(2.9, +(C.P + k[1]).toFixed(2))) }; draw();
+    });
+    svg.addEventListener("keyup", (e) => { if (e.key.startsWith("Arrow")) { customN++; name = "Your path " + customN; log(); } });
+    log();
+  })();
+
+  // ================= three mini P–V plots =================
+  (function () {
+    const g = document.getElementById("miniPaths");
+    const paths = [
+      ["Path 1", { V: 30, P: 2 }, "|w| = 4053 J"],
+      ["Path 2", { V: 10, P: 1 }, "|w| = 2027 J"],
+      ["Path 3", { V: 20, P: 1.5 }, "|w| = 3040 J"],
+    ];
+    let s = "";
+    paths.forEach(([lab, C, wl], i) => {
+      const ox = 20 + i * 250, X = (v) => ox + 30 + v / 34 * 200, Y = (p) => 220 - p / 2.5 * 180;
+      s += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(34)}" y2="${Y(0)}" stroke="var(--ink)" stroke-width="1.5"/>`;
+      s += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(2.5)}" stroke="var(--ink)" stroke-width="1.5"/>`;
+      s += `<path d="M${X(A.V)} ${Y(0)} L${X(A.V)} ${Y(A.P)} L${X(C.V)} ${Y(C.P)} L${X(B.V)} ${Y(B.P)} L${X(B.V)} ${Y(0)} Z" fill="var(--work)" opacity=".22"/>`;
+      s += `<path d="M${X(A.V)} ${Y(A.P)} L${X(C.V)} ${Y(C.P)} L${X(B.V)} ${Y(B.P)}" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/>`;
+      s += `<circle cx="${X(A.V)}" cy="${Y(A.P)}" r="5" fill="var(--sys)"/><circle cx="${X(B.V)}" cy="${Y(B.P)}" r="5" fill="var(--sys)"/>`;
+      s += `<text x="${X(A.V) - 8}" y="${Y(A.P) - 8}" class="t-small t-sys">A</text><text x="${X(B.V) + 6}" y="${Y(B.P) - 8}" class="t-small t-sys">B</text>`;
+      s += `<text x="${X(17)}" y="${Y(2.5) - 4}" text-anchor="middle" class="t-mid" style="font-weight:700">${lab}</text>`;
+      s += `<text x="${X(20)}" y="${Y(0.45)}" text-anchor="middle" class="t-small t-work">${wl}</text>`;
+      s += `<text x="${X(17)}" y="${Y(0) + 18}" text-anchor="middle" class="t-small t-muted">V</text><text x="${X(0) - 10}" y="${Y(1.25)}" class="t-small t-muted">P</text>`;
+    });
+    g.innerHTML = s;
+  })();
+
+  // ================= cycle animation =================
+  (function () {
+    const svg = document.getElementById("cycleSvg");
+    const X = (v) => 50 + v / 34 * 350, Y = (p) => 260 - p / 2.5 * 230;
+    const C1 = { V: 30, P: 2 }, C2 = { V: 10, P: 1 };
+    // loop: A -> C1 -> B -> C2 -> A
+    const legs = [[A, C1, "expanding at 2 atm"], [C1, B, "cooling at constant V"], [B, C2, "compressing at 1 atm"], [C2, A, "heating at constant V"]];
+    let st = `<line x1="50" y1="260" x2="405" y2="260" stroke="var(--ink)" stroke-width="2"/><line x1="50" y1="260" x2="50" y2="20" stroke="var(--ink)" stroke-width="2"/>
+      <text x="228" y="292" text-anchor="middle" class="t-small">V (L)</text><text x="18" y="140" class="t-small" text-anchor="middle" transform="rotate(-90 18 140)">P (atm)</text>`;
+    [0, 10, 20, 30].forEach(v => st += `<text x="${X(v)}" y="276" text-anchor="middle" class="t-small t-muted">${v}</text>`);
+    [0, 1, 2].forEach(p => st += `<text x="44" y="${Y(p) + 4}" text-anchor="end" class="t-small t-muted">${p}</text>`);
+    st += `<rect x="${X(10)}" y="${Y(2)}" width="${X(30) - X(10)}" height="${Y(1) - Y(2)}" fill="var(--work)" opacity="0" id="encl"/>`;
+    st += `<path d="M${X(10)} ${Y(2)} H ${X(30)} V ${Y(1)} H ${X(10)} Z" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="5 4"/>`;
+    st += `<path id="done" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>`;
+    st += `<circle cx="${X(10)}" cy="${Y(2)}" r="6" fill="var(--sys)"/><text x="${X(10) - 18}" y="${Y(2) - 8}" class="t-mid t-sys">A</text>`;
+    st += `<circle cx="${X(30)}" cy="${Y(1)}" r="6" fill="var(--sys)"/><text x="${X(30) + 8}" y="${Y(1) + 18}" class="t-mid t-sys">B</text>`;
+    st += `<text x="${X(20)}" y="${Y(1.5) + 5}" text-anchor="middle" class="t-small t-work" id="enclLbl" opacity="0">net |w| = enclosed area = 2027 J</text>`;
+    st += `<circle id="cDot" r="8" fill="var(--energy)" stroke="#fff" stroke-width="2" cx="${X(10)}" cy="${Y(2)}"/>`;
+    svg.innerHTML = st;
+    const dot = svg.querySelector("#cDot"), done = svg.querySelector("#done");
+    const U0 = U(A);
+    function show(f) { // f in 0..4 (legs)
+      const k = Math.min(3, Math.floor(f)), r = Math.min(1, f - k);
+      let w = 0, pts = [A];
+      for (let i = 0; i < k; i++) { w += seg(legs[i][0], legs[i][1]); pts.push(legs[i][1]); }
+      const [p0, p1, lbl] = legs[k];
+      const cur = { V: p0.V + (p1.V - p0.V) * r, P: p0.P + (p1.P - p0.P) * r };
+      w += seg(p0, cur); pts.push(cur);
+      const dU = U(cur) - U0, q = dU - w;
+      dot.setAttribute("cx", X(cur.V)); dot.setAttribute("cy", Y(cur.P));
+      done.setAttribute("d", pts.map((p, i) => (i ? "L" : "M") + X(p.V) + " " + Y(p.P)).join(" "));
+      const fin = f >= 4;
+      document.getElementById("cycStage").textContent = fin ? "back at A" : `leg ${k + 1}: ${lbl}`;
+      document.getElementById("cycU").textContent = fmt(U(cur) * LA, 0) + " J";
+      document.getElementById("cycDU").textContent = signed(dU * LA, 0) + " J";
+      document.getElementById("cycW").textContent = signed(w * LA, 0) + " J";
+      document.getElementById("cycQ").textContent = signed(q * LA, 0) + " J";
+      svg.querySelector("#encl").setAttribute("opacity", fin ? .25 : 0);
+      svg.querySelector("#enclLbl").setAttribute("opacity", fin ? 1 : 0);
+      document.getElementById("cycMsg").innerHTML = fin
+        ? `<b>Back at A:</b> U is exactly what it was, so <b>ΔU = 0</b>. But the gas did <b>2027 J</b> of net work (the enclosed area) and absorbed <b>2027 J</b> of net heat. q and w did not return to zero — they are path functions.`
+        : `U goes up and down as the gas moves, but its value at each point depends only on that point.`;
+    }
+    show(0);
+    document.getElementById("cycGo").addEventListener("click", () => {
+      const t0 = performance.now(), dur = 8000;
+      const step = (now) => { const f = Math.min(4, (now - t0) / dur * 4); show(f); if (f < 4) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  })();
+
+  // ================= sort activity =================
+  (function () {
+    const items = [
+      ["Temperature, T", "state", "It depends only on the present state."],
+      ["Heat absorbed, q", "path", "Different routes between the same states absorb different amounts of heat."],
+      ["Internal energy, U", "state", "It's the total energy the system has in that state."],
+      ["Work done, w", "path", "It's the area under the path on a P–V diagram, which depends on the route."],
+      ["Volume, V", "state", "It describes the present state."],
+      ["Enthalpy, H", "state", "H = U + PV, built entirely from state functions."],
+      ["Change in internal energy, ΔU", "state", "It's the difference between two values of a state function, so it depends only on the end points."],
+      ["Distance walked on a hike", "path", "It depends on the trail taken, not just the start and finish."],
+    ];
+    const box = document.getElementById("sortCard");
+    items.forEach(([txt, ans, why]) => {
+      const row = document.createElement("div"); row.className = "sort-row";
+      row.innerHTML = `<span>${txt}</span><div class="seg"><button data-k="state">state</button><button data-k="path">path</button></div><div class="why"></div>`;
+      row.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        row.querySelectorAll("button").forEach(x => { x.style.background = ""; x.style.color = ""; });
+        const ok = b.dataset.k === ans;
+        b.style.background = ok ? "var(--good)" : "var(--bad)"; b.style.color = "#fff";
+        row.classList.add("done");
+        row.querySelector(".why").innerHTML = (ok ? "✅ " : `❌ It's a <b>${ans}</b> function. `) + why;
+      }));
+      box.appendChild(row);
+    });
+  })();
+</script>
+</body>
+</html>
