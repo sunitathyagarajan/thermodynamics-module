@@ -346,7 +346,7 @@
     <div class="quiz-opts">
       <button data-why="Bond enthalpies are always positive; that isn't the problem.">Bond enthalpies are negative.</button>
       <button data-why="Hess's law applies to any path; the issue is what bond enthalpies leave out.">Hess's law doesn't apply to liquids.</button>
-      <button>Bond enthalpies are for gases; they ignore the intermolecular forces released when vapour condenses (44 kJ/mol for water).</button>
+      <button>Bond enthalpies are for gases; they ignore the intermolecular forces released when vapor condenses (44 kJ/mol for water).</button>
     </div>
     <div class="quiz-fb" data-right="Bond enthalpies describe gas-phase bonds. Condensation releases extra enthalpy that they don't include."></div>
   </div>
@@ -526,7 +526,7 @@
       { n: "Combustion of methane (natural gas)", r: [["CH₄(g)", 1], ["O₂(g)", 2]], p: [["CO₂(g)", 1], ["H₂O(l)", 2]], note: "Gas fuel, liquid water product." },
       { n: "Combustion of propane (barbecue gas)", r: [["C₃H₈(g)", 1], ["O₂(g)", 5]], p: [["CO₂(g)", 3], ["H₂O(l)", 4]], note: "" },
       { n: "Combustion of ethanol (a liquid fuel)", r: [["C₂H₅OH(l)", 1], ["O₂(g)", 3]], p: [["CO₂(g)", 2], ["H₂O(l)", 3]], note: "" },
-      { n: "Combustion of glucose (a solid; respiration)", r: [["C₆H₁₂O₆(s)", 1], ["O₂(g)", 6]], p: [["CO₂(g)", 6], ["H₂O(l)", 6]], note: "The same ΔH whether glucose burns in a flame or is oxidised slowly in your cells — a state function!" },
+      { n: "Combustion of glucose (a solid; respiration)", r: [["C₆H₁₂O₆(s)", 1], ["O₂(g)", 6]], p: [["CO₂(g)", 6], ["H₂O(l)", 6]], note: "The same ΔH whether glucose burns in a flame or is oxidized slowly in your cells — a state function!" },
       { n: "Thermite: 2 Al + Fe₂O₃ (all solids)", r: [["Al(s)", 2], ["Fe₂O₃(s)", 1]], p: [["Al₂O₃(s)", 1], ["Fe(s)", 2]], note: "Only solids: ΔH ≈ ΔU. Hot enough to melt the iron." },
       { n: "Decomposition of limestone", r: [["CaCO₃(s)", 1]], p: [["CaO(s)", 1], ["CO₂(g)", 1]], note: "Endothermic: lime kilns must be heated." },
       { n: "Haber process: ammonia synthesis", r: [["N₂(g)", 1], ["H₂(g)", 3]], p: [["NH₃(g)", 2]], note: "" },
@@ -626,7 +626,7 @@
       let mv; for (let i = 0; i < meas.length - 1; i++) if (T >= meas[i][0] && T <= meas[i + 1][0]) { const f = (T - meas[i][0]) / 25; mv = meas[i][1] + f * (meas[i + 1][1] - meas[i][1]); }
       document.getElementById("kMeas").textContent = mv.toFixed(2) + " kJ/mol" + (m ? "" : "*");
       document.getElementById("kMsg").innerHTML = `Δ<var>H</var><sub>vap</sub>(${T} °C) = 44.0 kJ/mol + (−0.0417 kJ mol⁻¹ K⁻¹)(${T} − 25) K = <b>${est(T).toFixed(2)} kJ/mol</b>. ` +
-        `Liquid water has the larger heat capacity, so warming the liquid stores more enthalpy than warming the vapour — less is then needed to vaporize it at higher temperature.` + (m ? "" : " <small>*interpolated between table values.</small>");
+        `Liquid water has the larger heat capacity, so warming the liquid stores more enthalpy than warming the vapor — less is then needed to vaporize it at higher temperature.` + (m ? "" : " <small>*interpolated between table values.</small>");
     }
     sl.addEventListener("input", draw); draw();
   })();

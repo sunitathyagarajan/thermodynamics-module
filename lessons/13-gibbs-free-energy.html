@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gibbs Free Energy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .deriv { counter-reset: d; list-style: none; padding: 0; display: grid; gap: 8px; }
+    .deriv li { counter-increment: d; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px 10px 48px; position: relative; }
+    .deriv li::before { content: counter(d); position: absolute; left: 12px; top: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--energy); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .85rem; }
+    .verdict { font-size: 1.05rem; font-weight: 700; padding: 10px 14px; border-radius: 10px; margin-top: 10px; }
+    .verdict.spont { background: var(--good-bg); color: var(--good); border: 2px solid var(--good); }
+    .verdict.eq { background: var(--energy-fill); color: var(--energy); border: 2px solid var(--energy); }
+    .verdict.non { background: var(--bad-bg); color: var(--bad); border: 2px solid var(--bad); }
+    .ledger td, .ledger th { font-size: .9rem; padding: 6px 10px; }
+    .ledger tr.univ td { font-weight: 700; border-top: 2px solid var(--ink-3); }
+    .app-head { display: flex; align-items: center; gap: 10px; }
+    .app-icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; color: #fff; }
+    .gtbl td, .gtbl th { font-size: .9rem; padding: 6px 10px; }
+  </style>
+</head>
+<body data-lesson="13" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 13</p>
+  <h1>Gibbs free energy: the second law, seen from the system</h1>
+  <p class="lede">To use the second law we had to track the entropy of the system <i>and</i> the surroundings. In the 1870s J. Willard Gibbs showed how to package both into one property of the system alone. That quantity — the Gibbs free energy, <var>G</var> — is the most useful number in chemical thermodynamics.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Derive Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var> from the second law and explain what it means.</li>
+      <li>Calculate Δ<var>G</var>° from Δ<var>H</var>° and Δ<var>S</var>°, or from free energies of formation, and connect Δ<var>G</var>° to the equilibrium constant.</li>
+      <li>Answer: do the surroundings, or the universe, have a Gibbs free energy — and why do we focus on the system?</li>
+      <li>Apply Gibbs free energy to real problems in chemistry, medicine, biology and materials engineering.</li>
+    </ul>
+  </div>
+
+  <h2 id="derivation" data-short="Deriving ΔG">Deriving Gibbs free energy</h2>
+  <p>Start from the second law (Lesson 11) and add one condition: <b>constant temperature and pressure</b> — the conditions of an open beaker or a living cell.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></p>
+  <ol class="deriv">
+    <li>A process is spontaneous when the entropy of the universe increases: Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> + Δ<var>S</var><sub>surr</sub> &gt; 0.<sup class="cite"><a href="#ref-2">2</a></sup></li>
+    <li>At constant <var>T</var> and <var>P</var>, the surroundings' entropy change comes from the heat they receive: Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var><sub>sys</sub>/<var>T</var> (Lesson 11).<sup class="cite"><a href="#ref-2">2</a></sup></li>
+    <li>Substitute: Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> − Δ<var>H</var><sub>sys</sub>/<var>T</var>. Everything on the right is now a property of the <b>system</b>.</li>
+    <li>Multiply through by −<var>T</var> (a negative number, so "&gt; 0" becomes "&lt; 0"): −<var>T</var>Δ<var>S</var><sub>univ</sub> = Δ<var>H</var><sub>sys</sub> − <var>T</var>Δ<var>S</var><sub>sys</sub>.</li>
+    <li>Define the <b>Gibbs free energy</b> <var>G</var> = <var>H</var> − <var>TS</var>. At constant temperature, Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var>.</li>
+    <li>So Δ<var>G</var><sub>sys</sub> = −<var>T</var>Δ<var>S</var><sub>univ</sub>. Whenever the universe's entropy rises, the system's free energy falls.</li>
+  </ol>
+  <div class="eq big">Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var> = −<var>T</var>Δ<var>S</var><sub>univ</sub>
+    <span class="label">constant temperature and pressure (G = H − TS is a state function, because H, T and S are)</span></div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="The entropy-of-the-universe criterion and the Gibbs free energy criterion are mirror images">
+      <g transform="translate(40,20)">
+        <text x="140" y="0" text-anchor="middle" class="t-mid" style="font-weight:700" dy="10">Universe view: ΔS<tspan dy="4" font-size="10">univ</tspan></text>
+        <line x1="140" y1="30" x2="140" y2="220" class="ink-line"/>
+        <rect x="150" y="30" width="120" height="85" rx="8" fill="var(--good-bg)" stroke="var(--good)"/><text x="210" y="70" text-anchor="middle" class="t-small" style="fill:var(--good);font-weight:700">ΔS<tspan dy="3" font-size="8">univ</tspan><tspan dy="-3"> &gt; 0</tspan></text><text x="210" y="88" text-anchor="middle" class="t-small" style="fill:var(--good)">spontaneous</text>
+        <line x1="130" y1="125" x2="280" y2="125" stroke="var(--energy)" stroke-width="3"/><text x="125" y="129" text-anchor="end" class="t-small t-energy">0 = equilibrium</text>
+        <rect x="150" y="135" width="120" height="85" rx="8" fill="var(--bad-bg)" stroke="var(--bad)"/><text x="210" y="175" text-anchor="middle" class="t-small" style="fill:var(--bad);font-weight:700">ΔS<tspan dy="3" font-size="8">univ</tspan><tspan dy="-3"> &lt; 0</tspan></text><text x="210" y="193" text-anchor="middle" class="t-small" style="fill:var(--bad)">nonspontaneous</text>
+        <text x="140" y="245" text-anchor="middle" class="t-small t-muted">needs system AND surroundings</text>
+      </g>
+      <g transform="translate(330,100)">
+        <path d="M0 25 H 80" class="ink-line" stroke-width="3"/><polygon points="88,25 76,18 76,32" fill="var(--ink)"/>
+        <text x="44" y="12" text-anchor="middle" class="t-small" style="font-weight:700">× (−T)</text>
+        <text x="44" y="52" text-anchor="middle" class="t-small t-muted">flips the sign</text>
+      </g>
+      <g transform="translate(440,20)">
+        <text x="140" y="0" text-anchor="middle" class="t-mid" style="font-weight:700" dy="10">System view: ΔG<tspan dy="4" font-size="10">sys</tspan></text>
+        <line x1="140" y1="30" x2="140" y2="220" class="ink-line"/>
+        <rect x="150" y="30" width="120" height="85" rx="8" fill="var(--bad-bg)" stroke="var(--bad)"/><text x="210" y="70" text-anchor="middle" class="t-small" style="fill:var(--bad);font-weight:700">ΔG &gt; 0</text><text x="210" y="88" text-anchor="middle" class="t-small" style="fill:var(--bad)">nonspontaneous</text>
+        <line x1="130" y1="125" x2="280" y2="125" stroke="var(--energy)" stroke-width="3"/><text x="125" y="129" text-anchor="end" class="t-small t-energy">0 = equilibrium</text>
+        <rect x="150" y="135" width="120" height="85" rx="8" fill="var(--good-bg)" stroke="var(--good)"/><text x="210" y="175" text-anchor="middle" class="t-small" style="fill:var(--good);font-weight:700">ΔG &lt; 0</text><text x="210" y="193" text-anchor="middle" class="t-small" style="fill:var(--good)">spontaneous</text>
+        <text x="140" y="245" text-anchor="middle" class="t-small t-muted">needs only the system</text>
+      </g>
+    </svg>
+    <figcaption>Gibbs free energy is the second law written in terms of the system: the same rule, turned upside down and scaled by <var>T</var>.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-4">4</a></sup></figcaption>
+  </figure>
+
+  <h2 id="meaning" data-short="What ΔG means">What Gibbs free energy means</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">1 · A direction sign</h3>
+      <p style="margin:0">At constant <var>T</var> and <var>P</var>, processes run "downhill" in <var>G</var>. Δ<var>G</var> &lt; 0: spontaneous. Δ<var>G</var> = 0: equilibrium. Δ<var>G</var> &gt; 0: the reverse is spontaneous.<sup class="cite"><a href="#ref-1">1</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">2 · Energy that is "free" to do work</h3>
+      <p style="margin:0">−Δ<var>G</var> is the <b>maximum useful (non-expansion) work</b> a process can deliver, reached only when it runs reversibly.<sup class="cite"><a href="#ref-3">3</a></sup> A battery is the clearest case: Δ<var>G</var> = −<var>nFE</var>, the maximum electrical work (Lesson 7's Daniell cell: −212 kJ).<sup class="cite"><a href="#ref-5">5</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">3 · Energy minus an "entropy tax"</h3>
+      <p style="margin:0">Δ<var>H</var> is the total heat at constant pressure. Part of it, <var>T</var>Δ<var>S</var>, must stay as heat to keep the entropy books balanced; the rest, Δ<var>G</var>, is available for work. When Δ<var>S</var> &gt; 0 the "tax" is a refund: more work is available than Δ<var>H</var> alone suggests.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">4 · Equilibrium is the bottom of the hill</h3>
+      <p style="margin:0">As a reaction proceeds, the mixture's <var>G</var> falls until it reaches a minimum. That minimum is equilibrium, where Δ<var>G</var> = 0 and there is no further driving force.<sup class="cite"><a href="#ref-1">1</a></sup></p>
+    </div>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 280" role="img" aria-label="Gibbs energy of a reaction mixture versus extent of reaction, with a minimum at equilibrium">
+      <line x1="80" y1="240" x2="700" y2="240" class="ink-line"/><line x1="80" y1="240" x2="80" y2="20" class="ink-line"/>
+      <text x="390" y="270" text-anchor="middle" class="t-small">extent of reaction →</text>
+      <text x="50" y="130" text-anchor="middle" class="t-small" transform="rotate(-90 50 130)">G of the mixture</text>
+      <text x="90" y="262" class="t-small" style="font-weight:700">pure reactants</text><text x="690" y="262" text-anchor="end" class="t-small" style="font-weight:700">pure products</text>
+      <path d="M90 50 C 200 150, 360 215, 470 205 S 640 150, 690 110" fill="none" stroke="var(--energy)" stroke-width="4"/>
+      <circle cx="455" cy="206" r="8" fill="var(--good)"/>
+      <text x="455" y="232" text-anchor="middle" class="t-small" style="fill:var(--good);font-weight:700">equilibrium (minimum G, ΔG = 0)</text>
+      <path d="M150 85 L 230 132" stroke="var(--heat)" stroke-width="3"/><polygon points="238,137 224,135 230,124" class="heat-fill"/>
+      <text x="170" y="70" class="t-small t-heat">ΔG &lt; 0: forward reaction runs</text>
+      <path d="M660 128 L 590 166" stroke="var(--heat)" stroke-width="3"/><polygon points="582,170 590,158 596,170" class="heat-fill"/>
+      <text x="560" y="105" class="t-small t-heat">ΔG &lt; 0 for the reverse reaction</text>
+      <line x1="90" y1="50" x2="720" y2="50" class="muted-line" stroke-dasharray="3 4"/><line x1="690" y1="110" x2="720" y2="110" class="muted-line" stroke-dasharray="3 4"/>
+      <path d="M712 54 V 106" stroke="var(--ink)" stroke-width="2"/><polygon points="712,110 707,100 717,100" fill="var(--ink)"/>
+      <text x="705" y="86" text-anchor="end" class="t-small" style="font-weight:700">ΔG°</text>
+    </svg>
+    <figcaption>Whichever side you start from, the reaction runs downhill in <var>G</var> toward the minimum. Δ<var>G</var>° compares <i>pure</i> products with <i>pure</i> reactants and decides where that minimum lies: negative Δ<var>G</var>° puts it nearer the products (K &gt; 1).<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></figcaption>
+  </figure>
+
+  <div class="widget" id="gx">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>ΔG = ΔH − TΔS explorer</h3></div>
+    <div class="widget-body">
+      <p>Pick a real reaction or set your own Δ<var>H</var> and Δ<var>S</var>, then change the temperature. The bars show how Δ<var>H</var> and the entropy term −<var>T</var>Δ<var>S</var> add up to Δ<var>G</var>; the graph shows Δ<var>G</var> against temperature.</p>
+      <div class="btn-row" style="margin-top:0" id="gxPre">
+        <button class="btn ghost" data-p="0">2 H₂O₂ → 2 H₂O + O₂</button>
+        <button class="btn ghost" data-p="1">3 O₂ → 2 O₃</button>
+        <button class="btn ghost" data-p="2">N₂ + 3 H₂ → 2 NH₃</button>
+        <button class="btn ghost" data-p="3">CaCO₃ → CaO + CO₂</button>
+        <button class="btn ghost" data-p="4">Ice melting</button>
+      </div>
+      <div class="grid-3" style="margin-top:12px">
+        <div class="control"><label for="gxH">ΔH <output id="gxHOut"></output></label><input type="range" id="gxH" min="-300" max="300" step="0.1" value="-91.8"></div>
+        <div class="control"><label for="gxS">ΔS <output id="gxSOut"></output></label><input type="range" id="gxS" min="-300" max="300" step="0.1" value="-198.1"></div>
+        <div class="control"><label for="gxT">Temperature <output id="gxTOut"></output></label><input type="range" id="gxT" min="100" max="1500" step="1" value="298"></div>
+      </div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="gxBars" viewBox="0 0 380 240" role="img" aria-label="Bars for ΔH, −TΔS and ΔG"></svg>
+        <svg id="gxPlot" viewBox="0 0 380 240" role="img" aria-label="ΔG versus temperature"></svg>
+      </div>
+      <div class="verdict" id="gxVer"></div>
+      <p id="gxMsg" style="font-size:.92rem;margin-bottom:0"></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">ΔH° and ΔS° at 25 °C (Lessons 9 and 11; CaCO₃ from the CRC Handbook), treated as constant with temperature.<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-15">15</a></sup></p>
+    </div>
+  </div>
+
+  <h2 id="calculating" data-short="Calculating ΔG°">Calculating ΔG° two ways</h2>
+  <p>Standard free energies of formation, Δ<var>G</var><sub>f</sub>°, are tabulated just like Δ<var>H</var><sub>f</sub>° (elements in their standard states = 0), so Δ<var>G</var>° can be found directly, Hess's-law style:<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-6">6</a></sup></p>
+  <div class="eq">Δ<var>G</var>°<sub>rxn</sub> = Σ<var>n</var> Δ<var>G</var><sub>f</sub>°(products) − Σ<var>m</var> Δ<var>G</var><sub>f</sub>°(reactants) &nbsp;&nbsp;or&nbsp;&nbsp; Δ<var>G</var>° = Δ<var>H</var>° − <var>T</var>Δ<var>S</var>°</div>
+  <div class="grid-2" style="align-items:start">
+    <div class="table-wrap" style="margin-top:0">
+      <table class="gtbl">
+        <tr><th>Substance</th><th class="num">Δ<var>G</var><sub>f</sub>° (kJ/mol)</th></tr>
+        <tr><td>H₂O(l)</td><td class="num">−237.1</td></tr>
+        <tr><td>H₂O(g)</td><td class="num">−228.6</td></tr>
+        <tr><td>CO₂(g)</td><td class="num">−394.4</td></tr>
+        <tr><td>CH₄(g)</td><td class="num">−50.5</td></tr>
+        <tr><td>NH₃(g)</td><td class="num">−16.4</td></tr>
+        <tr><td>C(s, diamond)</td><td class="num">+2.9</td></tr>
+        <tr><td>O₂(g), N₂(g), H₂(g), C(graphite)</td><td class="num">0</td></tr>
+      </table>
+      <p style="font-size:.82rem;color:var(--ink-3);margin:4px 0 0">At 25 °C, from OpenStax Appendix G.<sup class="cite"><a href="#ref-6">6</a></sup></p>
+    </div>
+    <div class="example" style="margin:0">
+      <div class="example-head"><span class="example-num">Example</span><h3>Burning methane</h3></div>
+      <div class="example-body">
+        <p style="margin-top:0">CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l) at 25 °C.</p>
+        <ol class="steps">
+          <li><b>From Δ<var>G</var><sub>f</sub>°:</b> [−394.4 + 2(−237.1)] − [−50.5 + 0] = <b>−818.1 kJ</b>.</li>
+          <li><b>From Δ<var>H</var>° and Δ<var>S</var>°:</b> −890.5 kJ − (298.15 K)(−0.2429 kJ/K) = −890.5 + 72.4 = <b>−818.1 kJ</b>.</li>
+          <li class="answer-box">Both routes give Δ<var>G</var>° = −818.1 kJ: strongly spontaneous. Note it is smaller in size than Δ<var>H</var>° — the "entropy tax" is 72.4 kJ, because 3 mol of gas become 1 mol of gas plus liquid.</li>
+        </ol>
+        <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <p style="margin-top:0"><b style="color:var(--accent)">Try it:</b> Use the table to find Δ<var>G</var>° for N₂(g) + 3 H₂(g) → 2 NH₃(g) at 25 °C, in kJ.</p>
+    <div class="num-check" data-answer="-32.8" data-tol="0.01" data-hint="Elements are 0; products: 2 × ΔGf°(NH₃)."><input inputmode="decimal" placeholder="kJ"><button class="btn">Check</button><span class="result"></span></div>
+  </div>
+
+  <h2 id="equilibrium" data-short="ΔG and equilibrium">ΔG and the equilibrium constant</h2>
+  <p>Away from standard conditions, Δ<var>G</var> depends on the reaction quotient <var>Q</var>. At equilibrium Δ<var>G</var> = 0 and <var>Q</var> = <var>K</var>, which links Δ<var>G</var>° to how far a reaction goes:<sup class="cite"><a href="#ref-1">1</a></sup></p>
+  <div class="eq">Δ<var>G</var> = Δ<var>G</var>° + <var>RT</var> ln <var>Q</var> &nbsp;&nbsp;⟹&nbsp;&nbsp; Δ<var>G</var>° = −<var>RT</var> ln <var>K</var> &nbsp;&nbsp;(<var>K</var> = e<sup>−Δ<var>G</var>°/<var>RT</var></sup>)</div>
+
+  <div class="widget" id="gk">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>From ΔG° to K</h3></div>
+    <div class="widget-body">
+      <div class="grid-2">
+        <div class="control"><label for="gkG">ΔG° <output id="gkGOut"></output></label><input type="range" id="gkG" min="-60" max="60" step="0.5" value="-10"></div>
+        <div class="control"><label for="gkT">Temperature <output id="gkTOut"></output></label><input type="range" id="gkT" min="250" max="400" step="1" value="298"></div>
+      </div>
+      <svg id="gkSvg" viewBox="0 0 700 150" role="img" aria-label="K on a logarithmic scale and the equilibrium mixture for A ⇌ B" style="margin-top:8px"></svg>
+      <p id="gkMsg" style="font-size:.92rem;margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example</span><h3>Predicting the vapor pressure of water at 25 °C</h3><span class="tag liquid">liquid ⇌ gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">For H₂O(l) ⇌ H₂O(g), <var>K</var> is simply the pressure of water vapor (in bar). Use Δ<var>H</var>° = +44.0 kJ and Δ<var>S</var>° = 188.8 − 70.0 = +118.8 J/K.</p>
+      <ol class="steps">
+        <li>Δ<var>G</var>° = 44.0 − (298.15)(0.1188) = <b>+8.58 kJ</b> (positive: at 1 bar, liquid water does not boil at 25 °C).</li>
+        <li><var>K</var> = e<sup>−8580/(8.314 × 298.15)</sup> = e<sup>−3.461</sup> = <b>0.0314</b>.</li>
+        <li class="answer-box">P(H₂O) = 0.0314 bar = <b>3.1 kPa ≈ 23.5 mmHg</b>. The measured vapor pressure of water at 25 °C is 3.17 kPa (23.8 mmHg) — thermodynamics predicts it from table data alone.<sup class="cite"><a href="#ref-7">7</a></sup></li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+
+  <h2 id="surroundings" data-short="G of the surroundings">Do the surroundings have a Gibbs free energy?</h2>
+  <p>Yes — <var>G</var> = <var>H</var> − <var>TS</var> can be written for any body at a definite temperature and pressure. So let's calculate it for the surroundings in the usual situation, where they act as a huge heat bath at constant <var>T</var> and <var>P</var> and simply absorb the heat <var>q</var><sub>surr</sub> = −Δ<var>H</var><sub>sys</sub>:<sup class="cite"><a href="#ref-3">3</a></sup></p>
+  <div class="eq">Δ<var>G</var><sub>surr</sub> = Δ<var>H</var><sub>surr</sub> − <var>T</var>Δ<var>S</var><sub>surr</sub> = <var>q</var><sub>surr</sub> − <var>T</var>(<var>q</var><sub>surr</sub>/<var>T</var>) = <b>0</b></div>
+  <div class="callout key">
+    <span class="callout-title">What this tells us</span>
+    <ul style="margin:.3em 0 0;padding-left:1.2em">
+      <li>When the surroundings only exchange heat, <b>their Gibbs energy doesn't change</b>. Their whole role — the entropy they gain or lose — is already built into Δ<var>G</var><sub>sys</sub> through the −Δ<var>H</var>/<var>T</var> term.</li>
+      <li>If the system also does <b>useful work</b> on the surroundings (a battery lifting a weight, an ATP-driven pump), the surroundings' <var>G</var> rises by that work. But the system's <var>G</var> falls by at least as much, so Δ<var>G</var><sub>sys</sub> + Δ<var>G</var><sub>surr</sub> ≤ 0.<sup class="cite"><a href="#ref-3">3</a></sup></li>
+      <li>Free energy can be <b>moved</b> from place to place as work, and it can be <b>lost</b> in irreversible processes, but it can never be created. Energy is conserved; <i>free</i> energy is not.</li>
+    </ul>
+  </div>
+
+  <div class="widget" id="ledger">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>The Gibbs ledger: system, surroundings and universe</h3></div>
+    <div class="widget-body">
+      <div class="seg" role="group" aria-label="Process" id="ldSeg">
+        <button class="on" data-l="0">Burning methane</button><button data-l="1">Making ammonia</button><button data-l="2">Limestone decomposing</button><button data-l="3">Ice melting at 25 °C</button>
+      </div>
+      <div class="table-wrap" style="margin-top:12px">
+        <table class="ledger"><thead><tr><th></th><th class="num">ΔH (kJ)</th><th class="num">ΔS (J/K)</th><th class="num">TΔS (kJ)</th><th class="num">ΔG = ΔH − TΔS (kJ)</th></tr></thead><tbody id="ldBody"></tbody></table>
+      </div>
+      <p id="ldMsg" style="font-size:.92rem;margin-bottom:0"></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">At 298.15 K and 1 bar; surroundings treated as a heat bath that only exchanges heat with the system.</p>
+    </div>
+  </div>
+
+  <h2 id="universe" data-short="G of the universe?">Is there a Gibbs free energy of the universe?</h2>
+  <p>Not in a useful sense. Gibbs free energy only has meaning for something held at a definite temperature and pressure by its surroundings. The universe has no single temperature or pressure, and it has <b>no surroundings</b> — it is the one truly isolated system. For an isolated system the governing law is simply Δ<var>S</var> ≥ 0.<sup class="cite"><a href="#ref-3">3</a></sup></p>
+  <p>You can formally add Δ<var>G</var><sub>sys</sub> + Δ<var>G</var><sub>surr</sub> for a laboratory-sized "universe" at one temperature (the ledger above does). But since Δ<var>G</var><sub>surr</sub> = 0, the sum is just Δ<var>G</var><sub>sys</sub> = −<var>T</var>Δ<var>S</var><sub>univ</sub>: the entropy law again, in different units. It doesn't add new physics.</p>
+  <p>What <i>does</i> carry meaning is the bullet above: every spontaneous process uses up some free energy — some ability to do useful work — that can never be recovered. Energy is never lost, but its usefulness is.</p>
+
+  <h2 id="why-system" data-short="Why focus on the system?">Why do we always focus on the system?</h2>
+  <div class="grid-2">
+    <div class="card"><h3 style="margin-top:0">It's what we can measure</h3><p style="margin:0">Calorimeters measure the system's Δ<var>H</var>; tables give its <var>S</var>° and Δ<var>G</var><sub>f</sub>°. Nobody can measure the entropy change of the whole room, building and atmosphere.</p></div>
+    <div class="card"><h3 style="margin-top:0">The surroundings are already counted</h3><p style="margin:0">At constant <var>T</var> and <var>P</var>, the surroundings' only effect is Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var>, which <var>G</var> includes automatically. Atkins calls this "concentrating on the system."<sup class="cite"><a href="#ref-3">3</a></sup></p></div>
+    <div class="card"><h3 style="margin-top:0">It matches how chemistry is done</h3><p style="margin:0">Open beakers, reactors held at set conditions and living cells at 37 °C all run at (nearly) constant temperature and pressure — exactly the conditions for which Δ<var>G</var> is the right test.</p></div>
+    <div class="card"><h3 style="margin-top:0">One number answers three questions</h3><p style="margin:0">Δ<var>G</var> tells you whether a process can happen, how far it goes (Δ<var>G</var>° = −<var>RT</var> ln <var>K</var>), and the most useful work it can deliver (−Δ<var>G</var>).<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></p></div>
+  </div>
+
+  <h2 id="applications" data-short="Real-life applications">Gibbs free energy in the real world</h2>
+
+  <!-- ===== Chemistry ===== -->
+  <h3 class="app-head"><span class="app-icon" style="background:var(--sys)">C</span>Chemistry: making ammonia for fertilizer (the Haber–Bosch process)</h3>
+  <p>Fertilizer made from Haber–Bosch ammonia grows the food that feeds nearly half of the world's population.<sup class="cite"><a href="#ref-16">16</a></sup> The reaction N₂(g) + 3 H₂(g) ⇌ 2 NH₃(g) has Δ<var>H</var>° = −91.8 kJ and Δ<var>S</var>° = −198.1 J/K, so it is favored only at low temperature.<sup class="cite"><a href="#ref-6">6</a></sup> At 25 °C, Δ<var>G</var>° = −32.8 kJ and <var>K</var> ≈ 6 × 10⁵: products are strongly favored, but the reaction is far too slow to be useful. Heating speeds it up. But because Δ<var>S</var>° &lt; 0, the −<var>T</var>Δ<var>S</var> term is positive and grows with temperature, so by 450 °C <var>K</var> has fallen to about 4 × 10⁻⁵.</p>
+  <p>Industry compromises. An iron catalyst gives a useful rate at a moderate 400–500 °C. Very <b>high pressure</b> (about 150–250 atm) pushes the equilibrium toward the side with fewer moles of gas, and ammonia is removed as it forms.<sup class="cite"><a href="#ref-8">8</a></sup> Thermodynamics tells engineers what is possible; kinetics tells them how fast.</p>
+
+  <div class="widget" id="haber">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Running an ammonia plant: choose the conditions</h3></div>
+    <div class="widget-body">
+      <p>Set the reactor temperature and pressure for a 1 : 3 mixture of N₂ and H₂. The calculator finds Δ<var>G</var>° and <var>K</var> at that temperature, then the percentage of ammonia in the mixture at equilibrium.</p>
+      <div class="btn-row" style="margin-top:0" id="hbPre">
+        <button class="btn ghost" data-t="298" data-p="1">25 °C, 1 atm</button>
+        <button class="btn ghost" data-t="723" data-p="200">Industrial: 450 °C, 200 atm</button>
+        <button class="btn ghost" data-t="873" data-p="1">600 °C, 1 atm</button>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="control"><label for="hbT">Temperature <output id="hbTOut"></output></label><input type="range" id="hbT" min="298" max="900" step="1" value="723"></div>
+        <div class="control"><label for="hbP">Pressure <output id="hbPOut"></output></label><input type="range" id="hbP" min="1" max="300" step="1" value="200"></div>
+      </div>
+      <svg id="hbSvg" viewBox="0 0 700 280" role="img" aria-label="Equilibrium percentage of ammonia versus temperature at several pressures" style="margin-top:8px"></svg>
+      <div class="readout">
+        <div><span class="k">ΔG° at this T</span><span class="v" id="hbG"></span></div>
+        <div><span class="k">K</span><span class="v" id="hbK"></span></div>
+        <div><span class="k">NH₃ at equilibrium</span><span class="v" id="hbX"></span></div>
+      </div>
+      <p id="hbMsg" style="font-size:.92rem;margin-bottom:0"></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Δ<var>H</var>° and Δ<var>S</var>° are corrected for temperature with Δ<var>C</var><sub>P</sub> ≈ −44 J/K (Kirchhoff's law, Lesson 9), and the gases are treated as ideal. At hundreds of atmospheres real gases are not ideal, so measured yields differ from these estimates by a few percentage points.<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup></p>
+    </div>
+  </div>
+  <p style="font-size:.85rem;color:var(--ink-3)">A note if you check the textbook: OpenStax Section 13.3 describes <var>K</var><sub>p</sub> for this reaction as "on the order of 10⁻⁵ at 25 °C." A <var>K</var> that small applies near 450 °C; the data in OpenStax's own Appendix G give <var>K</var> ≈ 6 × 10⁵ at 25 °C.<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-8">8</a></sup></p>
+
+  <!-- ===== Medicine ===== -->
+  <h3 class="app-head"><span class="app-icon" style="background:var(--heat)">M</span>Medicine: how tightly does a drug bind?</h3>
+  <p>A drug works by binding to a target protein: drug + protein ⇌ complex. Pharmacologists report the dissociation constant <var>K</var><sub>d</sub> (smaller = tighter binding), and the binding free energy is Δ<var>G</var>°<sub>bind</sub> = <var>RT</var> ln <var>K</var><sub>d</sub> (with <var>K</var><sub>d</sub> in mol/L). Drug designers improve Δ<var>G</var> by tuning both Δ<var>H</var> (better contacts) and Δ<var>S</var> (releasing ordered water, reducing floppiness).<sup class="cite"><a href="#ref-9">9</a></sup></p>
+  <div class="widget" id="drug">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Binding strength and free energy (37 °C)</h3></div>
+    <div class="widget-body">
+      <div class="control"><label for="drKd">Dissociation constant, K<sub>d</sub> <output id="drKdOut"></output></label><input type="range" id="drKd" min="-12" max="-3" step="0.1" value="-9"></div>
+      <svg id="drSvg" viewBox="0 0 700 100" role="img" aria-label="Binding free energy scale" style="margin-top:8px"></svg>
+      <p id="drMsg" style="font-size:.92rem;margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <h3 class="app-head"><span class="app-icon" style="background:var(--heat)">M</span>Medicine and biology: fever, pasteurization and sterilization</h3>
+  <p>A folded protein is only marginally stable. For unfolding, Δ<var>G</var> at body temperature is typically only a few tens of kJ/mol: the small difference between a large positive Δ<var>H</var> and a large positive <var>T</var>Δ<var>S</var>.<sup class="cite"><a href="#ref-10">10</a></sup> Because Δ<var>S</var> &gt; 0, raising the temperature makes unfolding spontaneous. That is how heat pasteurizes milk and sterilizes surgical instruments: it unfolds (denatures) the proteins that microbes need. It is also one reason a very high fever (above about 41 °C) is dangerous, because the least stable proteins in the body begin to unfold.</p>
+  <div class="widget" id="fold">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Will the protein stay folded?</h3></div>
+    <div class="widget-body">
+      <p>A model protein with Δ<var>H</var><sub>unfold</sub> = +400 kJ/mol that is half unfolded at its "melting" temperature <var>T</var><sub>m</sub>. Then Δ<var>S</var> = Δ<var>H</var>/<var>T</var><sub>m</sub> and Δ<var>G</var><sub>unfold</sub> = Δ<var>H</var>(1 − <var>T</var>/<var>T</var><sub>m</sub>). Try a less stable protein (<var>T</var><sub>m</sub> = 45 °C) and compare body temperature with a fever.</p>
+      <div class="btn-row" style="margin-top:0"><button class="btn ghost" data-ft="37">Body, 37 °C</button><button class="btn ghost" data-ft="40">Fever, 40 °C</button><button class="btn ghost" data-ft="72">Pasteurization, 72 °C</button><button class="btn ghost" data-ft="121">Autoclave, 121 °C</button></div>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="control"><label for="flT">Temperature <output id="flTOut"></output></label><input type="range" id="flT" min="0" max="130" step="1" value="37"></div>
+        <div class="control"><label for="flTm">Melting temperature, T<sub>m</sub> <output id="flTmOut"></output></label><input type="range" id="flTm" min="45" max="95" step="1" value="60"></div>
+      </div>
+      <svg id="flSvg" viewBox="0 0 700 200" role="img" aria-label="Fraction of protein unfolded versus temperature" style="margin-top:8px"></svg>
+      <div class="readout">
+        <div><span class="k">ΔG<sub>unfold</sub></span><span class="v" id="flG"></span></div>
+        <div><span class="k">K (unfolded/folded)</span><span class="v" id="flK"></span></div>
+        <div><span class="k">Unfolded</span><span class="v" id="flF"></span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Simplified two-state model that ignores the heat-capacity change of unfolding; real proteins vary.<sup class="cite"><a href="#ref-10">10</a></sup></p>
+    </div>
+  </div>
+
+  <!-- ===== Biology ===== -->
+  <h3 class="app-head"><span class="app-icon" style="background:var(--work)">B</span>Biology: how cells drive uphill reactions with ATP</h3>
+  <p>Cells constantly need reactions with Δ<var>G</var> &gt; 0. They pair them with ATP hydrolysis (Δ<var>G</var>°′ = −30.5 kJ/mol): when two reactions share an intermediate, their Δ<var>G</var> values simply add (Hess's law for <var>G</var>), and the total can be negative.<sup class="cite"><a href="#ref-11">11</a></sup> (The prime on Δ<var>G</var>°′ means the biochemical standard state, pH 7.)</p>
+  <div class="widget" id="atp">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Coupling a reaction to ATP</h3></div>
+    <div class="widget-body">
+      <div class="seg" role="group" aria-label="Reaction" id="atpSeg">
+        <button class="on" data-a="0">Glucose → glucose 6-phosphate</button><button data-a="1">Glutamate → glutamine</button>
+      </div>
+      <label style="display:inline-flex;gap:6px;align-items:center;font-size:.95rem;margin:12px 0 0;font-weight:600"><input type="checkbox" id="atpOn"> Couple it to ATP hydrolysis</label>
+      <div class="widget-row" style="margin-top:10px">
+        <div id="atpEqs" style="font-family:var(--serif);font-size:1rem"></div>
+        <svg id="atpSvg" viewBox="0 0 320 220" role="img" aria-label="Free energy bars for the coupled reactions"></svg>
+      </div>
+      <p id="atpMsg" style="font-size:.92rem;margin-bottom:0"></p>
+    </div>
+  </div>
+  <p><b>Respiration powers it all.</b> Oxidizing glucose, C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O(l), has Δ<var>G</var>° ≈ −2880 kJ/mol (from Lessons 9 and 11: −2802.5 − 298.15 × 0.2624). If a cell makes about 32 ATP per glucose, that stores 32 × 30.5 ≈ 980 kJ — roughly a third of the free energy released, under standard conditions. Inside real cells, Δ<var>G</var> for ATP hydrolysis is closer to −50 kJ/mol, because concentrations are far from standard (Δ<var>G</var> = Δ<var>G</var>°′ + <var>RT</var> ln <var>Q</var>).<sup class="cite"><a href="#ref-11">11</a></sup></p>
+
+  <!-- ===== Materials / engineering ===== -->
+  <h3 class="app-head"><span class="app-icon" style="background:var(--surr)">E</span>Materials and engineering: extracting metals (the Ellingham diagram)</h3>
+  <p>Metallurgists plot Δ<var>G</var>° for forming each metal oxide (per mole of O₂) against temperature. A substance whose line lies <b>lower</b> can take oxygen away from one whose line lies higher. Carbon's line (2 C + O₂ → 2 CO) slopes <b>downward</b> because making CO gas increases entropy — so at high enough temperature, carbon (coke) can reduce iron ore in a blast furnace.<sup class="cite"><a href="#ref-12">12</a>,<a href="#ref-13">13</a></sup></p>
+  <div class="widget" id="ell">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Which oxides can carbon reduce?</h3></div>
+    <div class="widget-body">
+      <div class="control"><label for="elT">Furnace temperature <output id="elTOut"></output></label><input type="range" id="elT" min="300" max="2500" step="10" value="1200"></div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="elSvg" viewBox="0 0 420 320" role="img" aria-label="Approximate Ellingham diagram"></svg>
+        <div>
+          <div class="table-wrap" style="margin-top:0"><table class="gtbl"><thead><tr><th>Oxide</th><th class="num">C reduces it above</th><th>At this T?</th></tr></thead><tbody id="elBody"></tbody></table></div>
+          <p id="elMsg" style="font-size:.92rem"></p>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Approximate straight lines from 25 °C values of ΔH° and ΔS° (real diagrams have small kinks at melting and boiling points).<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-13">13</a>,<a href="#ref-15">15</a></sup></p>
+    </div>
+  </div>
+  <p>The diagram explains a lot of history: copper (reducible by carbon even at a campfire's temperature) was smelted thousands of years before iron, which needs a furnace above ~750 °C. Aluminum can't be made with carbon at any practical temperature (~2000 °C would be needed), so it is produced by electrolysis instead.</p>
+
+  <h3 class="app-head"><span class="app-icon" style="background:var(--surr)">E</span>Engineering: the hydrogen fuel cell</h3>
+  <div class="grid-2" style="align-items:center">
+    <div>
+      <p style="margin-top:0">A fuel cell turns H₂(g) + ½ O₂(g) → H₂O(l) directly into electrical work. Its limits come straight from Δ<var>G</var>:<sup class="cite"><a href="#ref-5">5</a>,<a href="#ref-14">14</a></sup></p>
+      <ul>
+        <li><b>Maximum voltage:</b> <var>E</var>° = −Δ<var>G</var>°/(<var>nF</var>) = 237 100 / (2 × 96 485) = <b>1.23 V</b>.</li>
+        <li><b>Maximum efficiency:</b> Δ<var>G</var>°/Δ<var>H</var>° = 237.1/285.8 = <b>83%</b>. The other 17% (<var>T</var>Δ<var>S</var>, because 1.5 mol of gas become liquid) must leave as heat.</li>
+        <li>A heat engine burning the same hydrogen is limited instead by the temperatures it works between (the Carnot limit), so at low operating temperatures a fuel cell's limit is higher.<sup class="cite"><a href="#ref-14">14</a></sup></li>
+      </ul>
+    </div>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 220" role="img" aria-label="Energy split for a hydrogen fuel cell">
+        <text x="165" y="18" text-anchor="middle" class="t-small" style="font-weight:700">Per mole of H₂ at 25 °C</text>
+        <rect x="40" y="35" width="250" height="40" rx="6" fill="var(--heat)" opacity=".85"/>
+        <text x="165" y="60" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">|ΔH°| = 285.8 kJ</text>
+        <rect x="40" y="95" width="207" height="40" rx="6" fill="var(--work)" opacity=".85"/>
+        <text x="143" y="120" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:13px">|ΔG°| = 237.1 kJ (max work)</text>
+        <rect x="249" y="95" width="41" height="40" rx="6" fill="var(--ink-3)"/>
+        <text x="269" y="155" text-anchor="middle" class="t-small t-muted">TΔS: 48.7 kJ</text>
+        <text x="269" y="170" text-anchor="middle" class="t-small t-muted">as heat</text>
+        <text x="165" y="205" text-anchor="middle" class="t-mid" style="font-weight:700">efficiency limit = 83%</text>
+      </svg>
+    </figure>
+  </div>
+
+  <h3 class="app-head"><span class="app-icon" style="background:var(--surr)">E</span>Materials: are diamonds forever?</h3>
+  <p>C(diamond) → C(graphite) has Δ<var>G</var>° = −2.9 kJ/mol at 25 °C, so diamond is thermodynamically <i>unstable</i> — it "should" turn into graphite.<sup class="cite"><a href="#ref-6">6</a></sup> It doesn't, because breaking diamond's bonds is extremely slow: a reminder that Δ<var>G</var> says <b>whether</b>, not <b>how fast</b> (Lesson 11).</p>
+
+  <h2 id="check" data-short="Check yourself">Check yourself</h2>
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">At constant temperature and pressure, a process has ΔG = −25 kJ. What can you conclude?</p>
+    <div class="quiz-opts">
+      <button data-why="ΔG says nothing about speed; diamond → graphite has ΔG < 0 yet takes forever.">It happens quickly.</button>
+      <button>It is spontaneous, and the entropy of the universe increases.</button>
+      <button data-why="ΔG < 0 means ΔS_univ > 0, not ΔS_sys > 0. The system's entropy could go down.">The entropy of the system must increase.</button>
+      <button data-why="ΔG < 0 doesn't require ΔH < 0; endothermic processes can have ΔG < 0 if TΔS is large.">It must be exothermic.</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔG_sys = −TΔS_univ: a negative ΔG means the universe's entropy rises, so the process is spontaneous (but maybe slow)."></div>
+  </div>
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">A reaction has ΔG° = +10 kJ/mol at 25 °C. Which is true?</p>
+    <div class="quiz-opts">
+      <button data-why="A positive ΔG° doesn't mean no reaction; it means K is less than 1, so some products still form.">No products form at all.</button>
+      <button data-why="ΔG° > 0 gives K < 1, not K > 1.">K is greater than 1.</button>
+      <button>K = e<sup>−10 000/(8.314 × 298)</sup> ≈ 0.018: reactants are favored at equilibrium, but some products form.</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔG° = −RT ln K, so K = 0.018. Equilibrium lies on the reactant side."></div>
+  </div>
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">The surroundings absorb 50 kJ of heat at a constant 298 K and do nothing else. What is ΔG<sub>surr</sub>?</p>
+    <div class="quiz-opts">
+      <button>0</button>
+      <button data-why="ΔH_surr = +50 kJ, but TΔS_surr = T × (50 kJ/T) = +50 kJ too, so they cancel.">+50 kJ</button>
+      <button data-why="The two terms cancel: ΔG_surr = q − T(q/T) = 0.">−50 kJ</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔG_surr = ΔH_surr − TΔS_surr = 50 − 298 × (50/298) = 0. A heat bath stores no free energy; its role is already inside ΔG_sys."></div>
+  </div>
+  <div class="quiz" data-answer="3">
+    <p class="quiz-q">Why can cells make glutamine (ΔG°′ = +14.2 kJ/mol) by coupling the reaction to ATP hydrolysis (ΔG°′ = −30.5 kJ/mol)?</p>
+    <div class="quiz-opts">
+      <button data-why="Enzymes speed reactions up but don't change ΔG.">The enzyme makes ΔG negative.</button>
+      <button data-why="Coupling doesn't change temperature; the ΔG values add.">ATP heats the cell so that TΔS becomes larger.</button>
+      <button data-why="ΔG is a state function; the coupled reaction's ΔG is the sum of the two.">ATP makes the second law not apply.</button>
+      <button>The two reactions share an intermediate, so their ΔG values add: +14.2 − 30.5 = −16.3 kJ/mol.</button>
+    </div>
+    <div class="quiz-fb" data-right="G is a state function, so ΔG values of coupled steps add (like Hess's law). The overall reaction is spontaneous."></div>
+  </div>
+
+  <h2 id="wrap-up" data-short="Module wrap-up">Module wrap-up</h2>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="Concept map of the whole module from the first law to Gibbs free energy">
+      <g class="t-mid" style="font-weight:600">
+        <rect x="20" y="12" width="230" height="56" rx="12" fill="var(--energy-fill)" stroke="var(--energy)" stroke-width="2"/>
+        <text x="135" y="36" text-anchor="middle">First law</text><text x="135" y="57" text-anchor="middle" class="t-small t-energy">ΔU = q + w · enthalpy · Hess's law</text>
+        <rect x="265" y="12" width="230" height="56" rx="12" fill="var(--heat-fill)" stroke="var(--heat)" stroke-width="2"/>
+        <text x="380" y="36" text-anchor="middle">Second law</text><text x="380" y="57" text-anchor="middle" class="t-small t-heat">ΔS<tspan dy="3" font-size="8">univ</tspan><tspan dy="-3"> &gt; 0 for spontaneous change</tspan></text>
+        <rect x="510" y="12" width="230" height="56" rx="12" fill="var(--sys-fill)" stroke="var(--sys)" stroke-width="2"/>
+        <text x="625" y="36" text-anchor="middle">Third law</text><text x="625" y="57" text-anchor="middle" class="t-small t-sys">S = 0 for a perfect crystal at 0 K</text>
+        <rect x="160" y="120" width="440" height="66" rx="14" fill="var(--work-fill)" stroke="var(--work)" stroke-width="2.5"/>
+        <text x="380" y="148" text-anchor="middle">Gibbs free energy: ΔG = ΔH − TΔS = −TΔS<tspan dy="4" font-size="10">univ</tspan></text>
+        <text x="380" y="172" text-anchor="middle" class="t-small">constant T and P · system-only test of spontaneity</text>
+        <rect x="20" y="230" width="230" height="56" rx="12" fill="var(--surface-2)" stroke="var(--ink-3)"/><text x="135" y="254" text-anchor="middle" class="t-small">Direction: ΔG &lt; 0</text><text x="135" y="272" text-anchor="middle" class="t-small">spontaneous</text>
+        <rect x="265" y="230" width="230" height="56" rx="12" fill="var(--surface-2)" stroke="var(--ink-3)"/><text x="380" y="254" text-anchor="middle" class="t-small">Extent: ΔG° = −RT ln K</text><text x="380" y="272" text-anchor="middle" class="t-small">equilibrium</text>
+        <rect x="510" y="230" width="230" height="56" rx="12" fill="var(--surface-2)" stroke="var(--ink-3)"/><text x="625" y="254" text-anchor="middle" class="t-small">Work: −ΔG = max useful work</text><text x="625" y="272" text-anchor="middle" class="t-small">batteries, cells, engines</text>
+      </g>
+      <g class="muted-line" stroke-width="2">
+        <path d="M135 68 L 300 120"/><path d="M380 68 V 120"/><path d="M625 68 L 460 120"/>
+        <path d="M300 186 L 135 230"/><path d="M380 186 V 230"/><path d="M460 186 L 625 230"/>
+      </g>
+    </svg>
+    <figcaption>The three laws and the quantity that ties them together. Enthalpy (first law) and absolute entropy (third law) combine into Δ<var>G</var>, which expresses the second law for the system alone.</figcaption>
+  </figure>
+  <p>You have followed energy from a single cup of coffee to blast furnaces, fuel cells and living cells. The tools are always the same: choose a system, track <span class="q">q</span> and <span class="w">w</span> across its boundary, use the state functions <span class="u">U</span>, <var>H</var>, <var>S</var> and <var>G</var> to calculate changes along whatever path is easiest, and let the entropy of the universe — or, at constant <var>T</var> and <var>P</var>, the Gibbs energy of the system — tell you which way nature will go.</p>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
+  <ol class="refs">
+    <li id="ref-1">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.4, Free Energy. <a href="https://openstax.org/books/chemistry-2e/pages/16-4-free-energy">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.3, The Second and Third Laws of Thermodynamics. <a href="https://openstax.org/books/chemistry-2e/pages/16-3-the-second-and-third-laws-of-thermodynamics">openstax.org</a></li>
+    <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 3, The Second and Third Laws ("concentrating on the system": the Helmholtz and Gibbs energies; maximum non-expansion work).</li>
+    <li id="ref-4">Gibbs, J. W. On the Equilibrium of Heterogeneous Substances. <i>Trans. Conn. Acad. Arts Sci.</i> <b>1876</b>, <i>3</i>, 108–248; <b>1878</b>, <i>3</i>, 343–524.</li>
+    <li id="ref-5">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 17.4, Potential, Free Energy, and Equilibrium. <a href="https://openstax.org/books/chemistry-2e/pages/17-4-potential-free-energy-and-equilibrium">openstax.org</a></li>
+    <li id="ref-6">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
+    <li id="ref-7">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD, 20899. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> (accessed November 2026) <span class="use">— vapor pressure of water; heat capacities of N₂, H₂ and NH₃</span></li>
+    <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 13.3, Shifting Equilibria: Le Châtelier's Principle. <a href="https://openstax.org/books/chemistry-2e/pages/13-3-shifting-equilibria-le-chateliers-principle">openstax.org</a> <span class="use">— Haber–Bosch operating conditions (about 150–250 atm and 400–500 °C)</span></li>
+    <li id="ref-9">Freire, E. Do Enthalpy and Entropy Distinguish First in Class from Best in Class? <i>Drug Discovery Today</i> <b>2008</b>, <i>13</i> (19–20), 869–874. <a href="https://doi.org/10.1016/j.drudis.2008.07.005">doi:10.1016/j.drudis.2008.07.005</a></li>
+    <li id="ref-10">Privalov, P. L. Stability of Proteins: Small Globular Proteins. <i>Adv. Protein Chem.</i> <b>1979</b>, <i>33</i>, 167–241. <a href="https://doi.org/10.1016/S0065-3233(08)60460-X">doi:10.1016/S0065-3233(08)60460-X</a></li>
+    <li id="ref-11">Nelson, D. L.; Cox, M. M. <i>Lehninger Principles of Biochemistry</i>, 7th ed.; W. H. Freeman: New York, 2017; Chapter 13, Bioenergetics and Biochemical Reaction Types. <span class="use">— ΔG°′ of ATP hydrolysis and coupled reactions</span></li>
+    <li id="ref-12">Ellingham, H. J. T. Reducibility of Oxides and Sulphides in Metallurgical Processes. <i>J. Soc. Chem. Ind.</i> <b>1944</b>, <i>63</i> (5), 125–133. <a href="https://doi.org/10.1002/jctb.5000630501">doi:10.1002/jctb.5000630501</a></li>
+    <li id="ref-13">Gaskell, D. R.; Laughlin, D. E. <i>Introduction to the Thermodynamics of Materials</i>, 6th ed.; CRC Press: Boca Raton, FL, 2017. <span class="use">— Ellingham diagrams</span></li>
+    <li id="ref-14">Larminie, J.; Dicks, A. <i>Fuel Cell Systems Explained</i>, 2nd ed.; Wiley: Chichester, 2003. <span class="use">— 1.23 V and the 83% efficiency limit at 25 °C</span></li>
+    <li id="ref-15">Rumble, J. R., Ed. <i>CRC Handbook of Chemistry and Physics</i>, 100th ed.; CRC Press: Boca Raton, FL, 2019. <span class="use">— data for FeO, Cu₂O, Al₂O₃ and CaCO₃</span></li>
+    <li id="ref-16">Erisman, J. W.; Sutton, M. A.; Galloway, J.; Klimont, Z.; Winiwarter, W. How a Century of Ammonia Synthesis Changed the World. <i>Nat. Geosci.</i> <b>2008</b>, <i>1</i> (10), 636–639. <a href="https://doi.org/10.1038/ngeo325">doi:10.1038/ngeo325</a> <span class="use">— about 48% of the world's population fed by Haber–Bosch nitrogen (2008 estimate)</span></li>
+  </ol>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  const R = 8.314;
+  // numbers like 4.7 × 10⁻³ (HTML), plain decimals in the middle range
+  function sci(x) {
+    if (!isFinite(x)) return "—";
+    if (x === 0) return "0";
+    let e = Math.floor(Math.log10(Math.abs(x)));
+    if (e >= -2 && e <= 3) return x.toPrecision(3).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+    let m = +(x / Math.pow(10, e)).toFixed(1);
+    if (Math.abs(m) >= 10) { m /= 10; e += 1; }
+    return m.toFixed(1) + " × 10<sup>" + (e < 0 ? "−" + (-e) : e) + "</sup>";
+  }
+  // a percentage (0–100) shown sensibly at the extremes (HTML)
+  function pct(p) {
+    if (p < 0.001) return "&lt; 0.001%";
+    if (p > 99.999) return "&gt; 99.999%";
+    if (p < 0.1) return p.toPrecision(2) + "%";
+    if (p > 99.9) return p.toFixed(3) + "%";
+    return p.toFixed(1) + "%";
+  }
+  function verdict(el, g, tol) {
+    if (Math.abs(g) <= tol) { el.className = "verdict eq"; el.innerHTML = "ΔG = 0 → at equilibrium"; }
+    else if (g < 0) { el.className = "verdict spont"; el.innerHTML = "ΔG &lt; 0 → spontaneous"; }
+    else { el.className = "verdict non"; el.innerHTML = "ΔG &gt; 0 → nonspontaneous (reverse is spontaneous)"; }
+  }
+
+  // ================= ΔG explorer =================
+  (function () {
+    const P = [[-196.0, 126.0, "2 H₂O₂(l) → 2 H₂O(l) + O₂(g)"], [285.4, -137.8, "3 O₂(g) → 2 O₃(g)"], [-91.8, -198.1, "N₂(g) + 3 H₂(g) → 2 NH₃(g)"], [179.2, 160.2, "CaCO₃(s) → CaO(s) + CO₂(g)"], [6.01, 22.0, "H₂O(s) → H₂O(l)"]];
+    const H = document.getElementById("gxH"), S = document.getElementById("gxS"), T = document.getElementById("gxT");
+    let label = "N₂(g) + 3 H₂(g) → 2 NH₃(g)";
+    function draw() {
+      const dH = +H.value, dS = +S.value, t = +T.value, mTS = -t * dS / 1000, dG = dH + mTS;
+      document.getElementById("gxHOut").textContent = signed(dH, 1) + " kJ";
+      document.getElementById("gxSOut").textContent = signed(dS, 1) + " J/K";
+      document.getElementById("gxTOut").textContent = t + " K (" + (t - 273.15).toFixed(0) + " °C)";
+      // bars
+      const vals = [["ΔH", dH, "var(--heat)"], ["−TΔS", mTS, "var(--sys)"], ["ΔG", dG, "var(--energy)"]];
+      const M = Math.max(50, ...vals.map(v => Math.abs(v[1]))) * 1.15, Y0 = 120, sc = 95 / M;
+      let b = `<line x1="30" x2="370" y1="${Y0}" y2="${Y0}" stroke="var(--ink)" stroke-width="1.5"/><text x="26" y="${Y0 + 4}" text-anchor="end" class="t-small t-muted">0</text>`;
+      vals.forEach(([lab, v, col], i) => {
+        const x = 60 + i * 105, h = Math.abs(v) * sc, y = v >= 0 ? Y0 - h : Y0;
+        b += `<rect x="${x}" y="${y}" width="70" height="${Math.max(1, h)}" rx="4" fill="${col}" opacity=".85"/>`;
+        b += `<text x="${x + 35}" y="${v >= 0 ? y - 6 : y + h + 14}" text-anchor="middle" class="t-small" style="font-weight:700">${signed(v, 1)} kJ</text>`;
+        b += `<text x="${x + 35}" y="232" text-anchor="middle" class="t-mid" style="font-weight:700">${lab}</text>`;
+        if (i < 2) b += `<text x="${x + 88}" y="${Y0 + 7}" text-anchor="middle" style="font-size:22px;font-weight:700;fill:var(--ink-3)">${i === 0 ? "+" : "="}</text>`;
+      });
+      document.getElementById("gxBars").innerHTML = b;
+      // plot ΔG vs T
+      const Ts = [100, 1500], gs = Ts.map(x => dH - x * dS / 1000), lo = Math.min(...gs, 0), hi = Math.max(...gs, 0), span = Math.max(20, hi - lo);
+      const X = (x) => 45 + (x - 100) / 1400 * 320, Yp = (g) => 20 + (hi - g) / span * 180;
+      let p = `<rect x="45" y="20" width="320" height="${Math.max(0, Yp(0) - 20)}" fill="var(--bad-bg)" opacity=".7"/><rect x="45" y="${Yp(0)}" width="320" height="${Math.max(0, 200 - Yp(0))}" fill="var(--good-bg)" opacity=".7"/>
+        <line x1="45" y1="${Yp(0)}" x2="365" y2="${Yp(0)}" stroke="var(--ink)" stroke-width="1.5"/><line x1="45" y1="20" x2="45" y2="200" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="205" y="228" text-anchor="middle" class="t-small">temperature (K)</text><text x="14" y="110" text-anchor="middle" class="t-small" transform="rotate(-90 14 110)">ΔG (kJ)</text>`;
+      [300, 600, 900, 1200, 1500].forEach(x => p += `<text x="${X(x)}" y="214" text-anchor="middle" class="t-small t-muted">${x}</text>`);
+      // label the empty corner of each region (the line runs up to the right when ΔS < 0, down to the right when ΔS > 0)
+      if (Yp(0) - 20 > 24) p += `<text x="${dS < 0 ? 52 : 360}" y="34" text-anchor="${dS < 0 ? "start" : "end"}" class="t-small" style="fill:var(--bad);font-weight:700">ΔG &gt; 0</text>`;
+      if (200 - Yp(0) > 24) p += `<text x="${dS < 0 ? 360 : 52}" y="194" text-anchor="${dS < 0 ? "end" : "start"}" class="t-small" style="fill:var(--good);font-weight:700">ΔG &lt; 0</text>`;
+      p += `<line x1="${X(100)}" y1="${Yp(gs[0])}" x2="${X(1500)}" y2="${Yp(gs[1])}" stroke="var(--energy)" stroke-width="3"/>`;
+      const Tc = dS !== 0 ? dH * 1000 / dS : NaN;
+      if (Tc > 100 && Tc < 1500) p += `<line x1="${X(Tc)}" x2="${X(Tc)}" y1="20" y2="200" stroke="var(--ink-3)" stroke-dasharray="4 4"/><text x="${X(Tc) + (dS > 0 ? 4 : -4)}" y="${Yp(0) - 6}" text-anchor="${dS > 0 ? "start" : "end"}" class="t-small t-muted">${Tc.toFixed(0)} K</text>`;
+      p += `<circle cx="${X(t)}" cy="${Yp(dG)}" r="7" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      document.getElementById("gxPlot").innerHTML = p;
+      verdict(document.getElementById("gxVer"), dG, 0.05);
+      let msg = `<b>${label}</b>: Δ<var>G</var> = ${signed(dH, 1)} − (${t} K)(${signed(dS / 1000, 4)} kJ/K) = <b>${signed(dG, 1)} kJ</b>. `;
+      if (dH < 0 && dS > 0) msg += "Both terms favor the reaction: spontaneous at every temperature.";
+      else if (dH > 0 && dS < 0) msg += "Both terms oppose it: nonspontaneous at every temperature.";
+      else if (dS !== 0) msg += `ΔH and −TΔS pull in opposite directions; they balance at T = ΔH/ΔS = ${Tc.toFixed(0)} K. Spontaneous ${dH < 0 ? "below" : "above"} that temperature. The slope of the line is −ΔS.`;
+      document.getElementById("gxMsg").innerHTML = msg;
+    }
+    [H, S, T].forEach(e => e.addEventListener("input", () => { if (e !== T) label = "Your values"; draw(); }));
+    document.querySelectorAll("#gxPre [data-p]").forEach(b => b.addEventListener("click", () => {
+      const [h, s, l] = P[+b.dataset.p]; H.value = h; S.value = s; label = l; draw();
+    }));
+    draw();
+  })();
+
+  // ================= ΔG° → K =================
+  (function () {
+    const G = document.getElementById("gkG"), T = document.getElementById("gkT"), svg = document.getElementById("gkSvg");
+    function draw() {
+      const g = +G.value, t = +T.value, K = Math.exp(-g * 1000 / (R * t)), frac = K / (1 + K);
+      document.getElementById("gkGOut").textContent = signed(g, 1) + " kJ/mol";
+      document.getElementById("gkTOut").textContent = t + " K";
+      const lg = Math.log10(K), X = (l) => 40 + (l + 11) / 22 * 620;
+      let s = `<line x1="40" y1="45" x2="660" y2="45" stroke="var(--ink)" stroke-width="2"/>`;
+      for (let e = -10; e <= 10; e += 2) s += `<line x1="${X(e)}" x2="${X(e)}" y1="40" y2="50" stroke="var(--ink)"/><text x="${X(e)}" y="66" text-anchor="middle" class="t-small t-muted">10${e === 0 ? "⁰" : ""}<tspan dy="-6" font-size="9">${e === 0 ? "" : e}</tspan></text>`;
+      s += `<text x="40" y="24" class="t-small" style="font-weight:700">K (log scale)</text><text x="660" y="24" text-anchor="end" class="t-small t-muted">reactants favored ← K = 1 → products favored</text>`;
+      const xk = X(Math.max(-11, Math.min(11, lg)));
+      s += `<circle cx="${xk}" cy="45" r="8" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      // mixture bar for A ⇌ B
+      s += `<text x="40" y="96" class="t-small" style="font-weight:700">For A ⇌ B at equilibrium:</text>`;
+      s += `<rect x="40" y="104" width="620" height="26" rx="5" fill="var(--sys)" opacity=".75"/><rect x="${40 + 620 * (1 - frac)}" y="104" width="${620 * frac}" height="26" rx="5" fill="var(--heat)" opacity=".85"/>`;
+      s += `<text x="46" y="122" class="t-small" style="fill:#fff;font-weight:700">A ${pct(100 * (1 - frac))}</text><text x="654" y="122" text-anchor="end" class="t-small" style="fill:#fff;font-weight:700">B ${pct(100 * frac)}</text>`;
+      svg.innerHTML = s;
+      const ex = -g * 1000 / (R * t);
+      document.getElementById("gkMsg").innerHTML = `K = e<sup>−ΔG°/RT</sup> = e<sup>${fmt(ex, 2)}</sup> = <b>${sci(K)}</b>. ` +
+        (Math.abs(g) < 0.25 ? "ΔG° ≈ 0 gives K ≈ 1: comparable amounts of reactants and products." : g < 0 ? "Negative ΔG°: K &gt; 1, products favored." : "Positive ΔG°: K &lt; 1, reactants favored — but some products still form.") +
+        ` At 298 K, every 5.7 kJ/mol change in ΔG° changes K by a factor of 10.`;
+    }
+    G.addEventListener("input", draw); T.addEventListener("input", draw); draw();
+  })();
+
+  // ================= Gibbs ledger =================
+  (function () {
+    const P = [
+      { n: "Burning methane", dH: -890.5, dS: -242.9 },
+      { n: "Making ammonia", dH: -91.8, dS: -198.1 },
+      { n: "Limestone decomposing", dH: 179.2, dS: 160.2 },
+      { n: "Ice melting at 25 °C", dH: 6.01, dS: 22.0 },
+    ];
+    const T = 298.15;
+    function draw(i) {
+      const p = P[i];
+      const sysTS = T * p.dS / 1000, sysG = p.dH - sysTS;
+      const surH = -p.dH, surS = -p.dH * 1000 / T, surTS = T * surS / 1000, surG = surH - surTS;
+      const uniS = p.dS + surS;
+      const row = (lab, h, s, ts, g, cls) => `<tr class="${cls || ""}"><td>${lab}</td><td class="num">${signed(h, 1)}</td><td class="num">${signed(s, 1)}</td><td class="num">${signed(ts, 1)}</td><td class="num">${signed(g, 1)}</td></tr>`;
+      document.getElementById("ldBody").innerHTML =
+        row("System", p.dH, p.dS, sysTS, sysG) +
+        row("Surroundings (heat bath)", surH, surS, surTS, Math.abs(surG) < 1e-9 ? 0 : surG) +
+        row("Sum (\"universe\")", 0, uniS, T * uniS / 1000, sysG, "univ");
+      document.getElementById("ldMsg").innerHTML = `For the surroundings, ΔH = ${signed(surH, 1)} kJ and ΔS = ${signed(surS, 1)} J/K, so ΔG<sub>surr</sub> = ${signed(surH, 1)} − (${signed(surTS, 1)}) = <b>0</b>. ` +
+        `ΔS<sub>univ</sub> = ${signed(uniS, 1)} J/K, and −TΔS<sub>univ</sub> = ${signed(-T * uniS / 1000, 1)} kJ — exactly ΔG<sub>sys</sub>. ` +
+        (sysG < 0 ? "Spontaneous." : "Nonspontaneous at 25 °C.");
+    }
+    document.querySelectorAll("#ldSeg [data-l]").forEach(b => b.addEventListener("click", () => {
+      document.querySelectorAll("#ldSeg [data-l]").forEach(x => x.classList.toggle("on", x === b)); draw(+b.dataset.l);
+    }));
+    draw(0);
+  })();
+
+  // ================= drug binding =================
+  (function () {
+    const sl = document.getElementById("drKd"), svg = document.getElementById("drSvg"), T = 310.15;
+    const unit = (e) => { const v = Math.pow(10, e); if (v >= 1e-3) return (v * 1e3).toPrecision(2) + " mM"; if (v >= 1e-6) return (v * 1e6).toPrecision(2) + " µM"; if (v >= 1e-9) return (v * 1e9).toPrecision(2) + " nM"; return (v * 1e12).toPrecision(2) + " pM"; };
+    function draw() {
+      const e = +sl.value, G = R * T * Math.log(Math.pow(10, e)) / 1000;
+      document.getElementById("drKdOut").textContent = unit(e);
+      const X = (g) => 40 + (-g - 15) / 60 * 620; // g from -15 to -75
+      let s = `<line x1="40" y1="50" x2="660" y2="50" stroke="var(--ink)" stroke-width="2"/>`;
+      [-20, -30, -40, -50, -60, -70].forEach(g => s += `<line x1="${X(g)}" x2="${X(g)}" y1="45" y2="55" stroke="var(--ink)"/><text x="${X(g)}" y="72" text-anchor="middle" class="t-small t-muted">${g}</text>`);
+      s += `<text x="350" y="92" text-anchor="middle" class="t-small">ΔG°<tspan dy="3" font-size="8">bind</tspan><tspan dy="-3"> (kJ/mol) — more negative = tighter binding</tspan></text>`;
+      const gOf = (ex) => R * T * Math.log(Math.pow(10, ex)) / 1000;
+      [[-3, -6, "weak (mM–µM)", "var(--ink-3)", "t-muted"], [-6, -9, "strong (µM–nM)", "var(--work)", "t-work"], [-9, -12, "very strong (nM–pM)", "var(--heat)", "t-heat"]].forEach(([a, b, lab, col, cls]) => {
+        const x1 = X(gOf(a)), x2 = X(gOf(b));
+        s += `<rect x="${x1}" y="18" width="${x2 - x1}" height="18" rx="4" fill="${col}" opacity=".22"/><text x="${(x1 + x2) / 2}" y="31" text-anchor="middle" class="t-small ${cls}" style="font-weight:700">${lab}</text>`;
+      });
+      s += `<circle cx="${X(Math.max(-75, Math.min(-15, G)))}" cy="50" r="9" fill="var(--heat)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = s;
+      document.getElementById("drMsg").innerHTML = `ΔG°<sub>bind</sub> = RT ln K<sub>d</sub> = (8.314)(310.15) ln(${sci(Math.pow(10, e))}) = <b>${fmt(G, 1)} kJ/mol</b>. Every 10× tighter binding makes ΔG more negative by RT ln 10 = 5.9 kJ/mol at body temperature. So an improvement of just a few kJ/mol (for example, one extra well-placed hydrogen bond) makes a drug several times more potent. Many successful drugs bind their targets with K<sub>d</sub> in the nanomolar range.`;
+    }
+    sl.addEventListener("input", draw); draw();
+  })();
+
+  // ================= protein folding =================
+  (function () {
+    const T = document.getElementById("flT"), Tm = document.getElementById("flTm"), svg = document.getElementById("flSvg"), dH = 400; // kJ/mol
+    const dG = (tc, tmc) => dH * (1 - (tc + 273.15) / (tmc + 273.15));
+    const fu = (tc, tmc) => { const K = Math.exp(-dG(tc, tmc) * 1000 / (R * (tc + 273.15))); return K / (1 + K); };
+    function draw() {
+      const t = +T.value, tm = +Tm.value, g = dG(t, tm), K = Math.exp(-g * 1000 / (R * (t + 273.15))), f = K / (1 + K);
+      document.getElementById("flTOut").textContent = t + " °C"; document.getElementById("flTmOut").textContent = tm + " °C";
+      document.getElementById("flG").textContent = signed(g, 1) + " kJ/mol";
+      document.getElementById("flK").innerHTML = sci(K);
+      document.getElementById("flF").innerHTML = pct(100 * f);
+      const X = (tc) => 50 + tc / 130 * 620, Y = (fr) => 170 - fr * 140;
+      let s = `<line x1="50" y1="170" x2="670" y2="170" stroke="var(--ink)" stroke-width="1.5"/><line x1="50" y1="170" x2="50" y2="25" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="44" y="${Y(1) + 4}" text-anchor="end" class="t-small t-muted">100%</text><text x="44" y="${Y(0.5) + 4}" text-anchor="end" class="t-small t-muted">50%</text><text x="44" y="174" text-anchor="end" class="t-small t-muted">0%</text>
+        <text x="360" y="196" text-anchor="middle" class="t-small">temperature (°C)</text><text x="14" y="98" text-anchor="middle" class="t-small" transform="rotate(-90 14 98)">unfolded</text>`;
+      [0, 20, 40, 60, 80, 100, 120].forEach(x => s += `<text x="${X(x)}" y="184" text-anchor="middle" class="t-small t-muted">${x}</text>`);
+      [[37, "body", "end", -3], [40, "fever", "start", 3], [72, "pasteurize", "middle", 0], [121, "autoclave", "middle", 0]].forEach(([x, l, anc, dx]) => s += `<line x1="${X(x)}" x2="${X(x)}" y1="25" y2="170" stroke="var(--line)"/><text x="${X(x) + dx}" y="20" text-anchor="${anc}" class="t-small t-muted">${l}</text>`);
+      let d = ""; for (let x = 0; x <= 130; x += 0.5) d += (x ? " L" : "M") + X(x) + " " + Y(fu(x, tm));
+      s += `<path d="${d}" fill="none" stroke="var(--heat)" stroke-width="3"/>`;
+      s += `<circle cx="${X(t)}" cy="${Y(f)}" r="7" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = s;
+    }
+    [T, Tm].forEach(e => e.addEventListener("input", draw));
+    document.querySelectorAll("#fold [data-ft]").forEach(b => b.addEventListener("click", () => { T.value = b.dataset.ft; draw(); }));
+    draw();
+  })();
+
+  // ================= ATP coupling =================
+  (function () {
+    const RX = [
+      { eq: "glucose + P<sub>i</sub> → glucose 6-phosphate + H₂O", g: 13.8, net: "glucose + ATP → glucose 6-phosphate + ADP" },
+      { eq: "glutamate + NH₄⁺ → glutamine + H₂O", g: 14.2, net: "glutamate + NH₄⁺ + ATP → glutamine + ADP + P<sub>i</sub>" },
+    ];
+    const ATP = -30.5, T = 310.15;
+    let i = 0;
+    const on = document.getElementById("atpOn"), svg = document.getElementById("atpSvg");
+    function draw() {
+      const r = RX[i], c = on.checked, tot = r.g + (c ? ATP : 0), K = Math.exp(-tot * 1000 / (R * T));
+      document.getElementById("atpEqs").innerHTML =
+        `<p style="margin:0 0 6px">${r.eq} &nbsp; <b style="color:var(--bad)">ΔG°′ = +${r.g} kJ/mol</b></p>` +
+        (c ? `<p style="margin:0 0 6px">ATP + H₂O → ADP + P<sub>i</sub> &nbsp; <b style="color:var(--good)">ΔG°′ = ${fmt(ATP, 1)} kJ/mol</b></p><hr style="margin:8px 0"><p style="margin:0">${r.net} &nbsp; <b style="color:var(--energy)">ΔG°′ = ${fmt(tot, 1)} kJ/mol</b></p>` : "");
+      const Y0 = 100, sc = 2.4;
+      const bars = c ? [["reaction", r.g, "var(--bad)"], ["ATP", ATP, "var(--good)"], ["total", tot, "var(--energy)"]] : [["reaction", r.g, "var(--bad)"]];
+      let s = `<line x1="20" x2="310" y1="${Y0}" y2="${Y0}" stroke="var(--ink)" stroke-width="1.5"/><text x="16" y="${Y0 + 4}" text-anchor="end" class="t-small t-muted">0</text>`;
+      bars.forEach(([l, v, col], k) => {
+        const x = 40 + k * 90, h = Math.abs(v) * sc, y = v >= 0 ? Y0 - h : Y0;
+        s += `<rect x="${x}" y="${y}" width="60" height="${h}" rx="4" fill="${col}" opacity=".85"/>`;
+        s += `<text x="${x + 30}" y="${v >= 0 ? y - 6 : y + h + 14}" text-anchor="middle" class="t-small" style="font-weight:700">${signed(v, 1)}</text>`;
+        s += `<text x="${x + 30}" y="212" text-anchor="middle" class="t-small">${l}</text>`;
+      });
+      svg.innerHTML = s;
+      document.getElementById("atpMsg").innerHTML = c
+        ? `Coupled, the overall ΔG°′ = ${signed(r.g, 1)} + (${fmt(ATP, 1)}) = <b>${fmt(tot, 1)} kJ/mol</b>, so K′ ≈ ${sci(K)} at 37 °C: the reaction now runs essentially to completion.`
+        : `On its own ΔG°′ = +${r.g} kJ/mol, so K′ = e<sup>−ΔG°′/RT</sup> ≈ ${sci(K)} at 37 °C: almost no product. Tick the box to couple it to ATP.`;
+    }
+    document.querySelectorAll("#atpSeg [data-a]").forEach(b => b.addEventListener("click", () => { i = +b.dataset.a; document.querySelectorAll("#atpSeg [data-a]").forEach(x => x.classList.toggle("on", x === b)); draw(); }));
+    on.addEventListener("change", draw); draw();
+  })();
+
+  // ================= Ellingham diagram =================
+  (function () {
+    // per mol O2: ΔG° ≈ ΔH° − TΔS° (kJ, kJ/K), from 25 °C data
+    const L = [
+      { n: "4 Cu + O₂ → 2 Cu₂O", ox: "Cu₂O", H: -337.2, S: -0.1518, col: "#c97a4a" },
+      { n: "2 Fe + O₂ → 2 FeO", ox: "FeO (iron ore)", H: -544.0, S: -0.1383, col: "var(--hot)" },
+      { n: "2 H₂ + O₂ → 2 H₂O(g)", ox: "H₂O", H: -483.6, S: -0.0890, col: "#3f8fd6" },
+      { n: "4/3 Al + O₂ → 2/3 Al₂O₃", ox: "Al₂O₃", H: -1117.1, S: -0.2090, col: "var(--ink-3)" },
+    ];
+    const Cco = { n: "2 C + O₂ → 2 CO", H: -221.0, S: 0.1787 }, Cco2 = { n: "C + O₂ → CO₂", H: -393.5, S: 0.0029 };
+    const sl = document.getElementById("elT"), svg = document.getElementById("elSvg");
+    const g = (l, T) => l.H - T * l.S;
+    const X = (T) => 62 + (T - 300) / 2200 * 345, Y = (G) => 20 + (100 - G) / 1200 * 262; // ΔG° from +100 (top) to −1100 (bottom)
+    const halo = "paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round";
+    function draw() {
+      const T = +sl.value;
+      document.getElementById("elTOut").textContent = T + " K (" + (T - 273).toFixed(0) + " °C)";
+      let s = `<line x1="62" y1="20" x2="62" y2="285" stroke="var(--ink)" stroke-width="1.5"/><line x1="62" y1="285" x2="410" y2="285" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="236" y="314" text-anchor="middle" class="t-small">temperature (K)</text><text x="12" y="150" text-anchor="middle" class="t-small" transform="rotate(-90 12 150)">ΔG° (kJ per mol O₂)</text>`;
+      [500, 1000, 1500, 2000, 2500].forEach(x => s += `<text x="${X(x)}" y="300" text-anchor="middle" class="t-small t-muted">${x}</text>`);
+      [0, -200, -400, -600, -800, -1000].forEach(v => s += `<line x1="62" x2="410" y1="${Y(v)}" y2="${Y(v)}" stroke="${v === 0 ? "var(--ink-3)" : "var(--line)"}"/><text x="58" y="${Y(v) + 4}" text-anchor="end" class="t-small t-muted">${fmt(v, 0)}</text>`);
+      const line = (l, col, w, dash) => `<line x1="${X(300)}" y1="${Y(g(l, 300))}" x2="${X(2500)}" y2="${Y(g(l, 2500))}" stroke="${col}" stroke-width="${w}" ${dash ? 'stroke-dasharray="6 4"' : ""}/>`;
+      L.forEach(l => s += line(l, l.col, 3));
+      s += line(Cco2, "var(--ink)", 2, true) + line(Cco, "var(--work)", 4);
+      // dots where the carbon → CO line crosses each oxide line
+      L.forEach(l => { const Tx = (l.H - Cco.H) / (l.S - Cco.S); if (Tx >= 300 && Tx <= 2500) s += `<circle cx="${X(Tx)}" cy="${Y(g(Cco, Tx))}" r="4.5" fill="var(--work)" stroke="var(--surface)" stroke-width="1.5"/>`; });
+      const lab = (txt, y, col) => `<text x="${X(2490)}" y="${y}" text-anchor="end" class="t-small" style="fill:${col};font-weight:700;${halo}">${txt}</text>`;
+      L.forEach(l => s += lab(l.ox, Y(g(l, 2500)) - 6, l.col));
+      s += lab("C → CO₂", Y(g(Cco2, 2500)) - 6, "var(--ink)") + lab("C → CO", Y(g(Cco, 2500)) + 16, "var(--work)");
+      s += `<line x1="${X(T)}" x2="${X(T)}" y1="20" y2="285" stroke="var(--energy)" stroke-width="2" stroke-dasharray="4 4"/>`;
+      svg.innerHTML = s;
+      const rows = L.map(l => { const Tx = (l.H - Cco.H) / (l.S - Cco.S); const yes = g(Cco, T) < g(l, T); return `<tr><td>${l.ox}</td><td class="num">${Tx.toFixed(0)} K (${(Tx - 273).toFixed(0)} °C)</td><td style="font-weight:700;color:${yes ? "var(--good)" : "var(--bad)"}">${yes ? "yes" : "no"}</td></tr>`; });
+      document.getElementById("elBody").innerHTML = rows.join("");
+      const can = L.filter(l => g(Cco, T) < g(l, T)).map(l => l.ox.split(" ")[0]);
+      document.getElementById("elMsg").innerHTML = `At ${T} K the carbon → CO line is at ${fmt(g(Cco, T), 0)} kJ. Carbon can reduce any oxide whose line lies above it: <b>${can.length ? can.join(", ") : "none of these"}</b>. ` +
+        `For iron: 2 FeO + 2 C → 2 Fe + 2 CO has ΔG° = ${signed(g(Cco, T) - g(L[1], T), 0)} kJ at this temperature.`;
+    }
+    sl.addEventListener("input", draw); draw();
+  })();
+
+  // ================= Haber–Bosch operating conditions =================
+  (function () {
+    const dH0 = -91.8, dS0 = -198.1, dCp = -44.4; // kJ, J/K, J/K (ΔCp from heat capacities at 25 °C)
+    const T = document.getElementById("hbT"), P = document.getElementById("hbP"), svg = document.getElementById("hbSvg");
+    // Kirchhoff's law: ΔH and ΔS at temperature t, then ΔG° = ΔH − tΔS (kJ)
+    const dG = (t) => (dH0 + dCp * (t - 298.15) / 1000) - t * (dS0 + dCp * Math.log(t / 298.15)) / 1000;
+    const Kof = (t) => Math.exp(-dG(t) * 1000 / (R * t));
+    // equilibrium mole % of NH₃ for a 1 : 3 N₂ : H₂ feed at a total pressure in atm (K uses a 1 bar standard state)
+    function yieldPct(t, atm) {
+      const target = Kof(t) * Math.pow(atm * 1.01325, 2);
+      let lo = 0, hi = 1;
+      for (let k = 0; k < 70; k++) {
+        const m = (lo + hi) / 2, r = 4 * m * m * Math.pow(4 - 2 * m, 2) / (27 * Math.pow(1 - m, 4));
+        if (r < target) lo = m; else hi = m;
+      }
+      const xi = (lo + hi) / 2;
+      return 100 * 2 * xi / (4 - 2 * xi);
+    }
+    const X = (t) => 60 + (t - 298) / 602 * 620, Y = (p) => 245 - p / 100 * 205;
+    const curve = (atm) => { let d = ""; for (let i = 0; i <= 150; i++) { const t = 298 + i * 602 / 150; d += (i ? " L" : "M") + X(t).toFixed(1) + " " + Y(yieldPct(t, atm)).toFixed(1); } return d; };
+    // each reference curve is labelled at a different height, just right of the curve
+    const tAt = (atm, y) => { let lo = 298, hi = 900; for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; if (yieldPct(m, atm) > y) lo = m; else hi = m; } return lo; };
+    const refs = [[1, 12], [10, 35], [100, 60], [300, 82]].map(([a, y]) => ({ a, d: curve(a), y, t: tAt(a, y) }));
+    const halo = "paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round";
+    function draw() {
+      const t = +T.value, atm = +P.value, g = dG(t), K = Kof(t), x = yieldPct(t, atm);
+      document.getElementById("hbTOut").textContent = t + " K (" + (t - 273.15).toFixed(0) + " °C)";
+      document.getElementById("hbPOut").textContent = atm + " atm";
+      const xm = (X(673) + X(773)) / 2;
+      let s = `<rect x="${X(673)}" y="40" width="${X(773) - X(673)}" height="205" fill="var(--work-fill)"/>
+        <text x="${xm}" y="56" text-anchor="middle" class="t-small t-work" style="font-weight:700">industrial range</text>
+        <text x="${xm}" y="70" text-anchor="middle" class="t-small t-work">400–500 °C</text>
+        <line x1="60" y1="245" x2="680" y2="245" stroke="var(--ink)" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="245" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="370" y="276" text-anchor="middle" class="t-small">temperature (K)</text><text x="16" y="142" text-anchor="middle" class="t-small" transform="rotate(-90 16 142)">NH₃ at equilibrium (%)</text>
+        <text x="370" y="22" text-anchor="middle" class="t-small t-muted">← slower reaction · · · faster reaction →</text>`;
+      [300, 400, 500, 600, 700, 800, 900].forEach(v => s += `<text x="${X(v)}" y="261" text-anchor="middle" class="t-small t-muted">${v}</text>`);
+      [0, 25, 50, 75, 100].forEach(v => s += `<line x1="60" x2="680" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="54" y="${Y(v) + 4}" text-anchor="end" class="t-small t-muted">${v}</text>`);
+      refs.forEach(r => s += `<path d="${r.d}" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4"/>`);
+      s += `<path d="${curve(atm)}" fill="none" stroke="var(--sys)" stroke-width="3.5"/>`;
+      refs.forEach(r => s += `<text x="${X(r.t) + 6}" y="${Y(r.y) + 4}" class="t-small t-muted" style="${halo}">${r.a} atm</text>`);
+      s += `<circle cx="${X(t)}" cy="${Y(x)}" r="8" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = s;
+      document.getElementById("hbG").textContent = signed(g, 1) + " kJ";
+      document.getElementById("hbK").innerHTML = sci(K);
+      document.getElementById("hbX").innerHTML = pct(x);
+      const yieldWord = x >= 50 ? "high" : x >= 15 ? "moderate" : "low";
+      const rateWord = t < 673 ? "too slow for industry, even with an iron catalyst" : t <= 773 ? "fast enough with an iron catalyst" : "fast";
+      let msg = `At ${t} K, Δ<var>G</var>° = ${signed(g, 1)} kJ, so <var>K</var> = ${sci(K)}. At ${atm} atm the equilibrium mixture is <b>${pct(x)} NH₃</b> (a ${yieldWord} yield), and the reaction is ${rateWord}.`;
+      if (t >= 673 && t <= 773 && atm >= 150) msg += " These are close to real Haber–Bosch conditions: the ammonia is removed and the unreacted N₂ and H₂ are recycled.";
+      else {
+        if (atm < 100) msg += " Raising the pressure pushes the equilibrium toward fewer moles of gas (4 mol → 2 mol).";
+        if (t > 773) msg += " Lowering the temperature makes ΔG° less positive and raises the yield.";
+      }
+      document.getElementById("hbMsg").innerHTML = msg;
+    }
+    [T, P].forEach(e => e.addEventListener("input", draw));
+    document.querySelectorAll("#hbPre [data-t]").forEach(b => b.addEventListener("click", () => { T.value = b.dataset.t; P.value = b.dataset.p; draw(); }));
+    draw();
+  })();
+</script>
+</body>
+</html>

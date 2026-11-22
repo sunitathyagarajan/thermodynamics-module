@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Third Law</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .contrib td, .contrib th { font-size: .9rem; padding: 6px 10px; }
+    .contrib tr.off td { color: var(--ink-3); }
+    .contrib tr.total td { font-weight: 700; border-top: 2px solid var(--ink-3); }
+    .ways { counter-reset: w; list-style: none; padding: 0; display: grid; gap: 8px; margin: .4em 0 0; }
+    .ways li { counter-increment: w; position: relative; padding-left: 36px; }
+    .ways li::before { content: counter(w); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--energy); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .8rem; }
+  </style>
+</head>
+<body data-lesson="12" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 12</p>
+  <h1>The third law: the bottom of the entropy scale</h1>
+  <p class="lede">The first law says energy is conserved; the second says the entropy of the universe increases in every spontaneous process. The third law answers a quieter question: <b>is there a zero of entropy?</b> Yes — and that single fact lets chemists tabulate absolute entropies for every substance.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>State the third law and connect it to microstates (W = 1).</li>
+      <li>Explain why some real crystals keep a "residual entropy" at 0 K.</li>
+      <li>Show how absolute entropies are measured from heat capacities and phase changes.</li>
+      <li>Explain why absolute zero can be approached but never reached.</li>
+    </ul>
+  </div>
+
+  <h2 id="statement" data-short="The third law">The third law</h2>
+  <div class="callout key">
+    <span class="callout-title">The third law of thermodynamics</span>
+    The entropy of a <b>perfect crystal</b> of a pure substance approaches <b>zero</b> as the temperature approaches absolute zero (0 K).<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup>
+  </div>
+  <p>Walther Nernst arrived at the idea in 1906 from measurements of reactions at low temperature (his "heat theorem"), and Max Planck soon put it in the form above.<sup class="cite"><a href="#ref-3">3</a></sup> There are three equivalent ways to say it:</p>
+  <ol class="ways">
+    <li><b>Thermodynamic:</b> <var>S</var> → 0 for a perfect crystal as <var>T</var> → 0 K.<sup class="cite"><a href="#ref-1">1</a></sup></li>
+    <li><b>Microscopic:</b> at 0 K a perfect crystal has only one possible arrangement, <var>W</var> = 1, so <var>S</var> = <var>k</var><sub>B</sub> ln 1 = 0 (Lesson 10).<sup class="cite"><a href="#ref-2">2</a></sup></li>
+    <li><b>Practical:</b> absolute zero cannot be reached in a finite number of steps.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-4">4</a></sup></li>
+  </ol>
+
+  <h2 id="microscopic" data-short="Why W = 1">Why a perfect crystal has zero entropy</h2>
+  <p>At absolute zero every particle sits in its lowest-energy state, locked in a perfectly regular lattice. There is exactly <b>one</b> way to arrange the system: one microstate. Warm it up and the particles begin to vibrate, the energy can be shared among them in many ways, and <var>W</var> — and therefore <var>S</var> — rises.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-4">4</a></sup></p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 290" role="img" aria-label="A perfect crystal with one arrangement compared with crystals of CO and ice that keep some disorder at 0 K">
+      <!-- perfect -->
+      <g transform="translate(20,20)">
+        <text x="105" y="14" text-anchor="middle" class="t-mid" style="font-weight:700">Perfect crystal at 0 K</text>
+        <rect x="10" y="28" width="190" height="150" rx="10" class="surface-2"/>
+        <g fill="var(--sys)" id="perfectDots"></g>
+        <text x="105" y="200" text-anchor="middle" class="t-mid t-energy" style="font-weight:700">W = 1 → S = 0</text>
+        <text x="105" y="222" text-anchor="middle" class="t-small t-muted">every particle in its place</text>
+      </g>
+      <!-- CO -->
+      <g transform="translate(270,20)">
+        <text x="105" y="14" text-anchor="middle" class="t-mid" style="font-weight:700">Solid CO at 0 K</text>
+        <rect x="10" y="28" width="190" height="150" rx="10" class="surface-2"/>
+        <g id="coMols"></g>
+        <text x="105" y="200" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--heat)">W = 2<tspan dy="-6" font-size="10">N</tspan></text>
+        <text x="105" y="222" text-anchor="middle" class="t-small t-muted">each molecule can point either way</text>
+        <text x="105" y="240" text-anchor="middle" class="t-small t-muted">(C=O or O=C)</text>
+      </g>
+      <!-- ice -->
+      <g transform="translate(520,20)">
+        <text x="105" y="14" text-anchor="middle" class="t-mid" style="font-weight:700">Ice at 0 K</text>
+        <rect x="10" y="28" width="190" height="150" rx="10" class="surface-2"/>
+        <g id="iceMols"></g>
+        <text x="105" y="200" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--heat)">W ≈ (3/2)<tspan dy="-6" font-size="10">N</tspan></text>
+        <text x="105" y="222" text-anchor="middle" class="t-small t-muted">the H atoms can be arranged</text>
+        <text x="105" y="240" text-anchor="middle" class="t-small t-muted">in many ways between O atoms</text>
+      </g>
+    </svg>
+    <figcaption>Real crystals are not always perfect. If molecules can freeze into more than one arrangement, the crystal keeps a <b>residual entropy</b> even at 0 K.<sup class="cite"><a href="#ref-5">5</a>,<a href="#ref-7">7</a></sup></figcaption>
+  </figure>
+
+  <h3>Residual entropy: when a crystal isn't perfect</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Carbon monoxide</h3>
+      <p style="margin-top:0">CO molecules are almost symmetric, so as the solid forms they freeze in pointing either way (CO or OC) at random. With 2 choices per molecule, <var>W</var> = 2<sup><var>N</var></sup>:</p>
+      <p style="text-align:center;font-family:var(--serif)"><var>S</var> = <var>k</var><sub>B</sub> ln 2<sup><var>N</var></sup> = <var>N k</var><sub>B</sub> ln 2 = <var>R</var> ln 2 = <b>5.76 J mol⁻¹ K⁻¹</b> (for 1 mol)</p>
+      <p style="margin-bottom:0">Clayton and Giauque measured a residual entropy of about 4.6 J mol⁻¹ K⁻¹ — slightly less, because the orientations aren't perfectly random.<sup class="cite"><a href="#ref-7">7</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Ice</h3>
+      <p style="margin-top:0">Each H atom sits closer to one O atom than the other, and many arrangements obey the rules of hydrogen bonding. Linus Pauling estimated <var>W</var> ≈ (3/2)<sup><var>N</var></sup>, so</p>
+      <p style="text-align:center;font-family:var(--serif)"><var>S</var> = <var>R</var> ln(3/2) = <b>3.37 J mol⁻¹ K⁻¹</b></p>
+      <p style="margin-bottom:0">— which matched the 3.4 J mol⁻¹ K⁻¹ that Giauque and Stout found by comparing measured and calculated entropies of water.<sup class="cite"><a href="#ref-5">5</a>,<a href="#ref-6">6</a></sup></p>
+    </div>
+  </div>
+  <p style="font-size:.93rem">Glasses (amorphous solids) also keep residual entropy, because their particles are frozen in a disordered arrangement. The third law applies strictly only to <b>perfect, pure crystals</b>.<sup class="cite"><a href="#ref-3">3</a></sup></p>
+
+  <h2 id="measuring" data-short="Measuring absolute entropy">Measuring absolute entropy</h2>
+  <p>Because the third law fixes <var>S</var> = 0 at 0 K, we can measure the <b>absolute</b> entropy of a substance by warming it from (near) 0 K and adding up every entropy change along the way (Lesson 11):<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></p>
+  <div class="eq"><var>S</var>(<var>T</var>) = Σ <var>n C</var><sub>P</sub> ln(<var>T</var><sub>2</sub>/<var>T</var><sub>1</sub>) &nbsp;+&nbsp; Σ Δ<var>H</var><sub>trans</sub>/<var>T</var><sub>trans</sub>
+    <span class="label">heating steps in each phase (strictly, the area under a plot of C<sub>P</sub>/T against T) + one jump for each phase change</span></div>
+  <p>Very close to 0 K heat capacities become tiny (they fall off as <var>T</var>³), so the entropy rises smoothly from zero. This is how the <var>S</var>° values in the tables you used in Lesson 11 were obtained.<sup class="cite"><a href="#ref-3">3</a></sup></p>
+
+  <div class="widget" id="build">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Build the absolute entropy of 1 mol of water, starting at 0 K</h3></div>
+    <div class="widget-body">
+      <p>Drag the temperature up from 0 K. Watch the entropy climb gradually while the water warms and jump at each phase change. The table adds up the contributions so far.</p>
+      <div class="control"><label for="bT">Temperature <output id="bTOut">0 K</output></label><input type="range" id="bT" min="0" max="400" step="1" value="0"></div>
+      <label style="display:inline-flex;gap:6px;align-items:center;font-size:.92rem;margin-top:8px"><input type="checkbox" id="bRes" checked> Include the residual entropy of ice (3.4 J mol⁻¹ K⁻¹)</label>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="bSvg" viewBox="0 0 420 300" role="img" aria-label="Entropy of water versus temperature from 0 K to 400 K"></svg>
+        <div>
+          <div class="table-wrap" style="margin-top:0">
+            <table class="contrib"><thead><tr><th>Contribution</th><th class="num">ΔS (J mol⁻¹ K⁻¹)</th></tr></thead><tbody id="bBody"></tbody></table>
+          </div>
+          <p id="bMsg" style="font-size:.92rem;margin-bottom:0"></p>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Values: heating ice 0 → 273 K ≈ 38.0 and residual entropy 3.4 (Giauque and Stout);<sup class="cite"><a href="#ref-6">6</a></sup> ΔH<sub>fus</sub> = 6.01 kJ/mol at 273.15 K; C<sub>P</sub>(l) = 75.3 J mol⁻¹ K⁻¹; ΔH<sub>vap</sub> = 40.7 kJ/mol at 373.15 K; C<sub>P</sub>(g) ≈ 34 J mol⁻¹ K⁻¹.<sup class="cite"><a href="#ref-8">8</a>,<a href="#ref-9">9</a></sup> The shape of the curve below 273 K is approximate; its end points come from the data.</p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <span class="callout-title">Enthalpy has no natural zero — entropy does</span>
+    For enthalpy we had to <i>choose</i> a reference: Δ<var>H</var><sub>f</sub>° of elements = 0 by convention (Lesson 9). Entropy needs no such choice: the third law gives a true zero. That's why S° of elements is not zero — S°(O₂, g) = 205.2 and S°(C, graphite) = 5.7 J mol⁻¹ K⁻¹ — and why entropy tables list absolute values rather than changes.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-8">8</a></sup>
+  </div>
+
+  <h2 id="absolute-zero" data-short="Unreachable absolute zero">Why absolute zero can't be reached</h2>
+  <p>The lowest temperatures are reached in steps. In one classic method (adiabatic demagnetization), a magnetic salt is magnetized while held at a low temperature — which lowers its entropy — and then insulated and demagnetized, which cools it. Each cycle cools the sample further, but because the entropy curves for "magnet on" and "magnet off" both go to zero at 0 K, <b>every step is smaller than the last</b>.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-4">4</a></sup> Try it:</p>
+
+  <div class="widget" id="demag">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Cooling toward absolute zero, one step at a time</h3></div>
+    <div class="widget-body">
+      <div class="btn-row" style="margin-top:0"><button class="btn" id="dStep">Cool one step ▶</button><button class="btn ghost" id="dMany">Do 10 steps</button><button class="btn ghost" id="dReset">Start over</button></div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="dSvg" viewBox="0 0 420 300" role="img" aria-label="Entropy versus temperature for a magnetic salt with field on and off, with a staircase of cooling steps"></svg>
+        <div>
+          <div class="readout" style="grid-template-columns:1fr 1fr;margin-top:0">
+            <div><span class="k">Steps taken</span><span class="v" id="dN">0</span></div>
+            <div><span class="k">Temperature</span><span class="v" id="dT">4.00 K</span></div>
+          </div>
+          <p id="dMsg" style="font-size:.92rem"></p>
+          <p style="font-size:.82rem;color:var(--ink-3)">Schematic curves. Vertical steps: magnetize at constant temperature (entropy falls). Horizontal steps: demagnetize with no heat exchange (entropy constant, temperature falls).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Experiments have reached about 10<sup>−10</sup> K — a tenth of a billionth of a kelvin — but never 0 K itself.<sup class="cite"><a href="#ref-4">4</a></sup></p>
+
+  <h2 id="matters" data-short="Why it matters">Why the third law matters for chemistry</h2>
+  <ul>
+    <li><b>Absolute entropies</b> (<var>S</var>°) can be measured and tabulated for every substance (Lesson 11).<sup class="cite"><a href="#ref-1">1</a></sup></li>
+    <li><b>Reaction entropies</b> then follow from tables: Δ<var>S</var>°<sub>rxn</sub> = Σ<var>n S</var>°(products) − Σ<var>m S</var>°(reactants).<sup class="cite"><a href="#ref-1">1</a></sup></li>
+    <li>Together with enthalpies, they give <b>Gibbs free energies</b> — Δ<var>G</var>° = Δ<var>H</var>° − <var>T</var>Δ<var>S</var>° — which predict whether reactions run and how far (Lesson 13).</li>
+  </ul>
+
+  <h2 id="practice">Practice</h2>
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example</span><h3>Adding up the absolute entropy of liquid water at 25 °C</h3></div>
+    <div class="example-body">
+      <p style="margin-top:0">Use these contributions for 1 mol of water: heating ice from 0 K to 273.15 K, +38.0 J/K; residual entropy of ice, +3.4 J/K; melting (Δ<var>H</var><sub>fus</sub> = 6010 J/mol at 273.15 K); heating the liquid to 298.15 K (<var>C</var><sub>P</sub> = 75.3 J mol⁻¹ K⁻¹).</p>
+      <ol class="steps">
+        <li>Melting: Δ<var>S</var> = 6010 / 273.15 = <b>+22.0 J/K</b>.</li>
+        <li>Heating the liquid: Δ<var>S</var> = (1)(75.3) ln(298.15/273.15) = 75.3 × 0.0876 = <b>+6.6 J/K</b>.</li>
+        <li>Add everything: 3.4 + 38.0 + 22.0 + 6.6 = <b>70.0 J/K</b>.</li>
+        <li class="answer-box"><var>S</var>°(H₂O, l, 298 K) = <b>70.0 J mol⁻¹ K⁻¹</b> — exactly the table value.<sup class="cite"><a href="#ref-8">8</a></sup> Without the residual entropy, the heat-capacity measurements alone give 66.6.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="margin-top:0"><b style="color:var(--accent)">Try it 1:</b> A crystal is made of molecules that can each freeze in <b>four</b> equally likely orientations. What is its residual entropy, in J mol⁻¹ K⁻¹?</p>
+    <div class="num-check" data-answer="11.53" data-tol="0.01" data-hint="W = 4^N, so S = R ln 4."><input inputmode="decimal" placeholder="J/(mol·K)"><button class="btn">Check</button><span class="result"></span></div>
+    <p><b style="color:var(--accent)">Try it 2:</b> Calculate Δ<var>S</var> when 1.00 mol of liquid water is heated from 273.15 K to 373.15 K (<var>C</var><sub>P</sub> = 75.3 J mol⁻¹ K⁻¹), in J/K.</p>
+    <div class="num-check" data-answer="23.49" data-tol="0.01" data-hint="ΔS = n C_P ln(T₂/T₁)."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">Which of these has an entropy of (essentially) zero at 0 K?</p>
+    <div class="quiz-opts">
+      <button data-why="Glass is amorphous: its particles are frozen in a disordered arrangement, so W > 1.">A piece of glass</button>
+      <button data-why="CO molecules freeze pointing either way at random, so solid CO keeps about 4.6 J mol⁻¹ K⁻¹ of residual entropy.">Solid carbon monoxide</button>
+      <button>A perfect crystal of pure copper</button>
+      <button data-why="A mixture of two substances can be arranged in many ways, so W > 1 even at 0 K.">A crystal of a 50:50 copper–nickel alloy</button>
+    </div>
+    <div class="quiz-fb" data-right="Only a perfect crystal of a pure substance has a single arrangement (W = 1) at 0 K."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">Why is the standard entropy of O₂(g) 205.2 J mol⁻¹ K⁻¹ when its standard enthalpy of formation is zero?</p>
+    <div class="quiz-opts">
+      <button>Entropy has a true zero (the third law), so S° is absolute; ΔHf° of elements is zero only by convention.</button>
+      <button data-why="Both are measured; the difference is about the reference point.">Entropy is measured, but enthalpy is calculated.</button>
+      <button data-why="O₂ is in its standard state. The point is that S° is an absolute value.">O₂ is not in its standard state.</button>
+    </div>
+    <div class="quiz-fb" data-right="Entropies are measured up from S = 0 at 0 K. Enthalpies have no natural zero, so elements in their standard states are assigned ΔHf° = 0."></div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">Why can't absolute zero be reached?</p>
+    <div class="quiz-opts">
+      <button data-why="The problem isn't the equipment; it's built into the shape of the entropy curves.">Refrigerators aren't powerful enough yet.</button>
+      <button>Every cooling step is smaller than the last, because the entropy curves converge at 0 K, so infinitely many steps would be needed.</button>
+      <button data-why="Molecules do slow down; the point is that each step removes less entropy than the last.">Molecules never slow down.</button>
+    </div>
+    <div class="quiz-fb" data-right="Because all entropy curves meet at S = 0 when T = 0, each step gets smaller: you can get ever closer but never arrive."></div>
+  </div>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
+  <ol class="refs">
+    <li id="ref-1">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.3, The Second and Third Laws of Thermodynamics. <a href="https://openstax.org/books/chemistry-2e/pages/16-3-the-second-and-third-laws-of-thermodynamics">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.2, Entropy. <a href="https://openstax.org/books/chemistry-2e/pages/16-2-entropy">openstax.org</a></li>
+    <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 3, The Second and Third Laws (the measurement of entropy; the third law; reaching very low temperatures).</li>
+    <li id="ref-4">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 4.7, Entropy on a Microscopic Scale (includes the third law and absolute zero). <a href="https://openstax.org/books/university-physics-volume-2/pages/4-7-entropy-on-a-microscopic-scale">openstax.org</a></li>
+    <li id="ref-5">Pauling, L. The Structure and Entropy of Ice and of Other Crystals with Some Randomness of Atomic Arrangement. <i>J. Am. Chem. Soc.</i> <b>1935</b>, <i>57</i> (12), 2680–2684. <a href="https://doi.org/10.1021/ja01315a102">doi:10.1021/ja01315a102</a></li>
+    <li id="ref-6">Giauque, W. F.; Stout, J. W. The Entropy of Water and the Third Law of Thermodynamics. The Heat Capacity of Ice from 15 to 273 °K. <i>J. Am. Chem. Soc.</i> <b>1936</b>, <i>58</i> (7), 1144–1150.</li>
+    <li id="ref-7">Clayton, J. O.; Giauque, W. F. The Heat Capacity and Entropy of Carbon Monoxide. <i>J. Am. Chem. Soc.</i> <b>1932</b>, <i>54</i>, 2610. <span class="use">— residual entropy of solid CO</span></li>
+    <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
+    <li id="ref-9">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD, 20899. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> (accessed November 2026) <span class="use">— heat capacities and phase-change enthalpies of water</span></li>
+  </ol>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  // ================= crystal pictures =================
+  (function () {
+    const NS = "http://www.w3.org/2000/svg";
+    const g1 = document.getElementById("perfectDots");
+    for (let i = 0; i < 6; i++) for (let j = 0; j < 4; j++) {
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", 32 + i * 29); c.setAttribute("cy", 52 + j * 33); c.setAttribute("r", 9); g1.appendChild(c);
+    }
+    // CO: random orientations (fixed pattern so it doesn't change on reload)
+    const flips = [0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1];
+    let s = "", k = 0;
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 5; i++) {
+      const x = 34 + i * 36, y = 52 + j * 33, f = flips[k++];
+      const cx = f ? x + 8 : x - 8, ox = f ? x - 8 : x + 8;
+      s += `<line x1="${x - 8}" y1="${y}" x2="${x + 8}" y2="${y}" stroke="var(--ink-3)" stroke-width="3"/>` +
+           `<circle cx="${cx}" cy="${y}" r="7" fill="#555"/><circle cx="${ox}" cy="${y}" r="8" fill="var(--heat)"/>`;
+    }
+    document.getElementById("coMols").innerHTML = s + `<text x="20" y="172" class="t-small t-muted">gray C, orange O</text>`;
+    // ice: O atoms with one H closer to one side (schematic)
+    let t = "", m = 0;
+    const hs = [1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1];
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++) {
+      const x = 38 + i * 44, y = 52 + j * 33;
+      t += `<circle cx="${x}" cy="${y}" r="9" fill="var(--sys)"/>`;
+      if (i < 3) { const h = hs[m++ % hs.length]; t += `<circle cx="${x + (h ? 14 : 30)}" cy="${y}" r="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>`; }
+    }
+    document.getElementById("iceMols").innerHTML = t + `<text x="20" y="172" class="t-small t-muted">blue O, white H</text>`;
+  })();
+
+  // ================= build the absolute entropy of water =================
+  (function () {
+    // approximate calorimetric entropy of ice (shape only), scaled to 38.0 J/(mol K) at 273.15 K
+    const pts = [[0, 0], [20, 0.6], [40, 3.0], [60, 6.1], [80, 9.4], [100, 12.6], [150, 20.5], [200, 27.9], [250, 35.0], [273.15, 38.0]];
+    const iceS = (T) => { for (let i = 1; i < pts.length; i++) if (T <= pts[i][0]) { const [a, sa] = pts[i - 1], [b, sb] = pts[i]; return sa + (sb - sa) * (T - a) / (b - a); } return 38.0; };
+    const Tm = 273.15, Tb = 373.15, Sfus = 6010 / Tm, Svap = 40700 / Tb, CpL = 75.3, CpG = 34.0, RES = 3.4;
+    const sl = document.getElementById("bT"), res = document.getElementById("bRes"), svg = document.getElementById("bSvg");
+    function S(T, r) {
+      const base = r ? RES : 0;
+      if (T <= Tm) return base + iceS(T);
+      let s = base + 38.0 + Sfus;
+      if (T <= Tb) return s + CpL * Math.log(T / Tm);
+      s += CpL * Math.log(Tb / Tm) + Svap;
+      return s + CpG * Math.log(T / Tb);
+    }
+    const X = (T) => 50 + T / 400 * 355, Y = (s) => 260 - s / 220 * 235;
+    function draw() {
+      const T = +sl.value, r = res.checked;
+      document.getElementById("bTOut").textContent = T + " K" + (T >= 273 && T < 274 ? " (melting point)" : T >= 373 && T < 374 ? " (boiling point)" : "");
+      let p = `<line x1="50" y1="260" x2="410" y2="260" stroke="var(--ink)" stroke-width="2"/><line x1="50" y1="260" x2="50" y2="15" stroke="var(--ink)" stroke-width="2"/>
+        <text x="230" y="292" text-anchor="middle" class="t-small">temperature (K)</text>
+        <text x="14" y="140" text-anchor="middle" class="t-small" transform="rotate(-90 14 140)">S (J mol⁻¹ K⁻¹)</text>`;
+      [0, 100, 200, 273, 373].forEach(t => p += `<text x="${X(t)}" y="276" text-anchor="middle" class="t-small t-muted">${t}</text>`);
+      [0, 50, 100, 150, 200].forEach(v => p += `<text x="44" y="${Y(v) + 4}" text-anchor="end" class="t-small t-muted">${v}</text><line x1="50" x2="410" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/>`);
+      // full curve (faint) and the part done (bold)
+      const path = (Tmax) => {
+        let d = `M${X(0)} ${Y(S(0, r))}`;
+        for (let t = 1; t <= Tmax; t++) {
+          if (t - 1 < Tm && t >= Tm) { d += ` L${X(Tm)} ${Y(S(Tm, r))} L${X(Tm)} ${Y(S(Tm + 0.001, r))}`; }
+          if (t - 1 < Tb && t >= Tb) { d += ` L${X(Tb)} ${Y(S(Tb, r))} L${X(Tb)} ${Y(S(Tb + 0.001, r))}`; }
+          d += ` L${X(t)} ${Y(S(t, r))}`;
+        }
+        return d;
+      };
+      p += `<path d="${path(400)}" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="4 4"/>`;
+      if (T > 0) p += `<path d="${path(T)}" fill="none" stroke="var(--heat)" stroke-width="3.5" stroke-linejoin="round"/>`;
+      p += `<line x1="${X(298.15)}" x2="${X(298.15)}" y1="260" y2="20" stroke="var(--energy)" stroke-dasharray="3 4"/><text x="${X(298.15) + 3}" y="28" class="t-small t-energy">298 K</text>`;
+      p += `<text x="${X(130)}" y="${Y(10) - 10}" class="t-small t-muted">ice</text><text x="${X(300)}" y="${Y(S(310, r)) + 20}" class="t-small t-muted">liquid</text><text x="${X(381)}" y="${Y(S(390, r)) + 18}" text-anchor="middle" class="t-small t-muted">steam</text>`;
+      p += `<circle cx="${X(T)}" cy="${Y(S(T, r))}" r="6" fill="var(--heat)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = p;
+      // contributions table
+      const rows = [];
+      rows.push(["Residual entropy of ice (at 0 K)", r ? RES : 0, true, !r]);
+      rows.push([`Heating ice, 0 → ${Math.min(T, 273)} K`, iceS(Math.min(T, Tm)), T > 0, false]);
+      rows.push(["Melting at 273.15 K (6010/273.15)", T > Tm ? Sfus : 0, T > Tm, false]);
+      rows.push([`Heating liquid, 273 → ${T > Tm ? Math.min(T, 373) : 273} K`, T > Tm ? CpL * Math.log(Math.min(T, Tb) / Tm) : 0, T > Tm, false]);
+      rows.push(["Boiling at 373.15 K (40 700/373.15)", T > Tb ? Svap : 0, T > Tb, false]);
+      rows.push([`Heating steam, 373 → ${T > Tb ? T : 373} K`, T > Tb ? CpG * Math.log(T / Tb) : 0, T > Tb, false]);
+      const total = S(T, r);
+      document.getElementById("bBody").innerHTML = rows.map(([lab, v, on, dim]) => `<tr class="${on && !dim ? "" : "off"}"><td>${lab}</td><td class="num">${on && !dim ? "+" + v.toFixed(1) : "—"}</td></tr>`).join("") +
+        `<tr class="total"><td>Absolute entropy S at ${T} K</td><td class="num">${total.toFixed(1)}</td></tr>`;
+      let msg;
+      if (T === 0) msg = r ? "At 0 K ice is not a perfect crystal: its hydrogen atoms are disordered, so S = 3.4 J mol⁻¹ K⁻¹ instead of 0." : "Treating ice as a perfect crystal: S = 0 at 0 K, as the third law says.";
+      else if (T < Tm) msg = "The ice warms: its molecules vibrate more and the energy can be shared in more ways, so S rises smoothly.";
+      else if (T < Tb) msg = (T >= 298 && T <= 299 ? `<b>At 298 K, S = ${total.toFixed(1)} J mol⁻¹ K⁻¹</b>${r ? " — the tabulated S° of liquid water (70.0)." : " — the heat-capacity measurement alone. The table value, 70.0, includes the residual entropy."} ` : "") + "After melting (a jump of 22.0) the liquid keeps gaining entropy as it warms.";
+      else msg = "Boiling adds a big jump of 109.1 — molecules escape into a vastly larger volume.";
+      document.getElementById("bMsg").innerHTML = msg;
+    }
+    sl.addEventListener("input", draw); res.addEventListener("change", draw); draw();
+  })();
+
+  // ================= adiabatic demagnetization staircase =================
+  (function () {
+    const tauOff = 1.0, tauOn = 2.2;          // schematic: S(T) = 1 − exp(−T/τ)
+    const Soff = (T) => 1 - Math.exp(-T / tauOff), Son = (T) => 1 - Math.exp(-T / tauOn);
+    const invOff = (s) => -tauOff * Math.log(1 - s);
+    const svg = document.getElementById("dSvg");
+    let steps = [], T0 = 4.0;
+    const X = (T) => 50 + T / 4.2 * 355, Y = (s) => 260 - s * 230;
+    // 1.818 or 2.3 × 10⁻⁵ (HTML)
+    const fk = (x) => { if (x >= 0.01) return x.toFixed(3); let e = Math.floor(Math.log10(x)), m = +(x / Math.pow(10, e)).toFixed(1); if (m >= 10) { m /= 10; e += 1; } return m.toFixed(1) + " × 10<sup>−" + (-e) + "</sup>"; };
+    function draw() {
+      let p = `<line x1="50" y1="260" x2="410" y2="260" stroke="var(--ink)" stroke-width="2"/><line x1="50" y1="260" x2="50" y2="20" stroke="var(--ink)" stroke-width="2"/>
+        <text x="230" y="292" text-anchor="middle" class="t-small">temperature</text><text x="50" y="276" text-anchor="middle" class="t-small t-muted">0 K</text>
+        <text x="14" y="140" text-anchor="middle" class="t-small" transform="rotate(-90 14 140)">entropy</text>`;
+      let a = "", b = "";
+      for (let i = 0; i <= 84; i++) { const T = i * 0.05; a += (i ? " L" : "M") + X(T) + " " + Y(Soff(T)); b += (i ? " L" : "M") + X(T) + " " + Y(Son(T)); }
+      p += `<path d="${a}" fill="none" stroke="var(--sys)" stroke-width="3"/><path d="${b}" fill="none" stroke="var(--heat)" stroke-width="3"/>`;
+      p += `<text x="${X(3.0)}" y="${Y(Soff(3.0)) - 8}" class="t-small t-sys" style="font-weight:700">magnet off</text><text x="${X(3.0)}" y="${Y(Son(3.0)) + 18}" class="t-small t-heat" style="font-weight:700">magnet on</text>`;
+      // staircase
+      let T = T0, d = `M${X(T)} ${Y(Soff(T))}`;
+      steps.forEach(() => { const s1 = Son(T); d += ` L${X(T)} ${Y(s1)}`; T = invOff(s1); d += ` L${X(T)} ${Y(s1)}`; });
+      if (steps.length) p += `<path d="${d}" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
+      p += `<circle cx="${X(T)}" cy="${Y(Soff(T))}" r="6" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = p;
+      document.getElementById("dN").textContent = steps.length;
+      document.getElementById("dT").innerHTML = fk(T) + " K";
+      const prev = steps.length ? steps[steps.length - 1] : null;
+      document.getElementById("dMsg").innerHTML = !steps.length ? "Start at 4.00 K (the curves are schematic). Each step: magnetize at constant T (entropy drops onto the orange curve), then demagnetize with no heat exchange (temperature drops back onto the blue curve)."
+        : `Step ${steps.length} cooled the sample from ${fk(prev.from)} K to ${fk(T)} K — a drop of ${fk(prev.from - T)} K. Each step removes a fixed <i>fraction</i> of the temperature, so the steps keep shrinking: <b>you approach 0 K but never reach it.</b>`;
+      return T;
+    }
+    let curT = draw();
+    const step = () => { steps.push({ from: curT }); curT = draw(); };
+    document.getElementById("dStep").addEventListener("click", step);
+    document.getElementById("dMany").addEventListener("click", () => { for (let i = 0; i < 10; i++) step(); });
+    document.getElementById("dReset").addEventListener("click", () => { steps = []; curT = draw(); });
+  })();
+</script>
+</body>
+</html>

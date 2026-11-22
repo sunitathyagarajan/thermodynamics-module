@@ -19,6 +19,8 @@ const LESSONS = [
   { n: 9, file: "09-hess-law.html",               title: "Hess's law & calculating ΔH" },
   { n: 10, file: "10-second-law.html",            title: "Nature's one-way street: the second law" },
   { n: 11, file: "11-spontaneity.html",           title: "Spontaneity: the universe keeps score" },
+  { n: 12, file: "12-third-law.html",             title: "The third law: the bottom of the entropy scale" },
+  { n: 13, file: "13-gibbs-free-energy.html",     title: "Gibbs free energy: the second law, seen from the system" },
 ];
 
 const store = {

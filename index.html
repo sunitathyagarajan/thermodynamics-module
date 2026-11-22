@@ -51,8 +51,8 @@
     <figcaption><b>The whole module in one picture.</b> Energy crosses the boundary between a <span class="sys">system</span> and its <span class="surr">surroundings</span> in only two ways — as <span class="q">heat</span> and as <span class="w">work</span>. The first law of thermodynamics keeps the books.</figcaption>
   </figure>
 
-  <div class="legend" aria-label="Colour key used in every diagram">
-    <strong>Colour key used throughout:</strong>
+  <div class="legend" aria-label="Color key used in every diagram">
+    <strong>Color key used throughout:</strong>
     <span><i style="background:var(--sys)"></i>system</span>
     <span><i style="background:var(--surr)"></i>surroundings</span>
     <span><i style="background:var(--heat)"></i>heat, q</span>
@@ -71,6 +71,8 @@
       <li>Distinguish <b>reversible</b> from <b>irreversible</b> heat and work, compare them quantitatively, and explain why the difference is tiny for solids and liquids.</li>
       <li>Relate <b>enthalpy</b> to heat at constant pressure and calculate Δ<var>H</var> for phase changes and reactions, including with <b>Hess's law</b>.</li>
       <li>State the <b>second law</b>, explain entropy using microstates (<var>S</var> = <var>k</var> ln <var>W</var>), and use Δ<var>S</var><sub>univ</sub> to predict <b>spontaneity</b>.</li>
+      <li>State the <b>third law</b> and explain how absolute entropies are measured and why absolute zero can't be reached.</li>
+      <li>Derive the <b>Gibbs free energy</b> (Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var>), relate Δ<var>G</var>° to the equilibrium constant, and apply it to problems in chemistry, medicine, biology and engineering.</li>
     </ul>
   </div>
 
@@ -88,6 +90,8 @@
     <a href="lessons/09-hess-law.html" data-n="9"><span class="n">9</span><div><h3>Hess's law &amp; calculating ΔH</h3><p>The rules, interactive Hess puzzles, and every way to find ΔH: calorimetry, formation and bond enthalpies, Kirchhoff, Born–Haber.</p></div></a>
     <a href="lessons/10-second-law.html" data-n="10"><span class="n">10</span><div><h3>Nature's one-way street: the second law</h3><p>Entropy and randomness, diffusion and other examples, microstates and S = k ln W — with animations.</p></div></a>
     <a href="lessons/11-spontaneity.html" data-n="11"><span class="n">11</span><div><h3>Spontaneity: the universe keeps score</h3><p>ΔS of system, surroundings and universe; spontaneous, equilibrium and nonspontaneous; entropy in living things; factors affecting entropy; a scored test on Lessons 10–11.</p></div></a>
+    <a href="lessons/12-third-law.html" data-n="12"><span class="n">12</span><div><h3>The third law: the bottom of the entropy scale</h3><p>Why a perfect crystal has zero entropy, residual entropy of CO and ice, building the absolute entropy of water from 0 K, and why absolute zero can't be reached — with interactives.</p></div></a>
+    <a href="lessons/13-gibbs-free-energy.html" data-n="13"><span class="n">13</span><div><h3>Gibbs free energy: the second law, seen from the system</h3><p>Deriving ΔG = ΔH − TΔS and what it means, ΔG° and K, the Gibbs energy of the surroundings and the universe, and interactive applications: ammonia synthesis, drug binding, protein stability, ATP coupling, metal extraction and fuel cells.</p></div></a>
   </div>
 
   <h2 id="equations">Key equations card</h2>
@@ -104,6 +108,10 @@
       <tr><td>Hess's law / formation</td><td>Δ<var>H</var>°<sub>rxn</sub> = Σ<var>n</var>Δ<var>H</var><sub>f</sub>°(products) − Σ<var>m</var>Δ<var>H</var><sub>f</sub>°(reactants) &nbsp;(<var>n</var>, <var>m</var> = coefficients)</td><td>Any reaction with tabulated species</td></tr>
       <tr><td>Entropy (Boltzmann)</td><td><var>S</var> = <var>k</var><sub>B</sub> ln <var>W</var></td><td>Counting microstates</td></tr>
       <tr><td>Second law</td><td>Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> − Δ<var>H</var><sub>sys</sub>/<var>T</var> &gt; 0</td><td>Spontaneous process (constant T, P)</td></tr>
+      <tr><td>Third law / absolute entropy</td><td><var>S</var> = 0 for a perfect crystal at 0 K; &nbsp;<var>S</var>(<var>T</var>) = Σ<var>n C</var><sub>P</sub> ln(<var>T</var><sub>2</sub>/<var>T</var><sub>1</sub>) + ΣΔ<var>H</var><sub>trans</sub>/<var>T</var><sub>trans</sub></td><td>Measuring and tabulating <var>S</var>°</td></tr>
+      <tr><td>Gibbs free energy</td><td>Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var> = −<var>T</var>Δ<var>S</var><sub>univ</sub>; &nbsp;Δ<var>G</var>°<sub>rxn</sub> = Σ<var>n</var>Δ<var>G</var><sub>f</sub>°(products) − Σ<var>m</var>Δ<var>G</var><sub>f</sub>°(reactants)</td><td>Spontaneous if Δ<var>G</var> &lt; 0 (constant <var>T</var>, <var>P</var>)</td></tr>
+      <tr><td>Free energy and equilibrium</td><td>Δ<var>G</var> = Δ<var>G</var>° + <var>RT</var> ln <var>Q</var>; &nbsp;Δ<var>G</var>° = −<var>RT</var> ln <var>K</var></td><td>How far a reaction goes</td></tr>
+      <tr><td>Free energy and electrical work</td><td>Δ<var>G</var> = −<var>nFE</var> &nbsp;(<var>F</var> = 96 485 C/mol)</td><td>Batteries, fuel cells; −Δ<var>G</var> = maximum useful work</td></tr>
       <tr><td>Constant volume</td><td><span class="w">w</span> = 0, so <span class="u">ΔU</span> = <span class="q">q</span><sub><var>V</var></sub></td><td>Rigid container, bomb calorimeter</td></tr>
       <tr><td>Conversions</td><td colspan="2">1 L·atm = 101.325 J &nbsp;·&nbsp; 1 cal = 4.184 J &nbsp;·&nbsp; <var>R</var> = 8.314 J mol<sup>−1</sup> K<sup>−1</sup> = 0.08206 L·atm mol<sup>−1</sup> K<sup>−1</sup></td></tr>
     </table>
