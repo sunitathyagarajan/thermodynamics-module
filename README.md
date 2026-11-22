@@ -2,6 +2,10 @@
 
 An interactive learning module on the principles of thermodynamics for first-year (freshman) general chemistry students. It is a plain static website (HTML, CSS and JavaScript, no build step), so it can be opened directly in a browser or published with GitHub Pages.
 
+**▶ Open the live module:** https://sunitathyagarajan.github.io/thermodynamics-module/
+
+**Source code:** https://github.com/sunitathyagarajan/thermodynamics-module
+
 ## Lessons
 
 | # | Page | What it covers |
