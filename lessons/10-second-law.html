@@ -128,7 +128,7 @@
   <div class="grid-3">
     <div class="card">
       <h3 style="margin-top:0">① Diffusion</h3>
-      <p style="margin:0">A drop of food colouring spreads through water; perfume spreads through a room. Each dye molecule wanders randomly. There are vastly more ways for the molecules to be spread through the whole glass than crowded in one drop, so they end up spread out — and never gather back.<sup class="cite"><a href="#ref-8">8</a></sup></p>
+      <p style="margin:0">A drop of food colouring spreads through water; perfume spreads through a room. Each dye molecule wanders randomly. There are vastly more ways for the molecules to be spread through the whole glass than crowded in one drop, so they end up spread out — and never gather back.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-2">2</a>,<a href="#ref-8">8</a></sup></p>
     </div>
     <div class="card">
       <h3 style="margin-top:0">② A gas expanding</h3>
@@ -338,6 +338,11 @@
     <div class="quiz-fb" data-right="Clausius's statement says heat won't flow from cold to hot on its own. A fridge does it only by using work, and the total entropy of the universe still increases."></div>
   </div>
 
+  <div class="callout tip">
+    <span class="callout-title">Ready to test yourself?</span>
+    A short scored test covering Lessons 10 and 11 is at the end of Lesson 11: <a href="11-spontaneity.html#test-yourself">Test yourself: entropy and spontaneity</a>.
+  </div>
+
   <h2 id="references">References</h2>
   <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
   <ol class="refs">
@@ -349,7 +354,7 @@
     <li id="ref-6">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 3, The Second and Third Laws.</li>
     <li id="ref-7">Lambert, F. L. Disorder — A Cracked Crutch for Supporting Entropy Discussions. <i>J. Chem. Educ.</i> <b>2002</b>, <i>79</i> (2), 187–192. <a href="https://doi.org/10.1021/ed079p187">doi:10.1021/ed079p187</a></li>
     <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 9.4, Effusion and Diffusion of Gases. <a href="https://openstax.org/books/chemistry-2e/pages/9-4-effusion-and-diffusion-of-gases">openstax.org</a></li>
-    <li id="ref-9">Boltzmann, L. Über die Beziehung zwischen dem zweiten Hauptsatze der mechanischen Wärmetheorie und der Wahrscheinlichkeitsrechnung respektive den Sätzen über das Wärmegleichgewicht. <i>Sitzungsber. Kais. Akad. Wiss. Wien, Math.-Naturwiss. Cl. II</i> <b>1877</b>, <i>76</i>, 373–435. <span class="use">— the statistical (probability) interpretation of entropy</span></li>
+    <li id="ref-9">Boltzmann, L. Über die Beziehung zwischen dem zweiten Hauptsatze der mechanischen Wärmetheorie und der Wahrscheinlichkeitsrechnung respektive den Sätzen über das Wärmegleichgewicht. <i>Sitzungsber. Kais. Akad. Wiss. Wien, Math.-Naturwiss. Cl., Abt. II</i> <b>1877</b>, <i>76</i>, 373–435. <span class="use">— the statistical (probability) interpretation of entropy</span></li>
     <li id="ref-10">Clausius, R. Ueber verschiedene für die Anwendung bequeme Formen der Hauptgleichungen der mechanischen Wärmetheorie. <i>Ann. Phys. Chem.</i> <b>1865</b>, <i>125</i>, 353–400. <span class="use">— introduces the word "entropy"</span></li>
     <li id="ref-11">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 11.1, The Dissolution Process. <a href="https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process">openstax.org</a></li>
   </ol>
@@ -511,7 +516,7 @@
       document.getElementById("mS").innerHTML = W === 1 ? "0 J/K" : sci(S, 3) + " J/K";
       document.getElementById("mMsg").innerHTML = W === 1
         ? `Only one way to arrange this (all on one side): W = 1 and S = k ln 1 = <b>0</b>. Probability 1 in ${N <= 30 ? fmt(tot, 0) : `2<sup>${N}</sup>`}.`
-        : `W = ${N}!/(${n}! ${N - n}!) = ${big(W)}. ${n === Math.floor(N / 2) || n === Math.ceil(N / 2) ? "This is the <b>most probable</b> macrostate — the one with the highest entropy." : "Move toward the middle to increase W and S."}`;
+        : `W = ${N}!/(${n}! ${N - n}!) = ${big(W)}. ${n === Math.floor(N / 2) || n === Math.ceil(N / 2) ? (N % 2 ? "This is one of the two <b>equally most probable</b> macrostates — the ones with the highest entropy." : "This is the <b>most probable</b> macrostate — the one with the highest entropy.") : "Move toward the middle to increase W and S."}`;
       const tiles = document.getElementById("mTiles");
       if (N <= 6) {
         tiles.innerHTML = combos(N, n).map(c => { const L = c.map(i => letters[i]).join(""), R = [...Array(N).keys()].filter(i => !c.includes(i)).map(i => letters[i]).join(""); return `<div class="tile"><span>${L || "·"}</span><span>${R || "·"}</span></div>`; }).join("");

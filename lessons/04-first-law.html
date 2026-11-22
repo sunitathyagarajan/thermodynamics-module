@@ -270,7 +270,7 @@
     </figure>
     <div>
       <p>Over and over, inventors have claimed machines that produce work forever with no energy input. For a machine running in a cycle, Δ<var>U</var> = 0, so <var>w</var> = −<var>q</var>. With no heat input (<var>q</var> = 0), the work output must be zero too.</p>
-      <p><b>The first law says you can't get out more energy than you put in.</b> (The second law adds that you can't even break even — but that's a story for the next unit.)</p>
+      <p><b>The first law says you can't get out more energy than you put in.</b> (The second law adds that you can't even break even — you'll meet it in Lesson 10.)</p>
     </div>
   </div>
 
@@ -384,7 +384,7 @@
         msg = `The cylinder is insulated, so <b>q = 0</b>. Pushing the piston in does work on the gas, and <b>all</b> of it becomes internal energy: ΔU = w. The gas heats up with no flame at all!`;
         gas.setFlame(false); gas.setArrows(0, s > 0 ? 1 : 0); gas.setWeights(1 + Math.round(s / 500));
       } else {
-        V = s; T = T1; P = n * 0.082057 * T / V; w = -P * (V - V1) * 101.325; dU = 0; q = -w;
+        V = Math.max(s, V1); T = T1; P = n * 0.082057 * T / V; w = -P * (V - V1) * 101.325; dU = 0; q = -w;
         msg = `The water bath holds T at 300 K, so for an ideal gas <b>ΔU = 0</b>. The gas does work (w &lt; 0) and draws in exactly the same amount of heat from the bath: <b>q = −w</b>.`;
         gas.setFlame(false); gas.setArrows(V > V1 + 0.1 ? 1 : 0, V > V1 + 0.1 ? -1 : 0); gas.setWeights(1);
       }

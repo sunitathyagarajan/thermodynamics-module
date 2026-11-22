@@ -136,7 +136,7 @@
   <div class="widget" id="race">
     <div class="widget-head"><span class="badge">Animated</span><h3>Watch it happen: irreversible vs reversible work, side by side</h3></div>
     <div class="widget-body">
-      <p>Both cylinders hold <b>1.00 mol of ideal gas at 298 K</b> (a water bath keeps <var>T</var> constant) and go between the <b>same two states</b>: 4.00 atm, 6.12 L and 1.00 atm, 24.5 L. The load on the piston sets <var>P</var><sub>ext</sub>: the grey block always stays on and is worth 1 atm. <b>Left:</b> the extra 3 atm is three blocks, moved all at once. <b>Right:</b> the extra 3 atm is a pile of sand, moved one grain at a time. Press <b>Play</b>, or drag the time slider to step through.</p>
+      <p>Both cylinders hold <b>1.00 mol of ideal gas at 298.15 K (25 °C)</b> (a water bath keeps <var>T</var> constant) and go between the <b>same two states</b>: 4.00 atm, 6.12 L and 1.00 atm, 24.5 L. The load on the piston sets <var>P</var><sub>ext</sub>: the grey block always stays on and is worth 1 atm. <b>Left:</b> the extra 3 atm is three blocks, moved all at once. <b>Right:</b> the extra 3 atm is a pile of sand, moved one grain at a time. Press <b>Play</b>, or drag the time slider to step through.</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
         <div class="seg" role="group" aria-label="Direction">
           <button class="on" data-race="exp">Expansion</button>
@@ -182,7 +182,7 @@
   <div class="widget" id="steps">
     <div class="widget-head"><span class="badge">Interactive</span><h3>From one step to infinitely many</h3></div>
     <div class="widget-body">
-      <p><b>1.00 mol</b> of ideal gas at <b>298 K</b> (kept constant by a water bath) goes between <b>4.00 atm, 6.12 L</b> and <b>1.00 atm, 24.5 L</b>. Choose a direction, then increase the number of steps. Each step changes <var>P</var><sub>ext</sub> suddenly, then lets the gas settle.</p>
+      <p><b>1.00 mol</b> of ideal gas at <b>298.15 K (25 °C)</b> (kept constant by a water bath) goes between <b>4.00 atm, 6.12 L</b> and <b>1.00 atm, 24.5 L</b>. Choose a direction, then increase the number of steps. Each step changes <var>P</var><sub>ext</sub> suddenly, then lets the gas settle.</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
         <div class="seg" role="group" aria-label="Direction">
           <button class="on" data-dir="exp">Expansion</button>
@@ -222,7 +222,7 @@
       <li>Calculate each: irreversible with <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> (summed over steps); reversible with <var>w</var> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>).</li>
       <li>Or compare areas on a P–V diagram: the reversible path hugs the isotherm.</li>
     </ol>
-    <p style="margin-bottom:0"><b>Result:</b> for <b>expansion</b>, |<var>w</var><sub>rev</sub>| &gt; |<var>w</var><sub>irr</sub>| — reversible gives the <b>maximum work out</b>. For <b>compression</b>, <var>w</var><sub>rev</sub> &lt; <var>w</var><sub>irr</sub> — reversible needs the <b>minimum work in</b>. Taking a gas around an irreversible cycle always costs net work; a reversible cycle costs nothing.</p>
+    <p style="margin-bottom:0"><b>Result:</b> for <b>expansion</b>, |<var>w</var><sub>rev</sub>| &gt; |<var>w</var><sub>irr</sub>| — reversible gives the <b>maximum work out</b>. For <b>compression</b>, <var>w</var><sub>rev</sub> &lt; <var>w</var><sub>irr</sub> — reversible needs the <b>minimum work in</b>. Taking the gas out and back between the same two states with the same water bath, the irreversible round trip always costs net work; the reversible round trip costs nothing.</p>
   </div>
 
   <figure class="diagram">
@@ -318,7 +318,7 @@
         <text x="160" y="170" text-anchor="middle" class="t-small t-muted">a tiny warming will NOT melt it back</text>
       </g>
     </svg>
-    <figcaption>A phase change at its transition temperature (solid and liquid in equilibrium) is the textbook example of a reversible process; freezing a supercooled liquid is irreversible.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup></figcaption>
+    <figcaption>A phase change at its transition temperature (solid and liquid in equilibrium) is the textbook example of a reversible process.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup> Freezing a supercooled liquid happens suddenly, far from equilibrium, so it is irreversible.<sup class="cite"><a href="#ref-1">1</a></sup></figcaption>
   </figure>
 
   <h2 id="compare" data-short="Summary comparison">Side-by-side summary</h2>
@@ -467,7 +467,7 @@
       </div>
       <details>
         <summary style="cursor:pointer;font-weight:600">How is this calculated?</summary>
-        <p style="font-size:.92rem">Work per unit volume is the area under the stress–strain curve.<sup class="cite"><a href="#ref-11">11</a></sup> Elastic region: stress = <var>E</var> × strain, so work = ½<var>E</var>(strain)². Beyond the yield strain (0.125%) the wire is modelled as yielding at 250 MPa with slight hardening. On release it unloads along a line with the elastic slope, returning ½(stress)²/<var>E</var> per unit volume; the rest of the area is dissipated.<sup class="cite"><a href="#ref-12">12</a></sup> Multiply by the wire's volume (1.00 × 10⁻⁶ m³) to get joules.</p>
+        <p style="font-size:.92rem">Work per unit volume is the area under the stress–strain curve.<sup class="cite"><a href="#ref-12">12</a></sup> Elastic region: stress = <var>E</var> × strain, so work = ½<var>E</var>(strain)². Beyond the yield strain (0.125%) the wire is modelled as yielding at 250 MPa with slight hardening. On release it unloads along a line with the elastic slope, returning ½(stress)²/<var>E</var> per unit volume; the rest of the area is dissipated.<sup class="cite"><a href="#ref-12">12</a></sup> Multiply by the wire's volume (1.00 × 10⁻⁶ m³) to get joules.</p>
       </details>
     </div>
   </div>
@@ -581,7 +581,7 @@
       <button data-why="The irreversible work is actually larger (up to about 2× for compression); it's the absolute size that's negligible.">The reversible and irreversible works are exactly equal for liquids.</button>
       <button>Liquids are nearly incompressible, so ΔV — and hence both works — are tiny.</button>
     </div>
-    <div class="quiz-fb" data-right="Compressing 1 L of water to 100 atm takes only ~23 J reversibly or ~46 J suddenly, compared with ~10,000 J for 1 L of gas."></div>
+    <div class="quiz-fb" data-right="Compressing 1 L of water to 100 atm takes only ~23 J reversibly or ~46 J suddenly — a difference of 23 J. For 1 L of ideal gas it takes 467 J reversibly but about 10,000 J suddenly."></div>
   </div>
 
   <div class="quiz" data-answer="0">
@@ -630,8 +630,8 @@
     <li id="ref-9">Vargaftik, N. B.; Volkov, B. N.; Voljak, L. D. International Tables of the Surface Tension of Water. <i>J. Phys. Chem. Ref. Data</i> <b>1983</b>, <i>12</i> (3), 817–820. <a href="https://doi.org/10.1063/1.555688">doi:10.1063/1.555688</a> <span class="use">— γ of water at 25 °C</span></li>
     <li id="ref-10">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 17.4, Potential, Free Energy, and Equilibrium. <a href="https://openstax.org/books/chemistry-2e/pages/17-4-potential-free-energy-and-equilibrium">openstax.org</a> <span class="use">— maximum electrical work, w<sub>max</sub> = −nFE</span></li>
     <li id="ref-11">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 1</i>; OpenStax: Houston, TX, 2016; Section 12.3, Stress, Strain, and Elastic Modulus; Section 12.4, Elasticity and Plasticity. <a href="https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus">openstax.org</a></li>
-    <li id="ref-12">Callister, W. D.; Rethwisch, D. G. <i>Materials Science and Engineering: An Introduction</i>, 10th ed.; Wiley: Hoboken, NJ, 2018; Chapter 6, Mechanical Properties of Metals. <span class="use">— elastic vs plastic deformation, yield strength of steel</span></li>
-    <li id="ref-13">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 1</i>; OpenStax: Houston, TX, 2016; Section 17.3, Speed of Sound. <a href="https://openstax.org/books/university-physics-volume-1/pages/17-3-speed-of-sound">openstax.org</a></li>
+    <li id="ref-12">Callister, W. D., Jr.; Rethwisch, D. G. <i>Materials Science and Engineering: An Introduction</i>, 10th ed.; Wiley: Hoboken, NJ, 2018; Chapter 6, Mechanical Properties of Metals. <span class="use">— elastic vs plastic deformation, yield strength of steel</span></li>
+    <li id="ref-13">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 1</i>; OpenStax: Houston, TX, 2016; Section 17.2, Speed of Sound. <a href="https://openstax.org/books/university-physics-volume-1/pages/17-2-speed-of-sound">openstax.org</a></li>
     <li id="ref-14">Finn, B. S. Laplace and the Speed of Sound. <i>Isis</i> <b>1964</b>, <i>55</i> (1), 7–19. <span class="use">— history of Newton's isothermal error and Laplace's adiabatic correction</span></li>
     <li id="ref-15">Jayaraman, A. Diamond Anvil Cell and High-Pressure Physical Investigations. <i>Rev. Mod. Phys.</i> <b>1983</b>, <i>55</i> (1), 65–108. <a href="https://doi.org/10.1103/RevModPhys.55.65">doi:10.1103/RevModPhys.55.65</a></li>
     <li id="ref-16">Zel'dovich, Ya. B.; Raizer, Yu. P. <i>Physics of Shock Waves and High-Temperature Hydrodynamic Phenomena</i>; Dover: Mineola, NY, 2002. <span class="use">— shock compression of solids</span></li>

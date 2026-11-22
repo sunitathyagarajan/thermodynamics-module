@@ -45,7 +45,7 @@
   <p>Start from the first law and add one condition — <b>constant pressure</b>, with only pressure–volume work:<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></p>
   <ol class="deriv">
     <li>First law: Δ<span class="u">U</span> = <span class="q">q</span> + <span class="w">w</span></li>
-    <li>At constant pressure, the only work is expansion work: <span class="w">w</span> = −<var>P</var>Δ<var>V</var>. So Δ<span class="u">U</span> = <span class="q">q</span><sub>P</sub> − <var>P</var>Δ<var>V</var>.</li>
+    <li>If the only work is expansion work against the constant pressure, <span class="w">w</span> = −<var>P</var>Δ<var>V</var>. So Δ<span class="u">U</span> = <span class="q">q</span><sub>P</sub> − <var>P</var>Δ<var>V</var>.</li>
     <li>Rearrange: <span class="q">q</span><sub>P</sub> = Δ<span class="u">U</span> + <var>P</var>Δ<var>V</var>.</li>
     <li>At constant <var>P</var>, Δ<var>H</var> = Δ(<var>U</var> + <var>PV</var>) = Δ<span class="u">U</span> + <var>P</var>Δ<var>V</var>. Therefore:</li>
   </ol>
@@ -353,11 +353,11 @@
     <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 2, The First Law (enthalpy; thermochemistry).</li>
     <li id="ref-4">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 10.3, Phase Transitions. <a href="https://openstax.org/books/chemistry-2e/pages/10-3-phase-transitions">openstax.org</a></li>
     <li id="ref-5">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 3.5, Heat Capacities of an Ideal Gas. <a href="https://openstax.org/books/university-physics-volume-2/pages/3-5-heat-capacities-of-an-ideal-gas">openstax.org</a></li>
-    <li id="ref-6">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> <span class="use">— heat capacities, phase-change enthalpies</span></li>
+    <li id="ref-6">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD, 20899. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> (accessed November 2026) <span class="use">— heat capacities, phase-change enthalpies</span></li>
     <li id="ref-7">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
     <li id="ref-8">Cohen, E. R.; Cvitaš, T.; Frey, J. G.; et al. <i>Quantities, Units and Symbols in Physical Chemistry</i> (IUPAC Green Book), 3rd ed.; RSC Publishing: Cambridge, 2007. <span class="use">— standard state (1 bar) and notation for enthalpy changes</span></li>
     <li id="ref-9">Höhne, G. W. H.; Hemminger, W. F.; Flammersheim, H.-J. <i>Differential Scanning Calorimetry</i>, 2nd ed.; Springer: Berlin, 2003.</li>
-    <li id="ref-10">Kell, G. S. Density, Thermal Expansivity, and Compressibility of Liquid Water from 0° to 150 °C. <i>J. Chem. Eng. Data</i> <b>1975</b>, <i>20</i> (1), 97–105. <a href="https://doi.org/10.1021/je60064a005">doi:10.1021/je60064a005</a></li>
+    <li id="ref-10">Kell, G. S. Density, Thermal Expansivity, and Compressibility of Liquid Water from 0° to 150 °C: Correlations and Tables for Atmospheric Pressure and Saturation Reviewed and Expressed on 1968 Temperature Scale. <i>J. Chem. Eng. Data</i> <b>1975</b>, <i>20</i> (1), 97–105. <a href="https://doi.org/10.1021/je60064a005">doi:10.1021/je60064a005</a></li>
     <li id="ref-11">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 7.5, Strengths of Ionic and Covalent Bonds. <a href="https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds">openstax.org</a></li>
     <li id="ref-12">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 6.5, Periodic Variations in Element Properties. <a href="https://openstax.org/books/chemistry-2e/pages/6-5-periodic-variations-in-element-properties">openstax.org</a></li>
     <li id="ref-13">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 11.1, The Dissolution Process. <a href="https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process">openstax.org</a></li>
@@ -398,7 +398,7 @@
       const pct = pdv / dH * 100;
       document.getElementById("huMsg").innerHTML = s.gas
         ? `For ${s.name}, <b>${pct.toFixed(0)}%</b> of the heat goes into pushing back the atmosphere, so Δ<var>H</var> and Δ<var>U</var> are clearly different. For any ideal gas the difference is exactly <var>R</var>Δ<var>T</var> per mole (C<sub>P</sub> − C<sub>V</sub> = R).`
-        : `For ${s.name}, only <b>${pct < 0.001 ? pct.toExponential(1) : pct.toFixed(4)}%</b> of the heat does expansion work — Δ<var>H</var> and Δ<var>U</var> are equal for all practical purposes. That's why "heat capacity" for solids and liquids is usually quoted without worrying about constant P or V.`;
+        : `For ${s.name}, only <b>${pct < 0.001 ? pct.toExponential(1) : pct.toFixed(4)}%</b> of the heat does expansion work — Δ<var>H</var> and Δ<var>U</var> are equal for all practical purposes. So for a solid or liquid heated in open air, the heat absorbed is essentially ΔU as well as ΔH.`;
     };
     T.addEventListener("input", draw);
     document.querySelectorAll("#huSeg button").forEach(b => b.addEventListener("click", () => {

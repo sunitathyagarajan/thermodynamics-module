@@ -138,11 +138,11 @@
   <div class="example">
     <div class="example-head"><span class="example-num">Example</span><h3>Combustion of methane</h3><span class="tag gas">gas</span></div>
     <div class="example-body">
-      <p style="margin-top:0">A bomb calorimeter gives Δ<var>U</var> = −885.4 kJ/mol for CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l) at 298 K. Find Δ<var>H</var>.</p>
+      <p style="margin-top:0">A bomb calorimeter gives Δ<var>U</var> = −885.5 kJ/mol for CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l) at 298 K. Find Δ<var>H</var>.</p>
       <ol class="steps">
         <li>Count gases: products 1 (CO₂; water is liquid), reactants 3 → Δ<var>n</var><sub>gas</sub> = 1 − 3 = −2.</li>
         <li>Δ<var>n</var><sub>gas</sub><var>RT</var> = (−2)(8.314 × 10⁻³ kJ mol⁻¹ K⁻¹)(298 K) = −4.96 kJ/mol.</li>
-        <li class="answer-box">Δ<var>H</var> = −885.4 + (−4.96) = <b>−890.4 kJ/mol</b>. For a solid or liquid fuel that makes no net gas, Δ<var>H</var> ≈ Δ<var>U</var>.</li>
+        <li class="answer-box">Δ<var>H</var> = −885.5 + (−4.96) = <b>−890.5 kJ/mol</b>. For a solid or liquid fuel that makes no net gas, Δ<var>H</var> ≈ Δ<var>U</var>.</li>
       </ol>
       <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
     </div>
@@ -170,7 +170,7 @@
         </div>
         <svg id="fSvg" viewBox="0 0 360 300" role="img" aria-label="Hess cycle through the elements"></svg>
       </div>
-      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">ΔH<sub>f</sub>° values at 25 °C from OpenStax Appendix G and the NIST WebBook;<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-5">5</a></sup> elements in their standard states are 0 by definition.<sup class="cite"><a href="#ref-9">9</a></sup></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">ΔH<sub>f</sub>° values at 25 °C from OpenStax Appendix G and the NIST WebBook;<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-5">5</a></sup> elements in their standard states are 0 by definition.<sup class="cite"><a href="#ref-9">9</a></sup> CaCO₃ uses the CRC Handbook value (−1207.6 kJ/mol);<sup class="cite"><a href="#ref-11">11</a></sup> OpenStax Appendix G lists −1220.0 kJ/mol, which disagrees with the CRC and NBS tables.</p>
     </div>
   </div>
 
@@ -203,7 +203,7 @@
 
   <!-- ===== Method 6 ===== -->
   <h3><span class="method-tag">6</span>Heating and phase changes — q = nC<sub>P</sub>ΔT and q = nΔH<sub>transition</sub></h3>
-  <p>For physical changes, split the process into heating steps and phase changes and add them — Hess's law with each step measured separately. Lesson 8 has an interactive calculator for water.<sup class="cite"><a href="#ref-10">10</a></sup> Example: warming 18.0 g of ice from −10 °C to steam at 110 °C takes 0.38 + 6.01 + 7.53 + 40.7 + 0.36 = <b>55.0 kJ</b>.</p>
+  <p>For physical changes, split the process into heating steps and phase changes and add them — Hess's law with each step measured separately. Lesson 8 has an interactive calculator for water.<sup class="cite"><a href="#ref-10">10</a></sup> Example: warming 18.0 g of ice from −10 °C to steam at 110 °C takes 0.38 + 6.00 + 7.53 + 40.65 + 0.36 = <b>54.9 kJ</b> (18.0 g is 0.999 mol).</p>
 
   <!-- ===== Method 7 ===== -->
   <h3><span class="method-tag">7</span>Correcting ΔH to a different temperature (Kirchhoff's law)</h3>
@@ -213,7 +213,7 @@
   <div class="widget" id="kirch">
     <div class="widget-head"><span class="badge">Interactive</span><h3>How ΔH<sub>vap</sub> of water changes with temperature</h3></div>
     <div class="widget-body">
-      <p>Start from Δ<var>H</var><sub>vap</sub> = 44.0 kJ/mol at 25 °C (from formation enthalpies: −241.8 − (−285.8)).<sup class="cite"><a href="#ref-4">4</a></sup> With <var>C</var><sub>P</sub>(l) = 75.3 and <var>C</var><sub>P</sub>(g) = 33.6 J mol⁻¹ K⁻¹, Δ<var>C</var><sub>P</sub> = −41.7 J mol⁻¹ K⁻¹.<sup class="cite"><a href="#ref-5">5</a></sup> Drag the temperature and compare with measured steam-table values (dots).<sup class="cite"><a href="#ref-5">5</a></sup></p>
+      <p>Start from Δ<var>H</var><sub>vap</sub> = 44.0 kJ/mol at 25 °C (from formation enthalpies: −241.8 − (−285.8)).<sup class="cite"><a href="#ref-4">4</a></sup> With <var>C</var><sub>P</sub>(l) = 75.3 and <var>C</var><sub>P</sub>(g) = 33.6 J mol⁻¹ K⁻¹ (both at 25 °C), Δ<var>C</var><sub>P</sub> = −41.7 J mol⁻¹ K⁻¹.<sup class="cite"><a href="#ref-5">5</a></sup> Drag the temperature and compare with measured steam-table values (dots).<sup class="cite"><a href="#ref-5">5</a></sup></p>
       <div class="control"><label for="kT">Temperature <output id="kTOut">100 °C</output></label><input type="range" id="kT" min="0" max="100" step="1" value="100"></div>
       <div class="widget-row" style="margin-top:10px">
         <svg id="kSvg" viewBox="0 0 400 250" role="img" aria-label="Enthalpy of vaporization versus temperature"></svg>
@@ -361,7 +361,7 @@
     <div class="quiz-fb" data-right="By definition, an element in its most stable form at 1 bar and 25 °C has ΔHf° = 0."></div>
   </div>
 
-  <h2 id="wrap-up">Module wrap-up</h2>
+  <h2 id="wrap-up" data-short="Summary so far">Summary so far: the first law</h2>
   <figure class="diagram">
     <svg viewBox="0 0 760 290" role="img" aria-label="Concept map of the whole module">
       <g class="t-mid" style="font-weight:600">
@@ -389,12 +389,13 @@
     <li id="ref-2">Hess, G. H. Thermochemische Untersuchungen. <i>Ann. Phys. Chem.</i> (Poggendorff) <b>1840</b>, <i>50</i>, 385. <span class="use">— the original statement of constant heat summation; see also Leicester, H. M. Germain Henri Hess and the Foundations of Thermochemistry. <i>J. Chem. Educ.</i> <b>1951</b>, <i>28</i>, 581–583, <a href="https://doi.org/10.1021/ed028p581">doi:10.1021/ed028p581</a></span></li>
     <li id="ref-3">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 2, The First Law (thermochemistry; temperature dependence of reaction enthalpies).</li>
     <li id="ref-4">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
-    <li id="ref-5">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> <span class="use">— formation enthalpies, heat capacities, enthalpy of vaporization of water vs temperature, Na sublimation, Cl₂ bond energy</span></li>
+    <li id="ref-5">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD, 20899. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a> (accessed November 2026) <span class="use">— formation enthalpies, heat capacities, enthalpy of vaporization of water vs temperature, Na sublimation, Cl₂ bond energy</span></li>
     <li id="ref-6">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 7.5, Strengths of Ionic and Covalent Bonds (bond enthalpies; Born–Haber cycle). <a href="https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds">openstax.org</a></li>
     <li id="ref-7">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 5.2, Calorimetry. <a href="https://openstax.org/books/chemistry-2e/pages/5-2-calorimetry">openstax.org</a></li>
     <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 6.5, Periodic Variations in Element Properties (ionization energy, electron affinity). <a href="https://openstax.org/books/chemistry-2e/pages/6-5-periodic-variations-in-element-properties">openstax.org</a></li>
     <li id="ref-9">Cohen, E. R.; Cvitaš, T.; Frey, J. G.; et al. <i>Quantities, Units and Symbols in Physical Chemistry</i> (IUPAC Green Book), 3rd ed.; RSC Publishing: Cambridge, 2007. <span class="use">— standard state and reference state of elements</span></li>
     <li id="ref-10">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 10.3, Phase Transitions. <a href="https://openstax.org/books/chemistry-2e/pages/10-3-phase-transitions">openstax.org</a></li>
+    <li id="ref-11">Rumble, J. R., Ed. <i>CRC Handbook of Chemistry and Physics</i>, 100th ed.; CRC Press: Boca Raton, FL, 2019. <span class="use">— CaCO₃ values (OpenStax Appendix G lists ΔH<sub>f</sub>° = −1220.0 kJ/mol and S° = 110.0 J mol⁻¹ K⁻¹ for calcite, which disagree with the CRC and NBS tables)</span></li>
   </ol>
 
   <nav class="lesson-nav"></nav>
@@ -426,9 +427,9 @@
         hint: "These two can simply be added — watch NO cancel.",
         given: [{ eq: { "N₂(g)": -1, "O₂(g)": -1, "NO(g)": 2 }, dH: 180.5 }, { eq: { "NO(g)": -2, "O₂(g)": -1, "NO₂(g)": 2 }, dH: -114.1 }],
         sol: [[1, false], [1, false]] },
-      { name: "ΔHf of CH₄", target: { "C(s)": -1, "H₂(g)": -2, "CH₄(g)": 1 }, dH: -74.7,
+      { name: "ΔHf of CH₄", target: { "C(s)": -1, "H₂(g)": -2, "CH₄(g)": 1 }, dH: -74.6,
         hint: "Methane is a product, so reverse its combustion. You need 2 mol of H₂.",
-        given: [{ eq: { "CH₄(g)": -1, "O₂(g)": -2, "CO₂(g)": 1, "H₂O(l)": 2 }, dH: -890.4 }, { eq: { "C(s)": -1, "O₂(g)": -1, "CO₂(g)": 1 }, dH: -393.5 }, { eq: { "H₂(g)": -1, "O₂(g)": -0.5, "H₂O(l)": 1 }, dH: -285.8 }],
+        given: [{ eq: { "CH₄(g)": -1, "O₂(g)": -2, "CO₂(g)": 1, "H₂O(l)": 2 }, dH: -890.5 }, { eq: { "C(s)": -1, "O₂(g)": -1, "CO₂(g)": 1 }, dH: -393.5 }, { eq: { "H₂(g)": -1, "O₂(g)": -0.5, "H₂O(l)": 1 }, dH: -285.8 }],
         sol: [[1, true], [1, false], [2, false]] },
       { name: "ΔHf of C₂H₂", target: { "C(s)": -2, "H₂(g)": -1, "C₂H₂(g)": 1 }, dH: 226.8,
         hint: "Reverse the acetylene combustion; you need 2 mol of carbon.",
@@ -537,11 +538,11 @@
     function draw() {
       const x = R[+sel.value];
       document.getElementById("fEq").innerHTML = side(x.r) + " → " + side(x.p);
-      const row = (t, sp, c) => `<tr><td>${t === "p" ? "product" : "reactant"}: ${sp}</td><td class="num">${frac(c)}</td><td class="num">${Hf[sp].toFixed(1)}</td><td class="num">${(c * Hf[sp]).toFixed(1)}</td></tr>`;
+      const row = (t, sp, c) => `<tr><td>${t === "p" ? "product" : "reactant"}: ${sp}</td><td class="num">${frac(c)}</td><td class="num">${fmt(Hf[sp], 1)}</td><td class="num">${fmt(c * Hf[sp], 1)}</td></tr>`;
       const sp = x.p.reduce((a, [s, c]) => a + c * Hf[s], 0), sr = x.r.reduce((a, [s, c]) => a + c * Hf[s], 0), dH = sp - sr;
       document.getElementById("fBody").innerHTML = x.p.map(([s, c]) => row("p", s, c)).join("") + x.r.map(([s, c]) => row("r", s, c)).join("") +
-        `<tr><td colspan="3"><b>Σ products</b></td><td class="num"><b>${sp.toFixed(1)}</b></td></tr><tr><td colspan="3"><b>Σ reactants</b></td><td class="num"><b>${sr.toFixed(1)}</b></td></tr>`;
-      document.getElementById("fAns").innerHTML = `ΔH°<sub>rxn</sub> = (${sp.toFixed(1)}) − (${sr.toFixed(1)}) = <b>${signed(dH, 1)} kJ</b> ${dH < 0 ? "(exothermic)" : "(endothermic)"}`;
+        `<tr><td colspan="3"><b>Σ products</b></td><td class="num"><b>${fmt(sp, 1)}</b></td></tr><tr><td colspan="3"><b>Σ reactants</b></td><td class="num"><b>${fmt(sr, 1)}</b></td></tr>`;
+      document.getElementById("fAns").innerHTML = `ΔH°<sub>rxn</sub> = (${fmt(sp, 1)}) − (${fmt(sr, 1)}) = <b>${signed(dH, 1)} kJ</b> ${dH < 0 ? "(exothermic)" : "(endothermic)"}`;
       document.getElementById("fNote").innerHTML = x.note;
       // Hess cycle through elements
       const svg = document.getElementById("fSvg");
@@ -624,7 +625,7 @@
       // interpolate measured
       let mv; for (let i = 0; i < meas.length - 1; i++) if (T >= meas[i][0] && T <= meas[i + 1][0]) { const f = (T - meas[i][0]) / 25; mv = meas[i][1] + f * (meas[i + 1][1] - meas[i][1]); }
       document.getElementById("kMeas").textContent = mv.toFixed(2) + " kJ/mol" + (m ? "" : "*");
-      document.getElementById("kMsg").innerHTML = `Δ<var>H</var><sub>vap</sub>(${T} °C) = 44.0 + (−41.7 J mol⁻¹ K⁻¹)(${T} − 25 K) = <b>${est(T).toFixed(2)} kJ/mol</b>. ` +
+      document.getElementById("kMsg").innerHTML = `Δ<var>H</var><sub>vap</sub>(${T} °C) = 44.0 kJ/mol + (−0.0417 kJ mol⁻¹ K⁻¹)(${T} − 25) K = <b>${est(T).toFixed(2)} kJ/mol</b>. ` +
         `Liquid water has the larger heat capacity, so warming the liquid stores more enthalpy than warming the vapour — less is then needed to vaporize it at higher temperature.` + (m ? "" : " <small>*interpolated between table values.</small>");
     }
     sl.addEventListener("input", draw); draw();

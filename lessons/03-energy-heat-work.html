@@ -205,12 +205,12 @@
   <p>During melting or boiling, added heat does <b>not</b> raise the temperature. It goes into pulling molecules apart against their attractions (raising potential energy). The heat needed per mole is the enthalpy of fusion (Δ<var>H</var><sub>fus</sub>) or vaporization (Δ<var>H</var><sub>vap</sub>). For water: Δ<var>H</var><sub>fus</sub> = 6.01 kJ/mol at 0 °C and Δ<var>H</var><sub>vap</sub> = 40.7 kJ/mol at 100 °C.</p>
 
   <div class="widget" id="hc">
-    <div class="widget-head"><span class="badge">Interactive</span><h3>Heating curve of 1 mol (18.0 g) of water</h3></div>
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Heating curve of 1 mol (18.02 g) of water</h3></div>
     <div class="widget-body">
       <p>Drag the slider to add heat to one mole of ice that starts at −20 °C. Watch the temperature, the phase and which equation applies.</p>
       <div class="control">
         <label for="hcQ">Total heat added <output id="hcQOut">0.0 kJ</output></label>
-        <input type="range" id="hcQ" min="0" max="55.7" step="0.1" value="0">
+        <input type="range" id="hcQ" min="0" max="55.8" step="0.1" value="0">
       </div>
       <div class="widget-row" style="margin-top:10px">
         <svg viewBox="0 0 440 290" role="img" aria-label="Heating curve: temperature versus heat added">
@@ -220,23 +220,24 @@
           <text x="16" y="135" text-anchor="middle" class="t-small" transform="rotate(-90 16 135)">temperature (°C)</text>
           <g class="t-small t-muted">
             <text x="44" y="250" text-anchor="end" dy="4">−20</text>
-            <text x="44" y="213" text-anchor="end" dy="4">0</text>
-            <text x="44" y="28" text-anchor="end" dy="4">100</text>
+            <text x="44" y="218.3" text-anchor="end" dy="4">0</text>
+            <text x="44" y="59.7" text-anchor="end" dy="4">100</text>
+            <text x="44" y="28" text-anchor="end" dy="4">120</text>
             <text x="50" y="266" text-anchor="middle">0</text>
             <text x="186" y="266" text-anchor="middle">20</text>
             <text x="323" y="266" text-anchor="middle">40</text>
           </g>
-          <line x1="50" y1="213" x2="430" y2="213" class="muted-line" stroke-dasharray="3 4"/>
-          <line x1="50" y1="28" x2="430" y2="28" class="muted-line" stroke-dasharray="3 4"/>
+          <line x1="50" y1="218.3" x2="430" y2="218.3" class="muted-line" stroke-dasharray="3 4"/>
+          <line x1="50" y1="59.7" x2="430" y2="59.7" class="muted-line" stroke-dasharray="3 4"/>
           <polyline id="hcLine" fill="none" stroke="var(--ink-3)" stroke-width="3" stroke-linejoin="round"/>
           <polyline id="hcDone" fill="none" stroke="var(--heat)" stroke-width="4" stroke-linejoin="round"/>
           <circle id="hcDot" r="7" fill="var(--heat)" stroke="#fff" stroke-width="2"/>
           <g class="t-small" style="font-weight:600">
             <text x="56" y="240">ice</text>
-            <text x="75" y="206" text-anchor="middle">melting</text>
-            <text x="142" y="140" transform="rotate(-74 142 140)">liquid water</text>
-            <text x="250" y="20">boiling (liquid ⇌ gas)</text>
-            <text x="400" y="45">steam</text>
+            <text x="75" y="211" text-anchor="middle">melting</text>
+            <text x="140" y="160" transform="rotate(-72 140 160)">liquid water</text>
+            <text x="230" y="51">boiling (liquid ⇌ gas)</text>
+            <text x="380" y="36">steam</text>
           </g>
         </svg>
         <div>
@@ -331,7 +332,7 @@
   </div>
 
   <h3>Joule's experiment: work and heat are both just energy</h3>
-  <p>In the 1840s James Joule let a falling weight turn a paddle wheel in an insulated tank of water. No heat was added — yet the water got warmer. <b>Work done on the water raised its internal energy</b> exactly as heating would. This showed heat and work are two forms of the <i>same thing</i>: energy transfer. (It also gave us the conversion 1 cal = 4.184 J.)</p>
+  <p>In the 1840s James Joule let a falling weight turn a paddle wheel in an insulated tank of water. No heat was added — yet the water got warmer. <b>Work done on the water raised its internal energy</b> exactly as heating would. This showed heat and work are two forms of the <i>same thing</i>: energy transfer. (His measurements gave the first accurate "mechanical equivalent of heat", about 4.16 J per calorie; today the calorie is defined as exactly 4.184 J.)</p>
   <figure class="diagram">
     <svg viewBox="0 0 760 290" role="img" aria-label="Joule's paddle wheel apparatus: a falling weight turns paddles in insulated water">
       <!-- tank -->
@@ -515,7 +516,7 @@
         <path d="M100 135 V 110" class="heat-arrow" style="stroke-width:3"/><polygon points="100,104 94,114 106,114" class="heat-fill"/>
         <text x="190" y="50" class="t-small t-muted">volume shrinks!</text>
       </svg>
-      <p><span class="q">q = +6.01 kJ/mol</span>. Ice is <i>less</i> dense than water, so the volume <b>decreases</b> (by 1.6 mL/mol) and the atmosphere does a tiny bit of work on it: <span class="w">w ≈ +0.16 J</span>.</p>
+      <p><span class="q">q = +6.01 kJ/mol</span>. Ice is <i>less</i> dense than water, so the volume <b>decreases</b> (by 1.6 mL/mol) and the atmosphere does a tiny bit of work on it: <span class="w">w ≈ +0.17 J</span>.</p>
     </div>
   </div>
 
@@ -670,13 +671,13 @@
   (function () {
     // cumulative kJ breakpoints for 1 mol water from -20 C
     const seg = [
-      { q0: 0, q1: 0.753, T0: -20, T1: 0, phase: "solid (ice)", eq: "q = m c<sub>ice</sub> ΔT = (18.0 g)(2.09 J g⁻¹°C⁻¹)(20 °C) = 0.75 kJ" },
+      { q0: 0, q1: 0.753, T0: -20, T1: 0, phase: "solid (ice)", eq: "q = m c<sub>ice</sub> ΔT = (18.02 g)(2.09 J g⁻¹°C⁻¹)(20 °C) = 0.75 kJ" },
       { q0: 0.753, q1: 6.763, T0: 0, T1: 0, phase: "solid + liquid", eq: "Melting: q = n ΔH<sub>fus</sub> = (1 mol)(6.01 kJ/mol) = 6.01 kJ. Temperature stays at 0 °C — heat breaks attractions." },
-      { q0: 6.763, q1: 14.303, T0: 0, T1: 100, phase: "liquid", eq: "q = m c<sub>water</sub> ΔT = (18.0 g)(4.184 J g⁻¹°C⁻¹)(100 °C) = 7.54 kJ" },
+      { q0: 6.763, q1: 14.303, T0: 0, T1: 100, phase: "liquid", eq: "q = m c<sub>water</sub> ΔT = (18.02 g)(4.184 J g⁻¹°C⁻¹)(100 °C) = 7.54 kJ" },
       { q0: 14.303, q1: 55.003, T0: 100, T1: 100, phase: "liquid + gas", eq: "Boiling: q = n ΔH<sub>vap</sub> = (1 mol)(40.7 kJ/mol) = 40.7 kJ — the biggest step by far! Separating molecules completely takes a lot of energy." },
-      { q0: 55.003, q1: 55.727, T0: 100, T1: 120, phase: "gas (steam)", eq: "q = m c<sub>steam</sub> ΔT = (18.0 g)(2.01 J g⁻¹°C⁻¹)(20 °C) = 0.72 kJ" },
+      { q0: 55.003, q1: 55.727, T0: 100, T1: 120, phase: "gas (steam)", eq: "q = m c<sub>steam</sub> ΔT = (18.02 g)(2.01 J g⁻¹°C⁻¹)(20 °C) = 0.72 kJ" },
     ];
-    const X = (q) => 50 + q / 56 * 380, Y = (T) => 250 - (T + 20) / 120 * 222;
+    const X = (q) => 50 + q / 56 * 380, Y = (T) => 250 - (T + 20) / 140 * 222;
     const pts = [[0, -20], ...seg.map(s => [s.q1, s.T1])];
     document.getElementById("hcLine").setAttribute("points", pts.map(([q, T]) => `${X(q)},${Y(T)}`).join(" "));
     const c = document.getElementById("hcCanvas"), ctx = c.getContext("2d");
@@ -686,7 +687,7 @@
     let state = { T: -20, gasFrac: 0, liqFrac: 0 };
     const slider = document.getElementById("hcQ");
     const update = () => {
-      const q = +slider.value;
+      const q = Math.min(+slider.value, seg[seg.length - 1].q1);
       const s = seg.find(s => q <= s.q1) || seg[seg.length - 1];
       const f = (q - s.q0) / (s.q1 - s.q0);
       const T = s.T0 + (s.T1 - s.T0) * Math.max(0, Math.min(1, f));
@@ -745,7 +746,7 @@
       document.getElementById("pvWJ").textContent = signed(w * 101.325, 0) + " J";
       gas.setVolumeFrac(v2 / Vmax);
       gas.setWeights(Math.round(pe));
-      gas.setArrows(0, dV > 0 && pe > 0 ? -1 : dV < 0 ? 1 : 0);
+      gas.setArrows(0, pe > 0 && dV > 0 ? -1 : pe > 0 && dV < 0 ? 1 : 0);
       const a = Math.min(V1, v2), b = Math.max(V1, v2);
       svg.innerHTML = `
         <line x1="40" y1="190" x2="290" y2="190" stroke="var(--ink)" stroke-width="2"/>
@@ -760,7 +761,8 @@
         <circle cx="${X(v2)}" cy="${Y(pe)}" r="5" fill="var(--work)"/>
         <text x="${(X(a) + X(b)) / 2}" y="${Math.min(180, (Y(pe) + 190) / 2 + 4)}" text-anchor="middle" class="t-small t-work">|w| = area</text>`;
       let msg;
-      if (pe === 0 && dV !== 0) msg = "<b>Free expansion</b> into a vacuum: nothing to push against, so <b>w = 0</b> even though the volume changed.";
+      if (pe === 0 && dV > 0) msg = "<b>Free expansion</b> into a vacuum: nothing to push against, so <b>w = 0</b> even though the volume changed.";
+      else if (pe === 0 && dV < 0) msg = "A gas can't be compressed with P<sub>ext</sub> = 0 — something has to push on it. Raise the external pressure to see a compression.";
       else if (dV === 0) msg = "No volume change means no PV work: <b>w = 0</b>.";
       else if (dV > 0) msg = "<b>Expansion</b>: the gas does work on the surroundings, so w is <b>negative</b> — the system's energy goes down.";
       else msg = "<b>Compression</b>: the surroundings do work on the gas, so w is <b>positive</b> — the system's energy goes up.";

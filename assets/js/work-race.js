@@ -2,7 +2,7 @@
    Work race — irreversible vs reversible work, side by side.
    Lesson 7. Needs common.js (fmt, signed) loaded first.
 
-   Both cylinders: 1.00 mol ideal gas, 298 K (water bath),
+   Both cylinders: 1.00 mol ideal gas, 298.15 K (water bath),
    between 4.00 atm / 6.12 L and 1.00 atm / 24.5 L.
    Left: 3 of 4 blocks moved at once (P_ext jumps).
    Right: same extra load as sand, moved one grain at a time

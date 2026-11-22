@@ -129,7 +129,7 @@
         </g>
       </g>
     </svg>
-    <figcaption>Temperature is really the <b>average kinetic energy</b> of the particles; pressure is the average force of their collisions on the walls. Thermodynamics works with these averages.</figcaption>
+    <figcaption>Temperature is a measure of (proportional to) the <b>average kinetic energy</b> of the particles; pressure is the average force per unit area of their collisions on the walls. Thermodynamics works with these averages.</figcaption>
   </figure>
 
   <h2 id="energy">Energy, briefly</h2>
@@ -176,7 +176,7 @@
   </div>
 
   <h2 id="laws">The laws at a glance</h2>
-  <p>Thermodynamics rests on four laws. This module focuses on the <b>first law</b>; the others are previewed here so you can see where it fits.</p>
+  <p>Thermodynamics rests on four laws. This module covers the <b>first law</b> (Lessons 2–9) and the <b>second law</b> (Lessons 10–11); the zeroth and third laws are previewed here so you can see where everything fits.</p>
   <div class="grid-2">
     <div class="card">
       <h3 style="margin-top:0">0 · Zeroth law</h3>
@@ -189,12 +189,12 @@
       <p>If A and B are in thermal equilibrium, and B and C are too, then A and C are as well. This is what makes <b>thermometers</b> work.</p>
     </div>
     <div class="card" style="border-color:var(--energy)">
-      <h3 style="margin-top:0">1 · First law <small style="color:var(--energy)">(this module)</small></h3>
+      <h3 style="margin-top:0">1 · First law <small style="color:var(--energy)">(Lessons 2–9)</small></h3>
       <p style="font-family:var(--serif);font-size:1.4rem;text-align:center;margin:.3em 0"><span class="u">ΔU</span> = <span class="q">q</span> + <span class="w">w</span></p>
       <p><b>Energy is conserved.</b> It can change form and move between system and surroundings, but it cannot be created or destroyed.</p>
     </div>
     <div class="card">
-      <h3 style="margin-top:0">2 · Second law</h3>
+      <h3 style="margin-top:0">2 · Second law <small style="color:var(--energy)">(Lessons 10–11)</small></h3>
       <svg viewBox="0 0 300 60" aria-hidden="true">
         <rect x="10" y="10" width="90" height="40" rx="6" fill="var(--heat-fill)" stroke="var(--hot)" stroke-width="2"/><text x="55" y="35" text-anchor="middle" class="t-mid">hot</text>
         <rect x="200" y="10" width="90" height="40" rx="6" fill="#dcefff" stroke="var(--cold)" stroke-width="2"/><text x="245" y="35" text-anchor="middle" class="t-mid" style="fill:#1b4f80">cold</text>
@@ -298,12 +298,13 @@
   // hiking widget
   (function () {
     const w = document.getElementById("hike");
-    let path = "A";
+    let path = "A", raf = 0;
     const pA = document.getElementById("trailA"), pB = document.getElementById("trailB");
     const hiker = document.getElementById("hiker");
     const data = { A: { km: 4.2, sweat: 2600 }, B: { km: 11.8, sweat: 5900 } };
     w.querySelectorAll("[data-path]").forEach(b => b.addEventListener("click", () => {
       w.querySelectorAll("[data-path]").forEach(x => x.classList.toggle("on", x === b));
+      cancelAnimationFrame(raf);
       path = b.dataset.path;
       pA.setAttribute("opacity", path === "A" ? 1 : .35);
       pB.setAttribute("opacity", path === "B" ? 1 : .35);
@@ -312,8 +313,9 @@
       document.getElementById("hikeMsg").textContent = "";
     }));
     document.getElementById("hikeGo").addEventListener("click", () => {
-      const el = path === "A" ? pA : pB, L = el.getTotalLength(), d = data[path];
-      const t0 = performance.now(), dur = path === "A" ? 1800 : 3600;
+      cancelAnimationFrame(raf);
+      const p = path, el = p === "A" ? pA : pB, L = el.getTotalLength(), d = data[p];
+      const t0 = performance.now(), dur = p === "A" ? 1800 : 3600;
       const step = (now) => {
         const f = Math.min(1, (now - t0) / dur);
         const pt = el.getPointAtLength(f * L);
@@ -322,11 +324,11 @@
         document.getElementById("hAlt").textContent = "+" + Math.round(alt - 1200) + " m";
         document.getElementById("hDist").textContent = (d.km * f).toFixed(1) + " km";
         document.getElementById("hSweat").textContent = Math.round(d.sweat * f) + " kJ";
-        if (f < 1) requestAnimationFrame(step);
+        if (f < 1) raf = requestAnimationFrame(step);
         else document.getElementById("hikeMsg").innerHTML =
-          `Trail ${path} finished: altitude change <b class="u">+1800 m</b> (same for both trails), but distance <b>${d.km} km</b> and sweat <b>${d.sweat} kJ</b> depend on the trail. Try the other trail!`;
+          `Trail ${p} finished: altitude change <b class="u">+1800 m</b> (same for both trails), but distance <b>${d.km} km</b> and sweat <b>${d.sweat} kJ</b> depend on the trail. Try the other trail!`;
       };
-      requestAnimationFrame(step);
+      raf = requestAnimationFrame(step);
     });
   })();
 </script>

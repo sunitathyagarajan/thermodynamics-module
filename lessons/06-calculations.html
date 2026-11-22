@@ -17,7 +17,7 @@
     .ex-index a { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: .92rem; }
     .ex-index a:hover { border-color: var(--accent); }
     .ex-index .example-num { flex: none; }
-    #practice .prob { font-size: 1.02rem; }
+    #practiceBody .prob { font-size: 1.02rem; }
   </style>
 </head>
 <body data-lesson="6" data-root="../">
@@ -247,10 +247,10 @@
         </svg>
       </div>
       <ol class="steps">
-        <li><b>System:</b> the reacting chemicals. At constant <var>P</var>, <var>q</var> = Δ<var>H</var>. For 0.500 mol: <var>q</var> = (0.500 mol)(−153.9 kJ/mol) = <b>−76.9 kJ</b> (exothermic).</li>
+        <li><b>System:</b> the reacting chemicals. At constant <var>P</var>, <var>q</var> = Δ<var>H</var>. For 0.500 mol: <var>q</var> = (0.500 mol)(−153.9 kJ/mol) = <b>−77.0 kJ</b> (exothermic).</li>
         <li><b>Work:</b> only the gas matters. Δ<var>n</var><sub>gas</sub> = +0.500 mol (H<sub>2</sub> produced; aqueous species and Zn(s) take up negligible volume). <var>w</var> = −<var>P</var>Δ<var>V</var> = −Δ<var>n</var><sub>gas</sub><var>RT</var> = −(0.500)(8.314)(298.15) = <b>−1239 J = −1.24 kJ</b>.</li>
-        <li>Δ<var>U</var> = <var>q</var> + <var>w</var> = −76.9 kJ + (−1.24 kJ) = <b>−78.2 kJ</b>.</li>
-        <li class="answer-box"><var>q</var> = −76.9 kJ, <var>w</var> = −1.24 kJ, Δ<var>U</var> = −78.2 kJ. The system loses energy two ways: heat to the solution <i>and</i> work pushing back the air. Δ<var>U</var> and Δ<var>H</var> differ by Δ<var>n</var><sub>gas</sub><var>RT</var>.</li>
+        <li>Δ<var>U</var> = <var>q</var> + <var>w</var> = −77.0 kJ + (−1.24 kJ) = <b>−78.2 kJ</b>.</li>
+        <li class="answer-box"><var>q</var> = −77.0 kJ, <var>w</var> = −1.24 kJ, Δ<var>U</var> = −78.2 kJ. The system loses energy two ways: heat to the solution <i>and</i> work pushing back the air. Δ<var>U</var> and Δ<var>H</var> differ by Δ<var>n</var><sub>gas</sub><var>RT</var>.</li>
       </ol>
       <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
       <div class="try"><b>Try it:</b> Propane burns at 25 °C: C<sub>3</sub>H<sub>8</sub>(g) + 5 O<sub>2</sub>(g) → 3 CO<sub>2</sub>(g) + 4 H<sub>2</sub>O(l). Find <var>w</var> in <b>kJ</b> per mole of propane. (Watch which species are gases!)
@@ -296,17 +296,17 @@
         <p style="margin:0"><b>1.00 mol</b> of an ideal gas at <b>298 K</b> expands isothermally from <b>10.0 L to 20.0 L</b>. Find <var>w</var>, <var>q</var> and Δ<var>U</var> if (a) it expands in one step against a constant <var>P</var><sub>ext</sub> equal to the final pressure, and (b) it expands reversibly. <i>(Lesson 7 explains reversible processes in detail.)</i></p>
         <svg viewBox="0 0 220 170" aria-hidden="true">
           <line x1="30" y1="145" x2="210" y2="145" class="ink-line"/><line x1="30" y1="145" x2="30" y2="10" class="ink-line"/>
-          <path d="M60 25 C 80 60, 110 80, 200 105 L 200 145 L 60 145 Z" fill="var(--energy-fill)" opacity=".6"/>
-          <path d="M60 25 C 80 60, 110 80, 200 105" fill="none" stroke="var(--energy)" stroke-width="3"/>
+          <path d="M60 65 C 85 79, 130 97, 200 105 L 200 145 L 60 145 Z" fill="var(--energy-fill)" opacity=".6"/>
+          <path d="M60 65 C 85 79, 130 97, 200 105" fill="none" stroke="var(--energy)" stroke-width="3"/>
           <rect x="60" y="105" width="140" height="40" fill="var(--work-fill)" stroke="var(--work)" stroke-width="2"/>
           <text x="130" y="130" text-anchor="middle" class="t-small t-work">(a) one step</text>
-          <text x="128" y="75" class="t-small t-energy">(b) reversible</text>
+          <text x="104" y="68" class="t-small t-energy">(b) reversible</text>
           <text x="120" y="162" text-anchor="middle" class="t-small">V</text><text x="18" y="80" class="t-small">P</text>
         </svg>
       </div>
       <ol class="steps">
         <li><b>Either path:</b> ideal gas, constant <var>T</var> → Δ<var>U</var> = 0, so <var>q</var> = −<var>w</var>.</li>
-        <li><b>(a)</b> <var>P</var><sub>final</sub> = <var>nRT</var>/<var>V</var><sub>2</sub> = (1.00)(0.08206)(298)/(20.0) = 1.22 atm. <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(1.22 atm)(10.0 L) = −12.2 L·atm = <b>−1239 J</b>. So <var>q</var> = <b>+1239 J</b>.</li>
+        <li><b>(a)</b> <var>P</var><sub>final</sub> = <var>nRT</var>/<var>V</var><sub>2</sub> = (1.00)(0.08206)(298)/(20.0) = 1.223 atm. <var>w</var> = −<var>P</var><sub>ext</sub>Δ<var>V</var> = −(1.223 atm)(10.0 L) = −12.23 L·atm = <b>−1239 J</b>. So <var>q</var> = <b>+1239 J</b>.</li>
         <li><b>(b)</b> Reversible isothermal: <var>w</var> = −<var>nRT</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>) = −(1.00)(8.314)(298) ln(2) = <b>−1717 J</b>. So <var>q</var> = <b>+1717 J</b>.</li>
         <li class="answer-box">(a) <var>w</var> = −1.24 kJ, <var>q</var> = +1.24 kJ; (b) <var>w</var> = −1.72 kJ, <var>q</var> = +1.72 kJ; Δ<var>U</var> = 0 for both. Same initial and final states, same Δ<var>U</var> — but the reversible path gets <b>39% more work</b> out of the gas.</li>
       </ol>
@@ -321,13 +321,13 @@
   <p>Put the examples side by side and a clear pattern appears: <b>work is significant only when a gas is involved.</b></p>
   <figure class="diagram">
     <svg id="cmpChart" viewBox="0 0 760 300" role="img" aria-label="Bar chart comparing the size of q and w in examples 4 to 7 on a log scale"></svg>
-    <figcaption>|<span class="q">q</span>| and |<span class="w">w</span>| on a <b>logarithmic</b> scale (each gridline is 10× bigger). For the solid and the melting ice, |<var>w</var>| is a million-fold or more smaller than |<var>q</var>|.</figcaption>
+    <figcaption>|<span class="q">q</span>| and |<span class="w">w</span>| on a <b>logarithmic</b> scale (each gridline is 10× bigger). For the solid and the melting ice, |<var>w</var>| is roughly 36,000 to 350,000 times smaller than |<var>q</var>|.</figcaption>
   </figure>
 
   <h2 id="practice">Unlimited practice</h2>
   <div class="widget" id="practiceW">
     <div class="widget-head"><span class="badge">Practice</span><h3>New problem generator</h3></div>
-    <div class="widget-body" id="practice">
+    <div class="widget-body" id="practiceBody">
       <p class="prob" id="probText"></p>
       <div class="num-check" id="probCheck" data-answer="0" data-tol="0.015"><input inputmode="decimal" placeholder="your answer"><button class="btn">Check</button><span class="result"></span></div>
       <div class="btn-row"><button class="btn ghost" id="probSol">Show solution</button><button class="btn" id="probNew">New problem ↻</button></div>
@@ -346,10 +346,10 @@
       ["Ex 4: heat Al block", 9418, 0.027, "solid"],
       ["Ex 6: melt ice", 6010, 0.165, "solid → liquid"],
       ["Ex 5: boil water", 40700, 3102, "liquid → gas"],
-      ["Ex 7: Zn + HCl", 76900, 1239, "makes gas"],
+      ["Ex 7: Zn + HCl", 76950, 1239, "makes gas"],
     ];
     const svg = document.getElementById("cmpChart");
-    const x0 = 180, x1 = 740, lo = -2, hi = 5;
+    const x0 = 180, x1 = 700, lo = -2, hi = 5;
     const X = (v) => x0 + (Math.log10(v) - lo) / (hi - lo) * (x1 - x0);
     let s = "";
     for (let e = lo; e <= hi; e++) {
@@ -361,7 +361,9 @@
       s += `<text x="${x0 - 10}" y="${y + 16}" text-anchor="end" class="t-small" style="font-weight:600">${lab}</text>`;
       s += `<text x="${x0 - 10}" y="${y + 32}" text-anchor="end" class="t-small t-muted">${tag}</text>`;
       s += `<rect x="${x0}" y="${y}" width="${X(q) - x0}" height="18" rx="3" fill="var(--heat)"/>`;
-      s += `<text x="${X(q) + 6}" y="${y + 14}" class="t-small t-heat">|q| = ${q.toLocaleString()} J</text>`;
+      s += X(q) > 600
+        ? `<text x="${X(q) - 6}" y="${y + 14}" text-anchor="end" class="t-small" style="fill:#fff;font-weight:700">|q| = ${q.toLocaleString()} J</text>`
+        : `<text x="${X(q) + 6}" y="${y + 14}" class="t-small t-heat">|q| = ${q.toLocaleString()} J</text>`;
       s += `<rect x="${x0}" y="${y + 22}" width="${X(w) - x0}" height="18" rx="3" fill="var(--work)"/>`;
       s += `<text x="${X(w) + 6}" y="${y + 36}" class="t-small t-work">|w| = ${w.toLocaleString()} J</text>`;
     });
@@ -387,13 +389,14 @@
           sol: `ΔV = ${V2.toFixed(1)} − ${V1.toFixed(1)} = ${signed(V2 - V1, 1)} L. w = −P<sub>ext</sub>ΔV = −(${P.toFixed(1)} atm)(${signed(V2 - V1, 1)} L) = ${signed(-P * (V2 - V1), 2)} L·atm × 101.325 J/(L·atm) = <b>${signed(w, 0)} J</b>.` };
       },
       () => { // q = m c dT
-        const subs = [["water", 4.184], ["aluminum", 0.897], ["iron", 0.449], ["copper", 0.385], ["ethanol", 2.44]];
-        const [name, c] = subs[Math.floor(Math.random() * subs.length)];
-        let d = rnd(-30, 70, 1); if (d === 0) d = 15;
-        const m = rnd(20, 500, 5), T1 = rnd(10, 40, 1), T2 = T1 + d;
+        // each substance stays in one phase over its temperature range (water 5–95 °C, ethanol −50–75 °C)
+        const subs = [["water", 4.184, 5, 95], ["aluminum", 0.897, -20, 150], ["iron", 0.449, -20, 150], ["copper", 0.385, -20, 150], ["ethanol", 2.44, -50, 75]];
+        const [name, c, lo, hi] = subs[Math.floor(Math.random() * subs.length)];
+        let T1, T2; do { T1 = rnd(lo, hi, 1); T2 = rnd(lo, hi, 1); } while (Math.abs(T2 - T1) < 5);
+        const m = rnd(20, 500, 5);
         const q = m * c * (T2 - T1);
-        return { text: `${m} g of ${name} (c = ${c} J g⁻¹ °C⁻¹) changes temperature from ${T1} °C to ${T2} °C. Calculate q in J. (Assume w ≈ 0, so this is also ΔU.)`, ans: q, unit: "J",
-          sol: `q = m c ΔT = (${m} g)(${c} J g⁻¹ °C⁻¹)(${T2} − ${T1} °C) = <b>${signed(q, 0)} J</b>. ${T2 < T1 ? "Negative: the sample lost heat as it cooled." : ""}` };
+        return { text: `${m} g of ${name} (c = ${c} J g⁻¹ °C⁻¹) changes temperature from ${fmt(T1, 0)} °C to ${fmt(T2, 0)} °C with no change of phase. Calculate q in J. (Assume w ≈ 0, so this is also ΔU.)`, ans: q, unit: "J",
+          sol: `q = m c ΔT = (${m} g)(${c} J g⁻¹ °C⁻¹)(${fmt(T2, 0)} − ${T1 < 0 ? "(" + fmt(T1, 0) + ")" : T1} °C) = <b>${signed(q, 0)} J</b>. ${T2 < T1 ? "Negative: the sample lost heat as it cooled." : ""}` };
       },
       () => { // q from dU and constant-P work
         const P = rnd(1, 3, 0.5), V1 = rnd(8, 15, 1), V2 = rnd(2, 6, 1), dU = rnd(200, 1500, 50);
@@ -403,11 +406,12 @@
       },
       () => { // dn_gas RT
         const rx = [
-          ["2 H₂(g) + O₂(g) → 2 H₂O(l)", -3], ["N₂(g) + 3 H₂(g) → 2 NH₃(g)", -2], ["CaCO₃(s) → CaO(s) + CO₂(g)", 1],
-          ["2 H₂O₂(l) → 2 H₂O(l) + O₂(g)", 1], ["CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", -2], ["2 NaN₃(s) → 2 Na(s) + 3 N₂(g)", 3],
+          ["2 H₂(g) + O₂(g) → 2 H₂O(l)", -3, true], ["N₂(g) + 3 H₂(g) → 2 NH₃(g)", -2, false], ["CaCO₃(s) → CaO(s) + CO₂(g)", 1, false],
+          ["2 H₂O₂(l) → 2 H₂O(l) + O₂(g)", 1, true], ["CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", -2, true], ["2 NaN₃(s) → 2 Na(s) + 3 N₂(g)", 3, false],
         ];
-        const [eq, dn] = rx[Math.floor(Math.random() * rx.length)];
-        const T = rnd(298, 500, 1), w = -dn * R * T / 1000;
+        const [eq, dn, liquid] = rx[Math.floor(Math.random() * rx.length)];
+        // reactions with liquid water stay below 373 K so the water really is liquid
+        const T = liquid ? rnd(273, 370, 1) : rnd(298, 500, 1), w = -dn * R * T / 1000;
         return { text: `For the reaction ${eq}, as written, at ${T} K and constant pressure, calculate w in kJ.`, ans: w, unit: "kJ",
           sol: `Count only gases: Δn<sub>gas</sub> = ${dn > 0 ? "+" : ""}${dn} mol. w = −Δn<sub>gas</sub>RT = −(${dn})(8.314 J mol⁻¹K⁻¹)(${T} K) = <b>${signed(w, 2)} kJ</b>. ${dn < 0 ? "Gas is consumed, so the atmosphere does work on the system (w > 0)." : "Gas is produced, so the system pushes back the atmosphere (w < 0)."}` };
       },
