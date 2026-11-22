@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spontaneity and Entropy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .verdict { font-size: 1.1rem; font-weight: 700; padding: 10px 14px; border-radius: 10px; margin-top: 10px; }
+    .verdict.spont { background: var(--good-bg); color: var(--good); border: 2px solid var(--good); }
+    .verdict.eq { background: var(--energy-fill); color: var(--energy); border: 2px solid var(--energy); }
+    .verdict.non { background: var(--bad-bg); color: var(--bad); border: 2px solid var(--bad); }
+    .sbar { display: grid; grid-template-columns: 80px 1fr 96px; gap: 8px; align-items: center; font-size: .9rem; font-weight: 600; margin-top: 8px; }
+    .strack { position: relative; height: 24px; background: var(--surface-2); border-radius: 6px; overflow: hidden; }
+    .strack::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--ink-3); }
+    .sfill { position: absolute; top: 3px; bottom: 3px; border-radius: 4px; transition: all .25s; }
+    .sort-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .sort-row .seg button { padding: 6px 12px; font-size: .88rem; }
+    .sort-row .why { grid-column: 1 / -1; font-size: .88rem; color: var(--ink-2); display: none; }
+    .sort-row.done .why { display: block; }
+    .formula-tbl td:nth-child(2) { font-family: var(--serif); white-space: nowrap; }
+    @media (max-width: 560px) { .sort-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-lesson="11" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 11</p>
+  <h1>Spontaneity: the universe keeps score</h1>
+  <p class="lede">Why does ice melt at 10 °C but not at −10 °C? Why do some endothermic reactions happen on their own? The answer is to count entropy in <b>both</b> the system and its surroundings — the total for the universe decides.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>Define a spontaneous process and explain why enthalpy alone can't predict spontaneity.</li>
+      <li>Calculate the entropy change of a system for phase changes, heating, gas expansion and reactions.</li>
+      <li>Calculate the entropy change of the surroundings, Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var><sub>sys</sub>/<var>T</var>.</li>
+      <li>Use Δ<var>S</var><sub>univ</sub> to decide whether a process is spontaneous, at equilibrium or nonspontaneous.</li>
+      <li>Explain the factors that increase or decrease entropy, and how they affect spontaneity.</li>
+    </ul>
+  </div>
+
+  <h2 id="spontaneous" data-short="What is spontaneous?">What is a spontaneous process?</h2>
+  <p>A <b>spontaneous process</b> happens on its own once it starts, without continuous help from outside. The reverse of a spontaneous process is <b>nonspontaneous</b>: it only happens if we keep supplying energy or work.<sup class="cite"><a href="#ref-1">1</a></sup></p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Spontaneous</th><th>Nonspontaneous (the reverse)</th></tr>
+      <tr><td>Ice melts on a warm day</td><td>Water freezes on a warm day</td></tr>
+      <tr><td>Iron rusts in moist air</td><td>Rust turns back into iron and oxygen</td></tr>
+      <tr><td>Heat flows from hot coffee to the cool room</td><td>Heat flows from the room into the coffee</td></tr>
+      <tr><td>Salt dissolves in water</td><td>Salt crystallises from a dilute solution</td></tr>
+      <tr><td>Gas expands into a vacuum</td><td>Gas gathers into one corner</td></tr>
+    </table>
+  </div>
+  <div class="grid-2">
+    <div class="callout warn" style="margin:0"><span class="callout-title">Spontaneous ≠ fast</span>Diamond turning into graphite is spontaneous, but so slow you'll never see it. Thermodynamics says <i>whether</i> a process can happen, not how fast.<sup class="cite"><a href="#ref-1">1</a></sup></div>
+    <div class="callout warn" style="margin:0"><span class="callout-title">Spontaneous ≠ exothermic</span>Ice melting and an instant cold pack (NH₄NO₃ dissolving) are <b>endothermic</b>, yet spontaneous. Enthalpy alone can't predict spontaneity — we need entropy.<sup class="cite"><a href="#ref-1">1</a>,<a href="#ref-3">3</a></sup></div>
+  </div>
+
+  <h2 id="sys-surr" data-short="System + surroundings">Entropy of the system and the surroundings</h2>
+  <p>The second law is about the <b>universe</b> — the system plus its surroundings (Lesson 2):<sup class="cite"><a href="#ref-3">3</a></sup></p>
+  <div class="eq big">Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> + Δ<var>S</var><sub>surr</sub></div>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 250" role="img" aria-label="System inside surroundings; the system's entropy may go down if the surroundings' goes up more">
+      <rect x="10" y="10" width="740" height="230" rx="16" class="surr-box"/>
+      <text x="28" y="36" class="t-surr t-mid">SURROUNDINGS: ΔS<tspan dy="4" font-size="10">surr</tspan></text>
+      <rect x="270" y="70" width="220" height="120" rx="14" class="sys-box"/>
+      <text x="380" y="110" text-anchor="middle" class="t-sys t-mid">SYSTEM: ΔS<tspan dy="4" font-size="10">sys</tspan></text>
+      <text x="380" y="140" text-anchor="middle" class="t-small t-muted">e.g. water freezing:</text>
+      <text x="380" y="158" text-anchor="middle" class="t-small t-muted">ΔS<tspan dy="3" font-size="8">sys</tspan><tspan dy="-3"> &lt; 0 (more ordered)</tspan></text>
+      <path d="M495 130 H 640" class="heat-arrow anim-flow"/><polygon points="648,130 634,122 634,138" class="heat-fill"/>
+      <text x="570" y="118" text-anchor="middle" class="t-small t-heat">heat released</text>
+      <text x="570" y="160" text-anchor="middle" class="t-small t-heat">ΔS<tspan dy="3" font-size="8">surr</tspan><tspan dy="-3"> &gt; 0</tspan></text>
+      <text x="380" y="222" text-anchor="middle" class="t-mid"><tspan class="t-energy">ΔS<tspan dy="4" font-size="10">univ</tspan><tspan dy="-4"> = ΔS</tspan><tspan dy="4" font-size="10">sys</tspan><tspan dy="-4"> + ΔS</tspan><tspan dy="4" font-size="10">surr</tspan></tspan> — only the total must increase</text>
+    </svg>
+    <figcaption>A system can become more ordered (Δ<var>S</var><sub>sys</sub> &lt; 0) as long as the heat it releases raises the entropy of the surroundings by more.<sup class="cite"><a href="#ref-3">3</a></sup></figcaption>
+  </figure>
+
+  <h3>Standard molar entropies, S°</h3>
+  <p>Unlike enthalpy, entropy has an <b>absolute</b> zero point (the third law: a perfect crystal at 0 K has <var>S</var> = 0), so tables list absolute standard molar entropies, <var>S</var>°, at 1 bar and 25 °C.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-6">6</a></sup> They are always positive — even for elements.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Substance</th><th class="num"><var>S</var>° (J mol⁻¹ K⁻¹)</th><th>Substance</th><th class="num"><var>S</var>° (J mol⁻¹ K⁻¹)</th></tr>
+      <tr><td>C(s, diamond)</td><td class="num">2.4</td><td>H₂O(g)</td><td class="num">188.8</td></tr>
+      <tr><td>C(s, graphite)</td><td class="num">5.7</td><td>N₂(g)</td><td class="num">191.6</td></tr>
+      <tr><td>Fe(s)</td><td class="num">27.3</td><td>NH₃(g)</td><td class="num">192.8</td></tr>
+      <tr><td>H₂O(l)</td><td class="num">70.0</td><td>O₂(g)</td><td class="num">205.2</td></tr>
+      <tr><td>CaCO₃(s)</td><td class="num">91.7</td><td>CO₂(g)</td><td class="num">213.8</td></tr>
+      <tr><td>H₂(g)</td><td class="num">130.7</td><td>C₃H₈(g)</td><td class="num">270.3</td></tr>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--ink-3)">Values from OpenStax <i>Chemistry 2e</i> Appendix G and the NIST WebBook.<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup></p>
+
+  <h2 id="ssys" data-short="Calculating ΔS of the system">Calculating ΔS of the system</h2>
+  <p>Entropy is defined through reversible heat (Lesson 7): for a process at constant temperature, Δ<var>S</var> = <var>q</var><sub>rev</sub>/<var>T</var>.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-8">8</a></sup> From that one definition come all the formulas you need:</p>
+  <div class="table-wrap">
+    <table class="formula-tbl">
+      <tr><th>Process</th><th>Formula</th><th>Notes</th></tr>
+      <tr><td>Any reversible process at constant T</td><td>Δ<var>S</var> = <var>q</var><sub>rev</sub> / <var>T</var></td><td>The definition; T in kelvin<sup class="cite"><a href="#ref-2">2</a></sup></td></tr>
+      <tr><td>Phase change at its transition temperature</td><td>Δ<var>S</var> = Δ<var>H</var><sub>trans</sub> / <var>T</var><sub>trans</sub></td><td>Melting, boiling: reversible at T<sub>trans</sub><sup class="cite"><a href="#ref-3">3</a></sup></td></tr>
+      <tr><td>Heating or cooling (no phase change)</td><td>Δ<var>S</var> = <var>m c</var> ln(<var>T</var><sub>2</sub>/<var>T</var><sub>1</sub>) = <var>nC</var><sub>P</sub> ln(<var>T</var><sub>2</sub>/<var>T</var><sub>1</sub>)</td><td>Constant pressure<sup class="cite"><a href="#ref-5">5</a></sup></td></tr>
+      <tr><td>Ideal gas at constant T</td><td>Δ<var>S</var> = <var>nR</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>) = <var>nR</var> ln(<var>P</var><sub>1</sub>/<var>P</var><sub>2</sub>)</td><td>Expansion: ΔS &gt; 0<sup class="cite"><a href="#ref-8">8</a></sup></td></tr>
+      <tr><td>Chemical reaction</td><td>Δ<var>S</var>°<sub>rxn</sub> = Σ<var>n S</var>°(products) − Σ<var>m S</var>°(reactants)</td><td>Same pattern as Hess's law<sup class="cite"><a href="#ref-3">3</a></sup></td></tr>
+    </table>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 1</span><h3>Phase change: boiling water</h3><span class="tag liquid">liquid → gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">Find Δ<var>S</var> for vaporizing 1.00 mol of water at its normal boiling point, 100.0 °C (Δ<var>H</var><sub>vap</sub> = 40.7 kJ/mol).</p>
+      <ol class="steps">
+        <li>Convert to kelvin: <var>T</var> = 100.0 + 273.15 = 373.15 K. Convert to joules: Δ<var>H</var> = 40 700 J/mol.</li>
+        <li>Δ<var>S</var> = Δ<var>H</var><sub>vap</sub>/<var>T</var><sub>b</sub> = 40 700 / 373.15 = <b>+109.1 J mol⁻¹ K⁻¹</b>.</li>
+        <li class="answer-box">Positive and large: the molecules go from a crowded liquid to a gas that fills a huge volume.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Benzene melts at 5.5 °C with Δ<var>H</var><sub>fus</sub> = 9.87 kJ/mol. Find Δ<var>S</var><sub>fus</sub> in J mol⁻¹ K⁻¹.
+        <div class="num-check" data-answer="35.4" data-tol="0.01" data-hint="T = 278.65 K; ΔS = 9870 / T."><input inputmode="decimal" placeholder="J/(mol·K)"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 2</span><h3>Heating a liquid and a solid</h3><span class="tag liquid">liquid</span><span class="tag solid">solid</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">Find Δ<var>S</var> when 100 g of water is heated from 25 °C to 75 °C (<var>c</var> = 4.184 J g⁻¹ K⁻¹).</p>
+      <ol class="steps">
+        <li>Kelvin: <var>T</var><sub>1</sub> = 298.15 K, <var>T</var><sub>2</sub> = 348.15 K.</li>
+        <li>Δ<var>S</var> = <var>m c</var> ln(<var>T</var><sub>2</sub>/<var>T</var><sub>1</sub>) = (100 g)(4.184 J g⁻¹ K⁻¹) ln(348.15/298.15) = (418.4)(0.1550).</li>
+        <li class="answer-box">Δ<var>S</var> = <b>+64.9 J/K</b>. Warmer particles move faster and can share their energy in more ways.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> 50.0 g of aluminum (<var>c</var> = 0.897 J g⁻¹ K⁻¹) is heated from 20 °C to 100 °C. Find Δ<var>S</var> in J/K.
+        <div class="num-check" data-answer="10.82" data-tol="0.01" data-hint="ΔS = m c ln(373.15/293.15)."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 3</span><h3>Expanding or compressing a gas</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">2.00 mol of an ideal gas expands at constant temperature from 10.0 L to 50.0 L. Find Δ<var>S</var>.</p>
+      <ol class="steps">
+        <li>Δ<var>S</var> = <var>nR</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>) = (2.00)(8.314) ln(50.0/10.0) = (16.63)(1.609).</li>
+        <li class="answer-box">Δ<var>S</var> = <b>+26.8 J/K</b>. More volume means more possible positions for each molecule (Lesson 10).</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> 0.500 mol of ideal gas is compressed at constant temperature from 1.00 atm to 4.00 atm. Find Δ<var>S</var> in J/K (watch the sign).
+        <div class="num-check" data-answer="-5.76" data-tol="0.01" data-hint="ΔS = nR ln(P₁/P₂) = (0.500)(8.314) ln(1/4)."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 4</span><h3>A chemical reaction: making ammonia</h3><span class="tag rxn">reaction</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">Find Δ<var>S</var>° for N₂(g) + 3 H₂(g) → 2 NH₃(g) at 25 °C.</p>
+      <ol class="steps">
+        <li>Products: 2 <var>S</var>°(NH₃) = 2(192.8) = 385.6 J/K.</li>
+        <li>Reactants: <var>S</var>°(N₂) + 3 <var>S</var>°(H₂) = 191.6 + 3(130.7) = 583.7 J/K.</li>
+        <li class="answer-box">Δ<var>S</var>° = 385.6 − 583.7 = <b>−198.1 J/K</b>. Negative: 4 mol of gas become 2 mol, so there are fewer ways to arrange the particles.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Find Δ<var>S</var>° for CaCO₃(s) → CaO(s) + CO₂(g). <var>S</var>° values: CaCO₃ 91.7, CaO 38.1, CO₂ 213.8 J mol⁻¹ K⁻¹.
+        <div class="num-check" data-answer="160.2" data-tol="0.01" data-hint="ΣS°(products) − ΣS°(reactants)."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="ssurr" data-short="ΔS of the surroundings">Entropy of the surroundings</h2>
+  <p>The surroundings are a huge reservoir at constant temperature, so the heat they exchange counts as reversible. At constant pressure the heat they gain is <var>q</var><sub>surr</sub> = −<var>q</var><sub>sys</sub> = −Δ<var>H</var><sub>sys</sub>, so:<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-5">5</a></sup></p>
+  <div class="eq big">Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var><sub>sys</sub> / <var>T</var></div>
+  <div class="grid-2" style="align-items:center">
+    <ul>
+      <li><b>Exothermic</b> (Δ<var>H</var> &lt; 0): heat flows into the surroundings, so Δ<var>S</var><sub>surr</sub> &gt; 0.</li>
+      <li><b>Endothermic</b> (Δ<var>H</var> &gt; 0): heat is taken from the surroundings, so Δ<var>S</var><sub>surr</sub> &lt; 0.</li>
+      <li><b>Temperature matters:</b> the same heat has a bigger effect when <var>T</var> is low. Atkins compares it to sneezing: a sneeze in a quiet library (cold surroundings) causes far more disturbance than the same sneeze in a busy street (hot surroundings).<sup class="cite"><a href="#ref-5">5</a></sup></li>
+    </ul>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 330 200" role="img" aria-label="The same heat changes the entropy of cold surroundings more than hot surroundings">
+        <text x="165" y="18" text-anchor="middle" class="t-small" style="font-weight:700">Same heat (1000 J) released into…</text>
+        <rect x="20" y="35" width="130" height="110" rx="10" fill="#dcefff" stroke="var(--cold)" stroke-width="2"/>
+        <text x="85" y="62" text-anchor="middle" class="t-small" style="font-weight:700;fill:#1b4f80">cold: 200 K</text>
+        <text x="85" y="100" text-anchor="middle" class="t-mid" style="font-weight:700;fill:#1b4f80">+5.0 J/K</text>
+        <rect x="180" y="35" width="130" height="110" rx="10" fill="var(--heat-fill)" stroke="var(--hot)" stroke-width="2"/>
+        <text x="245" y="62" text-anchor="middle" class="t-small" style="font-weight:700;fill:var(--hot)">hot: 1000 K</text>
+        <text x="245" y="100" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--hot)">+1.0 J/K</text>
+        <text x="165" y="172" text-anchor="middle" class="t-small t-muted">ΔS<tspan dy="3" font-size="8">surr</tspan><tspan dy="-3"> = q/T: cold surroundings "notice" heat more</tspan></text>
+      </svg>
+    </figure>
+  </div>
+
+  <h2 id="universe" data-short="ΔS of the universe">The entropy of the universe decides</h2>
+  <div class="eq">Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> + Δ<var>S</var><sub>surr</sub> = Δ<var>S</var><sub>sys</sub> − Δ<var>H</var><sub>sys</sub>/<var>T</var></div>
+  <div class="grid-3">
+    <div class="card" style="border-top:4px solid var(--good)"><h3 style="margin-top:0;color:var(--good)">Δ<var>S</var><sub>univ</sub> &gt; 0</h3><p style="margin:0"><b>Spontaneous</b> in the forward direction.</p></div>
+    <div class="card" style="border-top:4px solid var(--energy)"><h3 style="margin-top:0;color:var(--energy)">Δ<var>S</var><sub>univ</sub> = 0</h3><p style="margin:0"><b>At equilibrium</b>: no net change either way (the process is reversible).</p></div>
+    <div class="card" style="border-top:4px solid var(--bad)"><h3 style="margin-top:0;color:var(--bad)">Δ<var>S</var><sub>univ</sub> &lt; 0</h3><p style="margin:0"><b>Nonspontaneous</b> as written; the <b>reverse</b> is spontaneous.</p></div>
+  </div>
+  <p style="font-size:.88rem;color:var(--ink-3)">Second-law criterion as stated in OpenStax <i>Chemistry 2e</i> 16.3 and Atkins.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-5">5</a></sup></p>
+
+  <div class="widget" id="ice">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>One process, all three situations: ice ⇌ water</h3></div>
+    <div class="widget-body">
+      <p>System: 1 mol of ice melting, H₂O(s) → H₂O(l). Δ<var>H</var><sub>sys</sub> = +6010 J and Δ<var>S</var><sub>sys</sub> = +22.0 J/K (taken as constant near 0 °C).<sup class="cite"><a href="#ref-3">3</a></sup> Change the temperature of the surroundings and watch who wins.</p>
+      <div class="btn-row" style="margin-top:0"><button class="btn ghost" data-t="-10">−10 °C</button><button class="btn ghost" data-t="0">0 °C</button><button class="btn ghost" data-t="10">+10 °C</button></div>
+      <div class="control" style="margin-top:12px"><label for="iceT">Temperature <output id="iceTOut">10 °C</output></label><input type="range" id="iceT" min="-30" max="30" step="1" value="10"></div>
+      <div class="widget-row" style="margin-top:10px">
+        <div>
+          <div class="sbar"><span class="u">ΔS<sub>sys</sub></span><div class="strack"><div class="sfill" id="iSys" style="background:var(--sys)"></div></div><span id="iSysV" style="text-align:right"></span></div>
+          <div class="sbar"><span class="surr">ΔS<sub>surr</sub></span><div class="strack"><div class="sfill" id="iSur" style="background:var(--surr)"></div></div><span id="iSurV" style="text-align:right"></span></div>
+          <div class="sbar"><span style="color:var(--energy)">ΔS<sub>univ</sub></span><div class="strack"><div class="sfill" id="iUni" style="background:var(--energy)"></div></div><span id="iUniV" style="text-align:right;font-weight:800"></span></div>
+          <div class="verdict" id="iVer"></div>
+          <p id="iMsg" style="font-size:.92rem"></p>
+        </div>
+        <svg id="iceSvg" viewBox="0 0 260 220" role="img" aria-label="Ice cube in water, melting or freezing"></svg>
+      </div>
+    </div>
+  </div>
+
+  <h3>Worked examples of the three situations</h3>
+  <div class="example">
+    <div class="example-head"><span class="example-num">Spontaneous</span><h3>Burning methane at 25 °C</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l): Δ<var>H</var>° = −890.4 kJ, Δ<var>S</var>° = −242.9 J/K. Is it spontaneous at 298 K?</p>
+      <ol class="steps">
+        <li>Δ<var>S</var><sub>sys</sub> = −242.9 J/K (3 mol of gas become 1 mol of gas plus liquid).</li>
+        <li>Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var> = −(−890 400 J)/298.15 K = +2986 J/K.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = −242.9 + 2986 = <b>+2743 J/K &gt; 0: spontaneous</b>. The system's entropy falls, but the huge release of heat raises the surroundings' entropy far more.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-head"><span class="example-num">Equilibrium</span><h3>Water boiling at 100 °C and 1 atm</h3><span class="tag liquid">liquid ⇌ gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">H₂O(l) → H₂O(g) at 373.15 K: Δ<var>H</var> = +40.7 kJ, Δ<var>S</var><sub>sys</sub> = +109.1 J/K.</p>
+      <ol class="steps">
+        <li>Δ<var>S</var><sub>surr</sub> = −40 700 J / 373.15 K = −109.1 J/K.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = 109.1 − 109.1 = <b>0: equilibrium</b>. Liquid and vapour coexist; neither direction is favoured. That is exactly what "boiling point" means.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-head"><span class="example-num">Nonspontaneous</span><h3>Decomposing limestone at 25 °C</h3><span class="tag solid">solid → gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">CaCO₃(s) → CaO(s) + CO₂(g): Δ<var>H</var>° = +179.2 kJ, Δ<var>S</var>° = +160.2 J/K. Is it spontaneous at 298 K?</p>
+      <ol class="steps">
+        <li>Δ<var>S</var><sub>surr</sub> = −179 200 J / 298.15 K = −601.0 J/K.</li>
+        <li>Δ<var>S</var><sub>univ</sub> = 160.2 − 601.0 = <b>−440.8 J/K &lt; 0: nonspontaneous</b> at room temperature (limestone buildings don't fall apart).</li>
+        <li class="answer-box">It becomes spontaneous when 160.2 &gt; 179 200/<var>T</var>, i.e. above <var>T</var> = 179 200/160.2 ≈ <b>1120 K (≈ 845 °C)</b> — which is why lime kilns run so hot.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Dissolving NH₄NO₃ (a cold pack): Δ<var>H</var>° = +25.7 kJ/mol, Δ<var>S</var>° = +108.7 J mol⁻¹ K⁻¹. Find Δ<var>S</var><sub>univ</sub> at 298 K (J/K). Is it spontaneous?
+        <div class="num-check" data-answer="22.5" data-tol="0.02" data-hint="ΔS_univ = 108.7 − 25 700/298.15."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="widget" id="univ">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Spontaneity explorer: pick a process, change the temperature</h3></div>
+    <div class="widget-body">
+      <div class="control"><label for="uSel">Process</label>
+        <select id="uSel" style="width:100%;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:4px"></select></div>
+      <p class="rxn" id="uEq" style="font-family:var(--serif);margin:10px 0 4px"></p>
+      <p style="font-size:.9rem;margin:0" id="uData"></p>
+      <div class="control" style="margin-top:12px"><label for="uT">Temperature <output id="uTOut">298 K</output></label><input type="range" id="uT" min="150" max="1500" step="1" value="298"></div>
+      <div class="widget-row" style="margin-top:10px">
+        <div>
+          <div class="sbar"><span class="u">ΔS<sub>sys</sub></span><div class="strack"><div class="sfill" id="uSys" style="background:var(--sys)"></div></div><span id="uSysV" style="text-align:right"></span></div>
+          <div class="sbar"><span class="surr">ΔS<sub>surr</sub></span><div class="strack"><div class="sfill" id="uSur" style="background:var(--surr)"></div></div><span id="uSurV" style="text-align:right"></span></div>
+          <div class="sbar"><span style="color:var(--energy)">ΔS<sub>univ</sub></span><div class="strack"><div class="sfill" id="uUni" style="background:var(--energy)"></div></div><span id="uUniV" style="text-align:right;font-weight:800"></span></div>
+          <div class="verdict" id="uVer"></div>
+        </div>
+        <svg id="uSvg" viewBox="0 0 380 240" role="img" aria-label="Entropy of the universe versus temperature"></svg>
+      </div>
+      <p id="uMsg" style="font-size:.92rem;margin-bottom:0"></p>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Δ<var>H</var>° and <var>S</var>° data at 25 °C;<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup> Δ<var>H</var> and Δ<var>S</var> are treated as constant with temperature — a good first approximation.<sup class="cite"><a href="#ref-5">5</a></sup></p>
+    </div>
+  </div>
+
+  <h2 id="biology" data-short="Living things & reactions">Entropy in living things and in chemical reactions</h2>
+  <p>Living things build highly ordered structures — proteins, DNA, cells — from simple, scattered molecules. Doesn't that decrease entropy and break the second law? No: an organism is an <b>open system</b>. It takes in food and oxygen and releases heat, CO₂ and water. The entropy <i>inside</i> it may go down, but the entropy it exports to its surroundings is much larger, so <b>ΔS<sub>univ</sub> &gt; 0</b>. Schrödinger famously described organisms as staying ordered by "feeding on" the low entropy of their food.<sup class="cite"><a href="#ref-10">10</a></sup></p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 270" role="img" aria-label="A cell as an open system: food and oxygen in, carbon dioxide, water and heat out">
+      <rect x="10" y="10" width="740" height="250" rx="16" class="surr-box"/>
+      <text x="28" y="36" class="t-surr t-mid">SURROUNDINGS: entropy goes up a lot</text>
+      <ellipse cx="380" cy="140" rx="130" ry="80" fill="var(--work-fill)" stroke="var(--work)" stroke-width="3"/>
+      <text x="380" y="118" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--work)">CELL (system)</text>
+      <text x="380" y="142" text-anchor="middle" class="t-small">builds ordered proteins, DNA</text>
+      <text x="380" y="160" text-anchor="middle" class="t-small">ΔS<tspan dy="3" font-size="8">inside</tspan><tspan dy="-3"> can be &lt; 0</tspan></text>
+      <!-- inputs -->
+      <path d="M70 100 H 245" class="ink-line" stroke-width="3"/><polygon points="252,100 238,92 238,108" fill="var(--ink)"/>
+      <text x="80" y="88" class="t-small" style="font-weight:700">glucose (ordered, low S)</text>
+      <path d="M70 180 H 252" class="ink-line" stroke-width="3"/><polygon points="259,180 245,172 245,188" fill="var(--ink)"/>
+      <text x="80" y="200" class="t-small" style="font-weight:700">O₂(g)</text>
+      <!-- outputs -->
+      <path d="M512 100 H 690" class="ink-line" stroke-width="3"/><polygon points="697,100 683,92 683,108" fill="var(--ink)"/>
+      <text x="520" y="88" class="t-small" style="font-weight:700">6 CO₂ + 6 H₂O (small molecules)</text>
+      <path d="M512 180 H 690" class="heat-arrow anim-flow"/><polygon points="697,180 683,172 683,188" class="heat-fill"/>
+      <text x="520" y="205" class="t-small t-heat" style="font-weight:700">heat released → ΔS<tspan dy="3" font-size="8">surr</tspan><tspan dy="-3"> ≫ 0</tspan></text>
+      <text x="380" y="248" text-anchor="middle" class="t-mid" style="font-weight:700;fill:var(--energy)">ΔS<tspan dy="4" font-size="10">univ</tspan><tspan dy="-4"> = ΔS</tspan><tspan dy="4" font-size="10">sys</tspan><tspan dy="-4"> + ΔS</tspan><tspan dy="4" font-size="10">surr</tspan><tspan dy="-4"> &gt; 0 — life obeys the second law</tspan></text>
+    </svg>
+    <figcaption>Order inside a living cell is paid for by a much larger increase in the entropy of its surroundings: heat plus many small waste molecules.</figcaption>
+  </figure>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Biology 1</span><h3>Cellular respiration in your body (37 °C)</h3><span class="tag rxn">biological</span></div>
+    <div class="example-body">
+      <p style="margin-top:0 " class="rxn">C₆H₁₂O₆(s) + 6 O₂(g) → 6 CO₂(g) + 6 H₂O(l) &nbsp;&nbsp; Δ<var>H</var>° = −2802.5 kJ (Lesson 9)</p>
+      <p><var>S</var>° (J mol⁻¹ K⁻¹): glucose 209.2, O₂ 205.2, CO₂ 213.8, H₂O(l) 70.0.<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup> Is respiration spontaneous at body temperature, 310 K?</p>
+      <ol class="steps">
+        <li><b>System:</b> Δ<var>S</var>°<sub>sys</sub> = [6(213.8) + 6(70.0)] − [209.2 + 6(205.2)] = 1702.8 − 1440.4 = <b>+262.4 J/K</b>. One large, ordered solid molecule becomes 12 small molecules, 6 of them gas.</li>
+        <li><b>Surroundings:</b> Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var> = −(−2 802 500 J)/310 K = <b>+9040 J/K</b>. The heat released warms your body and the air around you.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = 262 + 9040 ≈ <b>+9300 J/K per mole of glucose</b> — strongly spontaneous. Your cells capture part of this energy as ATP and use it to build ordered molecules; even after that, the total entropy of the universe still rises.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Biology 2</span><h3>Photosynthesis: entropy decreases — so it needs sunlight</h3><span class="tag rxn">biological</span></div>
+    <div class="example-body">
+      <p style="margin-top:0" class="rxn">6 CO₂(g) + 6 H₂O(l) → C₆H₁₂O₆(s) + 6 O₂(g) &nbsp;&nbsp; Δ<var>H</var>° = +2802.5 kJ, Δ<var>S</var>° = −262.4 J/K</p>
+      <ol class="steps">
+        <li>This is respiration in reverse, so both signs flip. At 298 K: Δ<var>S</var><sub>surr</sub> = −2 802 500/298.15 = −9400 J/K.</li>
+        <li>Δ<var>S</var><sub>univ</sub> = −262 − 9400 ≈ <b>−9660 J/K &lt; 0</b>: nonspontaneous on its own. Plants never make sugar in the dark.</li>
+        <li class="answer-box">Sunlight makes it possible. The plant absorbs high-energy light from the very hot Sun and gives off low-temperature heat; spreading that energy out creates more than enough entropy to pay for the ordered sugar molecule. Counting the Sun and the plant's waste heat as part of the surroundings, Δ<var>S</var><sub>univ</sub> &gt; 0.<sup class="cite"><a href="#ref-5">5</a></sup></li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Biology 3</span><h3>An enzyme reaction: catalase breaks down hydrogen peroxide</h3><span class="tag rxn">reaction</span></div>
+    <div class="example-body">
+      <p style="margin-top:0" class="rxn">2 H₂O₂(l) → 2 H₂O(l) + O₂(g)</p>
+      <p>Cells make toxic H₂O₂ as a by-product; the enzyme catalase destroys it (that's the fizzing when hydrogen peroxide touches a cut). Data: Δ<var>H</var><sub>f</sub>°(H₂O₂, l) = −187.8 kJ/mol, <var>S</var>°(H₂O₂, l) = 109.6 J mol⁻¹ K⁻¹.<sup class="cite"><a href="#ref-6">6</a></sup></p>
+      <ol class="steps">
+        <li>Δ<var>H</var>° = 2(−285.8) − 2(−187.8) = <b>−196.0 kJ</b> (exothermic).</li>
+        <li>Δ<var>S</var>°<sub>sys</sub> = [2(70.0) + 205.2] − 2(109.6) = <b>+126.0 J/K</b>: a gas (O₂) is produced from liquids.</li>
+        <li>Δ<var>S</var><sub>surr</sub> = +196 000/298.15 = <b>+657.4 J/K</b>.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = 126.0 + 657.4 = <b>+783.4 J/K</b>. Both terms are positive, so it is spontaneous at every temperature. The enzyme doesn't change this — it only makes the reaction <i>fast</i>.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Biology 4</span><h3>Protein folding and the hydrophobic effect</h3><span class="tag liquid">biological</span></div>
+    <div class="example-body">
+      <div class="grid-2" style="align-items:center">
+        <div>
+          <p style="margin-top:0" class="rxn">unfolded protein (aq) ⇌ folded protein (aq)</p>
+          <p>Folding turns a floppy chain into one precise shape, so the <b>protein's</b> entropy drops sharply. Yet proteins fold on their own. The key is the <b>water</b>: around exposed oily (nonpolar) side chains, water molecules are held in an ordered cage. When the chain folds and buries those groups inside, the caged water is released and gains entropy. This <b>hydrophobic effect</b> is a major driving force of folding.<sup class="cite"><a href="#ref-11">11</a></sup></p>
+          <p style="margin-bottom:0"><b>Entropy ledger:</b> ΔS(protein) &lt; 0, ΔS(released water) &gt; 0 and larger, plus heat released to the surroundings, so ΔS<sub>univ</sub> &gt; 0. The same effect makes oil droplets merge in water and helps cell membranes form.</p>
+        </div>
+        <svg viewBox="0 0 320 220" role="img" aria-label="Unfolded protein with ordered water cages folds, releasing free water molecules">
+          <text x="80" y="18" text-anchor="middle" class="t-small" style="font-weight:700">unfolded</text>
+          <path d="M20 120 C 40 60, 70 170, 95 100 S 130 60, 145 130" fill="none" stroke="var(--work)" stroke-width="5" stroke-linecap="round"/>
+          <g fill="none" stroke="#3f8fd6" stroke-width="1.5">
+            <circle cx="50" cy="95" r="12" stroke-dasharray="3 2"/><circle cx="95" cy="100" r="12" stroke-dasharray="3 2"/><circle cx="125" cy="80" r="12" stroke-dasharray="3 2"/>
+          </g>
+          <text x="80" y="200" text-anchor="middle" class="t-small t-muted">water caged around oily groups</text>
+          <path d="M160 110 H 185" class="ink-line" stroke-width="2.5"/><polygon points="192,110 182,104 182,116" fill="var(--ink)"/>
+          <text x="250" y="18" text-anchor="middle" class="t-small" style="font-weight:700">folded</text>
+          <path d="M225 90 C 205 120, 245 145, 262 120 S 290 80, 260 75 S 230 95, 250 110" fill="none" stroke="var(--work)" stroke-width="5" stroke-linecap="round"/>
+          <g fill="#3f8fd6"><circle cx="205" cy="60" r="4"/><circle cx="295" cy="55" r="4"/><circle cx="300" cy="150" r="4"/><circle cx="210" cy="165" r="4"/><circle cx="250" cy="175" r="4"/><circle cx="285" cy="185" r="4"/><circle cx="215" cy="40" r="4"/></g>
+          <text x="250" y="200" text-anchor="middle" class="t-small t-muted">freed water: entropy up</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">How total entropy increases in these examples</span>
+    <ul style="margin:.3em 0 0;padding-left:1.2em">
+      <li><b>Releasing heat</b> to the surroundings (respiration, H₂O₂ breakdown): Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var> is large and positive.</li>
+      <li><b>Making more, smaller molecules — especially gases</b> (glucose → CO₂ + H₂O; H₂O₂ → O₂): Δ<var>S</var><sub>sys</sub> &gt; 0.</li>
+      <li><b>Freeing ordered solvent</b> (the hydrophobic effect): water gains entropy even as the protein loses it.</li>
+      <li><b>Using an outside energy source</b> (sunlight for photosynthesis, food for living cells) to pay for local decreases in entropy.</li>
+    </ul>
+  </div>
+
+  <h2 id="factors" data-short="Factors affecting entropy">Factors that increase or decrease entropy</h2>
+  <p>You can often predict the sign of Δ<var>S</var><sub>sys</sub> without any numbers. Entropy <b>increases</b> when particles get more freedom or energy gets more ways to spread out:<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-3">3</a></sup></p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Factor</th><th>Entropy is higher when…</th><th>Example</th></tr>
+      <tr><td><b>Phase</b></td><td>gas &gt; liquid &gt; solid</td><td>H₂O: 70.0 (l) vs 188.8 (g) J mol⁻¹ K⁻¹</td></tr>
+      <tr><td><b>Temperature</b></td><td>temperature is higher (faster particles, more energy levels used)</td><td>Heating 100 g water 25 → 75 °C: +64.9 J/K</td></tr>
+      <tr><td><b>Volume / pressure</b></td><td>a gas has more volume (lower pressure)</td><td>Doubling V: +5.76 J/K per mol</td></tr>
+      <tr><td><b>Moles of gas</b></td><td>a reaction makes more moles of gas (Δ<var>n</var><sub>gas</sub> &gt; 0)</td><td>CaCO₃ → CaO + CO₂: +160.2 J/K</td></tr>
+      <tr><td><b>Molecular complexity</b></td><td>molecules have more atoms (more ways to rotate and vibrate)</td><td>CH₄ 186.3 &lt; C₂H₆ 229.6 &lt; C₃H₈ 270.3</td></tr>
+      <tr><td><b>Molar mass</b></td><td>atoms are heavier (more closely spaced energy levels)</td><td>He 126.2 &lt; Ne 146.3 &lt; Ar 154.8 &lt; Kr 164.1</td></tr>
+      <tr><td><b>Dissolving / mixing</b></td><td>a solid dissolves or substances mix</td><td>NaCl(s) 72.1 → Na⁺(aq) + Cl⁻(aq) 115.5</td></tr>
+      <tr><td><b>Rigidity</b></td><td>the structure is softer and less rigid</td><td>diamond 2.4 &lt; graphite 5.7</td></tr>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--ink-3)"><var>S</var>° values from OpenStax Appendix G and the NIST WebBook;<sup class="cite"><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup> dissolving trends.<sup class="cite"><a href="#ref-9">9</a></sup> Some ions (especially small, highly charged ones) lower the entropy when they dissolve, because they organise water molecules around them.<sup class="cite"><a href="#ref-9">9</a></sup></p>
+
+  <div class="widget" id="fac">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Factor explorer: compare standard entropies</h3></div>
+    <div class="widget-body">
+      <div class="seg" role="group" aria-label="Factor" id="facSeg">
+        <button class="on" data-f="0">Phase</button><button data-f="1">Complexity</button><button data-f="2">Molar mass</button><button data-f="3">Dissolving</button><button data-f="4">Rigidity</button>
+      </div>
+      <svg id="facSvg" viewBox="0 0 700 250" role="img" aria-label="Bar chart of standard molar entropies" style="margin-top:12px"></svg>
+      <p id="facMsg" style="font-size:.93rem;margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <h3>Predict the sign of ΔS<sub>sys</sub></h3>
+  <div class="card" id="signCard"><p style="margin-top:0">Is Δ<var>S</var><sub>sys</sub> positive or negative? Feedback appears instantly.</p></div>
+
+  <h3>Putting it together: four combinations of ΔH and ΔS</h3>
+  <p>Because Δ<var>S</var><sub>univ</sub> = Δ<var>S</var><sub>sys</sub> − Δ<var>H</var><sub>sys</sub>/<var>T</var>, the signs of Δ<var>H</var> and Δ<var>S</var> — together with temperature — decide spontaneity:<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-4">4</a></sup></p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Δ<var>H</var><sub>sys</sub></th><th>Δ<var>S</var><sub>sys</sub></th><th>Spontaneous?</th><th>Example</th></tr>
+      <tr><td class="q">− (exothermic)</td><td class="u">+</td><td><b>At all temperatures</b> (both terms help)</td><td>2 H₂O₂(l) → 2 H₂O(l) + O₂(g)</td></tr>
+      <tr><td class="q">+ (endothermic)</td><td class="u">−</td><td><b>Never</b> (both terms hurt)</td><td>3 O₂(g) → 2 O₃(g)</td></tr>
+      <tr><td class="q">− (exothermic)</td><td class="u">−</td><td><b>At low temperatures</b> (below <var>T</var> = Δ<var>H</var>/Δ<var>S</var>)</td><td>Water freezing; N₂ + 3 H₂ → 2 NH₃ (below ≈ 463 K)</td></tr>
+      <tr><td class="q">+ (endothermic)</td><td class="u">+</td><td><b>At high temperatures</b> (above <var>T</var> = Δ<var>H</var>/Δ<var>S</var>)</td><td>Ice melting (above 273 K); CaCO₃ decomposing (above ≈ 1120 K)</td></tr>
+    </table>
+  </div>
+  <div class="callout tip">
+    <span class="callout-title">Coming next: Gibbs free energy</span>
+    Multiplying Δ<var>S</var><sub>univ</sub> by −<var>T</var> gives a quantity that depends only on the system: Δ<var>G</var> = Δ<var>H</var> − <var>T</var>Δ<var>S</var> = −<var>T</var>Δ<var>S</var><sub>univ</sub>. A spontaneous process has Δ<var>G</var> &lt; 0.<sup class="cite"><a href="#ref-4">4</a></sup>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">An exothermic reaction has ΔS<sub>sys</sub> &lt; 0. When is it most likely to be spontaneous?</p>
+    <div class="quiz-opts">
+      <button data-why="At high T, −ΔH/T becomes small and can't outweigh the negative ΔS_sys.">At high temperature</button>
+      <button data-why="It depends on temperature, because ΔS_surr = −ΔH/T changes with T.">Always, because it's exothermic</button>
+      <button>At low temperature, where −ΔH/T is large</button>
+      <button data-why="It can be spontaneous — at low enough temperature.">Never</button>
+    </div>
+    <div class="quiz-fb" data-right="ΔS_surr = −ΔH/T is positive and largest at low T, so it can outweigh the negative ΔS_sys there."></div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">For a process at equilibrium, which is true?</p>
+    <div class="quiz-opts">
+      <button data-why="At equilibrium the system's entropy can change (e.g. +109 J/K for boiling); it's the universe's total that is zero.">ΔS<sub>sys</sub> = 0</button>
+      <button>ΔS<sub>sys</sub> = −ΔS<sub>surr</sub>, so ΔS<sub>univ</sub> = 0</button>
+      <button data-why="That would mean the process is spontaneous, not at equilibrium.">ΔS<sub>univ</sub> &gt; 0</button>
+    </div>
+    <div class="quiz-fb" data-right="At equilibrium the gain in one exactly balances the loss in the other: ΔS_univ = 0."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">Why can an endothermic process like an instant cold pack be spontaneous?</p>
+    <div class="quiz-opts">
+      <button>Its ΔS<sub>sys</sub> is positive and large enough to outweigh the negative ΔS<sub>surr</sub>.</button>
+      <button data-why="Endothermic processes take heat from the surroundings, which lowers ΔS_surr.">The surroundings gain entropy.</button>
+      <button data-why="The second law always applies; it's the total entropy that matters.">The second law doesn't apply to endothermic processes.</button>
+    </div>
+    <div class="quiz-fb" data-right="Dissolving NH₄NO₃: ΔS_sys = +108.7 J/K beats ΔS_surr = −86.2 J/K at 298 K, so ΔS_univ = +22.5 J/K."></div>
+  </div>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
+  <ol class="refs">
+    <li id="ref-1">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.1, Spontaneity. <a href="https://openstax.org/books/chemistry-2e/pages/16-1-spontaneity">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.2, Entropy. <a href="https://openstax.org/books/chemistry-2e/pages/16-2-entropy">openstax.org</a></li>
+    <li id="ref-3">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.3, The Second and Third Laws of Thermodynamics. <a href="https://openstax.org/books/chemistry-2e/pages/16-3-the-second-and-third-laws-of-thermodynamics">openstax.org</a></li>
+    <li id="ref-4">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.4, Free Energy. <a href="https://openstax.org/books/chemistry-2e/pages/16-4-free-energy">openstax.org</a></li>
+    <li id="ref-5">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 3, The Second and Third Laws (entropy changes of system and surroundings; temperature dependence).</li>
+    <li id="ref-6">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Appendix G, Standard Thermodynamic Properties for Selected Substances. <a href="https://openstax.org/books/chemistry-2e/pages/g-standard-thermodynamic-properties-for-selected-substances">openstax.org</a></li>
+    <li id="ref-7">Linstrom, P. J.; Mallard, W. G., Eds. <i>NIST Chemistry WebBook</i>, NIST Standard Reference Database Number 69; National Institute of Standards and Technology: Gaithersburg, MD. <a href="https://doi.org/10.18434/T4D303">doi:10.18434/T4D303</a></li>
+    <li id="ref-8">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 4.6, Entropy. <a href="https://openstax.org/books/university-physics-volume-2/pages/4-6-entropy">openstax.org</a></li>
+    <li id="ref-9">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 11.1, The Dissolution Process. <a href="https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process">openstax.org</a></li>
+      <li id="ref-10">Schrödinger, E. <i>What Is Life? The Physical Aspect of the Living Cell</i>; Cambridge University Press: Cambridge, 1944. <span class="use">— living organisms as open systems that maintain order by exporting entropy</span></li>
+    <li id="ref-11">Kauzmann, W. Some Factors in the Interpretation of Protein Denaturation. <i>Adv. Protein Chem.</i> <b>1959</b>, <i>14</i>, 1–63. <a href="https://doi.org/10.1016/S0065-3233(08)60608-7">doi:10.1016/S0065-3233(08)60608-7</a> <span class="use">— the hydrophobic effect in protein folding</span></li>
+  </ol>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  function bar(el, v, max) { const f = Math.max(-1, Math.min(1, v / max)); el.style.left = (f >= 0 ? 50 : 50 + f * 50) + "%"; el.style.width = Math.abs(f) * 50 + "%"; }
+  function verdict(el, u, tol) {
+    if (Math.abs(u) <= tol) { el.className = "verdict eq"; el.innerHTML = "ΔS<sub>univ</sub> = 0 → at equilibrium"; }
+    else if (u > 0) { el.className = "verdict spont"; el.innerHTML = "ΔS<sub>univ</sub> &gt; 0 → spontaneous"; }
+    else { el.className = "verdict non"; el.innerHTML = "ΔS<sub>univ</sub> &lt; 0 → nonspontaneous (reverse is spontaneous)"; }
+  }
+
+  // ================= ice ⇌ water =================
+  (function () {
+    const dH = 6010, dS = 6010 / 273.15; // J, J/K
+    const sl = document.getElementById("iceT"), svg = document.getElementById("iceSvg");
+    let size = 60, u = 0;
+    function update() {
+      const tc = +sl.value, T = tc + 273.15, sur = -dH / T; u = dS + sur; size = 60;
+      document.getElementById("iceTOut").textContent = tc + " °C (" + T.toFixed(2) + " K)";
+      bar(document.getElementById("iSys"), dS, 30); bar(document.getElementById("iSur"), sur, 30); bar(document.getElementById("iUni"), u, 3);
+      document.getElementById("iSysV").textContent = signed(dS, 2) + " J/K";
+      document.getElementById("iSurV").textContent = signed(sur, 2) + " J/K";
+      document.getElementById("iUniV").textContent = signed(u, 2) + " J/K";
+      verdict(document.getElementById("iVer"), u, 0.005);
+      document.getElementById("iMsg").innerHTML = `Δ<var>S</var><sub>surr</sub> = −6010 J / ${T.toFixed(2)} K = ${signed(sur, 2)} J/K. ` +
+        (Math.abs(u) <= 0.005 ? "At 0 °C the two terms cancel exactly: ice and water coexist." :
+          u > 0 ? "Above 0 °C the surroundings lose less entropy than the ice gains, so melting wins." :
+            "Below 0 °C the cold surroundings would lose more entropy than the ice gains, so melting is nonspontaneous — <b>freezing</b> happens instead.") +
+        ` <small>(The ΔS<sub>univ</sub> bar is magnified 10× so you can see it.)</small>`;
+    }
+    function draw() {
+      // ice cube grows or shrinks according to sign of u
+      if (u > 0.005) size = Math.max(14, size - 0.12); else if (u < -0.005) size = Math.min(110, size + 0.12);
+      const melt = u > 0.005, freeze = u < -0.005;
+      let s = `<rect x="20" y="40" width="220" height="160" rx="8" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <rect x="22" y="${200 - 40 - (110 - size) * 0.25}" width="216" height="${40 + (110 - size) * 0.25 - 2}" class="liquid"/>
+        <rect x="${130 - size / 2}" y="${150 - size}" width="${size}" height="${size}" rx="6" class="ice"/>`;
+      if (melt) s += `<text x="130" y="30" text-anchor="middle" class="t-small" style="fill:var(--good);font-weight:700">melting →</text>`;
+      if (freeze) s += `<text x="130" y="30" text-anchor="middle" class="t-small" style="fill:var(--bad);font-weight:700">← freezing</text>`;
+      if (!melt && !freeze) s += `<text x="130" y="30" text-anchor="middle" class="t-small" style="fill:var(--energy);font-weight:700">⇌ coexisting</text>`;
+      s += `<text x="130" y="218" text-anchor="middle" class="t-small t-muted">surroundings at ${sl.value} °C</text>`;
+      svg.innerHTML = s;
+      requestAnimationFrame(draw);
+    }
+    sl.addEventListener("input", update);
+    document.querySelectorAll("#ice [data-t]").forEach(b => b.addEventListener("click", () => { sl.value = b.dataset.t; update(); }));
+    update(); draw();
+  })();
+
+  // ================= spontaneity explorer =================
+  (function () {
+    const P = [
+      { n: "Burning methane", eq: "CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", dH: -890.4, dS: -242.9 },
+      { n: "Rusting of iron", eq: "4 Fe(s) + 3 O₂(g) → 2 Fe₂O₃(s)", dH: -1648.4, dS: -550.0 },
+      { n: "Ammonia synthesis (Haber process)", eq: "N₂(g) + 3 H₂(g) → 2 NH₃(g)", dH: -91.8, dS: -198.1 },
+      { n: "Cold pack: NH₄NO₃ dissolving", eq: "NH₄NO₃(s) → NH₄⁺(aq) + NO₃⁻(aq)", dH: 25.7, dS: 108.7 },
+      { n: "Limestone decomposing", eq: "CaCO₃(s) → CaO(s) + CO₂(g)", dH: 179.2, dS: 160.2 },
+      { n: "Water boiling (1 mol)", eq: "H₂O(l) → H₂O(g)", dH: 40.7, dS: 109.1 },
+      { n: "Water freezing (1 mol)", eq: "H₂O(l) → H₂O(s)", dH: -6.01, dS: -22.0 },
+      { n: "Making ozone", eq: "3 O₂(g) → 2 O₃(g)", dH: 285.4, dS: -137.8 },
+      { n: "Cellular respiration (biology)", eq: "C₆H₁₂O₆(s) + 6 O₂(g) → 6 CO₂(g) + 6 H₂O(l)", dH: -2802.5, dS: 262.4 },
+      { n: "Photosynthesis without sunlight (biology)", eq: "6 CO₂(g) + 6 H₂O(l) → C₆H₁₂O₆(s) + 6 O₂(g)", dH: 2802.5, dS: -262.4 },
+      { n: "Catalase: H₂O₂ breakdown (biology)", eq: "2 H₂O₂(l) → 2 H₂O(l) + O₂(g)", dH: -196.0, dS: 126.0 },
+    ];
+    const sel = document.getElementById("uSel"), sl = document.getElementById("uT"), svg = document.getElementById("uSvg");
+    sel.innerHTML = P.map((p, i) => `<option value="${i}">${p.n}</option>`).join("");
+    function update() {
+      const p = P[+sel.value], T = +sl.value;
+      const sys = p.dS, sur = -p.dH * 1000 / T, u = sys + sur;
+      document.getElementById("uTOut").textContent = T + " K (" + (T - 273.15).toFixed(0) + " °C)";
+      document.getElementById("uEq").textContent = p.eq;
+      document.getElementById("uData").innerHTML = `Δ<var>H</var>° = ${signed(p.dH, 1)} kJ &nbsp;·&nbsp; Δ<var>S</var>° = ${signed(p.dS, 1)} J/K`;
+      const M = Math.max(Math.abs(sys), Math.abs(sur), Math.abs(u), 50) * 1.1;
+      bar(document.getElementById("uSys"), sys, M); bar(document.getElementById("uSur"), sur, M); bar(document.getElementById("uUni"), u, M);
+      document.getElementById("uSysV").textContent = signed(sys, 1) + " J/K";
+      document.getElementById("uSurV").textContent = signed(sur, 1) + " J/K";
+      document.getElementById("uUniV").textContent = signed(u, 1) + " J/K";
+      verdict(document.getElementById("uVer"), u, Math.abs(sys) * 0.004);
+      const Tc = p.dH * 1000 / p.dS;
+      let msg = `Δ<var>S</var><sub>surr</sub> = −(${signed(p.dH * 1000, 0)} J)/${T} K = ${signed(sur, 1)} J/K. `;
+      if (p.dH < 0 && p.dS > 0) msg += "Both terms are positive: spontaneous at every temperature.";
+      else if (p.dH > 0 && p.dS < 0) msg += "Both terms are negative: nonspontaneous at every temperature.";
+      else msg += `The two terms fight. They balance at <b>T = ΔH/ΔS = ${Tc.toFixed(0)} K</b> (${(Tc - 273.15).toFixed(0)} °C): ` + (p.dH < 0 ? "spontaneous <b>below</b> it." : "spontaneous <b>above</b> it.");
+      document.getElementById("uMsg").innerHTML = msg;
+      // plot ΔS_univ vs T
+      const Ts = [], N = 60; for (let i = 0; i <= N; i++) Ts.push(150 + i * (1350 / N));
+      const us = Ts.map(t => sys - p.dH * 1000 / t), lo = Math.min(...us, 0), hi = Math.max(...us, 0), span = Math.max(1, hi - lo);
+      const X = (t) => 50 + (t - 150) / 1350 * 320, Y = (v) => 20 + (hi - v) / span * 190;
+      let s = `<line x1="50" y1="20" x2="50" y2="210" stroke="var(--ink)" stroke-width="1.5"/>
+        <rect x="50" y="20" width="320" height="${Math.max(0, Y(0) - 20)}" fill="var(--good-bg)" opacity=".7"/>
+        <rect x="50" y="${Y(0)}" width="320" height="${Math.max(0, 210 - Y(0))}" fill="var(--bad-bg)" opacity=".7"/>
+        <line x1="50" y1="${Y(0)}" x2="370" y2="${Y(0)}" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="365" y="34" text-anchor="end" class="t-small" style="fill:var(--good);font-weight:700">spontaneous</text>
+        <text x="365" y="204" text-anchor="end" class="t-small" style="fill:var(--bad);font-weight:700">nonspontaneous</text>
+        <text x="210" y="234" text-anchor="middle" class="t-small">temperature (K)</text>
+        <text x="16" y="115" text-anchor="middle" class="t-small" transform="rotate(-90 16 115)">ΔS_univ</text>`;
+      [300, 600, 900, 1200, 1500].forEach(t => s += `<text x="${X(t)}" y="222" text-anchor="middle" class="t-small t-muted">${t}</text>`);
+      s += `<polyline points="${Ts.map((t, i) => X(t) + "," + Y(us[i])).join(" ")}" fill="none" stroke="var(--energy)" stroke-width="3"/>`;
+      if (Tc > 150 && Tc < 1500 && Math.sign(p.dH) === Math.sign(p.dS)) s += `<line x1="${X(Tc)}" x2="${X(Tc)}" y1="20" y2="210" stroke="var(--ink-3)" stroke-dasharray="4 4"/><text x="${X(Tc) + 4}" y="${Y(0) - 6}" class="t-small t-muted">${Tc.toFixed(0)} K</text>`;
+      s += `<circle cx="${X(T)}" cy="${Y(u)}" r="7" fill="var(--energy)" stroke="#fff" stroke-width="2"/>`;
+      svg.innerHTML = s;
+    }
+    sel.addEventListener("change", update); sl.addEventListener("input", update); update();
+  })();
+
+  // ================= factor explorer =================
+  (function () {
+    const F = [
+      { d: [["H₂O(l)", 70.0], ["H₂O(g)", 188.8], ["Br₂(l)", 152.2], ["Br₂(g)", 245.5], ["I₂(s)", 116.1], ["I₂(g)", 260.7]], m: "<b>Phase:</b> for each substance the gas has far more entropy than the liquid or solid — its molecules move freely through a large volume." },
+      { d: [["CH₄(g)", 186.3], ["C₂H₆(g)", 229.6], ["C₃H₈(g)", 270.3]], m: "<b>Molecular complexity:</b> bigger molecules have more atoms that can rotate and vibrate, giving more ways to store energy." },
+      { d: [["He(g)", 126.2], ["Ne(g)", 146.3], ["Ar(g)", 154.8], ["Kr(g)", 164.1], ["Xe(g)", 169.7]], m: "<b>Molar mass:</b> heavier atoms have more closely spaced energy levels, so energy can be shared in more ways." },
+      { d: [["NaCl(s)", 72.1], ["Na⁺(aq) + Cl⁻(aq)", 115.5]], m: "<b>Dissolving:</b> ions locked in a crystal become free to move through the solvent, so entropy increases (for most solids)." },
+      { d: [["C(diamond)", 2.4], ["C(graphite)", 5.7], ["Fe(s)", 27.3]], m: "<b>Rigidity:</b> diamond's stiff 3-D network allows the least motion; graphite's layers can vibrate more easily." },
+    ];
+    let fi = 0;
+    const svg = document.getElementById("facSvg");
+    function draw() {
+      const f = F[fi], max = 280, w = Math.min(90, 560 / f.d.length);
+      let s = `<line x1="60" y1="210" x2="690" y2="210" stroke="var(--ink)" stroke-width="1.5"/><text x="16" y="110" text-anchor="middle" class="t-small" transform="rotate(-90 16 110)">S° (J mol⁻¹ K⁻¹)</text>`;
+      [0, 100, 200].forEach(v => s += `<text x="54" y="${210 - v / max * 190 + 4}" text-anchor="end" class="t-small t-muted">${v}</text><line x1="60" x2="690" y1="${210 - v / max * 190}" y2="${210 - v / max * 190}" stroke="var(--line)"/>`);
+      f.d.forEach(([lab, v], i) => {
+        const x = 80 + i * (610 / f.d.length), h = v / max * 190;
+        const col = lab.includes("(g)") ? "var(--heat)" : lab.includes("(l)") || lab.includes("aq") ? "#3f8fd6" : "var(--sys)";
+        s += `<rect x="${x}" y="${210 - h}" width="${w}" height="${h}" rx="4" fill="${col}" opacity=".85"/>`;
+        s += `<text x="${x + w / 2}" y="${205 - h}" text-anchor="middle" class="t-small" style="font-weight:700">${v}</text>`;
+        s += `<text x="${x + w / 2}" y="228" text-anchor="middle" class="t-small">${lab}</text>`;
+      });
+      svg.innerHTML = s;
+      document.getElementById("facMsg").innerHTML = f.m;
+    }
+    document.querySelectorAll("#facSeg button").forEach(b => b.addEventListener("click", () => { fi = +b.dataset.f; document.querySelectorAll("#facSeg button").forEach(x => x.classList.toggle("on", x === b)); draw(); }));
+    draw();
+  })();
+
+  // ================= predict the sign =================
+  (function () {
+    const items = [
+      ["2 H₂(g) + O₂(g) → 2 H₂O(l)", "−", "3 mol of gas become liquid: much less freedom."],
+      ["CaCO₃(s) → CaO(s) + CO₂(g)", "+", "A gas is produced from a solid."],
+      ["H₂O(l) → H₂O(g)", "+", "Liquid → gas."],
+      ["N₂(g) + 3 H₂(g) → 2 NH₃(g)", "−", "4 mol of gas become 2 mol."],
+      ["NaCl(s) → Na⁺(aq) + Cl⁻(aq)", "+", "Ions leave the crystal and spread through the water."],
+      ["Ag⁺(aq) + Cl⁻(aq) → AgCl(s)", "−", "Free ions lock into a solid precipitate."],
+      ["Cooling a gas from 400 K to 300 K", "−", "Lower temperature, fewer energy arrangements."],
+      ["A gas expanding from 1 L to 5 L", "+", "More volume, more positions."],
+    ];
+    const box = document.getElementById("signCard");
+    items.forEach(([t, a, why]) => {
+      const row = document.createElement("div"); row.className = "sort-row";
+      row.innerHTML = `<span style="font-family:var(--serif)">${t}</span><div class="seg"><button data-k="+">ΔS &gt; 0</button><button data-k="−">ΔS &lt; 0</button></div><div class="why"></div>`;
+      row.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        row.querySelectorAll("button").forEach(x => { x.style.background = ""; x.style.color = ""; });
+        const ok = b.dataset.k === a; b.style.background = ok ? "var(--good)" : "var(--bad)"; b.style.color = "#fff";
+        row.classList.add("done"); row.querySelector(".why").innerHTML = (ok ? "✅ " : `❌ ΔS is ${a === "+" ? "positive" : "negative"}. `) + why;
+      }));
+      box.appendChild(row);
+    });
+  })();
+</script>
+</body>
+</html>

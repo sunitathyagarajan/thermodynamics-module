@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Second Law</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    #spreadCanvas { width: 100%; height: 300px; display: block; background: var(--surface-2); border-radius: 10px; }
+    #traceCanvas { width: 100%; height: 90px; display: block; background: var(--surface-2); border-radius: 10px; margin-top: 8px; }
+    .meter { height: 18px; background: var(--surface-2); border-radius: 9px; overflow: hidden; margin-top: 6px; }
+    .meter div { height: 100%; width: 0; background: linear-gradient(90deg, var(--sys), var(--heat)); transition: width .2s; }
+    .tiles { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tile { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--ink-3); border-radius: 6px; overflow: hidden; min-width: 70px; font-size: .78rem; font-weight: 700; }
+    .tile span { padding: 4px 5px; min-height: 26px; text-align: center; letter-spacing: 1px; }
+    .tile span:first-child { background: var(--sys-fill); border-right: 2px dashed var(--ink-3); color: var(--sys); }
+    .tile span:last-child { background: var(--surr-fill); color: var(--surr); }
+    .backwards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body data-lesson="10" data-root="../">
+<header id="topbar"></header>
+<div class="page">
+<aside class="toc"></aside>
+<main>
+
+  <p class="eyebrow">Lesson 10</p>
+  <h1>Nature's one-way street: the second law</h1>
+  <p class="lede">Perfume spreads through a room but never gathers itself back into the bottle. Hot coffee cools but never reheats on its own. The first law says energy is conserved in both directions — so why does nature only run one way? The answer is <b>entropy</b>.</p>
+
+  <div class="objectives">
+    <h3>In this lesson</h3>
+    <ul>
+      <li>State the second law of thermodynamics in words.</li>
+      <li>Describe entropy as a measure of randomness — the number of ways energy and matter can be arranged.</li>
+      <li>Explain three everyday examples of entropy increasing: diffusion, a gas expanding, and melting.</li>
+      <li>Define microstates and use Boltzmann's formula, <var>S</var> = <var>k</var> ln <var>W</var>, to calculate entropy.</li>
+    </ul>
+  </div>
+
+  <h2 id="one-way" data-short="Why one way?">Why does nature only run one way?</h2>
+  <p>Imagine filming each of these and playing the film backwards. You would know instantly that something was wrong — even though the backwards version breaks <b>no</b> rule of energy conservation.</p>
+  <div class="backwards">
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Coffee warming itself">
+        <path d="M60 50 L 68 125 L 132 125 L 140 50 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/>
+        <path d="M140 66 C 165 66, 165 104, 136 106" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <path d="M64 62 L 136 62 L 130 120 L 70 120 Z" fill="#7a4a2a"/>
+        <path d="M40 90 H 58" class="heat-arrow" style="stroke-width:3"/><polygon points="62,90 52,84 52,96" class="heat-fill"/>
+        <path d="M180 90 H 162" class="heat-arrow" style="stroke-width:3"/><polygon points="158,90 168,84 168,96" class="heat-fill"/>
+        <text x="100" y="20" text-anchor="middle" class="t-small" style="font-weight:700">Cold coffee heats itself</text>
+        <text x="100" y="142" text-anchor="middle" class="t-small t-muted">from the cooler room air</text>
+      </svg>
+    </figure>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Dye un-mixing">
+        <rect x="45" y="35" width="110" height="95" rx="6" fill="#cfe5f7" stroke="var(--ink)" stroke-width="2.5"/>
+        <g fill="#c2185b" opacity=".75"><circle cx="65" cy="60" r="3"/><circle cx="130" cy="110" r="3"/><circle cx="100" cy="80" r="3"/><circle cx="80" cy="115" r="3"/><circle cx="140" cy="55" r="3"/><circle cx="60" cy="100" r="3"/><circle cx="115" cy="70" r="3"/></g>
+        <g fill="#c2185b"><circle cx="100" cy="47" r="4"/><circle cx="106" cy="44" r="4"/><circle cx="94" cy="44" r="4"/></g>
+        <path d="M70 75 L 92 52 M130 95 L 108 52" stroke="var(--ink-3)" stroke-dasharray="3 3"/>
+        <text x="100" y="20" text-anchor="middle" class="t-small" style="font-weight:700">Dye un-mixes into a drop</text>
+        <text x="100" y="146" text-anchor="middle" class="t-small t-muted">and jumps back into the dropper</text>
+      </svg>
+    </figure>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Gas gathering in one corner">
+        <rect x="40" y="35" width="120" height="95" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.5"/>
+        <g fill="var(--sys)"><circle cx="50" cy="45" r="4"/><circle cx="60" cy="48" r="4"/><circle cx="52" cy="57" r="4"/><circle cx="64" cy="60" r="4"/><circle cx="72" cy="46" r="4"/><circle cx="58" cy="68" r="4"/><circle cx="70" cy="70" r="4"/><circle cx="48" cy="72" r="4"/></g>
+        <text x="100" y="20" text-anchor="middle" class="t-small" style="font-weight:700">Air rushes into one corner</text>
+        <text x="100" y="146" text-anchor="middle" class="t-small t-muted">leaving a vacuum behind</text>
+      </svg>
+    </figure>
+    <figure class="diagram" style="margin:0">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Puddle freezing in a warm room">
+        <ellipse cx="100" cy="118" rx="60" ry="10" class="liquid"/>
+        <rect x="76" y="62" width="48" height="48" rx="5" class="ice"/>
+        <path d="M100 116 V 114" stroke="none"/>
+        <text x="160" y="58" class="t-small t-heat" text-anchor="middle">25 °C</text>
+        <text x="100" y="20" text-anchor="middle" class="t-small" style="font-weight:700">A puddle freezes</text>
+        <text x="100" y="146" text-anchor="middle" class="t-small t-muted">into an ice cube on a warm day</text>
+      </svg>
+    </figure>
+  </div>
+  <p style="margin-top:12px">Energy would be conserved in every one of these "backwards films". Processes that run on their own in one direction are called <b>spontaneous</b>; their reverses are not.<sup class="cite"><a href="#ref-1">1</a></sup> What forbids the backwards films is a second, separate law of nature.</p>
+
+  <h2 id="law" data-short="The second law">The second law of thermodynamics</h2>
+  <div class="callout key">
+    <span class="callout-title">The second law</span>
+    In any spontaneous process, the total <b>entropy of the universe increases</b>.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-6">6</a></sup> <span style="color:var(--ink-2)">An older, equivalent form (Clausius): heat never flows on its own from a colder object to a hotter one.<sup class="cite"><a href="#ref-4">4</a></sup></span>
+  </div>
+  <p><b>Entropy</b>, symbol <var>S</var>, is a measure of how many different ways the energy and particles of a system can be arranged. A useful everyday picture is <b>randomness</b> or <b>spread-out-ness</b>: the more ways the particles and their energy can be arranged, the higher the entropy.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup> The word was coined by Rudolf Clausius in 1865, who summed up thermodynamics as "the energy of the universe is constant; the entropy of the universe tends to a maximum."<sup class="cite"><a href="#ref-10">10</a></sup></p>
+  <div class="callout tip">
+    <span class="callout-title">A note on "disorder"</span>
+    You will often hear entropy called "disorder." It's a handy starting picture, but it can mislead (a shuffled deck of cards doesn't have more thermodynamic entropy than a sorted one). Many chemists prefer to think of entropy as the <b>spreading out of energy</b> over more possible arrangements.<sup class="cite"><a href="#ref-7">7</a></sup> In this lesson "randomness" always means "number of possible arrangements."
+  </div>
+  <p>Like <var>U</var> and <var>H</var>, <b>entropy is a state function</b> (Lesson 5). Its SI unit is J/K (for one mole, J mol⁻¹ K⁻¹).<sup class="cite"><a href="#ref-2">2</a></sup></p>
+
+  <h2 id="examples" data-short="Three examples">Randomness in action: three examples</h2>
+  <p>Yes — <b>diffusion is a classic example</b> of entropy increasing. Here it is alongside two others. Pick an example and press <b>Start</b>.</p>
+
+  <div class="widget" id="spread">
+    <div class="widget-head"><span class="badge">Animated</span><h3>Watch entropy increase</h3></div>
+    <div class="widget-body">
+      <div class="seg" role="group" aria-label="Example" id="spreadSeg">
+        <button class="on" data-m="diff">① Diffusion</button>
+        <button data-m="exp">② Gas expanding</button>
+        <button data-m="melt">③ Melting</button>
+      </div>
+      <div class="widget-row" style="margin-top:12px">
+        <div>
+          <canvas id="spreadCanvas" aria-label="Particle animation"></canvas>
+          <canvas id="traceCanvas" aria-label="Number of particles in the left half over time"></canvas>
+        </div>
+        <div>
+          <div class="btn-row" style="margin-top:0"><button class="btn" id="spGo">▶ Start</button><button class="btn ghost" id="spReset">Reset</button></div>
+          <div class="control" id="spNWrap" style="margin-top:12px;display:none"><label for="spN">Number of particles <output id="spNOut">40</output></label><input type="range" id="spN" min="4" max="200" step="2" value="40"></div>
+          <div class="control" id="spTWrap" style="margin-top:12px;display:none"><label for="spT">Temperature <output id="spTOut">cold</output></label><input type="range" id="spT" min="0" max="100" step="1" value="10"></div>
+          <div style="margin-top:12px;font-weight:700;font-size:.9rem" id="spMeterLbl">How spread out</div>
+          <div class="meter"><div id="spMeter"></div></div>
+          <p id="spText" style="font-size:.93rem"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3 style="margin-top:0">① Diffusion</h3>
+      <p style="margin:0">A drop of food colouring spreads through water; perfume spreads through a room. Each dye molecule wanders randomly. There are vastly more ways for the molecules to be spread through the whole glass than crowded in one drop, so they end up spread out — and never gather back.<sup class="cite"><a href="#ref-8">8</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">② A gas expanding</h3>
+      <p style="margin:0">Remove a partition and gas rushes into the empty half. Each molecule now has twice the space, so there are many more possible arrangements. The reverse — all the gas gathering on one side — is possible in principle but fantastically improbable.<sup class="cite"><a href="#ref-5">5</a></sup></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">③ Melting (and dissolving)</h3>
+      <p style="margin:0">In a solid, particles are locked in place. In a liquid they can move past each other, so there are many more arrangements: S(liquid) &gt; S(solid). Dissolving salt or sugar works the same way — the particles spread through the solvent.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-11">11</a></sup></p>
+    </div>
+  </div>
+  <p style="font-size:.93rem">A fourth example you've already met: <b>heat flowing from hot to cold</b> (Lesson 3). Spreading the energy from a few fast-moving particles over many slower ones increases the number of ways the energy can be shared.<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-6">6</a></sup></p>
+
+  <h2 id="microstates">Microstates: counting the arrangements</h2>
+  <p>To make "number of arrangements" precise, chemists distinguish two levels of description:<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup></p>
+  <div class="grid-2">
+    <div class="card"><h3 style="margin-top:0">Macrostate</h3><p style="margin:0">What we can observe or measure: temperature, pressure, volume — or, in our simple model, <b>how many</b> particles are in each half of a box.</p></div>
+    <div class="card"><h3 style="margin-top:0">Microstate</h3><p style="margin:0">One <b>specific</b> arrangement of every particle (which particle is where, and how the energy is shared). Many different microstates can look exactly the same from the outside — they belong to the same macrostate.</p></div>
+  </div>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 760 250" role="img" aria-label="The 4 microstates of 2 particles in a box with 2 halves">
+      <text x="380" y="20" text-anchor="middle" class="t-mid" style="font-weight:700">Two particles, A and B, in a box with two halves: 4 microstates, 3 macrostates</text>
+      <g transform="translate(40,45)">
+        <rect width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><line x1="75" y1="0" x2="75" y2="80" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <circle cx="25" cy="40" r="13" fill="var(--sys)"/><text x="25" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">A</text>
+        <circle cx="52" cy="40" r="13" fill="var(--heat)"/><text x="52" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">B</text>
+        <text x="75" y="105" text-anchor="middle" class="t-small" style="font-weight:700">both left: W = 1</text>
+      </g>
+      <g transform="translate(250,45)">
+        <rect width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--work)" stroke-width="3"/><line x1="75" y1="0" x2="75" y2="80" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <circle cx="37" cy="40" r="13" fill="var(--sys)"/><text x="37" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">A</text>
+        <circle cx="112" cy="40" r="13" fill="var(--heat)"/><text x="112" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">B</text>
+      </g>
+      <g transform="translate(250,140)">
+        <rect width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--work)" stroke-width="3"/><line x1="75" y1="0" x2="75" y2="80" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <circle cx="37" cy="40" r="13" fill="var(--heat)"/><text x="37" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">B</text>
+        <circle cx="112" cy="40" r="13" fill="var(--sys)"/><text x="112" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">A</text>
+      </g>
+      <text x="325" y="240" text-anchor="middle" class="t-small t-work" style="font-weight:700">one in each half: W = 2 (most likely)</text>
+      <g transform="translate(560,45)">
+        <rect width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><line x1="75" y1="0" x2="75" y2="80" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <circle cx="98" cy="40" r="13" fill="var(--sys)"/><text x="98" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">A</text>
+        <circle cx="125" cy="40" r="13" fill="var(--heat)"/><text x="125" y="45" text-anchor="middle" style="fill:#fff;font-weight:700">B</text>
+        <text x="75" y="105" text-anchor="middle" class="t-small" style="font-weight:700">both right: W = 1</text>
+      </g>
+    </svg>
+    <figcaption>Every microstate is equally likely, so the macrostate with the <b>most microstates</b> is the most probable. Even with just two particles, "spread out" (one in each half) is twice as likely as either "crowded" arrangement.<sup class="cite"><a href="#ref-2">2</a></sup></figcaption>
+  </figure>
+
+  <h3>Boltzmann's formula</h3>
+  <div class="eq big"><var>S</var> = <var>k</var><sub>B</sub> ln <var>W</var>
+    <span class="label">W = number of microstates for the macrostate · k<sub>B</sub> = Boltzmann constant = R/N<sub>A</sub> = 1.381 × 10⁻²³ J/K</span></div>
+  <p>Ludwig Boltzmann connected entropy to probability in 1877; the formula is engraved on his tombstone in Vienna.<sup class="cite"><a href="#ref-9">9</a></sup> It says that entropy grows with the number of microstates — but only as the <b>logarithm</b>, which keeps the numbers manageable even when <var>W</var> is astronomically large.<sup class="cite"><a href="#ref-2">2</a>,<a href="#ref-5">5</a></sup> Two consequences:</p>
+  <ul>
+    <li><b>If <var>W</var> = 1, then <var>S</var> = <var>k</var> ln 1 = 0.</b> A perfect crystal at absolute zero has only one possible arrangement, so its entropy is zero — the <b>third law of thermodynamics</b>.<sup class="cite"><a href="#ref-3">3</a></sup></li>
+    <li><b>Changes:</b> Δ<var>S</var> = <var>k</var><sub>B</sub> ln(<var>W</var><sub>final</sub>/<var>W</var><sub>initial</sub>). If the number of microstates increases, entropy increases.</li>
+  </ul>
+  <p>For <var>N</var> particles shared between two halves, the number of microstates with <var>n</var> particles on the left is the number of ways to choose which <var>n</var> particles they are:</p>
+  <div class="eq"><var>W</var> = <var>N</var>! / [<var>n</var>! (<var>N</var> − <var>n</var>)!] &nbsp;&nbsp;·&nbsp;&nbsp; total microstates = 2<sup><var>N</var></sup></div>
+
+  <div class="widget" id="micro">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Microstate explorer</h3></div>
+    <div class="widget-body">
+      <p>Choose the number of particles and click a bar (or use the slider) to pick a macrostate. For small numbers, every microstate is listed.</p>
+      <div class="seg" role="group" aria-label="Number of particles" id="mSeg"></div>
+      <div class="control" style="margin-top:12px"><label for="mN">Particles in the left half, n <output id="mNOut"></output></label><input type="range" id="mN" min="0" max="4" step="1" value="2"></div>
+      <div class="widget-row" style="margin-top:10px">
+        <svg id="mSvg" viewBox="0 0 420 240" role="img" aria-label="Histogram of the number of microstates for each macrostate" style="cursor:pointer"></svg>
+        <div>
+          <div class="readout" style="grid-template-columns:1fr 1fr;margin-top:0">
+            <div><span class="k">W (this macrostate)</span><span class="v" id="mW"></span></div>
+            <div><span class="k">Probability</span><span class="v" id="mP"></span></div>
+            <div><span class="k">S = k ln W</span><span class="v u" id="mS"></span></div>
+            <div><span class="k">Total microstates</span><span class="v" id="mT"></span></div>
+          </div>
+          <p id="mMsg" style="font-size:.92rem"></p>
+        </div>
+      </div>
+      <div class="tiles" id="mTiles"></div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <span class="callout-title">What the explorer shows</span>
+    As <var>N</var> grows, the bar chart becomes a sharp spike at "half on each side." For 100 particles, the chance of finding all of them on one side is 1 in 2¹⁰⁰ ≈ 1 in 10³⁰. A real sample has about 10²³ particles, so the spread-out state isn't just likely — it's effectively certain. <b>The second law is a law of overwhelming probability.</b><sup class="cite"><a href="#ref-5">5</a></sup>
+  </div>
+
+  <h3>From microstates to moles</h3>
+  <p>When a gas doubles its volume, each molecule has twice as many places to be, so <var>W</var> is multiplied by 2 <b>for every molecule</b>: <var>W</var><sub>2</sub>/<var>W</var><sub>1</sub> = 2<sup><var>N</var></sup>. Then</p>
+  <div class="eq">Δ<var>S</var> = <var>k</var><sub>B</sub> ln 2<sup><var>N</var></sup> = <var>N k</var><sub>B</sub> ln 2 = <var>nR</var> ln 2 &nbsp; ⟹ &nbsp; for 1 mol: Δ<var>S</var> = (8.314)(0.693) = <b>+5.76 J/K</b>
+    <span class="label">More generally, Δ<var>S</var> = <var>nR</var> ln(<var>V</var><sub>2</sub>/<var>V</var><sub>1</sub>) for an ideal gas at constant temperature (Lesson 11)</span></div>
+
+  <h2 id="calculate" data-short="Practice calculations">Practice calculations</h2>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 1</span><h3>Microstates of four particles</h3></div>
+    <div class="example-body">
+      <p style="margin-top:0">Four particles (A, B, C, D) are in a box with two halves. (a) How many microstates are there in total? (b) How many belong to the "2 left, 2 right" macrostate? (c) What is its entropy?</p>
+      <ol class="steps">
+        <li>Total: each particle has 2 choices, so 2⁴ = <b>16</b> microstates.</li>
+        <li>2 left: <var>W</var> = 4!/(2! 2!) = 24/4 = <b>6</b> (AB, AC, AD, BC, BD, CD on the left). The full set is 1, 4, 6, 4, 1 for n = 0 to 4.</li>
+        <li><var>S</var> = <var>k</var> ln <var>W</var> = (1.381 × 10⁻²³ J/K)(ln 6) = (1.381 × 10⁻²³)(1.792) = <b>2.47 × 10⁻²³ J/K</b>.</li>
+        <li class="answer-box">16 microstates; 6 of them are "2–2" (the most probable macrostate, 6/16 = 37.5%); S = 2.47 × 10⁻²³ J/K.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Six particles, three in each half. How many microstates, <var>W</var>?
+        <div class="num-check" data-answer="20" data-tol="0.001" data-hint="W = 6!/(3! 3!)."><input inputmode="decimal" placeholder="W"><button class="btn">Check</button><span class="result"></span></div>
+        <p style="margin:10px 0 0">…and its entropy, in units of 10⁻²³ J/K?</p>
+        <div class="num-check" data-answer="4.14" data-tol="0.01" data-hint="S = (1.381 × 10⁻²³) × ln W."><input inputmode="decimal" placeholder="× 10⁻²³ J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 2</span><h3>Will the gas gather on one side?</h3></div>
+    <div class="example-body">
+      <p style="margin-top:0">A box contains 10 gas molecules moving randomly. What is the probability that, at a given instant, all 10 are in the left half?</p>
+      <ol class="steps">
+        <li>Each molecule is in the left half with probability ½, independently.</li>
+        <li>All 10 at once: (½)¹⁰ = 1/1024.</li>
+        <li class="answer-box">P = 1/1024 ≈ <b>0.098%</b> — rare, but it would happen now and then. For 1 mol (6 × 10²³ molecules) it is (½)^(6 × 10²³): it never happens.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> For 20 molecules, the chance that all are in the left half is 1 in how many?
+        <div class="num-check" data-answer="1048576" data-tol="0.001" data-hint="2 raised to the power 20."><input inputmode="decimal" placeholder="1 in …"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Example 3</span><h3>Entropy change when a gas expands</h3><span class="tag gas">gas</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">Use microstates to find Δ<var>S</var> when 1.00 mol of ideal gas doubles its volume at constant temperature.</p>
+      <ol class="steps">
+        <li>Each of the <var>N</var> = 6.022 × 10²³ molecules has twice as many positions: <var>W</var><sub>2</sub>/<var>W</var><sub>1</sub> = 2<sup><var>N</var></sup>.</li>
+        <li>Δ<var>S</var> = <var>k</var> ln 2<sup><var>N</var></sup> = <var>N k</var> ln 2. Since <var>N k</var> = <var>N</var><sub>A</sub><var>k</var> = <var>R</var> for 1 mol: Δ<var>S</var> = <var>R</var> ln 2.</li>
+        <li class="answer-box">Δ<var>S</var> = (8.314 J mol⁻¹ K⁻¹)(0.693) = <b>+5.76 J/K</b>. Positive: the gas has spread out.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> 2.00 mol of ideal gas <b>triples</b> its volume at constant temperature. Find Δ<var>S</var> in J/K.
+        <div class="num-check" data-answer="18.27" data-tol="0.01" data-hint="ΔS = nR ln(V₂/V₁) = nR ln 3."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="concepts" data-short="Conceptual questions">Conceptual questions</h2>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">Which has the higher entropy at 100 °C and 1 atm?</p>
+    <div class="quiz-opts">
+      <button data-why="In the liquid, molecules are held close together by attractions; far fewer arrangements are possible.">1 mol of liquid water</button>
+      <button>1 mol of steam</button>
+      <button data-why="Same substance and amount, but the gas molecules move freely through a much larger volume.">They are equal</button>
+    </div>
+    <div class="quiz-fb" data-right="Gas molecules move freely through a far larger volume, so there are many more microstates: S(steam) ≫ S(liquid) — 109 J/(mol K) more at 100 °C."></div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">A drop of dye spreads through a glass of water. Why doesn't it ever spontaneously gather back into a drop?</p>
+    <div class="quiz-opts">
+      <button data-why="Energy would be conserved in the reverse process too; the first law doesn't forbid it.">It would violate conservation of energy.</button>
+      <button data-why="The molecules keep moving randomly forever; the reason is about probability.">The dye molecules stop moving once they're spread out.</button>
+      <button>The spread-out macrostate has vastly more microstates, so un-mixing is overwhelmingly improbable.</button>
+      <button data-why="Water and dye do attract, but that isn't what makes the process one-way.">Water molecules hold the dye in place.</button>
+    </div>
+    <div class="quiz-fb" data-right="Nothing forbids the dye from gathering — it's just so improbable that it never happens. That is the second law."></div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <p class="quiz-q">10 particles are shared between two halves of a box. Which macrostate is most probable?</p>
+    <div class="quiz-opts">
+      <button>5 left, 5 right (W = 252)</button>
+      <button data-why="W for 10 left is 1 — only one way to put every particle on the left.">10 left, 0 right</button>
+      <button data-why="W = 10!/(7!3!) = 120, less than for 5–5 (252).">7 left, 3 right</button>
+      <button data-why="Each microstate is equally likely, but macrostates are not: they contain different numbers of microstates.">All macrostates are equally likely</button>
+    </div>
+    <div class="quiz-fb" data-right="W = 10!/(5!5!) = 252 out of 1024 microstates: the evenly spread macrostate always has the most."></div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <p class="quiz-q">What is the entropy of a perfect crystal at 0 K?</p>
+    <div class="quiz-opts">
+      <button data-why="With only one arrangement, W = 1 and ln 1 = 0.">k<sub>B</sub></button>
+      <button data-why="Entropy can't be negative in Boltzmann's formula, because W is at least 1.">Negative</button>
+      <button data-why="It's a definite value: W = 1 gives S = 0.">It can't be determined</button>
+      <button>Zero</button>
+    </div>
+    <div class="quiz-fb" data-right="Only one microstate is possible (W = 1), so S = k ln 1 = 0: the third law."></div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <p class="quiz-q">True or false: "The entropy of a system can never decrease."</p>
+    <div class="quiz-opts">
+      <button data-why="Water freezing in a freezer is a system whose entropy decreases. The second law is about the universe.">True</button>
+      <button>False</button>
+    </div>
+    <div class="quiz-fb" data-right="A system's entropy can decrease (water freezing, a refrigerator cooling food) as long as the surroundings' entropy increases by more. The second law is about the entropy of the universe — the subject of Lesson 11."></div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <p class="quiz-q">A refrigerator moves heat from its cold inside to the warmer kitchen. Does this break the second law?</p>
+    <div class="quiz-opts">
+      <button data-why="It doesn't, because the heat isn't flowing on its own.">Yes — heat is flowing from cold to hot.</button>
+      <button data-why="The second law applies to every device, refrigerators included.">The second law doesn't apply to machines.</button>
+      <button>No — it needs electrical work, and the kitchen gains more entropy than the inside loses.</button>
+    </div>
+    <div class="quiz-fb" data-right="Clausius's statement says heat won't flow from cold to hot on its own. A fridge does it only by using work, and the total entropy of the universe still increases."></div>
+  </div>
+
+  <h2 id="references">References</h2>
+  <p style="font-size:.92rem">Numbers in square brackets throughout this lesson link to these sources.</p>
+  <ol class="refs">
+    <li id="ref-1">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.1, Spontaneity. <a href="https://openstax.org/books/chemistry-2e/pages/16-1-spontaneity">openstax.org</a></li>
+    <li id="ref-2">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.2, Entropy (microstates; S = k ln W). <a href="https://openstax.org/books/chemistry-2e/pages/16-2-entropy">openstax.org</a></li>
+    <li id="ref-3">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 16.3, The Second and Third Laws of Thermodynamics. <a href="https://openstax.org/books/chemistry-2e/pages/16-3-the-second-and-third-laws-of-thermodynamics">openstax.org</a></li>
+    <li id="ref-4">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 4.4, Statements of the Second Law of Thermodynamics. <a href="https://openstax.org/books/university-physics-volume-2/pages/4-4-statements-of-the-second-law-of-thermodynamics">openstax.org</a></li>
+    <li id="ref-5">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 4.6, Entropy; Section 4.7, Entropy on a Microscopic Scale. <a href="https://openstax.org/books/university-physics-volume-2/pages/4-7-entropy-on-a-microscopic-scale">openstax.org</a></li>
+    <li id="ref-6">Atkins, P.; de Paula, J.; Keeler, J. <i>Atkins' Physical Chemistry</i>, 11th ed.; Oxford University Press: Oxford, 2018; Focus 3, The Second and Third Laws.</li>
+    <li id="ref-7">Lambert, F. L. Disorder — A Cracked Crutch for Supporting Entropy Discussions. <i>J. Chem. Educ.</i> <b>2002</b>, <i>79</i> (2), 187–192. <a href="https://doi.org/10.1021/ed079p187">doi:10.1021/ed079p187</a></li>
+    <li id="ref-8">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 9.4, Effusion and Diffusion of Gases. <a href="https://openstax.org/books/chemistry-2e/pages/9-4-effusion-and-diffusion-of-gases">openstax.org</a></li>
+    <li id="ref-9">Boltzmann, L. Über die Beziehung zwischen dem zweiten Hauptsatze der mechanischen Wärmetheorie und der Wahrscheinlichkeitsrechnung respektive den Sätzen über das Wärmegleichgewicht. <i>Sitzungsber. Kais. Akad. Wiss. Wien, Math.-Naturwiss. Cl. II</i> <b>1877</b>, <i>76</i>, 373–435. <span class="use">— the statistical (probability) interpretation of entropy</span></li>
+    <li id="ref-10">Clausius, R. Ueber verschiedene für die Anwendung bequeme Formen der Hauptgleichungen der mechanischen Wärmetheorie. <i>Ann. Phys. Chem.</i> <b>1865</b>, <i>125</i>, 353–400. <span class="use">— introduces the word "entropy"</span></li>
+    <li id="ref-11">Flowers, P.; Theopold, K.; Langley, R.; Robinson, W. R. <i>Chemistry 2e</i>; OpenStax: Houston, TX, 2019; Section 11.1, The Dissolution Process. <a href="https://openstax.org/books/chemistry-2e/pages/11-1-the-dissolution-process">openstax.org</a></li>
+  </ol>
+
+  <nav class="lesson-nav"></nav>
+</main>
+</div>
+<script src="../assets/js/common.js"></script>
+<script>
+  const kB = 1.380649e-23;
+  // ================= three examples =================
+  (function () {
+    const cv = document.getElementById("spreadCanvas"), ctx = cv.getContext("2d");
+    const tc = document.getElementById("traceCanvas"), tctx = tc.getContext("2d");
+    let W = 0, H = 0, TW = 0, TH = 0;
+    const fit = () => {
+      const d = devicePixelRatio || 1, r = cv.getBoundingClientRect(), r2 = tc.getBoundingClientRect();
+      cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); W = r.width; H = r.height;
+      tc.width = r2.width * d; tc.height = r2.height * d; tctx.setTransform(d, 0, 0, d, 0, 0); TW = r2.width; TH = r2.height;
+    };
+    fit(); const ro = new ResizeObserver(fit); ro.observe(cv); ro.observe(tc);
+    let mode = "diff", running = false, P = [], trace = [], partition = true;
+    const N = document.getElementById("spN"), T = document.getElementById("spT");
+    const texts = {
+      diff: "<b>Diffusion.</b> Pink dye molecules start crowded in one drop. Each takes random steps as water molecules jostle it. Watch the meter: the dye spreads until it fills the glass evenly — and it never gathers back.",
+      exp: "<b>Free expansion.</b> All the gas starts in the left half. Press Start to remove the partition. The trace below counts the particles in the left half: with few particles it jumps around a lot; with many it settles at half and stays there.",
+      melt: "<b>Melting.</b> Raise the temperature. The particles vibrate harder until they break free of the lattice and move past each other as a liquid — many more possible arrangements, so higher entropy.",
+    };
+    function reset() {
+      running = false; trace = []; partition = true; P = [];
+      document.getElementById("spGo").textContent = "▶ Start";
+      document.getElementById("spNWrap").style.display = mode === "exp" ? "" : "none";
+      document.getElementById("spTWrap").style.display = mode === "melt" ? "" : "none";
+      tc.style.display = mode === "exp" ? "" : "none"; fit();
+      document.getElementById("spText").innerHTML = texts[mode];
+      document.getElementById("spMeterLbl").textContent = mode === "melt" ? "Fraction of particles free (liquid)" : mode === "exp" ? "Entropy relative to maximum" : "How evenly the dye is spread";
+      if (mode === "diff") {
+        for (let i = 0; i < 140; i++) P.push({ x: Math.random(), y: Math.random(), dye: false });
+        for (let i = 0; i < 45; i++) { const a = Math.random() * 6.28, r = Math.sqrt(Math.random()) * 0.06; P.push({ x: 0.2 + r * Math.cos(a), y: 0.3 + r * Math.sin(a) * 1.6, dye: true }); }
+      } else if (mode === "exp") {
+        const n = +N.value; document.getElementById("spNOut").textContent = n;
+        for (let i = 0; i < n; i++) { const a = Math.random() * 6.28; P.push({ x: Math.random() * 0.46 + 0.02, y: Math.random() * 0.94 + 0.03, vx: Math.cos(a) * 0.006, vy: Math.sin(a) * 0.006 }); }
+      } else {
+        for (let i = 0; i < 7; i++) for (let j = 0; j < 7; j++) { const hx = 0.32 + i * 0.06, hy = 0.5 + j * 0.065; P.push({ hx, hy, x: hx, y: hy, free: false, a: Math.random() * 6.28 }); }
+      }
+    }
+    function lnC(n, k) { let s = 0; for (let i = 1; i <= k; i++) s += Math.log((n - k + i) / i); return s; }
+    function step() {
+      if (mode === "diff") {
+        P.forEach(p => { const s = p.dye ? 0.006 : 0.004; p.x += (Math.random() - .5) * 2 * s; p.y += (Math.random() - .5) * 2 * s * (W / H);
+          p.x = Math.min(0.99, Math.max(0.01, p.x)); p.y = Math.min(0.99, Math.max(0.01, p.y)); });
+      } else if (mode === "exp") {
+        P.forEach(p => { p.x += p.vx; p.y += p.vy * (W / H);
+          if (p.x < 0.01) { p.x = 0.01; p.vx *= -1; } if (p.x > 0.99) { p.x = 0.99; p.vx *= -1; }
+          if (p.y < 0.02) { p.y = 0.02; p.vy *= -1; } if (p.y > 0.98) { p.y = 0.98; p.vy *= -1; }
+          if (partition) { if (p.x > 0.49 && p.vx > 0) { p.x = 0.49; p.vx *= -1; } }
+          p.vx += (Math.random() - .5) * 0.0006; p.vy += (Math.random() - .5) * 0.0006;
+          const sp = Math.hypot(p.vx, p.vy); p.vx *= 0.006 / sp; p.vy *= 0.006 / sp; });
+        trace.push(P.filter(p => p.x < 0.5).length); if (trace.length > 400) trace.shift();
+      } else {
+        const t = +T.value;
+        P.forEach(p => {
+          if (!p.free && t > 50 && Math.random() < (t - 50) / 4000) p.free = true;
+          if (p.free && t < 45 && Math.random() < (45 - t) / 300) p.free = false;
+          if (p.free) { p.a += (Math.random() - .5) * 0.8; const s = 0.003 + t / 15000; p.x += Math.cos(p.a) * s; p.y += Math.sin(p.a) * s * (W / H);
+            if (p.x < 0.03 || p.x > 0.97) p.a = Math.PI - p.a; if (p.y < 0.45 || p.y > 0.97) p.a = -p.a;
+            p.x = Math.min(0.97, Math.max(0.03, p.x)); p.y = Math.min(0.97, Math.max(0.45, p.y)); }
+          else { p.x += (p.hx - p.x) * 0.1; p.y += (p.hy - p.y) * 0.1; }
+        });
+      }
+    }
+    function meter() {
+      let f = 0;
+      if (mode === "diff") {
+        const bins = new Array(16).fill(0), dye = P.filter(p => p.dye);
+        dye.forEach(p => bins[Math.min(3, Math.floor(p.x * 4)) * 4 + Math.min(3, Math.floor(p.y * 4))]++);
+        let h = 0; bins.forEach(b => { if (b) { const q = b / dye.length; h -= q * Math.log(q); } });
+        f = h / Math.log(16);
+      } else if (mode === "exp") {
+        const n = P.length, l = P.filter(p => p.x < 0.5).length;
+        f = n ? lnC(n, l) / lnC(n, Math.floor(n / 2)) : 0;
+      } else f = P.filter(p => p.free).length / P.length;
+      document.getElementById("spMeter").style.width = Math.round(f * 100) + "%";
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      if (mode === "diff") {
+        ctx.fillStyle = "rgba(140,196,240,.35)"; ctx.fillRect(0, 0, W, H);
+        P.forEach(p => { ctx.fillStyle = p.dye ? "#c2185b" : "rgba(47,111,223,.45)"; ctx.beginPath(); ctx.arc(p.x * W, p.y * H, p.dye ? 4.5 : 3, 0, 6.28); ctx.fill(); });
+      } else if (mode === "exp") {
+        ctx.fillStyle = cssVar("--sys-fill"); ctx.fillRect(0, 0, partition ? W / 2 : W, H);
+        if (partition) { ctx.fillStyle = cssVar("--ink-2"); ctx.fillRect(W / 2 - 3, 0, 6, H); ctx.fillStyle = cssVar("--ink-3"); ctx.font = "13px Calibri, Carlito, sans-serif"; ctx.textAlign = "center"; ctx.fillText("vacuum", W * 0.75, H / 2); }
+        else { ctx.strokeStyle = cssVar("--ink-3"); ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.setLineDash([]); }
+        ctx.fillStyle = cssVar("--sys"); P.forEach(p => { ctx.beginPath(); ctx.arc(p.x * W, p.y * H, P.length > 100 ? 3 : 4.5, 0, 6.28); ctx.fill(); });
+        // trace
+        tctx.clearRect(0, 0, TW, TH);
+        const n = P.length;
+        tctx.strokeStyle = cssVar("--ink-3"); tctx.setLineDash([3, 3]); tctx.beginPath(); tctx.moveTo(0, TH / 2); tctx.lineTo(TW, TH / 2); tctx.stroke(); tctx.setLineDash([]);
+        tctx.fillStyle = cssVar("--ink-3"); tctx.font = "11px Calibri, Carlito, sans-serif"; tctx.textAlign = "left";
+        tctx.fillText("all left", 4, 11); tctx.fillText("half", 4, TH / 2 - 3); tctx.fillText("particles in left half over time", 4, TH - 4);
+        tctx.strokeStyle = cssVar("--heat"); tctx.lineWidth = 2; tctx.beginPath();
+        trace.forEach((v, i) => { const x = i / 400 * TW, y = TH - 4 - (v / n) * (TH - 8); i ? tctx.lineTo(x, y) : tctx.moveTo(x, y); }); tctx.stroke(); tctx.lineWidth = 1;
+      } else {
+        const t = +T.value;
+        ctx.fillStyle = cssVar("--surface"); ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = "rgba(140,196,240,.25)"; ctx.fillRect(0, H * 0.43, W, H * 0.57);
+        const amp = 1 + t / 25;
+        P.forEach((p, i) => { const jx = p.free ? 0 : Math.sin(performance.now() / 70 + i) * amp, jy = p.free ? 0 : Math.cos(performance.now() / 80 + i * 1.3) * amp;
+          ctx.fillStyle = p.free ? "#3f8fd6" : cssVar("--sys"); ctx.beginPath(); ctx.arc(p.x * W + jx, p.y * H + jy, 7, 0, 6.28); ctx.fill(); });
+        document.getElementById("spTOut").textContent = t < 30 ? "cold (solid)" : t < 50 ? "near melting point" : t < 75 ? "melting" : "hot (liquid)";
+      }
+    }
+    function loop() { if (running || mode === "melt") step(); draw(); meter(); requestAnimationFrame(loop); }
+    document.querySelectorAll("#spreadSeg button").forEach(b => b.addEventListener("click", () => {
+      mode = b.dataset.m; document.querySelectorAll("#spreadSeg button").forEach(x => x.classList.toggle("on", x === b)); reset();
+    }));
+    document.getElementById("spGo").addEventListener("click", (e) => {
+      if (mode === "melt") { T.value = Math.max(+T.value, 85); return; }
+      running = !running; if (mode === "exp") partition = false;
+      e.target.textContent = running ? "❚❚ Pause" : "▶ Start";
+    });
+    document.getElementById("spReset").addEventListener("click", reset);
+    N.addEventListener("input", () => { if (mode === "exp") reset(); });
+    reset(); loop();
+  })();
+
+  // ================= microstate explorer =================
+  (function () {
+    const Ns = [2, 3, 4, 5, 6, 8, 10, 20, 50, 100];
+    let N = 4, n = 2;
+    const seg = document.getElementById("mSeg"), sl = document.getElementById("mN"), svg = document.getElementById("mSvg");
+    seg.innerHTML = Ns.map(v => `<button data-n="${v}" class="${v === N ? "on" : ""}">N = ${v}</button>`).join("");
+    const C = (N, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (N - k + i) / i; return r; };
+    const sci = (x, d = 2) => { const [m, e] = x.toExponential(d).split("e"); return `${m} × 10<sup>${+e}</sup>`; };
+    const big = (x) => x < 1e6 ? fmt(Math.round(x), 0) : sci(x);
+    const letters = "ABCDEFGH";
+    function combos(N, k) { const out = []; const rec = (start, cur) => { if (cur.length === k) { out.push(cur.slice()); return; } for (let i = start; i < N; i++) { cur.push(i); rec(i + 1, cur); cur.pop(); } }; rec(0, []); return out; }
+    function draw() {
+      sl.max = N; if (n > N) n = Math.round(N / 2); sl.value = n;
+      const Ws = Array.from({ length: N + 1 }, (_, k) => C(N, k)), max = Math.max(...Ws), tot = Math.pow(2, N);
+      const x0 = 40, w = 370 / (N + 1);
+      let s = `<line x1="${x0}" y1="200" x2="410" y2="200" stroke="var(--ink)" stroke-width="1.5"/><line x1="${x0}" y1="200" x2="${x0}" y2="15" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="225" y="232" text-anchor="middle" class="t-small">n = particles in the left half</text><text x="14" y="110" text-anchor="middle" class="t-small" transform="rotate(-90 14 110)">W</text>`;
+      Ws.forEach((W, k) => {
+        const h = W / max * 175, x = x0 + k * w + w * 0.1;
+        s += `<rect data-k="${k}" x="${x}" y="${200 - h}" width="${Math.max(1, w * 0.8)}" height="${Math.max(h, 0.5)}" fill="${k === n ? "var(--heat)" : "var(--sys)"}" opacity="${k === n ? 1 : .7}" rx="2"/>`;
+        if (N <= 20 || k % Math.ceil(N / 10) === 0) s += `<text x="${x + w * 0.4}" y="214" text-anchor="middle" class="t-small t-muted">${k}</text>`;
+        if (N <= 10) s += `<text x="${x + w * 0.4}" y="${196 - h}" text-anchor="middle" class="t-small">${W}</text>`;
+      });
+      svg.innerHTML = s;
+      svg.querySelectorAll("rect[data-k]").forEach(r => r.addEventListener("click", () => { n = +r.dataset.k; draw(); }));
+      const W = Ws[n];
+      document.getElementById("mNOut").textContent = `${n} left, ${N - n} right`;
+      document.getElementById("mW").innerHTML = big(W);
+      document.getElementById("mT").innerHTML = N <= 30 ? fmt(tot, 0) : `2<sup>${N}</sup> ≈ ${sci(tot)}`;
+      const p = W / tot;
+      document.getElementById("mP").innerHTML = p > 0.001 ? (p * 100).toFixed(2) + "%" : sci(p);
+      const S = kB * Math.log(W);
+      document.getElementById("mS").innerHTML = W === 1 ? "0 J/K" : sci(S, 3) + " J/K";
+      document.getElementById("mMsg").innerHTML = W === 1
+        ? `Only one way to arrange this (all on one side): W = 1 and S = k ln 1 = <b>0</b>. Probability 1 in ${N <= 30 ? fmt(tot, 0) : `2<sup>${N}</sup>`}.`
+        : `W = ${N}!/(${n}! ${N - n}!) = ${big(W)}. ${n === Math.floor(N / 2) || n === Math.ceil(N / 2) ? "This is the <b>most probable</b> macrostate — the one with the highest entropy." : "Move toward the middle to increase W and S."}`;
+      const tiles = document.getElementById("mTiles");
+      if (N <= 6) {
+        tiles.innerHTML = combos(N, n).map(c => { const L = c.map(i => letters[i]).join(""), R = [...Array(N).keys()].filter(i => !c.includes(i)).map(i => letters[i]).join(""); return `<div class="tile"><span>${L || "·"}</span><span>${R || "·"}</span></div>`; }).join("");
+      } else tiles.innerHTML = `<p style="font-size:.88rem;color:var(--ink-3);margin:0">Too many microstates to list for N = ${N} (${big(W)} in this macrostate). Choose N ≤ 6 to see them all.</p>`;
+    }
+    seg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { N = +b.dataset.n; n = Math.floor(N / 2); seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); draw(); }));
+    sl.addEventListener("input", () => { n = +sl.value; draw(); });
+    draw();
+  })();
+</script>
+</body>
+</html>

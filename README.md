@@ -20,6 +20,8 @@ An interactive learning module on the principles of thermodynamics for first-yea
 | 7 | `lessons/07-reversible-irreversible.html` | Reversible vs irreversible work and heat, a side-by-side animation (blocks moved at once vs sand moved grain by grain, with live P–V traces and work bars), the N-step P–V widget with convergence chart and cycles, the reservoir ladder for heat, a summary table, reversible work in gases, liquids and solids (compressibility chart, sound waves, boiling, surface work, a Daniell cell, an elastic-vs-plastic steel-wire interactive, compression comparison) and a numbered reference list with in-text citations |
 | 8 | `lessons/08-enthalpy.html` | Enthalpy: H = U + PV and ΔH = q_P (derivation and diagram), measuring ΔH for gases, liquids and solids (calorimeters, ΔH vs ΔU interactive), the forms of ΔH (formation, combustion, fusion, vaporization, sublimation, solution, neutralization, bond, atomization, ionization, electron gain, lattice), enthalpy of phases (level diagram, phase-change calculator, heating/cooling calculator for water), with references |
 | 9 | `lessons/09-hess-law.html` | Hess's law: statement and rules, interactive Hess puzzles with a waterfall diagram, and every method for ΔH — coffee-cup and bomb calorimetry, Hess's law, formation enthalpies (calculator with Hess cycle), bond enthalpies (interactive), heating/phase changes, Kirchhoff's law (interactive), Born–Haber cycle (step-through), a method-selection table, module wrap-up, with references |
+| 10 | `lessons/10-second-law.html` | "Nature's one-way street": the second law, entropy as randomness (with a note on "disorder"), three animated examples (diffusion, gas expanding with a fluctuation trace, melting), microstates and macrostates, Boltzmann's S = k ln W with a microstate explorer, worked calculations with answer checks, conceptual questions, references |
+| 11 | `lessons/11-spontaneity.html` | Spontaneity: spontaneous vs nonspontaneous, ΔS of system/surroundings/universe, formulas for ΔS of the system with worked examples and practice, ΔS_surr = −ΔH/T, an ice ⇌ water interactive showing all three situations, worked examples (spontaneous, equilibrium, nonspontaneous), a spontaneity explorer with temperature slider, entropy in living things and reactions (respiration, photosynthesis, catalase, protein folding), factors affecting entropy (factor explorer, predict-the-sign activity, ΔH/ΔS sign table), references |
 
 Every diagram uses the same colour code: blue = system, sand = surroundings, orange-red = heat (q), green = work (w), indigo = internal energy (U). Pages support light and dark mode.
 
@@ -39,7 +41,7 @@ To publish: in the GitHub repository settings, enable **Pages** from the `main` 
 
 ```
 index.html
-lessons/          nine lesson pages
+lessons/          eleven lesson pages
 assets/css/       shared stylesheet (colour tokens, layout, widgets)
 assets/js/        common.js (navigation, quizzes, step reveal, answer checks)
                   gas.js (animated gas-in-a-piston canvas used by lessons 3, 4 and 7)

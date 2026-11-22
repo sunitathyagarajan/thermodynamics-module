@@ -17,6 +17,8 @@ const LESSONS = [
   { n: 7, file: "07-reversible-irreversible.html", title: "Reversible vs irreversible" },
   { n: 8, file: "08-enthalpy.html",               title: "Enthalpy" },
   { n: 9, file: "09-hess-law.html",               title: "Hess's law & calculating ΔH" },
+  { n: 10, file: "10-second-law.html",            title: "Nature's one-way street: the second law" },
+  { n: 11, file: "11-spontaneity.html",           title: "Spontaneity: the universe keeps score" },
 ];
 
 const store = {
