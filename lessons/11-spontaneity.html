@@ -179,7 +179,7 @@
   </div>
 
   <h2 id="ssurr" data-short="ΔS of the surroundings">Entropy of the surroundings</h2>
-  <p>The surroundings are a huge reservoir at constant temperature, so the heat they exchange counts as reversible. At constant pressure the heat they gain is <var>q</var><sub>surr</sub> = −<var>q</var><sub>sys</sub> = −Δ<var>H</var><sub>sys</sub>, so:<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-5">5</a></sup></p>
+  <p>The surroundings are a <b>huge reservoir at constant temperature</b>, so the heat they exchange counts as reversible. At constant pressure the heat they gain is <var>q</var><sub>surr</sub> = −<var>q</var><sub>sys</sub> = −Δ<var>H</var><sub>sys</sub>, so:<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-5">5</a></sup></p>
   <div class="eq big">Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var><sub>sys</sub> / <var>T</var></div>
   <div class="grid-2" style="align-items:center">
     <ul>
@@ -233,11 +233,11 @@
   <div class="example">
     <div class="example-head"><span class="example-num">Spontaneous</span><h3>Burning methane at 25 °C</h3><span class="tag gas">gas</span></div>
     <div class="example-body">
-      <p style="margin-top:0">CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l): Δ<var>H</var>° = −890.4 kJ, Δ<var>S</var>° = −242.9 J/K. Is it spontaneous at 298 K?</p>
+      <p style="margin-top:0">CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l): Δ<var>H</var>° = −890.5 kJ, Δ<var>S</var>° = −242.9 J/K. Is it spontaneous at 298 K?</p>
       <ol class="steps">
         <li>Δ<var>S</var><sub>sys</sub> = −242.9 J/K (3 mol of gas become 1 mol of gas plus liquid).</li>
-        <li>Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var> = −(−890 400 J)/298.15 K = +2986 J/K.</li>
-        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = −242.9 + 2986 = <b>+2743 J/K &gt; 0: spontaneous</b>. The system's entropy falls, but the huge release of heat raises the surroundings' entropy far more.</li>
+        <li>Δ<var>S</var><sub>surr</sub> = −Δ<var>H</var>/<var>T</var> = −(−890 500 J)/298.15 K = +2987 J/K.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = −242.9 + 2987 = <b>+2744 J/K &gt; 0: spontaneous</b>. The system's entropy falls, but the huge release of heat raises the surroundings' entropy far more.</li>
       </ol>
       <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
     </div>
@@ -268,6 +268,90 @@
       </div>
     </div>
   </div>
+
+  <h3 id="uphill-example">When the entropy of the universe would decrease: heat flowing uphill</h3>
+  <p>The clearest example of a process that would <b>lower</b> the entropy of the universe is heat flowing by itself from a <b>colder</b> object to a <b>hotter</b> one — a cold drink getting even colder while the warm room around it heats up. Energy would be conserved, so the first law allows it. The second law does not.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-13">13</a></sup></p>
+
+  <div class="example">
+    <div class="example-head"><span class="example-num">Nonspontaneous</span><h3>Could a cold drink cool itself further in a warm room?</h3><span class="tag liquid">heat flow</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">A drink at 5 °C sits in a room at 25 °C. Suppose 1000 J of heat flowed <b>out of the drink and into the room</b>. Treat both as large enough that their temperatures barely change, so each one's entropy change is <var>q</var>/<var>T</var>.<sup class="cite"><a href="#ref-3">3</a>,<a href="#ref-8">8</a></sup></p>
+      <ol class="steps">
+        <li>Kelvin: <var>T</var><sub>drink</sub> = 278.15 K, <var>T</var><sub>room</sub> = 298.15 K.</li>
+        <li>The drink <b>loses</b> 1000 J: Δ<var>S</var><sub>drink</sub> = −1000 J / 278.15 K = <b>−3.595 J/K</b>.</li>
+        <li>The room <b>gains</b> 1000 J: Δ<var>S</var><sub>room</sub> = +1000 J / 298.15 K = <b>+3.354 J/K</b>.</li>
+        <li class="answer-box">Δ<var>S</var><sub>univ</sub> = −3.595 + 3.354 = <b>−0.241 J/K &lt; 0: nonspontaneous</b>. The same amount of heat changes the entropy of the <i>colder</i> object more (dividing by a smaller <var>T</var>), so moving heat from cold to hot always lowers the entropy of the universe. That is why it never happens on its own. The reverse — the drink warming up — gives Δ<var>S</var><sub>univ</sub> = +0.241 J/K and does happen.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Suppose 500 J of heat flowed from an ice cube at 0 °C into boiling water at 100 °C. Calculate Δ<var>S</var><sub>univ</sub> in J/K.
+        <div class="num-check" data-answer="-0.491" data-tol="0.02" data-hint="ΔS_ice = −500/273.15 and ΔS_water = +500/373.15; add them."><input inputmode="decimal" placeholder="J/K"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="widget" id="uphill">
+    <div class="widget-head"><span class="badge">Interactive</span><h3>Which way can heat flow?</h3></div>
+    <div class="widget-body">
+      <p>Set the temperatures of two objects, choose which way the heat goes, and see what happens to the entropy of the universe.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div class="seg" role="group" aria-label="Direction of heat flow" id="upDir">
+          <button class="on" data-d="down">Hot → cold</button>
+          <button data-d="up">Cold → hot (backwards)</button>
+        </div>
+        <button class="btn ghost" data-pre="drink">Drink in a warm room</button>
+        <button class="btn ghost" data-pre="ice">Ice cube and boiling water</button>
+      </div>
+      <div class="grid-3" style="margin-top:12px">
+        <div class="control"><label for="upTc">Colder object <output id="upTcOut">5 °C</output></label><input type="range" id="upTc" min="-20" max="120" step="1" value="5"></div>
+        <div class="control"><label for="upTh">Hotter object <output id="upThOut">25 °C</output></label><input type="range" id="upTh" min="-20" max="120" step="1" value="25"></div>
+        <div class="control"><label for="upQ">Heat transferred, q <output id="upQOut">1000 J</output></label><input type="range" id="upQ" min="100" max="2000" step="50" value="1000"></div>
+      </div>
+      <svg id="upSvg" viewBox="0 0 520 200" role="img" aria-label="Two objects with a heat arrow between them" style="margin-top:10px"></svg>
+      <div class="sbar"><span style="color:var(--cold)">ΔS<sub>colder</sub></span><div class="strack"><div class="sfill" id="upSc" style="background:var(--cold)"></div></div><span id="upScV" style="text-align:right"></span></div>
+      <div class="sbar"><span style="color:var(--hot)">ΔS<sub>hotter</sub></span><div class="strack"><div class="sfill" id="upSh" style="background:var(--hot)"></div></div><span id="upShV" style="text-align:right"></span></div>
+      <div class="sbar"><span style="color:var(--energy)">ΔS<sub>univ</sub></span><div class="strack"><div class="sfill" id="upSu" style="background:var(--energy)"></div></div><span id="upSuV" style="text-align:right;font-weight:800"></span></div>
+      <div class="verdict" id="upVer"></div>
+      <p id="upMsg" style="font-size:.92rem;margin-bottom:0"></p>
+    </div>
+  </div>
+
+  <h3>Making it happen anyway: the refrigerator</h3>
+  <p>A refrigerator does move heat from its cold inside to the warm kitchen — but not on its own. It needs <b>work</b> from the electricity supply, and that work ends up as extra heat released into the kitchen. The kitchen gains more entropy than the inside loses, so the entropy of the universe still increases.<sup class="cite"><a href="#ref-13">13</a></sup></p>
+  <figure class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="Refrigerator: work moves heat from the cold inside to the warm kitchen, and the total entropy still increases">
+      <rect x="10" y="10" width="740" height="280" rx="16" class="surr-box"/>
+      <text x="28" y="36" class="t-surr t-mid">KITCHEN · 25 °C (298.15 K)</text>
+      <!-- fridge -->
+      <rect x="250" y="55" width="200" height="200" rx="14" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/>
+      <line x1="250" y1="130" x2="450" y2="130" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="262" y="140" width="176" height="104" rx="8" fill="#dcefff" stroke="var(--cold)" stroke-width="2"/>
+      <text x="350" y="180" text-anchor="middle" class="t-mid" style="font-weight:700;fill:#1b4f80">inside · 5 °C</text>
+      <text x="350" y="200" text-anchor="middle" class="t-small" style="fill:#1b4f80">(278.15 K)</text>
+      <text x="350" y="225" text-anchor="middle" class="t-small" style="fill:#1b4f80">q<tspan dy="3" font-size="8">c</tspan><tspan dy="-3"> = 1000 J removed</tspan></text>
+      <rect x="300" y="70" width="100" height="44" rx="6" fill="var(--surface-2)" stroke="var(--ink-3)"/>
+      <text x="350" y="97" text-anchor="middle" class="t-small" style="font-weight:700">compressor</text>
+      <!-- work in -->
+      <path d="M120 92 H 292" class="work-arrow anim-flow"/><polygon points="299,92 285,84 285,100" class="work-fill"/>
+      <text x="40" y="80" class="t-small t-work" style="font-weight:700">electrical work, w = 300 J</text>
+      <!-- heat out -->
+      <path d="M458 120 H 640" class="heat-arrow anim-flow"/><polygon points="648,120 634,112 634,128" class="heat-fill"/>
+      <text x="470" y="106" class="t-small t-heat" style="font-weight:700">q<tspan dy="3" font-size="8">h</tspan><tspan dy="-3"> = q</tspan><tspan dy="3" font-size="8">c</tspan><tspan dy="-3"> + w = 1300 J to the kitchen</tspan></text>
+      <!-- ledger -->
+      <g transform="translate(470,150)" class="t-small">
+        <text y="0" style="font-weight:700">Entropy ledger</text>
+        <text y="22" style="fill:#1b4f80">inside: −1000/278.15 = −3.60 J/K</text>
+        <text y="42" class="t-heat">kitchen: +1300/298.15 = +4.36 J/K</text>
+        <text y="66" class="t-energy" style="font-weight:700">ΔS<tspan dy="3" font-size="8">univ</tspan><tspan dy="-3"> = +0.77 J/K &gt; 0 ✓</tspan></text>
+      </g>
+      <g transform="translate(30,150)" class="t-small">
+        <text y="0" style="font-weight:700">Without the work (w = 0):</text>
+        <text y="22">inside −3.60, kitchen +3.35</text>
+        <text y="44" style="fill:var(--bad);font-weight:700">ΔS<tspan dy="3" font-size="8">univ</tspan><tspan dy="-3"> = −0.24 J/K ✗</tspan></text>
+        <text y="66" class="t-muted">heat can't flow uphill on its own</text>
+      </g>
+    </svg>
+    <figcaption>The work is what makes the "uphill" heat flow possible. Here at least 72 J of work is needed for every 1000 J removed (1000 × 298.15/278.15 − 1000); real refrigerators use more, so they increase the entropy of the universe even more.<sup class="cite"><a href="#ref-13">13</a></sup></figcaption>
+  </figure>
 
   <div class="widget" id="univ">
     <div class="widget-head"><span class="badge">Interactive</span><h3>Spontaneity explorer: pick a process, change the temperature</h3></div>
@@ -620,6 +704,7 @@
       <li id="ref-10">Schrödinger, E. <i>What Is Life? The Physical Aspect of the Living Cell</i>; Cambridge University Press: Cambridge, 1944. <span class="use">— living organisms as open systems that maintain order by exporting entropy</span></li>
     <li id="ref-11">Kauzmann, W. Some Factors in the Interpretation of Protein Denaturation. <i>Adv. Protein Chem.</i> <b>1959</b>, <i>14</i>, 1–63. <a href="https://doi.org/10.1016/S0065-3233(08)60608-7">doi:10.1016/S0065-3233(08)60608-7</a> <span class="use">— the hydrophobic effect in protein folding</span></li>
     <li id="ref-12">Rumble, J. R., Ed. <i>CRC Handbook of Chemistry and Physics</i>, 100th ed.; CRC Press: Boca Raton, FL, 2019. <span class="use">— CaCO₃ values (OpenStax Appendix G lists ΔH<sub>f</sub>° = −1220.0 kJ/mol and S° = 110.0 J mol⁻¹ K⁻¹ for calcite, which disagree with the CRC and NBS tables)</span></li>
+    <li id="ref-13">Ling, S. J.; Sanny, J.; Moebs, W. <i>University Physics, Volume 2</i>; OpenStax: Houston, TX, 2016; Section 4.4, Statements of the Second Law of Thermodynamics. <a href="https://openstax.org/books/university-physics-volume-2/pages/4-4-statements-of-the-second-law-of-thermodynamics">openstax.org</a> <span class="use">— Clausius statement; refrigerators need work to move heat from cold to hot</span></li>
   </ol>
 
   <nav class="lesson-nav"></nav>
@@ -675,7 +760,7 @@
   // ================= spontaneity explorer =================
   (function () {
     const P = [
-      { n: "Burning methane", eq: "CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", dH: -890.4, dS: -242.9 },
+      { n: "Burning methane", eq: "CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)", dH: -890.5, dS: -242.9 },
       { n: "Rusting of iron", eq: "4 Fe(s) + 3 O₂(g) → 2 Fe₂O₃(s)", dH: -1648.4, dS: -550.0 },
       { n: "Ammonia synthesis (Haber process)", eq: "N₂(g) + 3 H₂(g) → 2 NH₃(g)", dH: -91.8, dS: -198.1 },
       { n: "Cold pack: NH₄NO₃ dissolving", eq: "NH₄NO₃(s) → NH₄⁺(aq) + NO₃⁻(aq)", dH: 25.7, dS: 108.7 },
@@ -780,6 +865,71 @@
       }));
       box.appendChild(row);
     });
+  })();
+
+  // ================= which way can heat flow? =================
+  (function () {
+    const W = document.getElementById("uphill");
+    if (!W) return;
+    const Tc = document.getElementById("upTc"), Th = document.getElementById("upTh"), Q = document.getElementById("upQ"), svg = document.getElementById("upSvg");
+    let dir = "down";
+    const presets = { drink: [5, 25, 1000], ice: [0, 100, 500] };
+    const col = (c) => { const f = Math.max(0, Math.min(1, (c + 20) / 140)); return `rgb(${Math.round(70 + 170 * f)}, ${Math.round(140 - 80 * f)}, ${Math.round(225 - 190 * f)})`; };
+    function update(changed) {
+      // keep the "colder" object no hotter than the "hotter" one
+      if (+Tc.value > +Th.value) { if (changed === Th) Tc.value = Th.value; else Th.value = Tc.value; }
+      const tc = +Tc.value, th = +Th.value, q = +Q.value, TC = tc + 273.15, TH = th + 273.15;
+      const equal = tc === th;
+      const sC = dir === "down" ? q / TC : -q / TC;
+      const sH = dir === "down" ? -q / TH : q / TH;
+      const u = equal ? 0 : sC + sH;
+      document.getElementById("upTcOut").textContent = tc + " °C";
+      document.getElementById("upThOut").textContent = th + " °C";
+      document.getElementById("upQOut").textContent = q + " J";
+      const M = Math.max(Math.abs(sC), Math.abs(sH)) * 1.15;
+      bar(document.getElementById("upSc"), sC, M); bar(document.getElementById("upSh"), sH, M); bar(document.getElementById("upSu"), u * 5, M);
+      document.getElementById("upScV").textContent = signed(sC, 3) + " J/K";
+      document.getElementById("upShV").textContent = signed(sH, 3) + " J/K";
+      document.getElementById("upSuV").textContent = signed(u, 3) + " J/K";
+      verdict(document.getElementById("upVer"), u, 1e-9);
+      const from = dir === "down" ? "hotter" : "colder", to = dir === "down" ? "colder" : "hotter";
+      let msg = `Δ<var>S</var><sub>colder</sub> = ${dir === "down" ? "+" : "−"}${q} J / ${TC.toFixed(2)} K = ${signed(sC, 3)} J/K; Δ<var>S</var><sub>hotter</sub> = ${dir === "down" ? "−" : "+"}${q} J / ${TH.toFixed(2)} K = ${signed(sH, 3)} J/K. `;
+      if (equal) msg += "At equal temperatures the two changes cancel: the objects are in <b>thermal equilibrium</b> and there is no net heat flow either way.";
+      else if (dir === "down") msg += "Heat flowing from hot to cold raises the entropy of the universe, so it happens on its own.";
+      else msg += "Heat flowing from cold to hot would <b>lower</b> the entropy of the universe, because the colder object loses more entropy than the hotter one gains. It never happens on its own — a refrigerator can do it only by using work (see below).";
+      document.getElementById("upMsg").innerHTML = msg + ` <small>(The ΔS<sub>univ</sub> bar is magnified 5×.)</small>`;
+      // picture
+      const y = 100, xL = 205, xR = 315;
+      const arrowR = dir === "down" ? false : true; // true = arrow points from colder (left) to hotter (right)
+      let s = `<rect x="20" y="30" width="185" height="140" rx="14" fill="${col(tc)}" opacity=".85"/>
+        <text x="112" y="70" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:15px">colder object</text>
+        <text x="112" y="105" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:26px">${tc} °C</text>
+        <text x="112" y="140" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">ΔS = ${signed(sC, 2)} J/K</text>
+        <rect x="315" y="30" width="185" height="140" rx="14" fill="${col(th)}" opacity=".85"/>
+        <text x="407" y="70" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:15px">hotter object</text>
+        <text x="407" y="105" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:26px">${th} °C</text>
+        <text x="407" y="140" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">ΔS = ${signed(sH, 2)} J/K</text>`;
+      if (!equal) {
+        s += arrowR
+          ? `<path d="M${xL + 8} ${y} H ${xR - 14}" class="heat-arrow anim-flow"/><polygon points="${xR - 4},${y} ${xR - 18},${y - 9} ${xR - 18},${y + 9}" class="heat-fill"/>`
+          : `<path d="M${xR - 8} ${y} H ${xL + 14}" class="heat-arrow anim-flow"/><polygon points="${xL + 4},${y} ${xL + 18},${y - 9} ${xL + 18},${y + 9}" class="heat-fill"/>`;
+        s += `<text x="260" y="${y - 16}" text-anchor="middle" class="t-small t-heat" style="font-weight:700">q = ${q} J</text>`;
+        if (arrowR) s += `<text x="260" y="${y + 34}" text-anchor="middle" class="t-mid" style="fill:var(--bad);font-weight:800">✗ backwards</text>`;
+      } else {
+        s += `<text x="260" y="${y + 5}" text-anchor="middle" class="t-mid" style="fill:var(--energy);font-weight:800">⇌</text>`;
+      }
+      s += `<text x="260" y="192" text-anchor="middle" class="t-small t-muted">heat flows from the ${from} object to the ${to} object</text>`;
+      if (equal) s = s.replace(/heat flows from the \w+ object to the \w+ object/, "equal temperatures: no net heat flow");
+      svg.innerHTML = s;
+    }
+    [Tc, Th, Q].forEach(el => el.addEventListener("input", () => update(el)));
+    W.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => {
+      dir = b.dataset.d; W.querySelectorAll("[data-d]").forEach(x => x.classList.toggle("on", x === b)); update();
+    }));
+    W.querySelectorAll("[data-pre]").forEach(b => b.addEventListener("click", () => {
+      const [c, h, q] = presets[b.dataset.pre]; Tc.value = c; Th.value = h; Q.value = q; update();
+    }));
+    update();
   })();
 
   // ================= Test yourself (scored) =================
