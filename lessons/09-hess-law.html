@@ -246,6 +246,75 @@
     </div>
   </div>
 
+  <div class="example" id="bhCaCl2">
+    <div class="example-head"><span class="example-num">Example</span><h3>Born–Haber cycle for calcium chloride, CaCl₂</h3><span class="tag solid">ionic solid</span></div>
+    <div class="example-body">
+      <p style="margin-top:0">Find the lattice enthalpy of CaCl₂(s). This cycle differs from NaCl in two ways: calcium loses <b>two</b> electrons (so there are two ionization steps), and there are <b>two</b> chloride ions (so both the Cl–Cl bond and the electron gain count twice as much).</p>
+      <div class="table-wrap">
+        <table class="ftbl">
+          <tr><th>Data (kJ/mol)</th><th class="num">Value</th></tr>
+          <tr><td>Δ<var>H</var><sub>f</sub>°(CaCl₂, s): Ca(s) + Cl₂(g) → CaCl₂(s)</td><td class="num">−795.4</td></tr>
+          <tr><td>Sublimation of Ca: Ca(s) → Ca(g)</td><td class="num">+177.8</td></tr>
+          <tr><td>First ionization energy of Ca: Ca(g) → Ca⁺(g) + e⁻</td><td class="num">+589.8</td></tr>
+          <tr><td>Second ionization energy of Ca: Ca⁺(g) → Ca²⁺(g) + e⁻</td><td class="num">+1145.4</td></tr>
+          <tr><td>Cl–Cl bond enthalpy: Cl₂(g) → 2 Cl(g)</td><td class="num">+242.6</td></tr>
+          <tr><td>Electron gain of Cl: Cl(g) + e⁻ → Cl⁻(g)</td><td class="num">−348.8</td></tr>
+        </table>
+      </div>
+      <figure class="diagram" style="margin:12px 0">
+        <svg viewBox="0 0 520 345" role="img" aria-label="Born-Haber cycle enthalpy diagram for calcium chloride">
+          <line x1="16" y1="10" x2="16" y2="335" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="10" y="175" class="t-small" transform="rotate(-90 10 175)" text-anchor="middle">H (kJ/mol)</text>
+          <!-- levels -->
+          <line x1="30" y1="239.2" x2="510" y2="239.2" stroke="var(--ink)" stroke-width="3"/>
+          <text x="510" y="235" text-anchor="end" class="t-small" style="font-weight:700">Ca(s) + Cl₂(g) (H = 0)</text>
+          <line x1="40" y1="221.1" x2="510" y2="221.1" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="510" y="217" text-anchor="end" class="t-small">Ca(g) + Cl₂(g)</text>
+          <line x1="85" y1="196.5" x2="510" y2="196.5" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="510" y="192" text-anchor="end" class="t-small">Ca(g) + 2 Cl(g)</text>
+          <line x1="130" y1="136.5" x2="510" y2="136.5" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="510" y="132" text-anchor="end" class="t-small">Ca⁺(g) + e⁻ + 2 Cl(g)</text>
+          <line x1="175" y1="20" x2="510" y2="20" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="510" y="16" text-anchor="end" class="t-small">Ca²⁺(g) + 2 e⁻ + 2 Cl(g)</text>
+          <line x1="220" y1="90.9" x2="510" y2="90.9" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="510" y="86" text-anchor="end" class="t-small">Ca²⁺(g) + 2 Cl⁻(g)</text>
+          <line x1="265" y1="320.1" x2="510" y2="320.1" stroke="var(--ink)" stroke-width="3"/>
+          <text x="510" y="336" text-anchor="end" class="t-small" style="font-weight:700">CaCl₂(s)</text>
+          <!-- step arrows: up = blue (endothermic), down = orange (exothermic) -->
+          <path d="M50 239.2 V 229" stroke="var(--sys)" stroke-width="3.5"/><polygon points="50,221.1 45,231 55,231" fill="var(--sys)"/>
+          <text x="40" y="262" text-anchor="middle" class="t-small t-sys">① +177.8</text>
+          <path d="M95 221.1 V 205" stroke="var(--sys)" stroke-width="3.5"/><polygon points="95,196.5 90,207 100,207" fill="var(--sys)"/>
+          <text x="98" y="262" text-anchor="middle" class="t-small t-sys">② +242.6</text>
+          <path d="M140 196.5 V 145" stroke="var(--sys)" stroke-width="3.5"/><polygon points="140,136.5 134,148 146,148" fill="var(--sys)"/>
+          <text x="145" y="172" class="t-small t-sys">③ +589.8</text>
+          <path d="M185 136.5 V 29" stroke="var(--sys)" stroke-width="3.5"/><polygon points="185,20 179,32 191,32" fill="var(--sys)"/>
+          <text x="179" y="80" text-anchor="end" class="t-small t-sys">④ +1145.4</text>
+          <path d="M230 20 V 82" stroke="var(--heat)" stroke-width="3.5"/><polygon points="230,90.9 224,79 236,79" fill="var(--heat)"/>
+          <text x="236" y="58" class="t-small t-heat">⑤ −697.6</text>
+          <path d="M275 90.9 V 311" stroke="var(--energy)" stroke-width="4" stroke-dasharray="7 4"/><polygon points="275,320.1 268,306 282,306" fill="var(--energy)"/>
+          <text x="282" y="260" class="t-small t-energy" style="font-weight:700">⑥ lattice formation</text>
+          <text x="282" y="276" class="t-small t-energy" style="font-weight:700">= ? (−2253.4)</text>
+          <path d="M430 239.2 V 311" stroke="var(--ink)" stroke-width="3" stroke-dasharray="3 3"/><polygon points="430,320.1 424,308 436,308" fill="var(--ink)"/>
+          <text x="436" y="282" class="t-small" style="font-weight:700">ΔHf° = −795.4</text>
+        </svg>
+        <figcaption>Blue arrows absorb energy, orange arrows release it, and the dashed indigo arrow is the unknown. Both routes from Ca(s) + Cl₂(g) down to CaCl₂(s) must have the same total (Hess's law). Drawn approximately to scale.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><b>Write the target.</b> Formation: Ca(s) + Cl₂(g) → CaCl₂(s), Δ<var>H</var><sub>f</sub>° = −795.4 kJ/mol. The unknown is step ⑥: Ca²⁺(g) + 2 Cl⁻(g) → CaCl₂(s).</li>
+        <li><b>Make gaseous atoms.</b> ① Sublime Ca: +177.8 kJ. ② Break the whole Cl₂ molecule (we need <i>two</i> Cl atoms): +242.6 kJ.</li>
+        <li><b>Make the ions.</b> ③ First ionization: +589.8 kJ. ④ Second ionization: +1145.4 kJ (much larger, because the electron is pulled from a positive ion). ⑤ Two chlorine atoms each gain an electron: 2 × (−348.8) = −697.6 kJ.</li>
+        <li><b>Add the known steps:</b> 177.8 + 242.6 + 589.8 + 1145.4 − 697.6 = <b>+1458.0 kJ</b>.</li>
+        <li><b>Apply Hess's law:</b> −795.4 = 1458.0 + Δ<var>H</var>⑥, so Δ<var>H</var>⑥ = −795.4 − 1458.0 = <b>−2253.4 kJ/mol</b>.</li>
+        <li class="answer-box">Lattice enthalpy of CaCl₂ (separating the solid into gaseous ions) = <b>+2253 kJ/mol</b>, almost three times NaCl's 787 kJ/mol. The Ca²⁺ ion has twice the charge of Na⁺ and attracts two Cl⁻ ions, so the solid is held together far more strongly. That strong lattice is what pays for the large second ionization energy.</li>
+      </ol>
+      <div class="btn-row"><button class="btn" data-steps>Show step</button><button class="btn ghost" data-steps-all>Show all</button></div>
+      <div class="try" style="border-top:1px dashed var(--line);margin-top:14px;padding-top:12px"><b style="color:var(--accent)">Try it:</b> Find the lattice enthalpy of KCl (as a positive number, kJ/mol). Data: Δ<var>H</var><sub>f</sub>°(KCl, s) = −436.5; sublimation of K = +89.0; ionization energy of K = +418.8; ½ Cl–Cl bond enthalpy = +121.3; electron gain of Cl = −348.8 (all kJ/mol).
+        <div class="num-check" data-answer="716.8" data-tol="0.01" data-hint="Add the four known steps, then lattice formation = ΔHf° − (that sum). Report the lattice enthalpy as the positive value."><input inputmode="decimal" placeholder="kJ/mol"><button class="btn">Check</button><span class="result"></span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:0">Data: formation and sublimation enthalpies from standard tables;<sup class="cite"><a href="#ref-4">4</a>,<a href="#ref-5">5</a></sup> ionization energies and electron affinity;<sup class="cite"><a href="#ref-8">8</a></sup> Cl–Cl bond enthalpy.<sup class="cite"><a href="#ref-5">5</a></sup> Method as in OpenStax.<sup class="cite"><a href="#ref-6">6</a></sup></p>
+    </div>
+  </div>
+
   <h2 id="choose" data-short="Which method when?">Which method for which system?</h2>
   <div class="table-wrap">
     <table>
